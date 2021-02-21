@@ -41,6 +41,50 @@ function human_date($date){
     return Carbon\Carbon::createFromTimeStamp(strtotime($editDate))->diffForHumans();
 }
 
+// Products points schema
+function pointify($price){
+    $points = 0;
+    switch ($price) {
+        case $price >= 0 && $price <= 20 :
+            $points = $price * (.08 * 100);
+            break;
+
+        case $price >= 21 && $price <= 60 :
+            $points = $price * (.07 * 100);
+            break;
+
+        case $price >= 61 && $price <= 150 :
+            $points = $price * (.06 * 100);
+            break;
+
+        case $price >= 151 && $price <= 400 :
+            $points = $price * (.05 * 100);
+            break;
+
+        case $price >= 401 && $price <= 800 :
+            $points = $price * (.05 * 100);
+            break;
+
+        case $price >= 801 && $price <= 2000 :
+            $points = $price * (.04 * 100);
+            break;
+
+        case $price >= 2001 && $price <= 10000 :
+            $points = $price * (.03 * 100);
+            break;
+
+        case $price >= 10001 && $price <= 100000 :
+            $points = $price * (.02 * 100);
+            break;
+
+        case $price >= 100001 :
+            $points = $price * (.01 * 100);
+            break;
+    }
+
+    return $points;
+}
+
 // Upload files
 function upload_file($type, $file, $path){
 

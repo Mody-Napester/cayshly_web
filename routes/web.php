@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PublicControllers\HomeController;
+use App\Http\Controllers\PublicControllers\HomePublicController;
 use App\Http\Controllers\DashboardControllers\DashboardController;
 use \App\Http\Controllers\DashboardControllers\LookupController;
 use \App\Http\Controllers\DashboardControllers\ScriptController;
@@ -21,17 +21,19 @@ use \App\Http\Controllers\DashboardControllers\BlogController;
 use \App\Http\Controllers\DashboardControllers\OrderController;
 use \App\Http\Controllers\DashboardControllers\SubscriberController;
 use \App\Http\Controllers\DashboardControllers\TicketController;
-
 use \App\Http\Controllers\DashboardControllers\PermissionGroupsController;
 use \App\Http\Controllers\DashboardControllers\PermissionsController;
 use \App\Http\Controllers\DashboardControllers\RolesController;
 use \App\Http\Controllers\DashboardControllers\UserController;
 
-Route::get('/', [HomeController::class, 'home'])->name('public.home');
+use \App\Http\Controllers\PublicControllers\CategoryPublicController;
+use \App\Http\Controllers\PublicControllers\StorePublicController;
+use \App\Http\Controllers\PublicControllers\ProductPublicController;
 
-//Route::get('/dashboard', function () {
-//    return view('dashboard');
-//})->middleware(['auth'])->name('dashboard');
+Route::get('/', [HomePublicController::class, 'home'])->name('public.home');
+Route::get('categories', [CategoryPublicController::class, 'index'])->name('public.category.index');
+Route::get('store/{store}', [StorePublicController::class, 'show'])->name('public.store.show');
+Route::get('product/{product}', [ProductPublicController::class, 'show'])->name('public.product.show');
 
 Route::group([
     'prefix' => 'dashboard',

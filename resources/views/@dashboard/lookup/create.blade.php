@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="parent_id">Parent</label>
-                                        <select class="form-control @error('brand_id') is-invalid @enderror" id="parent_id" name="parent_id">
+                                        <select class="form-control @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id">
                                             <option value="0">No Parent</option>
                                             @foreach($parents as $parent)
                                                 <option value="{{ $parent->uuid }}">{{ getFromJson($parent->name , lang()) }}</option>

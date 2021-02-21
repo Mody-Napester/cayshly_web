@@ -3,53 +3,86 @@
 @section('page_title') Brand @endsection
 
 @section('page_contents')
-
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Brand</h1>
-        <a href="{{ route('brand.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-            <i class="fas fa-plus fa-sm text-white-50"></i> Add new</a>
-    </div>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">All</h6>
+    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+        <div class="container">
+            <div class="page-header-content pt-4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto mt-4">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="book"></i></div>
+                            Brands ({{ $resources->count() }})
+                        </h1>
+                        <div class="page-header-subtitle">All Application Required Data</div>
+                    </div>
+                    <div class="col-12 col-xl-auto mt-4">
+                        <a href="{{ route('brand.create') }}" class="btn btn-sm btn-white">
+                            <i class="mr-2 text-primary" data-feather="plus"></i> Add New
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Details</th>
-                            <th>Banner</th>
-                            <th>Image</th>
-                            <th>Created at</th>
-                            <th>Controls</th>
-                        </tr>
-                    </thead>
+    </header>
 
-                    <tbody>
+    <!-- Main page content-->
+    <div class="container mt-n10">
+        <!-- Example DataTable for Dashboard Demo-->
+        <div class="card mb-4">
+            <div class="card-header">Personnel Management</div>
+            <div class="card-body">
+                <div class="datatable">
+                    <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Slug</th>
+                            <th>Name</th>
+                            <th>Picture</th>
+                            <th>Cover</th>
+                            <th>Active</th>
+                            <th>Created by</th>
+                            <th>Updated by</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         @foreach($resources as $resource)
                             <tr>
-                                <td>{{ getFromJson($resource->title , lang()) }}</td>
-                                <td>{!! getFromJson($resource->details , lang()) !!}</td>
+                                <td>{{ $resource->id }}</td>
+                                <td>{{ $resource->slug }}</td>
+                                <td>{{ getFromJson($resource->name , lang()) }}</td>
                                 <td>
-                                    <img style="width: 150px;" class="img-fluid" src="{{ url('assets_public/images/brand/'. $resource->banner) }}" alt="">
+                                    <div style="width:50px;height: 50px;overflow: hidden">
+                                        <img style="width:100%;" src="{{ url('assets_public/images/brand/picture/'. $resource->picture) }}" alt="">
+                                    </div>
                                 </td>
                                 <td>
-                                    <img style="width: 150px;" class="img-fluid" src="{{ url('assets_public/images/brand/'. $resource->image) }}" alt="">
+                                    <div style="width:50px;height: 50px;overflow: hidden">
+                                        <img style="width:100%;" src="{{ url('assets_public/images/brand/cover/'. $resource->cover) }}" alt="">
+                                    </div>
                                 </td>
+                                <td>
+                                    @if($resource->is_active == 1)
+                                        <span class="badge badge-success badge-pill">Yes</span>
+                                    @else
+                                        <span class="badge badge-danger badge-pill">No</span>
+                                    @endif
+                                </td>
+                                <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
+                                <td>{{ ($ub = $resource->updated_by_user)? $ub->name : '-' }}</td>
                                 <td>{{ $resource->created_at }}</td>
+                                <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('brand.edit' , [$resource->id]) }}" class="btn btn-warning btn-sm"><i class="fa fa-fw fa-edit"></i></a>
-                                    <a href="{{ route('brand.destroy' , [$resource->id]) }}" class="btn btn-danger btn-sm confirm-delete"><i class="fa fa-fw fa-trash"></i></a>
+                                    <a href="{{ route('brand.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+                                    <a href="{{ route('brand.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

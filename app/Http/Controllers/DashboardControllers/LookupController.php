@@ -63,8 +63,7 @@ class LookupController extends Controller
             'key' => Str::slug($name['en'], '_'),
             'name' => json_encode($name),
             'is_active' => ($request->is_active == 1)? 1 : 0,
-//            'created_by' => auth()->user()->id,
-            'created_by' => 1,
+            'created_by' => auth()->user()->id,
         ]);
 
         // Return
@@ -149,8 +148,7 @@ class LookupController extends Controller
             'key' => Str::slug($name['en'], '_'),
             'name' => json_encode($name),
             'is_active' => ($request->is_active == 1)? 1 : 0,
-//            'updated_by' => auth()->user()->id,
-            'updated_by' => 1,
+            'updated_by' => auth()->user()->id,
         ]);
 
         // Return

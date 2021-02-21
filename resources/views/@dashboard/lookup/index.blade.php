@@ -11,9 +11,9 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Lookups
+                            Lookups ({{ $resources->count() }})
                         </h1>
-                        <div class="page-header-subtitle">All Application Required Data</div>
+                        <div class="page-header-subtitle">Parents ({{ $resources->where('parent_id', 0)->count() }}), Childes ({{ $resources->where('parent_id', '<>', 0)->count() }})</div>
                     </div>
                     <div class="col-12 col-xl-auto mt-4">
                         <a href="{{ route('lookup.create') }}" class="btn btn-sm btn-white">

@@ -16,6 +16,7 @@ class CreateSpecificationsTable extends Migration
         Schema::create('specifications', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
+            $table->integer('category_id');
             $table->text('name');
             $table->boolean('is_active')->default(1);
             $table->integer('created_by')->unsigned();

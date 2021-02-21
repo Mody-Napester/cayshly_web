@@ -24,6 +24,10 @@ class CreateContactsTable extends Migration
             $table->string('picture')->nullable();
             $table->string('working_hours')->nullable();
             $table->string('map')->nullable();
+            $table->boolean('is_default')->default(0);
+            $table->boolean('is_active')->default(1);
+            $table->integer('created_by')->unsigned();
+            $table->integer('updated_by')->nullable()->unsigned();
             $table->timestamps();
         });
     }

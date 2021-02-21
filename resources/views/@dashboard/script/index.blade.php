@@ -11,7 +11,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Scripts
+                            Scripts ({{ $resources->count() }})
                         </h1>
                         <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
