@@ -25,6 +25,8 @@ use \App\Http\Controllers\DashboardControllers\PermissionGroupsController;
 use \App\Http\Controllers\DashboardControllers\PermissionsController;
 use \App\Http\Controllers\DashboardControllers\RolesController;
 use \App\Http\Controllers\DashboardControllers\UserController;
+use \App\Http\Controllers\DashboardControllers\SliderController;
+use \App\Http\Controllers\DashboardControllers\SocialController;
 
 use \App\Http\Controllers\PublicControllers\CategoryPublicController;
 use \App\Http\Controllers\PublicControllers\StorePublicController;
@@ -56,6 +58,8 @@ Route::group([
     Route::resource('contact', ContactController::class);
     Route::resource('page', PageController::class);
     Route::resource('blog', BlogController::class);
+    Route::resource('slider', SliderController::class);
+    Route::resource('social', SocialController::class);
     Route::get('orders', [OrderController::class, 'index'])->name('dashboard.order.index');
     Route::get('subscriber', [SubscriberController::class, 'index'])->name('dashboard.subscriber.index');
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');

@@ -27,7 +27,6 @@
 
     <!-- Main page content-->
     <div class="container mt-n10">
-        <!-- Example DataTable for Dashboard Demo-->
         <div class="card mb-4">
             <div class="card-header">Personnel Management</div>
             <div class="card-body">

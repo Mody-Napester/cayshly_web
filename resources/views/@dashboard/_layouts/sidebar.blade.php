@@ -74,6 +74,8 @@
                     <a class="nav-link" href="{{ route('option.index') }}">Options</a>
                     <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                     <a class="nav-link" href="{{ route('offer.index') }}">Offers</a>
+                    <a class="nav-link" href="{{ route('slider.index') }}">Slider</a>
+                    <a class="nav-link" href="{{ route('social.index') }}">Social</a>
                 </nav>
             </div>
 
