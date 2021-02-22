@@ -6,8 +6,8 @@
     <title>@yield('page_title')</title>
     <!-- SEO Meta Tags-->
     <meta name="description" content="Cayshly - Bootstrap E-commerce Template">
-    <meta name="keywords" content="bootstrap, shop, e-commerce, market, modern, responsive,  business, mobile, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
-    <meta name="author" content="Createx Studio">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon and Touch Icons-->

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\PublicControllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Store;
+use App\Models\Brand;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
-class StorePublicController extends Controller
+class BrandPublicController extends Controller
 {
     /**
-     * Index all stores.
+     * Index all brands.
      */
     public function index(){
-        $data['stores'] = Store::getAllBy('is_active', 1);
-        return view('@public.store.index', $data);
+        $data['brands'] = Brand::getAllBy('is_active', 1);
+        return view('@public.brand.index', $data);
     }
 
 }

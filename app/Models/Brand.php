@@ -77,4 +77,12 @@ class Brand extends Model
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
+
+    /**
+     *  Products Relation
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

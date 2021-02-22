@@ -39,21 +39,16 @@
                 </a>
                 <!-- Search-->
                 <div class="input-group-overlay d-none d-lg-block mx-4">
-                    <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
+                    <div class="input-group-prepend-overlay">
+                        <span class="input-group-text"><i class="czi-search"></i></span>
+                    </div>
                     <input class="form-control prepended-form-control appended-form-control" type="text" placeholder="Search for products">
                     <div class="input-group-append-overlay">
                         <select class="custom-select">
-                            <option>All categories</option>
-                            <option>Computers</option>
-                            <option>Smartphones</option>
-                            <option>TV, Video, Audio</option>
-                            <option>Cameras</option>
-                            <option>Headphones</option>
-                            <option>Wearables</option>
-                            <option>Printers</option>
-                            <option>Video Games</option>
-                            <option>Home Music</option>
-                            <option>Data Storage</option>
+                            <option value="all">All categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -139,7 +134,9 @@
                                                 <div class="widget widget-links">
                                                     <ul class="widget-list">
                                                         @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
-                                                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="#">{{ getFromJson($child->name , lang()) }}</a></li>
+                                                        <li class="widget-list-item pb-1">
+                                                            <a class="widget-list-link" href="{{ route('public.category.products.show', $child->slug) }}">{{ getFromJson($child->name , lang()) }}</a>
+                                                        </li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
@@ -147,7 +144,7 @@
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center">
                                                 <img src="{{ url('assets_public/images/category/picture/'. $category->picture) }}" alt="{{ getFromJson($category->name , lang()) }}"/>
 {{--                                                <div class="font-size-sm mb-3">Starting from <span class='font-weight-medium'>$149.<small>80</small></span></div>--}}
-                                                <a class="btn btn-primary btn-shadow btn-sm" href="#">See offers<i class="czi-arrow-right font-size-xs ml-1"></i></a>
+                                                <a class="btn btn-primary btn-shadow btn-sm" href="{{ route('public.category.child.show', $category->slug) }}">{{ trans('navbar.see_all') }}<i class="czi-arrow-right font-size-xs ml-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -159,27 +156,27 @@
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-bag"></i> Stores</a>
+                            <a class="nav-link" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> Stores</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-view-grid"></i> Categories</a>
+                            <a class="nav-link" href="{{ route('public.category.index') }}"><i style="margin-right: 5px;" class="czi-view-grid"></i> Categories</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-bookmark"></i> Brands</a>
+                            <a class="nav-link" href="{{ route('public.brand.index') }}"><i style="margin-right: 5px;" class="czi-bookmark"></i> Brands</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-diamond"></i> Best Sellers</a>
+                            <a class="nav-link" href="{{ route('public.product.best.index') }}"><i style="margin-right: 5px;" class="czi-diamond"></i> Best Sales</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> Offers</a>
+                            <a class="nav-link" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> Offers</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><i style="margin-right: 5px;" class="czi-gift"></i> By Free</a>
+                            <a class="nav-link" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> By Free</a>
                         </li>
                     </ul>
                 </div>

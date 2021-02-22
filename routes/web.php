@@ -30,12 +30,27 @@ use \App\Http\Controllers\DashboardControllers\SocialController;
 
 use \App\Http\Controllers\PublicControllers\CategoryPublicController;
 use \App\Http\Controllers\PublicControllers\StorePublicController;
+use \App\Http\Controllers\PublicControllers\BrandPublicController;
 use \App\Http\Controllers\PublicControllers\ProductPublicController;
+use \App\Http\Controllers\PublicControllers\OfferPublicController;
 
 Route::get('/', [HomePublicController::class, 'home'])->name('public.home');
+
 Route::get('categories', [CategoryPublicController::class, 'index'])->name('public.category.index');
+Route::get('category/products/{category}', [CategoryPublicController::class, 'show_products'])->name('public.category.products.show');
+Route::get('category/child/{category}', [CategoryPublicController::class, 'show_child'])->name('public.category.child.show');
+
+Route::get('stores', [StorePublicController::class, 'index'])->name('public.store.index');
 Route::get('store/{store}', [StorePublicController::class, 'show'])->name('public.store.show');
+
+Route::get('brands', [BrandPublicController::class, 'index'])->name('public.brand.index');
+Route::get('brand/{brand}', [BrandPublicController::class, 'show'])->name('public.brand.show');
+
+Route::get('products/best-sales', [ProductPublicController::class, 'index_best_sales_products'])->name('public.product.best.index');
+Route::get('products/by-free', [ProductPublicController::class, 'index_by_free_products'])->name('public.product.free.index');
 Route::get('product/{product}', [ProductPublicController::class, 'show'])->name('public.product.show');
+
+Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offer.index');
 
 Route::group([
     'prefix' => 'dashboard',
