@@ -44,7 +44,7 @@ class StoreController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -55,7 +55,7 @@ class StoreController extends Controller
         $name = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }
@@ -160,7 +160,7 @@ class StoreController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -171,7 +171,7 @@ class StoreController extends Controller
         $name = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }

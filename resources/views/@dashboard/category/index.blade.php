@@ -56,13 +56,13 @@
                         </thead>
                         <tbody>
                         @foreach($resources as $resource)
-                            <tr>
+                            <tr @if(!\App\Models\Category::getOneBy('id', $resource->parent_id)) class="" @endif>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->parent_id }}</td>
                                 <td>{{ $resource->slug }}</td>
                                 <td>
                                     @if($resource->parent_id != 0)
-                                        {{ getFromJson(\App\Models\Category::getOneBy('id', $resource->parent_id)->name , lang()) }}
+                                        {{ ($parent = \App\Models\Category::getOneBy('id', $resource->parent_id))? getFromJson($parent->name , lang()) : '-' }}
                                     @else
                                         -
                                     @endif
@@ -99,6 +99,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{ $resources->links() }}
             </div>
         </div>
     </div>

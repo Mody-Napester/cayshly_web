@@ -44,7 +44,7 @@ class LookupController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
         }
 
@@ -53,7 +53,7 @@ class LookupController extends Controller
         // Code
         $name = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
         }
 
@@ -128,7 +128,7 @@ class LookupController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
         }
 
@@ -137,7 +137,7 @@ class LookupController extends Controller
         // Code
         $name = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
         }
 

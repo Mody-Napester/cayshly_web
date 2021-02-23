@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
 
-                                @foreach(config('vars.langs') as $lang)
+                                @foreach(langs("short_name") as $lang)
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-col-form-label" for="title_{{ $lang }}">Title ({{ $lang }})</label>
@@ -66,7 +66,7 @@
                                     </div>
                                 @endforeach
 
-                                @foreach(config('vars.langs') as $lang)
+                                @foreach(langs("short_name") as $lang)
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-col-form-label" for="details_{{ $lang }}">Details ({{ $lang }})</label>

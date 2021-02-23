@@ -44,7 +44,7 @@ class BlogController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['title_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -55,7 +55,7 @@ class BlogController extends Controller
         $title = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $title[$lang] = $request->input('title_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }
@@ -156,7 +156,7 @@ class BlogController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['title_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -167,7 +167,7 @@ class BlogController extends Controller
         $title = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $title[$lang] = $request->input('title_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }

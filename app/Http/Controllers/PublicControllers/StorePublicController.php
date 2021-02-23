@@ -17,4 +17,12 @@ class StorePublicController extends Controller
         return view('@public.store.index', $data);
     }
 
+    /**
+     * Show store.
+     */
+    public function show($store){
+        $data['store'] = Store::getOneBy('slug', $store);
+        return view('@public.store.show', $data);
+    }
+
 }

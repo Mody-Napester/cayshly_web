@@ -58,9 +58,9 @@
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
-                                <td>{{ getFromJson( $resource->brand->name , lang()) }}</td>
-                                <td>{{ getFromJson( $resource->category->name , lang()) }}</td>
-                                <td>{{ getFromJson( $resource->store->name , lang()) }}</td>
+                                <td>{{ (isset($resource->brand))? getFromJson( $resource->brand->name , lang()) : '-' }}</td>
+                                <td>{{ (isset($resource->category))? getFromJson( $resource->category->name , lang()) : '-' }}</td>
+                                <td>{{ (isset($resource->store))? getFromJson( $resource->store->name , lang()) : '-' }}</td>
                                 <td>{{ $resource->slug }}</td>
                                 <td>{{ getFromJson($resource->name , lang()) }}</td>
                                 <td>{{ $resource->price }}</td>
@@ -94,6 +94,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{ $resources->links() }}
             </div>
         </div>
     </div>

@@ -2,7 +2,8 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title product-title"><a href="shop-single-v2.html" data-toggle="tooltip" data-placement="right" title="Go to product page">Smartwatch Youth Edition<i class="czi-arrow-right font-size-lg ml-2"></i></a></h4>
+                <h4 class="modal-title product-title">
+                    <a href="shop-single-v2.html" data-toggle="tooltip" data-placement="right" title="Go to product page">Smartwatch Youth Edition<i class="czi-arrow-right font-size-lg ml-2"></i></a></h4>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">

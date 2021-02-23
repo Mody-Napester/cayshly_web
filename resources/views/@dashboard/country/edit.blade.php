@@ -37,7 +37,7 @@
                         <div class="card-body">
                             <div class="row">
 
-                                @foreach(config('vars.langs') as $lang)
+                                @foreach(langs("short_name") as $lang)
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="form-col-form-label" for="name_{{ $lang }}">Name ({{ $lang }})</label>

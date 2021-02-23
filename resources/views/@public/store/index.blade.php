@@ -32,9 +32,11 @@
                     <div class="card product-card-alt">
                         <div class="product-thumb" style="height: 180px;overflow: hidden;">
                             <div class="product-card-actions">
-                                <a class="btn btn-light btn-icon btn-shadow font-size-base mx-2" href=""><i class="czi-eye"></i></a>
+                                <a class="btn btn-light btn-icon btn-shadow font-size-base mx-2" href="{{ route('public.store.show', $store->slug) }}">
+                                    <i class="czi-eye"></i>
+                                </a>
                             </div>
-                            <a class="product-thumb-overlay" href=""></a>
+                            <a class="product-thumb-overlay" href="{{ route('public.store.show', $store->slug) }}"></a>
                             <img src="{{ url('assets_public/images/store/picture/'. $store->picture) }}" alt="Product">
                         </div>
                         <div class="card-body">
@@ -49,7 +51,7 @@
     {{--                            </div>--}}
                             </div>
                             <h3 class="product-title font-size-sm mb-2">
-                                <a href="marketplace-single.html">{{ getFromJson($store->name , lang()) }}</a>
+                                <a href="{{ route('public.store.show', $store->slug) }}">{{ getFromJson($store->name , lang()) }}</a>
                             </h3>
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="font-size-sm mr-2">

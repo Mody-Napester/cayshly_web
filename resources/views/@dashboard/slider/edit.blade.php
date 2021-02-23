@@ -34,7 +34,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @foreach(config('vars.langs') as $lang)
+                    @foreach(langs("short_name") as $lang)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="text_1_{{ $lang }}">Text 1 ({{ $lang }})</label>
@@ -50,7 +50,7 @@
                         </div>
                     @endforeach
 
-                    @foreach(config('vars.langs') as $lang)
+                    @foreach(langs("short_name") as $lang)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="text_2_{{ $lang }}">Text 2 ({{ $lang }})</label>
@@ -66,7 +66,7 @@
                         </div>
                     @endforeach
 
-                    @foreach(config('vars.langs') as $lang)
+                    @foreach(langs("short_name") as $lang)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="text_3_{{ $lang }}">Text 3 ({{ $lang }})</label>
@@ -85,7 +85,7 @@
                         </div>
                     @endforeach
 
-                    @foreach(config('vars.langs') as $lang)
+                    @foreach(langs("short_name") as $lang)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="button_1_text_{{ $lang }}">Button 1 Text ({{ $lang }})</label>
@@ -101,7 +101,7 @@
                         </div>
                     @endforeach
 
-                    @foreach(config('vars.langs') as $lang)
+                    @foreach(langs("short_name") as $lang)
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="button_2_text_{{ $lang }}">Button 2 Text ({{ $lang }})</label>

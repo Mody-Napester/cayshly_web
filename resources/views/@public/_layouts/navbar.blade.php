@@ -4,25 +4,26 @@
         <div class="container">
             <div>
                 <div class="topbar-text dropdown disable-autohide">
-                    <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">language</a>
+                    <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('navbar.language') }}</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item pb-1" href="#">English</a></li>
-                        <li><a class="dropdown-item pb-1" href="#">Arabic</a></li>
+                        @foreach(langs() as $lang)
+                        <li><a class="dropdown-item pb-1" href="#">{{ $lang['name'] }}</a></li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
-                    <span class="text-muted mr-1">Available 24/7 at</span><a class="topbar-link" href="tel:00331697720">(00) 33 169 7720</a>
+                    <span class="text-muted mr-1">{{ trans('navbar.available') }} {{ $contact->working_hours }} {{ trans('navbar.at') }}</span><a class="topbar-link" href="tel:{{ $contact->phone }}">{{ $contact->phone }}</a>
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
                 <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">Useful pages</a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href=""><i class="czi-compare text-muted mr-2"></i>Return product</a></li>
+                    <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>
                     <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>
                 </ul>
             </div>
             <div class="d-none d-md-block ml-3 text-nowrap">
-                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-compare mt-n1"></i>Return product</a>
+                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>
                 <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>
             </div>
         </div>
@@ -54,11 +55,28 @@
                 </div>
                 <!-- Toolbar-->
                 <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span class="navbar-tool-tooltip">Expand menu</span>
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div></a><a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <a class="navbar-tool navbar-stuck-toggler" href="#">
+                        <span class="navbar-tool-tooltip">Expand menu</span>
+                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div>
+                    </a>
+
+                    <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('login') }}">
                         <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-                        <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div></a>
-                    <div class="navbar-tool dropdown ml-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span class="navbar-tool-label">4</span><i class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>My Cart</small>$1,247.00</a>
+                        <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
+                    </a>
+
+                    <div class="navbar-tool dropdown ml-3">
+                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html">
+                            <span class="navbar-tool-label">4</span>
+                            <i class="navbar-tool-icon czi-cart"></i>
+                        </a>
+
+                        <a class="navbar-tool-text" href="shop-cart.html"><small>My Cart</small>$1,247.00</a>
+
                         <!-- Cart dropdown-->
                         <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
                             <div class="widget widget-cart px-3 pt-2 pb-3">

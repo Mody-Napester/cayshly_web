@@ -43,7 +43,7 @@ class ContactController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['address_' . $lang] = 'required';
         }
 
@@ -52,7 +52,7 @@ class ContactController extends Controller
         // Code
         $address = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $address[$lang] = $request->input('address_' . $lang);
         }
 
@@ -143,7 +143,7 @@ class ContactController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['address_' . $lang] = 'required';
         }
 
@@ -152,7 +152,7 @@ class ContactController extends Controller
         // Code
         $address = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $address[$lang] = $request->input('address_' . $lang);
         }
 

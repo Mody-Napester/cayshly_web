@@ -47,7 +47,7 @@ class CategoryController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -58,7 +58,7 @@ class CategoryController extends Controller
         $name = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }
@@ -165,7 +165,7 @@ class CategoryController extends Controller
             'is_active' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
             $rules['details_' . $lang] = 'required';
         }
@@ -176,7 +176,7 @@ class CategoryController extends Controller
         $name = [];
         $details = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
             $details[$lang] = $request->input('details_' . $lang);
         }

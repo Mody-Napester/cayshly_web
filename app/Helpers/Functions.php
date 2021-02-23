@@ -16,6 +16,21 @@ function lang(){
     return app()->getLocale();
 }
 
+// System languages
+function langs($get = null){
+    $get_array = [];
+    if($get == null){
+        $get_array = config('vars.langs');
+    }else{
+        foreach (config('vars.langs') as $lang) {
+            if($get == 'short_name'){
+                $get_array[] = $lang['short_name'];
+            }
+        }
+    }
+    return $get_array;
+}
+
 // Get lookup
 function lookup($by, $value){
     $results = null;
@@ -37,8 +52,8 @@ function str_well($value){
 
 // Human Date
 function human_date($date){
-    $editDate = str_replace('-0001-11-30', '2016-11-30', $date);
-    return Carbon\Carbon::createFromTimeStamp(strtotime($editDate))->diffForHumans();
+//    $editDate = str_replace('-0001-11-30', '2016-11-30', $date);
+    return Carbon\Carbon::createFromTimeStamp(strtotime($date))->diffForHumans();
 }
 
 // Products points schema

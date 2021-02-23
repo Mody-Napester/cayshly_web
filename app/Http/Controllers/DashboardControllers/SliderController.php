@@ -44,7 +44,7 @@ class SliderController extends Controller
             'button_2_link' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['text_1_' . $lang] = 'required';
             $rules['text_2_' . $lang] = 'required';
             $rules['text_3_' . $lang] = 'required';
@@ -61,7 +61,7 @@ class SliderController extends Controller
         $button_1_text = [];
         $button_2_text = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $text_1[$lang] = $request->input('text_1_' . $lang);
             $text_2[$lang] = $request->input('text_2_' . $lang);
             $text_3[$lang] = $request->input('text_3_' . $lang);
@@ -155,7 +155,7 @@ class SliderController extends Controller
             'button_2_link' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['text_1_' . $lang] = 'required';
             $rules['text_2_' . $lang] = 'required';
             $rules['text_3_' . $lang] = 'required';
@@ -172,7 +172,7 @@ class SliderController extends Controller
         $button_1_text = [];
         $button_2_text = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $text_1[$lang] = $request->input('text_1_' . $lang);
             $text_2[$lang] = $request->input('text_2_' . $lang);
             $text_3[$lang] = $request->input('text_3_' . $lang);

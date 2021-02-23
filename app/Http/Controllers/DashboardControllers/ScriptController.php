@@ -46,7 +46,7 @@ class ScriptController extends Controller
             'code' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
         }
 
@@ -55,7 +55,7 @@ class ScriptController extends Controller
         // Code
         $name = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
         }
 
@@ -132,7 +132,7 @@ class ScriptController extends Controller
             'code' => 'required',
         ];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $rules['name_' . $lang] = 'required';
         }
 
@@ -141,7 +141,7 @@ class ScriptController extends Controller
         // Code
         $name = [];
 
-        foreach (config('vars.langs') as $lang) {
+        foreach (langs("short_name") as $lang) {
             $name[$lang] = $request->input('name_' . $lang);
         }
 
