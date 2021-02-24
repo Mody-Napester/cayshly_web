@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Translation Manager</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+@extends('@dashboard._layouts.master')
+
+@section('page_title') Product @endsection
+
+@section('head_styles')
+{{--    <link rel="stylesheet" href="{{ url('assets_dashboard/css/bootstrap.css') }}">--}}
+
+{{--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">--}}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+@endsection
+
+@section('footer_scripts')
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>//https://github.com/rails/jquery-ujs/blob/master/src/rails.js
@@ -97,43 +101,56 @@
 
         })
     </script>
-</head>
-<body>
-<header class="navbar navbar-static-top navbar-inverse" id="top" role="banner">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="navbar-brand">
-                Translation Manager
-            </a>
+@endsection
+
+@section('page_contents')
+
+    <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
+        <div class="container">
+            <div class="page-header-content pt-4">
+                <div class="row align-items-center justify-content-between">
+                    <div class="col-auto mt-4">
+                        <h1 class="page-header-title">
+                            <div class="page-header-icon"><i data-feather="book"></i></div>
+                            Translations
+                        </h1>
+                        <div class="page-header-subtitle">All Application Required Data</div>
+                    </div>
+                    <div class="col-12 col-xl-auto mt-4">
+                        <a href="{{ route('product.create') }}" class="btn btn-sm btn-white">
+                            <i class="mr-2 text-primary" data-feather="plus"></i> Add New
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</header>
-<div class="container-fluid">
-    <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>
-    <div class="alert alert-success success-import" style="display:none;">
-        <p>Done importing, processed <strong class="counter">N</strong> items! Reload this page to refresh the groups!</p>
-    </div>
-    <div class="alert alert-success success-find" style="display:none;">
-        <p>Done searching for translations, found <strong class="counter">N</strong> items!</p>
-    </div>
-    <div class="alert alert-success success-publish" style="display:none;">
-        <p>Done publishing the translations for group '<?php echo $group ?>'!</p>
-    </div>
-    <div class="alert alert-success success-publish-all" style="display:none;">
-        <p>Done publishing the translations for all group!</p>
-    </div>
-    <?php if(Session::has('successPublish')) : ?>
+    </header>
+
+    <!-- Main page content-->
+    <div class="container mt-n10">
+        <div class="card mb-4">
+            <div class="card-header">All</div>
+            <div class="card-body">
+
+        <p>Warning, translations are not visible until they are exported back to the app/lang file, using <code>php artisan translation:export</code> command or publish button.</p>
+        <div class="alert alert-success success-import" style="display:none;">
+            <p>Done importing, processed <strong class="counter">N</strong> items! Reload this page to refresh the groups!</p>
+        </div>
+        <div class="alert alert-success success-find" style="display:none;">
+            <p>Done searching for translations, found <strong class="counter">N</strong> items!</p>
+        </div>
+        <div class="alert alert-success success-publish" style="display:none;">
+            <p>Done publishing the translations for group '<?php echo $group ?>'!</p>
+        </div>
+        <div class="alert alert-success success-publish-all" style="display:none;">
+            <p>Done publishing the translations for all group!</p>
+        </div>
+        <?php if(Session::has('successPublish')) : ?>
         <div class="alert alert-info">
             <?php echo Session::get('successPublish'); ?>
         </div>
-    <?php endif; ?>
-    <p>
+        <?php endif; ?>
+        <p>
         <?php if(!isset($group)) : ?>
         <form class="form-import" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postImport') ?>" data-remote="true" role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
@@ -146,7 +163,7 @@
                         </select>
                     </div>
                     <div class="col-sm-2">
-                    <button type="submit" class="btn btn-success btn-block"  data-disable-with="Loading..">Import groups</button>
+                        <button type="submit" class="btn btn-success btn-block"  data-disable-with="Loading..">Import groups</button>
                     </div>
                 </div>
             </div>
@@ -159,32 +176,32 @@
         </form>
         <?php endif; ?>
         <?php if(isset($group)) : ?>
-            <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
-                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-                <button type="submit" class="btn btn-info" data-disable-with="Publishing.." >Publish translations</button>
-                <a href="<?= action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="btn btn-default">Back</a>
-            </form>
+        <form class="form-inline form-publish" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postPublish', $group) ?>" data-remote="true" role="form" data-confirm="Are you sure you want to publish the translations group '<?php echo $group ?>? This will overwrite existing language files.">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <button type="submit" class="btn btn-info" data-disable-with="Publishing.." >Publish translations</button>
+            <a href="<?= action('\Barryvdh\TranslationManager\Controller@getIndex') ?>" class="btn btn-default">Back</a>
+        </form>
         <?php endif; ?>
-    </p>
-    <form role="form" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddGroup') ?>">
-        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-        <div class="form-group">
-            <p>Choose a group to display the group translations. If no groups are visisble, make sure you have run the migrations and imported the translations.</p>
-            <select name="group" id="group" class="form-control group-select">
-                <?php foreach($groups as $key => $value): ?>
+        </p>
+        <form role="form" method="POST" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddGroup') ?>">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <div class="form-group">
+                <p>Choose a group to display the group translations. If no groups are visisble, make sure you have run the migrations and imported the translations.</p>
+                <select name="group" id="group" class="form-control group-select">
+                    <?php foreach($groups as $key => $value): ?>
                     <option value="<?php echo $key ?>"<?php echo $key == $group ? ' selected':'' ?>><?php echo $value ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Enter a new group name and start edit translations in that group</label>
-            <input type="text" class="form-control" name="new-group" />
-        </div>
-        <div class="form-group">
-            <input type="submit" class="btn btn-default" name="add-group" value="Add and edit keys" />
-        </div>
-    </form>
-    <?php if($group): ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Enter a new group name and start edit translations in that group</label>
+                <input type="text" class="form-control" name="new-group" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-default" name="add-group" value="Add and edit keys" />
+            </div>
+        </form>
+        <?php if($group): ?>
         <form action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAdd', array($group)) ?>" method="POST"  role="form">
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
             <div class="form-group">
@@ -208,7 +225,7 @@
                         <label for="base-locale">Base Locale for Auto Translations</label>
                         <select name="base-locale" id="base-locale" class="form-control">
                             <?php foreach ($locales as $locale): ?>
-                                <option value="<?= $locale ?>"><?= $locale ?></option>
+                            <option value="<?= $locale ?>"><?= $locale ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -217,9 +234,9 @@
                         <input type="text" name="new-locale" class="form-control" id="new-locale" placeholder="Enter target locale key" />
                     </div>
                     <?php if(!config('laravel_google_translate.google_translate_api_key')): ?>
-                        <p>
-                            <code>Translating using stichoza/google-translate-php. If you would like to use Google Translate API enter your Google Translate API key to config file laravel_google_translate</code>
-                        </p>
+                    <p>
+                        <code>Translating using stichoza/google-translate-php. If you would like to use Google Translate API enter your Google Translate API key to config file laravel_google_translate</code>
+                    </p>
                     <?php endif; ?>
                     <div class="form-group">
                         <input type="hidden" name="with-translations" value="1">
@@ -230,49 +247,49 @@
             </div>
         </form>
         <hr>
-    <h4>Total: <?= $numTranslations ?>, changed: <?= $numChanged ?></h4>
+        <h4>Total: <?= $numTranslations ?>, changed: <?= $numChanged ?></h4>
         <table class="table">
             <thead>
             <tr>
                 <th width="15%">Key</th>
                 <?php foreach ($locales as $locale): ?>
-                    <th><?= $locale ?></th>
+                <th><?= $locale ?></th>
                 <?php endforeach; ?>
                 <?php if ($deleteEnabled): ?>
-                    <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <?php endif; ?>
             </tr>
             </thead>
             <tbody>
 
             <?php foreach ($translations as $key => $translation): ?>
-                <tr id="<?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>">
-                    <td><?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?></td>
-                    <?php foreach ($locales as $locale): ?>
-                        <?php $t = isset($translation[$locale]) ? $translation[$locale] : null ?>
+            <tr id="<?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>">
+                <td><?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?></td>
+                <?php foreach ($locales as $locale): ?>
+                <?php $t = isset($translation[$locale]) ? $translation[$locale] : null ?>
 
-                        <td>
-                            <a href="#edit"
-                               class="editable status-<?php echo $t ? $t->status : 0 ?> locale-<?php echo $locale ?>"
-                               data-locale="<?php echo $locale ?>" data-name="<?php echo $locale . "|" . htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>"
-                               id="username" data-type="textarea" data-pk="<?php echo $t ? $t->id : 0 ?>"
-                               data-url="<?php echo $editUrl ?>"
-                               data-title="Enter translation"><?php echo $t ? htmlentities($t->value, ENT_QUOTES, 'UTF-8', false) : '' ?></a>
-                        </td>
-                    <?php endforeach; ?>
-                    <?php if ($deleteEnabled): ?>
-                        <td>
-                            <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@postDelete', [$group, $key]) ?>"
-                               class="delete-key"
-                               data-confirm="Are you sure you want to delete the translations for '<?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>?"><span
-                                        class="glyphicon glyphicon-trash"></span></a>
-                        </td>
-                    <?php endif; ?>
-                </tr>
+                <td>
+                    <a href="#edit"
+                       class="editable status-<?php echo $t ? $t->status : 0 ?> locale-<?php echo $locale ?>"
+                       data-locale="<?php echo $locale ?>" data-name="<?php echo $locale . "|" . htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>"
+                       id="username" data-type="textarea" data-pk="<?php echo $t ? $t->id : 0 ?>"
+                       data-url="<?php echo $editUrl ?>"
+                       data-title="Enter translation"><?php echo $t ? htmlentities($t->value, ENT_QUOTES, 'UTF-8', false) : '' ?></a>
+                </td>
+                <?php endforeach; ?>
+                <?php if ($deleteEnabled): ?>
+                <td>
+                    <a href="<?php echo action('\Barryvdh\TranslationManager\Controller@postDelete', [$group, $key]) ?>"
+                       class="delete-key"
+                       data-confirm="Are you sure you want to delete the translations for '<?php echo htmlentities($key, ENT_QUOTES, 'UTF-8', false) ?>?"><span
+                            class="glyphicon glyphicon-trash"></span></a>
+                </td>
+                <?php endif; ?>
+            </tr>
             <?php endforeach; ?>
             </tbody>
         </table>
-    <?php else: ?>
+        <?php else: ?>
         <fieldset>
             <legend>Supported locales</legend>
             <p>
@@ -281,17 +298,17 @@
             <form  class="form-remove-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postRemoveLocale') ?>" data-confirm="Are you sure to remove this locale and all of data?">
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                 <ul class="list-locales">
-                <?php foreach($locales as $locale): ?>
+                    <?php foreach($locales as $locale): ?>
                     <li>
                         <div class="form-group">
                             <button type="submit" name="remove-locale[<?php echo $locale ?>]" class="btn btn-danger btn-xs" data-disable-with="...">
                                 &times;
                             </button>
                             <?php echo $locale ?>
-                            
+
                         </div>
                     </li>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </form>
             <form class="form-add-locale" method="POST" role="form" action="<?php echo action('\Barryvdh\TranslationManager\Controller@postAddLocale') ?>">
@@ -319,8 +336,10 @@
             </form>
         </fieldset>
 
-    <?php endif; ?>
-</div>
+        <?php endif; ?>
+    </div>
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
+@endsection

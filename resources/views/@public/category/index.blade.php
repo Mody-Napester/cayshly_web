@@ -5,7 +5,7 @@
 @section('page_contents')
 
     <!-- Page title-->
-    <div class="page-title-overlap bg-warning pt-4 pb-4">
+    <div class="page-title-overlap bg-primary pt-4 pb-4">
         <div class="container pt-lg-3 pb-lg-4">
             <div class="d-lg-flex pb-5 mb-3 justify-content-between">
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -30,7 +30,7 @@
                 @foreach($categories as $category)
                 <div class="col-md-4 col-sm-6 mb-3">
                     <div class="card border-0">
-                        <a class="d-block overflow-hidden rounded-lg" style="height: 180px;overflow: hidden;" href="shop-grid-ls.html">
+                        <a class="d-block overflow-hidden rounded-lg" style="height: 180px;overflow: hidden;" href="{{ route('public.category.show', $category->slug) }}">
                             <img class="d-block w-100" src="{{ url('assets_public/images/category/picture/'. $category->picture) }}" alt="{{ getFromJson($category->name , lang()) }}">
                         </a>
                         <div class="card-body">
@@ -38,7 +38,7 @@
                             <ul class="list-unstyled font-size-sm mb-0">
                                 @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
                                 <li class="d-flex align-items-center justify-content-between">
-                                    <a class="nav-link-style" href="{{ route('public.category.products.show', $child->slug) }}"><i class="czi-arrow-right-circle mr-2"></i>{{ getFromJson($child->name , lang()) }}</a>
+                                    <a class="nav-link-style" href="{{ route('public.category.product.index', $child->slug) }}"><i class="czi-arrow-right-circle mr-2"></i>{{ getFromJson($child->name , lang()) }}</a>
                                     <span class="font-size-ms text-muted">{{ $category->products()->count() }}</span>
                                 </li>
                                 @endforeach

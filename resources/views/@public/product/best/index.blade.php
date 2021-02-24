@@ -589,41 +589,9 @@
                 <!-- Products grid-->
                 <div class="row mb-5 mx-n2">
                     @foreach($products as $product)
-                    <div class="col-md-4 col-sm-6 px-2 mb-4">
-                        <div class="card product-card">
-                            <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
-                                <i class="czi-heart"></i>
-                            </button>
-                            <a class="card-img-top d-block overflow-hidden" href="">
-                                <img src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="{{ getFromJson($product->name , lang()) }}">
-                            </a>
-                            <div class="card-body py-2">
-                                <a class="product-meta d-block font-size-xs pb-1" href="">{{ getFromJson( $product->store->name , lang()) }}</a>
-                                <h3 class="product-title font-size-sm">
-                                    <a href="">{{ getFromJson($product->name , lang()) }}</a>
-                                </h3>
-                                <div class="d-flex justify-content-between">
-                                    <div class="product-price">
-                                        <span class="text-accent">{{ $product->price }}<small>00</small></span>
-                                        <del class="font-size-sm text-muted">38.<small>50</small></del>
-                                    </div>
-                                    <div class="star-rating">
-                                        <i class="sr-star czi-star-filled active"></i>
-                                        <i class="sr-star czi-star-filled active"></i>
-                                        <i class="sr-star czi-star-filled active"></i>
-                                        <i class="sr-star czi-star-filled active"></i>
-                                        <i class="sr-star czi-star"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body card-body-hidden">
-                                <button class="btn btn-primary btn-sm btn-block mb-2" type="button" data-toggle="toast" data-target="#cart-toast">
-                                    <i class="czi-cart font-size-sm mr-1"></i>Add to Cart
-                                </button>
-                            </div>
+                        <div class="col-md-4 col-sm-6 px-2 mb-4">
+                            @include('@public._partials.product')
                         </div>
-                        <hr class="d-sm-none">
-                    </div>
                     @endforeach
                 </div>
 

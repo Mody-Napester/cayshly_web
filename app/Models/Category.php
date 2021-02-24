@@ -35,6 +35,14 @@ class Category extends Model
         return 'uuid';
     }
 
+    /*
+     * Scope Active
+     * */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
     /**
      *  Setup model event hooks
      */

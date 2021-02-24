@@ -37,7 +37,7 @@
                                 </a>
                             </div>
                             <a class="product-thumb-overlay" href="{{ route('public.store.show', $store->slug) }}"></a>
-                            <img src="{{ url('assets_public/images/store/picture/'. $store->picture) }}" alt="Product">
+                            <img style="height: 100%;" src="{{ url('assets_public/images/store/picture/'. $store->picture) }}" alt="Product">
                         </div>
                         <div class="card-body">
                             <div class="d-flex flex-wrap justify-content-between align-items-start pb-2">

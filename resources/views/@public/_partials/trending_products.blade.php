@@ -161,7 +161,7 @@
                 <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1" href="#">Computers</a>
                     <h3 class="product-title font-size-sm"><a href="shop-single-v2.html">Convertible 2-in-1 HD Laptop</a></h3>
                     <div class="d-flex justify-content-between">
-                        <div class="product-price"><span class="text-accent">$412.<small>00</small></span></div>
+                        <div class="product-price"><span class="text-danger">$412.<small>00</small></span></div>
                     </div>
                 </div>
                 <div class="card-body card-body-hidden">

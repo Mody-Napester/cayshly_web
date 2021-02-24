@@ -7,12 +7,12 @@
                     <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('navbar.language') }}</a>
                     <ul class="dropdown-menu">
                         @foreach(langs() as $lang)
-                        <li><a class="dropdown-item pb-1" href="#">{{ $lang['name'] }}</a></li>
+                        <li><a class="dropdown-item pb-1" href="{{ route('language', $lang['short_name']) }}">{{ $lang['name'] }}</a></li>
                         @endforeach
                     </ul>
                 </div>
                 <div class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
-                    <span class="text-muted mr-1">{{ trans('navbar.available') }} {{ $contact->working_hours }} {{ trans('navbar.at') }}</span><a class="topbar-link" href="tel:{{ $contact->phone }}">{{ $contact->phone }}</a>
+                    <span class="text-muted mr-1">{{ trans('navbar.available') }} {{ (isset($contact))? $contact->working_hours : '' }} {{ trans('navbar.at') }}</span><a class="topbar-link" href="tel:{{ (isset($contact))? $contact->phone : '' }}">{{ (isset($contact))? $contact->phone : '' }}</a>
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
@@ -153,7 +153,7 @@
                                                     <ul class="widget-list">
                                                         @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
                                                         <li class="widget-list-item pb-1">
-                                                            <a class="widget-list-link" href="{{ route('public.category.products.show', $child->slug) }}">{{ getFromJson($child->name , lang()) }}</a>
+                                                            <a class="widget-list-link" href="{{ route('public.category.product.index', $child->slug) }}">{{ getFromJson($child->name , lang()) }}</a>
                                                         </li>
                                                         @endforeach
                                                     </ul>
@@ -162,7 +162,7 @@
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center">
                                                 <img src="{{ url('assets_public/images/category/picture/'. $category->picture) }}" alt="{{ getFromJson($category->name , lang()) }}"/>
 {{--                                                <div class="font-size-sm mb-3">Starting from <span class='font-weight-medium'>$149.<small>80</small></span></div>--}}
-                                                <a class="btn btn-primary btn-shadow btn-sm" href="{{ route('public.category.child.show', $category->slug) }}">{{ trans('navbar.see_all') }}<i class="czi-arrow-right font-size-xs ml-1"></i></a>
+                                                <a class="btn btn-primary btn-shadow btn-sm" href="{{ route('public.category.show', $category->slug) }}">{{ trans('navbar.see_all') }}<i class="czi-arrow-right font-size-xs ml-1"></i></a>
                                             </div>
                                         </div>
                                     </div>

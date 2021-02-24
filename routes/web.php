@@ -28,17 +28,22 @@ use \App\Http\Controllers\DashboardControllers\UserController;
 use \App\Http\Controllers\DashboardControllers\SliderController;
 use \App\Http\Controllers\DashboardControllers\SocialController;
 
+use \App\Http\Controllers\LanguagesController;
+
 use \App\Http\Controllers\PublicControllers\CategoryPublicController;
 use \App\Http\Controllers\PublicControllers\StorePublicController;
 use \App\Http\Controllers\PublicControllers\BrandPublicController;
 use \App\Http\Controllers\PublicControllers\ProductPublicController;
 use \App\Http\Controllers\PublicControllers\OfferPublicController;
 
+// Site Languages
+Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
+
 Route::get('/', [HomePublicController::class, 'home'])->name('public.home');
 
 Route::get('categories', [CategoryPublicController::class, 'index'])->name('public.category.index');
-Route::get('category/products/{category}', [CategoryPublicController::class, 'show_products'])->name('public.category.products.show');
-Route::get('category/child/{category}', [CategoryPublicController::class, 'show_child'])->name('public.category.child.show');
+Route::get('category/{category}', [CategoryPublicController::class, 'show'])->name('public.category.show');
+Route::get('category/products/{category}', [CategoryPublicController::class, 'products'])->name('public.category.product.index');
 
 Route::get('stores', [StorePublicController::class, 'index'])->name('public.store.index');
 Route::get('store/{store}', [StorePublicController::class, 'show'])->name('public.store.show');

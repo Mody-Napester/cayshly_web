@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PublicControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -23,18 +24,20 @@ class CategoryPublicController extends Controller
     /**
      * Display products for category.
      */
-    public function show_products($category)
+    public function show($category)
     {
         $data['category'] = Category::getOneBy('slug', $category);
-        return view('@public.category.products.show', $data);
+        $data['categories'] = Category::getAllBy('parent_id', $data['category']->id);
+        return view('@public.category.show', $data);
     }
 
     /**
      * Display child for category.
      */
-    public function show_child($category)
+    public function products($category)
     {
         $data['category'] = Category::getOneBy('slug', $category);
-        return view('@public.category.child.show', $data);
+        $data['products'] = Product::where('category_id', $data['category']->id)->active()->paginate(30);
+        return view('@public.category.product.index', $data);
     }
 }

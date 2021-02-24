@@ -64,7 +64,7 @@
                         </h2>
                         <div class="row pt-2">
                             @foreach($store->products as $product)
-                                <div class="col-md-3 col-sm-3 mb-4">
+                                <div class="col-md-4 col-sm-3 mb-4">
                                     <div class="card product-card">
                                         <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
                                             <i class="czi-heart"></i>

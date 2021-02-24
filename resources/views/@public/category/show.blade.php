@@ -1,6 +1,6 @@
 @extends('@public._layouts.master')
 
-@section('page_title') {{ trans('home.brands') }} @endsection
+@section('page_title') {{ getFromJson($category->name, lang()) }} @endsection
 
 @section('page_contents')
 
@@ -12,12 +12,13 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
                             <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>Home</a></li>
-                            <li class="breadcrumb-item text-nowrap active" aria-current="page">Brands</li>
+                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.category.index') }}"><i class="czi-view-grid"></i>Categories</a></li>
+                            <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ getFromJson($category->name, lang()) }}</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                    <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-bookmark"></i> Brands</h1>
+                    <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="{{ $category->icon }}"></i> {{ getFromJson($category->name, lang()) }}</h1>
                 </div>
             </div>
         </div>
@@ -27,19 +28,19 @@
     <div class="container pb-5 mb-2 mb-md-4">
         <div class="bg-light box-shadow-lg rounded-lg pr-2 pl-2">
             <div class="row pt-3 mx-n2">
-                @foreach($brands as $brand)
+                @foreach($categories as $category)
                     <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
                         <div class="card product-card-alt">
                             <div class="product-thumb" style="height: 180px;overflow: hidden;">
                                 <div class="product-card-actions">
-                                    <a class="btn btn-light btn-icon btn-shadow font-size-base mx-2" href=""><i class="czi-eye"></i></a>
+                                    <a class="btn btn-light btn-icon btn-shadow font-size-base mx-2" href="{{ route('public.category.product.index', $category->slug) }}"><i class="czi-eye"></i></a>
                                 </div>
-                                <a class="product-thumb-overlay" href=""></a>
-                                <img style="height: 100%;" src="{{ url('assets_public/images/brand/picture/'. $brand->picture) }}" alt="Product">
+                                <a class="product-thumb-overlay" href="{{ route('public.category.product.index', $category->slug) }}"></a>
+                                <img style="height: 100%;" src="{{ url('assets_public/images/category/picture/'. $category->picture) }}" alt="Product">
                             </div>
                             <div class="card-body text-center">
                                 <h3 class="product-title font-size-sm mb-2">
-                                    <a href="">{{ getFromJson($brand->name , lang()) }}</a>
+                                    <a href="{{ route('public.category.product.index', $category->slug) }}">{{ getFromJson($category->name , lang()) }}</a>
                                 </h3>
                             </div>
                         </div>
