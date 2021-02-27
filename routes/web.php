@@ -37,6 +37,7 @@ use \App\Http\Controllers\PublicControllers\ProductPublicController;
 use \App\Http\Controllers\PublicControllers\OfferPublicController;
 use \App\Http\Controllers\PublicControllers\UserPublicController;
 use \App\Http\Controllers\PublicControllers\WishlistPublicController;
+use \App\Http\Controllers\PublicControllers\PagePublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -52,6 +53,7 @@ Route::get('store/{store}', [StorePublicController::class, 'show'])->name('publi
 
 Route::get('brands', [BrandPublicController::class, 'index'])->name('public.brand.index');
 Route::get('brand/{brand}', [BrandPublicController::class, 'show'])->name('public.brand.show');
+Route::get('brand/products/{brand}', [BrandPublicController::class, 'products'])->name('public.brand.product.index');
 
 Route::get('products/best-sales', [ProductPublicController::class, 'index_best_sales_products'])->name('public.product.best.index');
 Route::get('products/by-free', [ProductPublicController::class, 'index_by_free_products'])->name('public.product.free.index');
@@ -63,6 +65,9 @@ Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.u
 
 Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
 Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
+Route::delete('wishlist/{wishlist}', [WishlistPublicController::class, 'destroy'])->name('public.wishlist.destroy');
+
+Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.page.show');
 
 Route::group([
     'prefix' => 'dashboard',

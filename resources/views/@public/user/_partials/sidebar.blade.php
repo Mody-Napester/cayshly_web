@@ -16,7 +16,7 @@
         </div>
         <ul class="list-unstyled mb-0">
 {{--            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-bag opacity-60 mr-2"></i>Orders<span class="font-size-sm text-muted ml-auto">1</span></a></li>--}}
-            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>Wishlist<span class="font-size-sm text-muted ml-auto">3</span></a></li>
+            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>Wishlist<span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span></a></li>
 {{--            <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-dollar opacity-60 mr-2"></i>My Points<span class="font-size-sm text-muted ml-auto">1</span></a></li>--}}
         </ul>
         <div class="bg-secondary px-4 py-3">

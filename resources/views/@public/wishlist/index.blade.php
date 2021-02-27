@@ -30,12 +30,13 @@
             <section class="col-lg-8">
                 <!-- Toolbar-->
                 <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-                    <h6 class="font-size-base text-light mb-0">List of items you added to wishlist:</h6><a class="btn btn-primary btn-sm" href="account-signin.html"><i class="czi-sign-out mr-2"></i>Sign out</a>
+                    <h6 class="font-size-base text-light mb-0">List of items you added to wishlist:</h6>
+                    @include('@public._partials.logout_btn')
                 </div>
                 <!-- Wishlist-->
 
                 <div class="card card-body">
-                    @foreach($products as $product)
+                    @foreach($user->wishlists as $product)
                         <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                             <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left">
                                 <a class="d-inline-block mx-auto mr-sm-4" href="{{ route('public.product.show', $product->slug) }}" style="width: 10rem;height: 100px;text-align: center;">
@@ -50,7 +51,11 @@
                                 </div>
                             </div>
                             <div class="pt-2 pl-sm-3 mx-auto mx-sm-0 text-center">
-                                <button class="btn btn-outline-danger btn-sm" type="button"><i class="czi-trash mr-2"></i>Remove</button>
+                                <form action="{{ route('public.wishlist.destroy', $product->pivot->uuid) }}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button class="btn btn-outline-danger btn-sm" type="submit"><i class="czi-trash mr-2"></i>Remove</button>
+                                </form>
                             </div>
                         </div>
                     @endforeach

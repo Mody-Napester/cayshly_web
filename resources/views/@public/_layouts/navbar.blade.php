@@ -16,25 +16,27 @@
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
-                <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">Useful pages</a>
+                <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('master.Useful_pages') }}</a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>
-                    <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>
-                    <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>Dashboard</a></li>
-                    @guest
-                    <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-location text-muted mr-2"></i>Login</a></li>
-                    <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-location text-muted mr-2"></i>Register</a></li>
-                    @endguest
+{{--                    <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>--}}
+{{--                    <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>--}}
+                    @if(auth()->check())
+                        <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a></li>
+                    @else
+                        <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-location text-muted mr-2"></i>{{ trans('master.Login') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-location text-muted mr-2"></i>{{ trans('master.Register') }}</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="d-none d-md-block ml-3 text-nowrap">
-                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>
-                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>
-                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>Dashboard</a>
-                @guest
-                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>Login</a>
-                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>Register</a>
-                @endguest
+{{--                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>--}}
+{{--                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>--}}
+                @if(auth()->check())
+                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>
+                @else
+                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>{{ trans('master.Login') }}</a>
+                    <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>{{ trans('master.Register') }}</a>
+                @endif
             </div>
         </div>
     </div>
@@ -43,17 +45,17 @@
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
                 <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="{{ route('public.home') }}" style="min-width: 7rem;">
-                    <img style="width: 130px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="Cayshly"/>
+                    <img style="width: 130px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
                 </a>
                 <a class="navbar-brand d-sm-none mr-2" href="{{ route('public.home') }}" style="min-width: 4.625rem;">
-                    <img width="74" src="{{ url('assets_public/img/logo-icon.png') }}" alt="Cayshly"/>
+                    <img width="74" src="{{ url('assets_public/img/logo-icon.png') }}" alt="{{ trans('master.Cayshly') }}"/>
                 </a>
                 <!-- Search-->
                 <div class="input-group-overlay d-none d-lg-block mx-4">
                     <div class="input-group-prepend-overlay">
                         <span class="input-group-text"><i class="czi-search"></i></span>
                     </div>
-                    <input class="form-control prepended-form-control appended-form-control" type="text" placeholder="Search for products">
+                    <input class="form-control prepended-form-control appended-form-control" type="text" placeholder="{{ trans('master.Search_for_products') }}">
                     <div class="input-group-append-overlay">
                         <select class="custom-select">
                             <option value="all">All categories</option>
@@ -190,6 +192,10 @@
                     </ul>
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> Home</a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> Stores</a>
                         </li>

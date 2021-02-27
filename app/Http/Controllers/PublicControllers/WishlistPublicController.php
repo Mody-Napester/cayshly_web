@@ -16,7 +16,6 @@ class WishlistPublicController extends Controller
      */
     public function index(){
         $data['user'] = auth()->user();
-        $data['products'] = $data['user']->wishlists;
         return view('@public.wishlist.index', $data);
     }
 
@@ -34,20 +33,36 @@ class WishlistPublicController extends Controller
                 'user_id' => $data['user']->id,
                 'product_id' => $data['product']->id,
             ]);
-        }else{
-            $resource = false;
-        }
-
-        // Return
-        if($resource){
             return back()->with('message', [
                 'type' => 'success',
-                'text' => 'Updated successfully'
+                'text' => 'Added successfully'
             ]);
         }else{
             return back()->with('message', [
-                'type' => 'error',
-                'text' => 'Error!, Please try again.'
+                'type' => 'danger',
+                'text' => 'Already added before.'
+            ]);
+        }
+    }
+
+    /**
+     * Destroy user wishlist
+     */
+    public function destroy($wishlist){
+        $data['wishlist'] = Wishlist::getOneBy('uuid', $wishlist);
+
+        // Return
+        if($data['wishlist']){
+            $data['wishlist']->delete();
+
+            return back()->with('message', [
+                'type' => 'success',
+                'text' => 'Deleted successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'danger',
+                'text' => 'Error!, Please try again later.'
             ]);
         }
     }

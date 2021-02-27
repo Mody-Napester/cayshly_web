@@ -129,7 +129,7 @@ class User extends Authenticatable
      */
     public function wishlists()
     {
-        return $this->belongsToMany(Product::class, 'wishlists');
+        return $this->belongsToMany(Product::class, 'wishlists')->withPivot('uuid');
     }
 
     /**

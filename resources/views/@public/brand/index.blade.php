@@ -27,7 +27,7 @@
         <div class="row pt-sm-0">
             @foreach($brands as $brand)
                 <div class="col-md-3 col-sm-6 mb-grid-gutter">
-                    <a class="card product-card h-100 border-0 box-shadow pb-2" href="">
+                    <a class="card product-card h-100 border-0 box-shadow pb-2" href="{{ route('public.brand.product.index', $brand->slug) }}">
                         <span class="badge badge-right badge-shadow badge-success font-size-md font-weight-medium badge-shadow" data-toggle="tooltip" title="" data-original-title="Average meal cost">{{ $brand->products()->count() }} Products</span>
                         <div style="height: 150px;overflow: hidden">
                             <img class="card-img-top" src="{{ url('assets_public/images/brand/cover/'. $brand->cover) }}" alt="{{ getFromJson($brand->name , lang()) }}">

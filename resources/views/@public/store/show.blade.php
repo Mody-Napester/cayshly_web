@@ -52,8 +52,14 @@
                             @if(!empty($store->website))
                             <li><i class="czi-globe opacity-60 mr-2"></i>{{ $store->website }}</li>
                             @endif
-                        </ul><a class="social-btn sb-facebook sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-facebook"></i></a><a class="social-btn sb-twitter sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-twitter"></i></a><a class="social-btn sb-dribbble sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-dribbble"></i></a><a class="social-btn sb-behance sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-behance"></i></a>
-                        <hr class="my-4">
+                        </ul>
+
+{{--                        <a class="social-btn sb-facebook sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-facebook"></i></a>--}}
+{{--                        <a class="social-btn sb-twitter sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-twitter"></i></a>--}}
+{{--                        <a class="social-btn sb-dribbble sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-dribbble"></i></a>--}}
+{{--                        <a class="social-btn sb-behance sb-outline sb-sm mr-2 mb-2" href="#"><i class="czi-behance"></i></a>--}}
+
+{{--                        <hr class="my-4">--}}
                     </div>
                 </aside>
                 <!-- Content-->
