@@ -143,6 +143,34 @@
                         </div>
                     </div>
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-col-form-label" for="is_active">Is Active</label>
+                            <select class="form-control @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
+                                <option @if($resource->is_active == 1) selected @endif value="1">Yes</option>
+                                <option @if($resource->is_active == 0) selected @endif value="0">No</option>
+                            </select>
+
+                            @error('is_active')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-col-form-label" for="is_featured">Is Featured</label>
+                            <select class="form-control @error('is_featured') is-invalid @enderror" id="is_featured" name="is_featured">
+                                <option @if($resource->is_featured == 1) selected @endif value="1">Yes</option>
+                                <option @if($resource->is_featured == 0) selected @endif value="0">No</option>
+                            </select>
+
+                            @error('is_featured')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
                     <div class="col-md-12">
                         <div class="form-group">
                             <label class="form-col-form-label" for="image">Image</label>

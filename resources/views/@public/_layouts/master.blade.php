@@ -18,6 +18,7 @@
     <link rel="mask-icon" color="#fe6a6a" href="{{ url('assets_public/img/platform/safari-pinned-tab.svg') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    @yield('page_meta')
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/simplebar/dist/simplebar.min.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/tiny-slider/dist/tiny-slider.css') }}"/>

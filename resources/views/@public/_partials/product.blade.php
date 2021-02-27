@@ -1,13 +1,18 @@
 <div class="card product-card">
     <span class="badge badge-success badge-shadow">New</span>
     <div class="product-card-actions d-flex align-items-center">
-        <a class="btn-action nav-link-style mr-2" href="#"><i class="czi-compare mr-1"></i>Compare</a>
-        <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
-            <i class="czi-heart"></i>
-        </button>
+{{--        <a class="btn-action nav-link-style mr-2" href="#"><i class="czi-compare mr-1"></i>Compare</a>--}}
+
+        <form action="{{ route('public.wishlist.store') }}" method="post">
+            @csrf
+            <input type="hidden" name="wishlist_product" value="{{ $product->uuid }}">
+            <button class="btn-wishlist btn-sm" type="submit" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
+                <i class="czi-heart"></i>
+            </button>
+        </form>
     </div>
 
-    <a class="card-img-top d-block overflow-hidden text-center" href="" style="height: 180px;width: 100%;">
+    <a class="card-img-top d-block overflow-hidden text-center" href="{{ route('public.product.show', $product->slug) }}" style="height: 180px;width: 100%;">
         <img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="{{ getFromJson($product->name , lang()) }}">
     </a>
     <div class="card-body py-2">

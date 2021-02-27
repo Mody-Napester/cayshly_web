@@ -20,7 +20,20 @@ class User extends Authenticatable
         'uuid',
         'parent_id',
         'name',
+        'first_name',
+        'last_name',
+        'slug',
         'email',
+        'phone',
+        'dob',
+        'lookup_gender_id',
+        'email_verified_at',
+        'is_active',
+        'activation_code',
+        'num_of_login',
+        'last_login_date',
+        'created_by',
+        'updated_by',
         'password',
     ];
 
@@ -50,7 +63,7 @@ class User extends Authenticatable
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->uuid = (string) \Webpatser\Uuid\Uuid::generate(config('vars.uuid_ver'));
+            $model->uuid = (string) \Webpatser\Uuid\Uuid::generate(config('vars.uuid_version'));
         });
     }
 
@@ -109,6 +122,14 @@ class User extends Authenticatable
     public function parent()
     {
         return $this->belongsTo(User::class, 'parent_id');
+    }
+
+    /**
+     *  Relationship with wishlist
+     */
+    public function wishlists()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists');
     }
 
     /**

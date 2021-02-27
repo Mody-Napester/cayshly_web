@@ -17,7 +17,6 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->integer('brand_id')->unsigned();
-            $table->integer('category_id')->unsigned();
             $table->integer('store_id')->unsigned();
             $table->string('slug')->unique();
             $table->text('name');

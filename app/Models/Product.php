@@ -16,7 +16,7 @@ class Product extends Model
      */
     protected $fillable = [
         'brand_id','category_id','store_id','slug','name','details',
-        'picture','price','points','lookup_condition_id','warranty',
+        'picture','code','price','points','lookup_condition_id','warranty',
         'video','views','is_active','created_by','updated_by',
     ];
 
@@ -99,9 +99,25 @@ class Product extends Model
     /**
      *  Category Relation
      */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class , 'product_category')->withTimestamps();
+    }
+
+    /**
+     *  Specification Relation
+     */
+    public function specifications()
+    {
+        return $this->belongsToMany(Specification::class , 'product_specification')->withTimestamps()->withPivot('value');
+    }
+
+    /**
+     *  Options Relation
+     */
+    public function options()
+    {
+        return $this->belongsToMany(Option::class , 'product_option')->withTimestamps();
     }
 
     /**

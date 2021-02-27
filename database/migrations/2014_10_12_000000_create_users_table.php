@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('last_login_date')->nullable();
             $table->rememberToken();
             $table->integer('created_by');
-            $table->integer('updated_by');
+            $table->integer('updated_by')->nullable();
             $table->timestamps();
         });
     }

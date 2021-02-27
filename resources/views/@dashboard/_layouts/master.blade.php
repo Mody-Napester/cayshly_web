@@ -16,6 +16,17 @@
     <link href="{{ url('assets_dashboard/img/favicon.png') }}" rel="icon" type="image/x-icon" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    <style>
+        .select2-selection__rendered {
+            line-height: 30px !important;
+        }
+        .select2-container .select2-selection--single {
+            height: 44px !important;
+        }
+        .select2-selection__arrow {
+            height: 44px !important;
+        }
+    </style>
     @yield('head_styles')
 
     <script src="{{ url('assets_dashboard/vendor/font-awesome/5.15.1/js/all.min.js') }}" crossorigin="anonymous" data-search-pseudo-elements defer></script>
@@ -29,11 +40,13 @@
     <!-- * * Tip * * You can use text or an image for your navbar brand.-->
     <!-- * * * * * * When using an image, we recommend the SVG format.-->
     <!-- * * * * * * Dimensions: Maximum height: 32px, maximum width: 240px-->
-    <a class="navbar-brand" href="{{ route('dashboard.home') }}">
+    <a class="navbar-brand text-danger" href="{{ route('dashboard.home') }}">
         <img style="width: 90px;height: 32px" src="{{ url('assets_public/img/logo-dark.png') }}" alt="Cayshly"/> Dashboard
     </a>
     <!-- Sidenav Toggle Button-->
-    <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle"><i data-feather="menu"></i></button>
+    <button class="btn btn-icon btn-transparent-dark order-1 order-lg-0 mr-lg-2" id="sidebarToggle">
+        <i data-feather="menu"></i>
+    </button>
     <!-- Navbar Search Input-->
     <!-- * * Note: * * Visible only on and above the md breakpoint-->
 {{--    <form class="form-inline mr-auto d-none d-md-block mr-3">--}}
@@ -44,11 +57,19 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </form>--}}
+    <a class="btn btn-transparent-dark" target="_blank" href="{{ route('public.home') }}">
+        <i data-feather="globe"></i> &nbsp; Website
+    </a>
     <!-- Navbar Items-->
     <ul class="navbar-nav align-items-center ml-auto">
         <!-- User Dropdown-->
+        <li class="nav-item mr-2">
+            @foreach (auth()->user()->roles as $role)
+                <span class="badge {{ $role->class }}">{{ $role->name }}</span>
+            @endforeach
+        </li>
         <li class="nav-item dropdown no-caret mr-3 mr-lg-0 dropdown-user">
-            {{ Auth::user()->name }} &nbsp;
+            {{ auth()->user()->name }} &nbsp;
             <a class="btn btn-icon btn-transparent-dark dropdown-toggle" id="navbarDropdownUserImage" href="javascript:void(0);" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="img-fluid" src="{{ url('assets_dashboard/img/illustrations/profiles/profile-2.png') }}" />
             </a>
@@ -56,9 +77,9 @@
                 <h6 class="dropdown-header d-flex align-items-center">
                     <img class="dropdown-user-img" src="{{ url('assets_dashboard/img/illustrations/profiles/profile-2.png') }}" />
                     <div class="dropdown-user-details">
-                        <div class="dropdown-user-details-name">{{ Auth::user()->name }}</div>
+                        <div class="dropdown-user-details-name">{{ auth()->user()->name }}</div>
                         <div class="dropdown-user-details-email">
-                            {{ Auth::user()->email }}
+                            {{ auth()->user()->email }}
                         </div>
                     </div>
                 </h6>

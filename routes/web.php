@@ -35,6 +35,8 @@ use \App\Http\Controllers\PublicControllers\StorePublicController;
 use \App\Http\Controllers\PublicControllers\BrandPublicController;
 use \App\Http\Controllers\PublicControllers\ProductPublicController;
 use \App\Http\Controllers\PublicControllers\OfferPublicController;
+use \App\Http\Controllers\PublicControllers\UserPublicController;
+use \App\Http\Controllers\PublicControllers\WishlistPublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -57,6 +59,11 @@ Route::get('product/{product}', [ProductPublicController::class, 'show'])->name(
 
 Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offer.index');
 
+Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.user.show');
+
+Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
+Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
+
 Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth',
@@ -66,6 +73,7 @@ Route::group([
     Route::resource('script', ScriptController::class);
     Route::resource('script', ScriptController::class);
     Route::resource('category', CategoryController::class);
+    Route::post('category/specifications', [CategoryController::class, 'index_specifications'])->name('category.specifications.index');
     Route::resource('brand', BrandController::class);
     Route::resource('country', CountryController::class);
     Route::resource('city', CityController::class);
@@ -73,6 +81,7 @@ Route::group([
     Route::resource('store', StoreController::class);
     Route::resource('specification', SpecificationController::class);
     Route::resource('option', OptionController::class);
+    Route::post('option/child', [OptionController::class, 'index_child'])->name('option.child.index');
     Route::resource('product', ProductController::class);
     Route::resource('offer', OfferController::class);
     Route::resource('contact', ContactController::class);
@@ -83,12 +92,13 @@ Route::group([
     Route::get('orders', [OrderController::class, 'index'])->name('dashboard.order.index');
     Route::get('subscriber', [SubscriberController::class, 'index'])->name('dashboard.subscriber.index');
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');
-    Route::resource('user', UserController::class)->names([
-        'index' => 'dashboard.user.index',
-        'create' => 'dashboard.user.create',
-        'edit' => 'dashboard.user.edit',
-        'destroy' => 'dashboard.user.destroy',
-    ]);
+    Route::resource('user', UserController::class);
+//        ->names([
+//        'index' => 'dashboard.user.index',
+//        'create' => 'dashboard.user.create',
+//        'edit' => 'dashboard.user.edit',
+//        'destroy' => 'dashboard.user.destroy',
+//    ]);
     Route::resource('permission-groups', PermissionGroupsController::class);
     Route::resource('permissions', PermissionsController::class);
     Route::resource('roles', RolesController::class);

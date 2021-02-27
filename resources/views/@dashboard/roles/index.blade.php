@@ -37,6 +37,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
+                            <th>Class</th>
                             <th>Permissions</th>
                             <th>Created by</th>
                             <th>Updated by</th>
@@ -51,8 +52,9 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>
-                                    <span class="label {{ $resource->class }}">{{ $resource->name }}</span>
+                                    <span class="badge {{ $resource->class }}">{{ $resource->name }}</span>
                                 </td>
+                                <td>{{ $resource->class }}</td>
                                 <td>
                                     @foreach($resource->permissions as $permission)
                                         <span class="badge badge-primary">{{ \App\Models\PermissionGroup::getBy('id', $permission->pivot->permission_group_id)->name }}.{{ $permission->name }}</span>

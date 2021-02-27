@@ -33,24 +33,33 @@
                         <h2 class="h4 mb-1">Sign in</h2>
                         <div class="py-3">
                             <h3 class="d-inline-block align-middle font-size-base font-weight-semibold mb-2 mr-2">With social account:</h3>
-                            <div class="d-inline-block align-middle"><a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a><a class="social-btn sb-facebook mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a><a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a></div>
-                        </div>
+                            <div class="d-inline-block align-middle">
+                                <a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a>
+                                <a class="social-btn sb-facebook mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a>
+                                <a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a>
+                            </div>                        </div>
                         <hr>
                         <h3 class="font-size-base pt-4 pb-2">Or using form below</h3>
                         <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>
                             @csrf
                             <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
-                                <input class="form-control prepended-form-control" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+                                <input class="form-control @error('email') is-invalid @enderror prepended-form-control" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Email" required autofocus>
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
                                 <div class="password-toggle">
-                                    <input class="form-control prepended-form-control" id="password" name="password" type="password" placeholder="Password" required autocomplete="current-password">
+                                    <input class="form-control @error('password') is-invalid @enderror prepended-form-control" id="password" name="password" type="password" placeholder="Password" required autocomplete="current-password">
                                     <label class="password-toggle-btn">
                                         <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Show password</span>
                                     </label>
                                 </div>
+                                @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="d-flex flex-wrap justify-content-between">
                                 <div class="custom-control custom-checkbox">

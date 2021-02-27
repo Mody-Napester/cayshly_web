@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Lookup;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -27,38 +28,43 @@ class UserController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+
      */
     public function index()
     {
-//        if (!User::hasAuthority('index.users')){
-//            return redirect('/');
-//        }
-        $data['roles'] = Role::all();
+        // Check Permission
+        if (!User::hasAuthority('index.users')){
+            return redirect('/');
+        }
+
         $data['resources'] = User::all();
         return view('@dashboard.users.index', $data);
     }
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        // Check Permission
+        if (!User::hasAuthority('create.users')){
+            return redirect('/');
+        }
+
+        $data['roles'] = Role::all();
+        $data['genders'] = lookups('gender');
+        return view('@dashboard.users.create', $data);
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         // Check permissions
+        if (!User::hasAuthority('store.users')){
+            return redirect('/');
+        }
 
         // Check validation
         $validator = Validator::make($request->all(), [
@@ -74,24 +80,35 @@ class UserController extends Controller
 
         // Do Code
         $resource = User::store([
+            'parent_id' => 1,
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
+            'phone' => ($request->has('phone'))? $request->phone : '',
+            'dob' => ($request->has('dob'))? $request->dob : '',
+            'lookup_gender_id' => Lookup::getOneBy('uuid', $request->lookup_gender_id)->id,
             'password' => bcrypt($request->password),
+            'is_active' => ($request->is_active == 1)? 1 : 0,
             'created_by' => auth()->user()->id,
-            'updated_by' => auth()->user()->id
         ]);
 
         // Relation
         if ($resource){
-            foreach ($request->input('roles') as $role){
+            foreach ($request->roles as $role){
                 $resource->roles()->attach(Role::getBy('uuid', $role)->id);
             }
         }
 
         // Return
-        if ($resource){
-            return back();
+        if($resource){
+            return redirect(route('user.index'))->with('message', [
+                'type' => 'success',
+                'text' => 'Created successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'error',
+                'text' => 'Error!, Please try again.'
+            ]);
         }
     }
 
@@ -103,7 +120,10 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // Check permissions
+        if (!User::hasAuthority('show.users')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -117,30 +137,29 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
      */
     public function edit($uuid)
     {
-        $data['roles'] = Role::all();
+        // Check permissions
+        if (!User::hasAuthority('edit.users')){
+            return redirect('/');
+        }
+
         $data['resource'] = User::getBy('uuid', $uuid);
-        return response([
-            'title'=> "Update user " . $data['resource']->name,
-            'view'=> view('@dashboard.users.edit', $data)->render(),
-        ]);
+        $data['roles'] = Role::all();
+        $data['genders'] = lookups('gender');
+        return view('@dashboard.users.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $uuid
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $uuid)
     {
         // Check permissions
+        if (!User::hasAuthority('update.users')){
+            return redirect('/');
+        }
 
         // Get Resource
         $resource = User::getBy('uuid', $uuid);
@@ -160,8 +179,11 @@ class UserController extends Controller
         $updatedResource = User::edit([
             'name' => $request->name,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => ($request->has('password')? bcrypt($request->password) : $resource->password),
+            'phone' => ($request->has('phone'))? $request->phone : '',
+            'dob' => ($request->has('dob'))? $request->dob : '',
+            'lookup_gender_id' => Lookup::getOneBy('uuid', $request->lookup_gender_id)->id,
+            'password' => (($request->has('password') && !empty($request->password))? bcrypt($request->password) : $resource->password),
+            'is_active' => ($request->is_active == 1)? 1 : 0,
             'updated_by' => auth()->user()->id
         ], $resource->id);
 
@@ -175,27 +197,51 @@ class UserController extends Controller
         }
 
         // Return
-        if ($updatedResource){
-            return back();
+        if($resource){
+            return redirect(route('user.index'))->with('message', [
+                'type' => 'success',
+                'text' => 'Updated successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'error',
+                'text' => 'Error!, Please try again.'
+            ]);
         }
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $uuid
-     * @return \Illuminate\Http\Response
      */
     public function destroy($uuid)
     {
+        // Check permissions
+        if (!User::hasAuthority('destroy.users')){
+            return redirect('/');
+        }
+
         $resource = User::getBy('uuid', $uuid);
+
         if ($resource){
+            $resource->roles()->detach();
             $deletedResource = User::remove($resource->id);
 
-            // Return
-            if ($deletedResource){
-                return back();
+            if($deletedResource){
+                return redirect()->back()->with('message',[
+                    'type'=>'success',
+                    'text'=>'Deleted Successfully.'
+                ]);
+            }else{
+                return redirect()->back()->with('message',[
+                    'type'=>'danger',
+                    'text'=>'Error Deleting.'
+                ]);
             }
+        }else{
+            return redirect()->back()->with('message',[
+                'type'=>'danger',
+                'text'=>'Sorry! not exists.'
+            ]);
         }
 
     }

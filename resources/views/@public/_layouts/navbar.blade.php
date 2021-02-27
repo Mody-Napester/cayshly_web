@@ -12,7 +12,7 @@
                     </ul>
                 </div>
                 <div class="topbar-text text-nowrap d-none d-md-inline-block border-left border-light pl-3 ml-3">
-                    <span class="text-muted mr-1">{{ trans('navbar.available') }} {{ (isset($contact))? $contact->working_hours : '' }} {{ trans('navbar.at') }}</span><a class="topbar-link" href="tel:{{ (isset($contact))? $contact->phone : '' }}">{{ (isset($contact))? $contact->phone : '' }}</a>
+                    <span class="text-muted mr-1 topbar-link"><i class="czi-support"></i> {{ trans('navbar.available') }} {{ (isset($contact))? $contact->working_hours : '' }} {{ trans('navbar.at') }}</span><a class="topbar-link" href="tel:{{ (isset($contact))? $contact->phone : '' }}">{{ (isset($contact))? $contact->phone : '' }}</a>
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
@@ -20,11 +20,21 @@
                 <ul class="dropdown-menu dropdown-menu-right">
                     <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>
                     <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>
+                    <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>Dashboard</a></li>
+                    @guest
+                    <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-location text-muted mr-2"></i>Login</a></li>
+                    <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-location text-muted mr-2"></i>Register</a></li>
+                    @endguest
                 </ul>
             </div>
             <div class="d-none d-md-block ml-3 text-nowrap">
                 <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>
                 <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>
+                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>Dashboard</a>
+                @guest
+                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>Login</a>
+                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>Register</a>
+                @endguest
             </div>
         </div>
     </div>
@@ -64,10 +74,17 @@
                         <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div>
                     </a>
 
-                    <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('login') }}">
-                        <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-                        <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
-                    </a>
+                    @if(auth()->check())
+                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('public.user.show', [auth()->user()->name]) }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
+                            <div class="navbar-tool-text ml-n3"><small>Hello, {{ auth()->user()->name }}</small>My Account</div>
+                        </a>
+                    @else
+                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
+                            <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
+                        </a>
+                    @endif
 
                     <div class="navbar-tool dropdown ml-3">
                         <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html">
@@ -144,7 +161,7 @@
                             <ul class="dropdown-menu">
                                 @foreach($categories as $category)
                                 <li class="dropdown mega-dropdown">
-                                    <a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">
+                                    <a class="dropdown-item dropdown-toggle" href="{{ route('public.category.show', $category->slug) }}" data-toggle="dropdown">
                                         <i class="{{ $category->icon }} opacity-60 font-size-lg mt-n1 mr-2"></i>{{ getFromJson($category->name , lang()) }}</a>
                                     <div class="dropdown-menu p-0">
                                         <div class="d-flex flex-wrap flex-md-nowrap px-2">
@@ -153,7 +170,7 @@
                                                     <ul class="widget-list">
                                                         @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
                                                         <li class="widget-list-item pb-1">
-                                                            <a class="widget-list-link" href="{{ route('public.category.product.index', $child->slug) }}">{{ getFromJson($child->name , lang()) }}</a>
+                                                            <a class="widget-list-link" href="{{ route('public.category.product.index', $child->slug) }}"><i class="{{ $child->icon }} opacity-60 font-size-lg mt-n1 mr-2"></i> {{ getFromJson($child->name , lang()) }}</a>
                                                         </li>
                                                         @endforeach
                                                     </ul>

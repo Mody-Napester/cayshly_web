@@ -30,6 +30,81 @@
     <!-- Main page content-->
     <div class="container mt-n10">
         <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 1-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-primary h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-primary mb-1">Earnings (monthly)</div>
+                                <div class="h5">$4,390</div>
+                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-up"></i>
+                                    12%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-dollar-sign fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 2-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-secondary h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-secondary mb-1">Average sale price</div>
+                                <div class="h5">$27.00</div>
+                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-down"></i>
+                                    3%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-tag fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 3-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-success h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-success mb-1">Clicks</div>
+                                <div class="h5">11,291</div>
+                                <div class="text-xs font-weight-bold text-success d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-up"></i>
+                                    12%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-mouse-pointer fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-md-6 mb-4">
+                <!-- Dashboard info widget 4-->
+                <div class="card border-top-0 border-bottom-0 border-right-0 border-left-lg border-info h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-grow-1">
+                                <div class="small font-weight-bold text-info mb-1">Conversion rate</div>
+                                <div class="h5">1.23%</div>
+                                <div class="text-xs font-weight-bold text-danger d-inline-flex align-items-center">
+                                    <i class="mr-1" data-feather="trending-down"></i>
+                                    1%
+                                </div>
+                            </div>
+                            <div class="ml-2"><i class="fas fa-percentage fa-2x text-gray-200"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-xxl-3 col-lg-3">
                 <div class="card bg-gradient-primary-to-secondary text-white mb-4">
                     <div class="card-body">
@@ -163,6 +238,18 @@
                     <div class="card-footer d-flex align-items-center justify-content-between">
                         <a class="small text-white stretched-link" href="#">View</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-3 col-lg-3">
+                <div class="card bg-primary border-0">
+                    <div class="card-body">
+                        <h5 class="text-white-50">Budget Overview</h5>
+                        <div class="mb-4">
+                            <span class="display-4 text-white">$48k</span>
+                            <span class="text-white-50">per year</span>
+                        </div>
+                        <div class="progress bg-white-25 rounded-pill" style="height: 0.5rem"><div class="progress-bar bg-white w-75 rounded-pill" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@
                         <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
                     <div class="col-12 col-xl-auto mt-4">
-                        <a href="{{ route('roles.create') }}" class="btn btn-sm btn-white">
+                        <a href="{{ route('user.create') }}" class="btn btn-sm btn-white">
                             <i class="mr-2 text-primary" data-feather="plus"></i> Add New
                         </a>
                     </div>
@@ -32,14 +32,16 @@
             <div class="card-header">All Users</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-responsive table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
                             <th>Parent</th>
                             <th>Email</th>
+                            <th>Phone</th>
                             <th>Roles</th>
+                            <th>Active</th>
                             <th>Created by</th>
                             <th>Updated by</th>
                             <th>Created at</th>
@@ -55,18 +57,26 @@
                                 <td>{{ $resource->name }}</td>
                                 <td>{{ ($resource->parent)? $resource->parent->name : '-' }}</td>
                                 <td>{{ $resource->email }}</td>
+                                <td>{{ $resource->phone }}</td>
                                 <td>
                                     @foreach ($resource->roles as $role)
-                                    <span class="badge badge-danger">{{ $role->name }}</span>
+                                    <span class="badge {{ $role->class }}">{{ $role->name }}</span>
                                     @endforeach
+                                </td>
+                                <td>
+                                    @if($resource->is_active == 1)
+                                        <span class="badge badge-success badge-pill">Yes</span>
+                                    @else
+                                        <span class="badge badge-danger badge-pill">No</span>
+                                    @endif
                                 </td>
                                 <td>{{ ($resource->createdBy)? $resource->createdBy->name : '-' }}</td>
                                 <td>{{ ($resource->updatedBy)? $resource->updatedBy->name : '-' }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('dashboard.user.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
-                                    <a href="{{ route('dashboard.user.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
+                                    <a href="{{ route('user.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+                                    <a href="{{ route('user.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
                                 </td>
                             </tr>
                         @endforeach

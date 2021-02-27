@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Support\Str;
 use App\Models\Option;
 use Illuminate\Http\Request;
@@ -186,4 +187,23 @@ class OptionController extends Controller
             ]);
         }
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function index_child(Request $request)
+    {
+        if(isset($request->product)){
+            $data['product_id'] = Product::getOneBy('uuid', $request->product)->id;
+        }
+        if(isset($request->options) && count($request->options) > 0){
+            $data['options'] = Option::whereIn('uuid', $request->options)->get();
+            $data['has_data'] = true;
+        }else{
+            $data['has_data'] = false;
+        }
+        $data['view'] = view('@dashboard.option._partials.child', $data)->render();
+        return response($data);
+    }
+
 }

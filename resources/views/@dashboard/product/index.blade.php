@@ -39,6 +39,7 @@
                             <th>Store</th>
                             <th>Slug</th>
                             <th>Name</th>
+                            <th>Code</th>
                             <th>Price</th>
                             <th>Points</th>
                             <th>Condition</th>
@@ -59,10 +60,19 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ (isset($resource->brand))? getFromJson( $resource->brand->name , lang()) : '-' }}</td>
-                                <td>{{ (isset($resource->category))? getFromJson( $resource->category->name , lang()) : '-' }}</td>
+                                <td>
+                                    @if($resource->categories)
+                                        @foreach($resource->categories as $category)
+                                            <span class="badge badge-primary">{{ getFromJson( $category->name , lang()) }}</span>
+                                        @endforeach
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td>{{ (isset($resource->store))? getFromJson( $resource->store->name , lang()) : '-' }}</td>
                                 <td>{{ $resource->slug }}</td>
                                 <td>{{ getFromJson($resource->name , lang()) }}</td>
+                                <td>{{ $resource->code }}</td>
                                 <td>{{ $resource->price }}</td>
                                 <td>{{ $resource->points }}</td>
                                 <td>{{ getFromJson( $resource->condition->name , lang()) }}</td>

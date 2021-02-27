@@ -185,8 +185,16 @@ class RolesController extends Controller
         }
 
         // Return
-        if ($updatedResource){
-            return back();
+        if($updatedResource){
+            return redirect(route('roles.index'))->with('message', [
+                'type' => 'success',
+                'text' => 'Updated successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'error',
+                'text' => 'Error!, Please try again.'
+            ]);
         }
     }
 
@@ -200,6 +208,7 @@ class RolesController extends Controller
     {
         $resource = Role::getBy('uuid', $uuid);
         if ($resource){
+            $resource->permissions()->detach();
             $deletedResource = Role::remove($resource->id);
 
             // Return

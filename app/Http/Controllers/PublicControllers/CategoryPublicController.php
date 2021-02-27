@@ -37,7 +37,7 @@ class CategoryPublicController extends Controller
     public function products($category)
     {
         $data['category'] = Category::getOneBy('slug', $category);
-        $data['products'] = Product::where('category_id', $data['category']->id)->active()->paginate(30);
+        $data['products'] = $data['category']->products()->active()->paginate(30);
         return view('@public.category.product.index', $data);
     }
 }

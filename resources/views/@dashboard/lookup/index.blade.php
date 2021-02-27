@@ -4,6 +4,7 @@
 
 @section('page_contents')
 
+    <!-- Page Heading -->
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
         <div class="container">
             <div class="page-header-content pt-4">
@@ -27,9 +28,8 @@
 
     <!-- Main page content-->
     <div class="container mt-n10">
-        <!-- Example DataTable for Dashboard Demo-->
         <div class="card mb-4">
-            <div class="card-header">Personnel Management</div>
+            <div class="card-header">All Lookups</div>
             <div class="card-body">
                 <div class="datatable">
                     <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">

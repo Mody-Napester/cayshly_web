@@ -1,6 +1,6 @@
 @extends('@dashboard._layouts.master')
 
-@section('page_title') Users @endsection
+@section('page_title') Create User @endsection
 
 @section('page_contents')
 
@@ -11,7 +11,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="key"></i></div>
-                            Update Users
+                            Add New User
                         </h1>
                     </div>
                 </div>
@@ -23,91 +23,133 @@
     <div class="container mt-n10">
         <div class="row">
             <div class="col-md-12">
-                <form action="{{ route('roles.update', $resource->uuid) }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('user.update', [$resource->uuid]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Update Permissions</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Create new Role</h6>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Role name</label>
-                                        <input type="text" name="name" class="form-control" required placeholder="Role name" value="{{ $resource->name }}"/>
+                                        <label>Name</label>
+                                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" required value="{{ $resource->name }}"/>
+                                        @if ($errors->has('name'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('name') }}</strong>
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Class</label>
-                                        <select name="class" id="class" class="form-control" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>
-                                            @foreach(App\Enums\LabelClasses::$classes as $key => $class)
-                                                <option @if($resource->class == $class) selected @endif value="{{ $class }}">{{ str_well($class) }}</option>
+                                        <label>Email</label>
+                                        <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required value="{{ $resource->email }}"/>
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Phone</label>
+                                        <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" value="{{ $resource->phone }}"/>
+                                        @if ($errors->has('phone'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Date of birth</label>
+                                        <input type="date" name="dob" class="form-control @error('dob') is-invalid @enderror" value="{{ $resource->dob }}"/>
+                                        @if ($errors->has('dob'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('dob') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password"/>
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="lookup_gender_id">Gender</label>
+                                        <select style="width: 100%;" class="select2 @error('lookup_gender_id') is-invalid @enderror" id="lookup_gender_id" name="lookup_gender_id">
+                                            @foreach($genders as $gender)
+                                                <option @if($gender->id == $resource->lookup_gender_id) selected @endif value="{{ $gender->uuid }}">{{ getFromJson($gender->name , lang()) }}</option>
                                             @endforeach
                                         </select>
+
+                                        @error('lookup_gender_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
+
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Color</label>
-                                        <input type="text" name="color" class="form-control" required placeholder="Color" value="{{ $resource->color }}"/>
+                                        <label class="form-col-form-label" for="is_active">Is Active</label>
+                                        <select style="width: 100%;" class="select2 @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
+                                            <option @if($resource->is_active == 1) selected @endif value="1">Yes</option>
+                                            <option @if($resource->is_active == 0) selected @endif value="0">No</option>
+                                        </select>
+
+                                        @error('is_active')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Icon</label>
-                                        <input type="text" name="icon" class="form-control" required placeholder="Icon" value="{{ $resource->icon }}"/>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Permission Groups
-                                    <span data-select2-target="permissions-groups_update" class="select-all text-success btn-link">(Select All)</span>
-                                    <span data-select2-target="permissions-groups_update" class="de-select-all text-success btn-link">(Deselect All)</span>
-                                </label>
-
-                                <div style="border:1px solid #dddddd;padding: 10px;border-radius: 5px;">
-                                    @foreach($permissions as $permission)
-                                        <div class="text-primary mb-2">{{ str_well($permission->name) }}</div>
-                                        <div class="row mb-2">
-                                            @foreach($permission->permission_groups as $permission_group)
-                                                <div class="col-md-3 all-checkbox">
-                                                    <label for="{{ $permission_group->uuid }}.{{ $permission->uuid }}">
-                                                        <input @if(in_array($permission->id, $resource->permissions->pluck('id')->toArray()) &&
-                                                                    in_array($permission_group->id, $resource->permissionGroups->pluck('id')->toArray())) checked @endif
-
-                                                        type="checkbox" name="permissions-groups[]"
-                                                               id="{{ $permission_group->uuid }}.{{ $permission->uuid }}"
-                                                               value="{{ $permission_group->uuid }}.{{ $permission->uuid }}">
-                                                        {{ str_well($permission_group->name) }}
-                                                    </label>
-                                                </div>
+                                        <label class="form-col-form-label" for="roles">Roles</label>
+                                        <select style="width: 100%;" class="select2 @error('roles') is-invalid @enderror" multiple id="roles" name="roles[]">
+                                            @foreach($roles as $role)
+                                                <option @if(in_array($role->id ,$resource->roles()->pluck('role_id')->toArray())) selected @endif value="{{ $role->uuid }}">{{ $role->name }}</option>
                                             @endforeach
-                                        </div>
-                                    @endforeach
-                                </div>
+                                        </select>
 
-                                {{--<select name="permissions-groups[]" id="permissions-groups_update" class="select2 select2-multiple" multiple="" data-placeholder="Choose ..." tabindex="-1" aria-hidden="true" required>--}}
-                                {{--@foreach($permissions as $permission)--}}
-                                {{--@foreach($permission->permission_groups as $permission_group)--}}
-                                {{--<option @if(in_array($permission->id, $resource->permissions->pluck('id')->toArray()) &&--}}
-                                {{--in_array($permission_group->id, $resource->permissionGroups->pluck('id')->toArray())) selected @endif--}}
-                                {{--value="{{ $permission_group->uuid }}.{{ $permission->uuid }}">{{ $permission_group->name }}.{{ $permission->name }}</option>--}}
-                                {{--@endforeach--}}
-                                {{--@endforeach--}}
-                                {{--</select>--}}
+                                        @error('roles')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-warning" type="submit"><i class="fa fa-fw fa-save"></i> Update</button>
+                            <button class="btn btn-success" type="submit"><i class="fa fa-fw fa-save"></i> Save</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('footer_scripts')
 
 @endsection

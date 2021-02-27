@@ -4,6 +4,8 @@
 
 @section('head_scripts')
     <script src="{{ url('assets_dashboard/vendor/ckeditor/ckeditor.js') }}"></script>
+    <!-- provide the csrf token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('page_contents')
@@ -25,21 +27,21 @@
 
     <!-- Main page content-->
     <div class="container mt-n10">
-        <div class="row">
-            <div class="col-md-12">
-                <form action="{{ route('product.update', $resource->uuid) }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Update Product</h6>
-                        </div>
-                        <div class="card-body">
+        <form action="{{ route('product.update', $resource->uuid) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Update Product</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="brand_id">Brand</label>
-                                        <select class="form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
+                                        <select class="select2 form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
                                             @foreach($brands as $brand)
                                                 <option @if($resource->brand_id == $brand->id) selected @endif value="{{ $brand->uuid }}">{{ getFromJson($brand->name , lang()) }}</option>
                                             @endforeach
@@ -53,23 +55,8 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="form-col-form-label" for="category_id">Category</label>
-                                        <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
-                                            @foreach($categories as $category)
-                                                <option @if($resource->category_id == $category->id) selected @endif value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
-                                            @endforeach
-                                        </select>
-
-                                        @error('category_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
                                         <label class="form-col-form-label" for="store_id">Store</label>
-                                        <select class="form-control @error('store_id') is-invalid @enderror" id="store_id" name="store_id">
+                                        <select class="select2 form-control @error('store_id') is-invalid @enderror" id="store_id" name="store_id">
                                             @foreach($stores as $store)
                                                 <option @if($resource->store_id == $store->id) selected @endif value="{{ $store->uuid }}">{{ getFromJson($store->name , lang()) }}</option>
                                             @endforeach
@@ -84,7 +71,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="lookup_condition_id">Condition</label>
-                                        <select class="form-control @error('lookup_condition_id') is-invalid @enderror" id="lookup_condition_id" name="lookup_condition_id">
+                                        <select class="select2 form-control @error('lookup_condition_id') is-invalid @enderror" id="lookup_condition_id" name="lookup_condition_id">
                                             @foreach($conditions as $condition)
                                                 <option @if($resource->lookup_condition_id == $condition->id) selected @endif value="{{ $condition->uuid }}">{{ getFromJson($condition->name , lang()) }}</option>
                                             @endforeach
@@ -99,7 +86,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="is_active">Is Active</label>
-                                        <select class="form-control @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
+                                        <select class="select2 form-control @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
                                             <option @if($resource->is_active == 1) selected @endif value="1">Yes</option>
                                             <option @if($resource->is_active == 0) selected @endif value="0">No</option>
                                         </select>
@@ -124,40 +111,19 @@
                                     </div>
                                 </div>
 
-                                @foreach(langs("short_name") as $lang)
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-col-form-label" for="name_{{ $lang }}">Name ({{ $lang }})</label>
-                                            <input class="form-control @error('name_'.$lang) is-invalid @enderror "
-                                                   id="name_{{ $lang }}"
-                                                   type="text" name="name_{{ $lang }}"
-                                                   placeholder="Enter name_{{ $lang }} .." value="{{ getFromJson($resource->name , $lang) }}">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="code">Code</label>
+                                        <input class="form-control @error('code') is-invalid @enderror "
+                                               id="code"
+                                               type="text" name="code"
+                                               placeholder="Enter code .." value="{{ $resource->code }}">
 
-                                            @error('name_'.$lang)
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-                                        </div>
+                                        @error('code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
-                                @endforeach
-
-                                @foreach(langs("short_name") as $lang)
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-col-form-label" for="details_{{ $lang }}">Details ({{ $lang }})</label>
-                                            <textarea class="form-control @error('details_'.$lang) is-invalid @enderror "
-                                                      id="details_{{ $lang }}" name="details_{{ $lang }}"
-                                                      placeholder="Enter details_{{ $lang }} ..">{{ getFromJson($resource->details , $lang) }}</textarea>
-
-                                            @error('details_'.$lang)
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                            @enderror
-
-                                            <script>
-                                                CKEDITOR.replace( 'details_{{ $lang }}' );
-                                            </script>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -187,7 +153,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="picture">Picture</label>
                                         <input class="form-control @error('picture') is-invalid @enderror" id="picture" type="file" name="picture">
@@ -197,15 +163,98 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                @foreach(langs("short_name") as $lang)
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-col-form-label" for="name_{{ $lang }}">Name ({{ $lang }})</label>
+                                            <input class="form-control @error('name_'.$lang) is-invalid @enderror "
+                                                   id="name_{{ $lang }}"
+                                                   type="text" name="name_{{ $lang }}"
+                                                   placeholder="Enter name_{{ $lang }} .." value="{{ getFromJson($resource->name , $lang) }}">
+
+                                            @error('name_'.$lang)
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                @foreach(langs("short_name") as $lang)
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="form-col-form-label" for="details_{{ $lang }}">Details ({{ $lang }})</label>
+                                            <textarea class="form-control @error('details_'.$lang) is-invalid @enderror "
+                                                      id="details_{{ $lang }}" name="details_{{ $lang }}"
+                                                      placeholder="Enter details_{{ $lang }} ..">{{ getFromJson($resource->details , $lang) }}</textarea>
+
+                                            @error('details_'.$lang)
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+
+                                            <script>
+                                                CKEDITOR.replace( 'details_{{ $lang }}' );
+                                            </script>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <button class="btn btn-warning" type="submit"><i class="fa fa-fw fa-save"></i> Update</button>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="category">Category</label>
+                                        <select class="select2 form-control @error('category') is-invalid @enderror" multiple id="category" name="category[]">
+                                            @foreach($categories as $category)
+                                                <option @if(in_array($category->id, $resource->categories()->pluck('category_id')->toArray())) selected @endif value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-col-form-label" for="specifications">Specifications</label>
+                                    <div id="specifications_container">
+                                        @include('@dashboard.category._partials.specifications')
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="option">Options</label>
+                                        <select class="select2 form-control @error('option') is-invalid @enderror" multiple id="option" name="option[]">
+                                            @foreach($options as $option)
+                                                <option @if(in_array($option->id, $product_options)) selected @endif value="{{ $option->uuid }}">{{ getFromJson($option->name , lang()) }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('option')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-col-form-label" for="product_options">Product options</label>
+                                    <div id="product_options">
+                                        @include('@dashboard.option._partials.child')
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-warning" type="submit"><i class="fa fa-fw fa-save"></i> Update</button>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 
 
@@ -214,7 +263,61 @@
 @section('footer_scripts')
     <script !src="">
         $(document).ready(function () {
+            $(document).on('change', '#category', function(){
+                var categories = $(this).val();
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
 
+                console.log(categories);
+                $.ajax({
+                    url: "{{ route('category.specifications.index') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        _token: CSRF_TOKEN,
+                        product : '{{ $resource->uuid }}',
+                        categories : categories
+                    },
+                    beforeSend : function(){
+
+                    },
+                    success: function(data){
+                        $('#specifications_container').html(data.view);
+                    },
+                    error: function(data){
+                        console.log('Error');
+                    }
+                });
+            });
+
+            $('#category').trigger('change');
+
+            $(document).on('change', '#option', function(){
+                var options = $(this).val();
+                var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+                console.log(options);
+                $.ajax({
+                    url: "{{ route('option.child.index') }}",
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        _token: CSRF_TOKEN,
+                        product : '{{ $resource->uuid }}',
+                        options : options
+                    },
+                    beforeSend : function(){
+
+                    },
+                    success: function(data){
+                        $('#product_options').html(data.view);
+                    },
+                    error: function(data){
+                        console.log('Error');
+                    }
+                });
+            });
+
+            $('#option').trigger('change');
         });
     </script>
 @endsection

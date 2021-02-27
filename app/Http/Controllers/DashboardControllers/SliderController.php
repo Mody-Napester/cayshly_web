@@ -90,6 +90,9 @@ class SliderController extends Controller
             'button_1_link' => $request->button_1_link,
             'button_2_link' => $request->button_2_link,
             'image' => $image,
+            'is_featured' => ($request->is_featured == 1)? 1 : 0,
+            'is_active' => ($request->is_active == 1)? 1 : 0,
+            'created_by' => auth()->user()->id,
         ]);
 
         // Return
@@ -201,6 +204,9 @@ class SliderController extends Controller
             'button_1_link' => $request->button_1_link,
             'button_2_link' => $request->button_2_link,
             'image' => (isset($image)? $image : $data['resource']->image),
+            'is_featured' => ($request->is_featured == 1)? 1 : 0,
+            'is_active' => ($request->is_active == 1)? 1 : 0,
+            'updated_by' => auth()->user()->id,
         ]);
 
         // Return

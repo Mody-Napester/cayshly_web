@@ -38,7 +38,7 @@
                     <a class="nav-link" href="{{ route('roles.index') }}">Roles</a>
                 </nav>
             </div>
-            <a class="nav-link" href="{{ route('dashboard.user.index') }}"><div class="nav-link-icon"><i data-feather="user"></i></div> Users</a>
+            <a class="nav-link" href="{{ route('user.index') }}"><div class="nav-link-icon"><i data-feather="user"></i></div> Users</a>
             <a class="nav-link" href="{{ route('lookup.index') }}"><div class="nav-link-icon"><i data-feather="book"></i></div> Lookups</a>
             <a class="nav-link" href="{{ route('script.index') }}"><div class="nav-link-icon"><i data-feather="code"></i></div> Scripts</a>
 

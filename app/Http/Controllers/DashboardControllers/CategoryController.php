@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Specification;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -255,5 +257,24 @@ class CategoryController extends Controller
                 'text'=>'Sorry! not exists.'
             ]);
         }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function index_specifications(Request $request)
+    {
+        if(isset($request->product)){
+            $data['product_id'] = Product::getOneBy('uuid', $request->product)->id;
+        }
+        if(isset($request->categories) && count($request->categories) > 0){
+            $data['categories'] = Category::whereIn('uuid', $request->categories)->pluck('id')->toArray();
+            $data['specifications'] = Specification::whereIn('category_id', $data['categories'])->get();
+            $data['has_data'] = true;
+        }else{
+            $data['has_data'] = false;
+        }
+        $data['view'] = view('@dashboard.category._partials.specifications', $data)->render();
+        return response($data);
     }
 }

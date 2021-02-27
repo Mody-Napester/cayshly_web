@@ -77,4 +77,20 @@ class Option extends Model
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
+
+    /**
+     *  Parent Relation
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Option::class, 'parent_id', 'id');
+    }
+
+    /**
+     *  Child Relation
+     */
+    public function child()
+    {
+        return $this->hasMany(Option::class, 'parent_id', 'id');
+    }
 }
