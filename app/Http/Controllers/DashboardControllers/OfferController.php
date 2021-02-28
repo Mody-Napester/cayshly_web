@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Offer;
 use Illuminate\Http\Request;
@@ -15,6 +16,10 @@ class OfferController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.offer')){
+            return redirect('/');
+        }
         $data['resources'] = Offer::paginate(config('vars.pagination'));
         return view('@dashboard.offer.index', $data);
     }
@@ -26,6 +31,11 @@ class OfferController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.offer')){
+            return redirect('/');
+        }
+
         return view('@dashboard.offer.create');
     }
 
@@ -37,6 +47,11 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.offer')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'picture' => 'required',
@@ -114,6 +129,11 @@ class OfferController extends Controller
      */
     public function edit(Offer $offer)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.offer')){
+            return redirect('/');
+        }
+
         $data['resource'] = $offer;
         return view('@dashboard.offer.edit', $data);
     }
@@ -127,6 +147,11 @@ class OfferController extends Controller
      */
     public function update(Request $request, Offer $offer)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.offer')){
+            return redirect('/');
+        }
+
         $data['resource'] = $offer;
 
         // Return
@@ -202,6 +227,11 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.offer')){
+            return redirect('/');
+        }
+
         $data['resource'] = $offer;
 
         if($data['resource']){

@@ -58,7 +58,7 @@
                     <input class="form-control prepended-form-control appended-form-control" type="text" placeholder="{{ trans('master.Search_for_products') }}">
                     <div class="input-group-append-overlay">
                         <select class="custom-select">
-                            <option value="all">All categories</option>
+                            <option value="all">{{ trans('master.All_categories') }}</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
                             @endforeach
@@ -72,76 +72,76 @@
                     </button>
 
                     <a class="navbar-tool navbar-stuck-toggler" href="#">
-                        <span class="navbar-tool-tooltip">Expand menu</span>
+                        <span class="navbar-tool-tooltip">{{ trans('master.Expand_menu') }}</span>
                         <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div>
                     </a>
 
                     @if(auth()->check())
                         <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('public.user.show', [auth()->user()->name]) }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-                            <div class="navbar-tool-text ml-n3"><small>Hello, {{ auth()->user()->name }}</small>My Account</div>
+                            <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ auth()->user()->name }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @else
                         <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('login') }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-                            <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
+                            <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ trans('master.Sign_in') }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @endif
 
                     <div class="navbar-tool dropdown ml-3">
-                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html">
+                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="">
                             <span class="navbar-tool-label">4</span>
                             <i class="navbar-tool-icon czi-cart"></i>
                         </a>
 
-                        <a class="navbar-tool-text" href="shop-cart.html"><small>My Cart</small>$1,247.00</a>
+                        <a class="navbar-tool-text" href=""><small>{{ trans('master.My_Cart') }}</small>$1,247.00</a>
 
                         <!-- Cart dropdown-->
-                        <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
-                            <div class="widget widget-cart px-3 pt-2 pb-3">
-                                <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">
-                                    <div class="widget-cart-item pb-2 border-bottom">
-                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/05.jpg" alt="Product"/></a>
-                                            <div class="media-body">
-                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Bluetooth Headphones</a></h6>
-                                                <div class="widget-product-meta"><span class="text-accent mr-2">$259.<small>00</small></span><span class="text-muted">x 1</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-cart-item py-2 border-bottom">
-                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/06.jpg" alt="Product"/></a>
-                                            <div class="media-body">
-                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Cloud Security Camera</a></h6>
-                                                <div class="widget-product-meta"><span class="text-accent mr-2">$122.<small>00</small></span><span class="text-muted">x 1</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-cart-item py-2 border-bottom">
-                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/07.jpg" alt="Product"/></a>
-                                            <div class="media-body">
-                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smartphone S10</a></h6>
-                                                <div class="widget-product-meta"><span class="text-accent mr-2">$799.<small>00</small></span><span class="text-muted">x 1</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="widget-cart-item py-2 border-bottom">
-                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/08.jpg" alt="Product"/></a>
-                                            <div class="media-body">
-                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smart TV Box</a></h6>
-                                                <div class="widget-product-meta"><span class="text-accent mr-2">$67.<small>00</small></span><span class="text-muted">x 1</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-wrap justify-content-between align-items-center py-3">
-                                    <div class="font-size-sm mr-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent font-size-base ml-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i class="czi-arrow-right ml-1 mr-n1"></i></a>
-                                </div><a class="btn btn-primary btn-sm btn-block" href="checkout-details.html"><i class="czi-card mr-2 font-size-base align-middle"></i>Checkout</a>
-                            </div>
-                        </div>
+{{--                        <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">--}}
+{{--                            <div class="widget widget-cart px-3 pt-2 pb-3">--}}
+{{--                                <div style="height: 15rem;" data-simplebar data-simplebar-auto-hide="false">--}}
+{{--                                    <div class="widget-cart-item pb-2 border-bottom">--}}
+{{--                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>--}}
+{{--                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/05.jpg" alt="Product"/></a>--}}
+{{--                                            <div class="media-body">--}}
+{{--                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Bluetooth Headphones</a></h6>--}}
+{{--                                                <div class="widget-product-meta"><span class="text-accent mr-2">$259.<small>00</small></span><span class="text-muted">x 1</span></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="widget-cart-item py-2 border-bottom">--}}
+{{--                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>--}}
+{{--                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/06.jpg" alt="Product"/></a>--}}
+{{--                                            <div class="media-body">--}}
+{{--                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Cloud Security Camera</a></h6>--}}
+{{--                                                <div class="widget-product-meta"><span class="text-accent mr-2">$122.<small>00</small></span><span class="text-muted">x 1</span></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="widget-cart-item py-2 border-bottom">--}}
+{{--                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>--}}
+{{--                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/07.jpg" alt="Product"/></a>--}}
+{{--                                            <div class="media-body">--}}
+{{--                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smartphone S10</a></h6>--}}
+{{--                                                <div class="widget-product-meta"><span class="text-accent mr-2">$799.<small>00</small></span><span class="text-muted">x 1</span></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="widget-cart-item py-2 border-bottom">--}}
+{{--                                        <button class="close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>--}}
+{{--                                        <div class="media align-items-center"><a class="d-block mr-2" href="shop-single-v2.html"><img width="64" src="{{ url('assets_public') }}/img/shop/cart/widget/08.jpg" alt="Product"/></a>--}}
+{{--                                            <div class="media-body">--}}
+{{--                                                <h6 class="widget-product-title"><a href="shop-single-v2.html">Android Smart TV Box</a></h6>--}}
+{{--                                                <div class="widget-product-meta"><span class="text-accent mr-2">$67.<small>00</small></span><span class="text-muted">x 1</span></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                                <div class="d-flex flex-wrap justify-content-between align-items-center py-3">--}}
+{{--                                    <div class="font-size-sm mr-2 py-2"><span class="text-muted">Subtotal:</span><span class="text-accent font-size-base ml-1">$1,247.<small>00</small></span></div><a class="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i class="czi-arrow-right ml-1 mr-n1"></i></a>--}}
+{{--                                </div><a class="btn btn-primary btn-sm btn-block" href="checkout-details.html"><i class="czi-card mr-2 font-size-base align-middle"></i>Checkout</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -152,13 +152,13 @@
                     <!-- Search-->
                     <div class="input-group-overlay d-lg-none my-3">
                         <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
-                        <input class="form-control prepended-form-control" type="text" placeholder="Search for products">
+                        <input class="form-control prepended-form-control" type="text" placeholder="{{ trans('master.Search_for_products') }}">
                     </div>
                     <!-- Departments menu-->
                     <ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle pl-0" href="#" data-toggle="dropdown">
-                                <i class="czi-menu align-middle mt-n1 mr-2"></i>Departments</a>
+                                <i class="czi-menu align-middle mt-n1 mr-2"></i>{{ trans('master.Departments') }}</a>
 
                             <ul class="dropdown-menu">
                                 @foreach($categories as $category)
@@ -193,31 +193,31 @@
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> Home</a>
+                            <a class="nav-link" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> {{ trans('master.Home') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> Stores</a>
+                            <a class="nav-link" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> {{ trans('master.Stores') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.category.index') }}"><i style="margin-right: 5px;" class="czi-view-grid"></i> Categories</a>
+                            <a class="nav-link" href="{{ route('public.category.index') }}"><i style="margin-right: 5px;" class="czi-view-grid"></i> {{ trans('master.Categories') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.brand.index') }}"><i style="margin-right: 5px;" class="czi-bookmark"></i> Brands</a>
+                            <a class="nav-link" href="{{ route('public.brand.index') }}"><i style="margin-right: 5px;" class="czi-bookmark"></i> {{ trans('master.Brands') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.product.best.index') }}"><i style="margin-right: 5px;" class="czi-diamond"></i> Best Sales</a>
+                            <a class="nav-link" href="{{ route('public.product.best.index') }}"><i style="margin-right: 5px;" class="czi-diamond"></i> {{ trans('master.Best_Sales') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> Offers</a>
+                            <a class="nav-link" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> By Free</a>
+                            <a class="nav-link" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> {{ trans('master.By_Free') }}</a>
                         </li>
                     </ul>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Specification;
 use Illuminate\Http\Request;
@@ -16,6 +17,11 @@ class SpecificationController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.specification')){
+            return redirect('/');
+        }
+
         $data['resources'] = Specification::all();
         return view('@dashboard.specification.index', $data);
     }
@@ -27,6 +33,11 @@ class SpecificationController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.specification')){
+            return redirect('/');
+        }
+
         $data['categories'] = Category::all();
         return view('@dashboard.specification.create', $data);
     }
@@ -39,6 +50,11 @@ class SpecificationController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.specification')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'category' => 'required',
@@ -98,6 +114,11 @@ class SpecificationController extends Controller
      */
     public function edit(Specification $specification)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.specification')){
+            return redirect('/');
+        }
+
         $data['resource'] = $specification;
         $data['categories'] = Category::all();
         return view('@dashboard.specification.edit', $data);
@@ -112,6 +133,11 @@ class SpecificationController extends Controller
      */
     public function update(Request $request, Specification $specification)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.specification')){
+            return redirect('/');
+        }
+
         $data['resource'] = $specification;
 
         // Return
@@ -169,6 +195,11 @@ class SpecificationController extends Controller
      */
     public function destroy(Specification $specification)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.specification')){
+            return redirect('/');
+        }
+
         $data['resource'] = $specification;
 
         if($data['resource']){

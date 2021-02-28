@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lookup;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Script;
 use Illuminate\Http\Request;
@@ -16,6 +17,11 @@ class ScriptController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.script')){
+            return redirect('/');
+        }
+
         $data['resources'] = Script::paginate(config('vars.pagination'));
         return view('@dashboard.script.index', $data);
     }
@@ -27,6 +33,11 @@ class ScriptController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.script')){
+            return redirect('/');
+        }
+
         $data['providers'] = lookups('providers');
         return view('@dashboard.script.create', $data);
     }
@@ -39,6 +50,11 @@ class ScriptController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.script')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'lookup_provider_id' => 'required',
@@ -101,6 +117,11 @@ class ScriptController extends Controller
      */
     public function edit(Script $script)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.script')){
+            return redirect('/');
+        }
+
         $data['resource'] = $script;
         $data['providers'] = lookups('providers');
         return view('@dashboard.script.edit', $data);
@@ -115,6 +136,11 @@ class ScriptController extends Controller
      */
     public function update(Request $request, Script $script)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.script')){
+            return redirect('/');
+        }
+
         $data['resource'] = $script;
 
         // Return
@@ -175,6 +201,11 @@ class ScriptController extends Controller
      */
     public function destroy(Script $script)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.script')){
+            return redirect('/');
+        }
+
         $data['resource'] = $script;
 
         if($data['resource']){

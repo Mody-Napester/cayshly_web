@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DashboardControllers;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\City;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -15,6 +16,11 @@ class CityController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.city')){
+            return redirect('/');
+        }
+
         $data['resources'] = City::all();
         return view('@dashboard.city.index', $data);
     }
@@ -26,6 +32,11 @@ class CityController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.city')){
+            return redirect('/');
+        }
+
         $data['countries'] = Country::all();
         return view('@dashboard.city.create', $data);
     }
@@ -38,6 +49,11 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.city')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'country' => 'required',
@@ -97,6 +113,11 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.city')){
+            return redirect('/');
+        }
+
         $data['resource'] = $city;
         $data['countries'] = Country::all();
         return view('@dashboard.city.edit', $data);
@@ -111,6 +132,11 @@ class CityController extends Controller
      */
     public function update(Request $request, City $city)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.city')){
+            return redirect('/');
+        }
+
         $data['resource'] = $city;
 
         // Return
@@ -168,6 +194,11 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.city')){
+            return redirect('/');
+        }
+
         $data['resource'] = $city;
 
         if($data['resource']){

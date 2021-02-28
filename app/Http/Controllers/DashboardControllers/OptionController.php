@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Option;
 use Illuminate\Http\Request;
@@ -16,6 +17,11 @@ class OptionController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.option')){
+            return redirect('/');
+        }
+
         $data['resources'] = Option::paginate(config('vars.pagination'));
         return view('@dashboard.option.index', $data);
     }
@@ -27,6 +33,11 @@ class OptionController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.option')){
+            return redirect('/');
+        }
+
         $data['parents'] = Option::getAllBy('parent_id', 0);
         return view('@dashboard.option.create', $data);
     }
@@ -39,6 +50,11 @@ class OptionController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.option')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'parent_id' => 'required',
@@ -99,6 +115,11 @@ class OptionController extends Controller
      */
     public function edit(Option $option)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.option')){
+            return redirect('/');
+        }
+
         $data['resource'] = $option;
         $data['parents'] = Option::getAllBy('parent_id', 0);
         return view('@dashboard.option.edit', $data);
@@ -113,6 +134,11 @@ class OptionController extends Controller
      */
     public function update(Request $request, Option $option)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.option')){
+            return redirect('/');
+        }
+
         $data['resource'] = $option;
 
         // Return
@@ -171,6 +197,11 @@ class OptionController extends Controller
      */
     public function destroy(Option $option)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.option')){
+            return redirect('/');
+        }
+
         $data['resource'] = $option;
 
         if($data['resource']){

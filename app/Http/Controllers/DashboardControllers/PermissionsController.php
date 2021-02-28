@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Validator;
@@ -32,6 +33,11 @@ class PermissionsController extends Controller
      */
     public function index()
     {
+        // Check Authority
+        if (!User::hasAuthority('index.permissions')){
+            return redirect('/');
+        }
+
         $data['groups'] = PermissionGroup::all();
         $data['resources'] = Permission::all();
         return view('@dashboard.permissions.index', $data);
@@ -44,6 +50,11 @@ class PermissionsController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.permissions')){
+            return redirect('/');
+        }
+
         $data['groups'] = PermissionGroup::all();
         return view('@dashboard.permissions.create',$data);
     }
@@ -56,6 +67,11 @@ class PermissionsController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.permissions')){
+            return redirect('/');
+        }
+
         // Check permissions
 
         // Check validation
@@ -115,6 +131,11 @@ class PermissionsController extends Controller
      */
     public function edit($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.permissions')){
+            return redirect('/');
+        }
+
         $data['groups'] = PermissionGroup::all();
         $data['resource'] = Permission::getBy('uuid', $uuid);
         return view('@dashboard.permissions.edit', $data);
@@ -129,6 +150,11 @@ class PermissionsController extends Controller
      */
     public function update(Request $request, $uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.permissions')){
+            return redirect('/');
+        }
+
         // Check permissions
 
         // Get Resource
@@ -179,6 +205,11 @@ class PermissionsController extends Controller
      */
     public function destroy($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.permissions')){
+            return redirect('/');
+        }
+
         $resource = Permission::getBy('uuid', $uuid);
         if ($resource){
             $deletedResource = Permission::remove($resource->id);

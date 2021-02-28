@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Address;
 use Illuminate\Http\Request;
@@ -16,7 +17,10 @@ class AddressController extends Controller
      */
     public function index()
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('index.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -26,7 +30,10 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('create.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -37,7 +44,10 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('store.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -48,7 +58,10 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('show.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -59,7 +72,10 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('edit.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -71,7 +87,10 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('update.address')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -82,6 +101,9 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('destroy.address')){
+            return redirect('/');
+        }
     }
 }

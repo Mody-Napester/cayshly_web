@@ -1,12 +1,13 @@
 <div class="card product-card">
-    <span class="badge badge-success badge-shadow">New</span>
+    <span class="badge badge-success badge-shadow">{{ trans('partials.New') }}</span>
+{{--    <span class="badge badge-success badge-shadow">{{ trans('partials.Sale') }}</span>--}}
     <div class="product-card-actions d-flex align-items-center">
 {{--        <a class="btn-action nav-link-style mr-2" href="#"><i class="czi-compare mr-1"></i>Compare</a>--}}
 
         <form action="{{ route('public.wishlist.store') }}" method="post">
             @csrf
             <input type="hidden" name="wishlist_product" value="{{ $product->uuid }}">
-            <button class="btn-wishlist btn-sm" type="submit" data-toggle="tooltip" data-placement="left" title="Add to wishlist">
+            <button class="btn-wishlist btn-sm" type="submit" data-toggle="tooltip" data-placement="left" title="{{ trans('partials.Add_to_wishlist') }}">
                 <i class="czi-heart"></i>
             </button>
         </form>
@@ -36,7 +37,7 @@
     </div>
     <div class="card-body card-body-hidden">
         <button class="btn btn-primary btn-sm btn-block mb-2" type="button" data-toggle="toast" data-target="#cart-toast">
-            <i class="czi-cart font-size-sm mr-1"></i>Add to Cart
+            <i class="czi-cart font-size-sm mr-1"></i>{{ trans('partials.Add_to_Cart') }}
         </button>
 
 {{--        <div class="text-center">--}}

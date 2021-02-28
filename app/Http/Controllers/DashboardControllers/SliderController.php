@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Slider;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class SliderController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.slider')){
+            return redirect('/');
+        }
+
         $data['resources'] = Slider::paginate(config('vars.pagination'));
         return view('@dashboard.slider.index', $data);
     }
@@ -26,6 +32,11 @@ class SliderController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.slider')){
+            return redirect('/');
+        }
+
         return view('@dashboard.slider.create');
     }
 
@@ -37,6 +48,11 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.slider')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'image' => 'required',
@@ -128,6 +144,11 @@ class SliderController extends Controller
      */
     public function edit(Slider $slider)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.slider')){
+            return redirect('/');
+        }
+
         $data['resource'] = $slider;
         return view('@dashboard.slider.edit', $data);
     }
@@ -141,6 +162,11 @@ class SliderController extends Controller
      */
     public function update(Request $request, Slider $slider)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.slider')){
+            return redirect('/');
+        }
+
         $data['resource'] = $slider;
 
         // Return
@@ -231,6 +257,11 @@ class SliderController extends Controller
      */
     public function destroy(Slider $slider)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.slider')){
+            return redirect('/');
+        }
+
         $data['resource'] = $slider;
 
         if($data['resource']){

@@ -11,8 +11,8 @@
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>Home</a></li>
-                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.category.index') }}"><i class="czi-view-grid"></i>Categories</a></li>
+                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.category.index') }}"><i class="czi-view-grid"></i>{{ trans('master.Categories') }}</a></li>
                             <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ getFromJson($category->name, lang()) }}</li>
                         </ol>
                     </nav>

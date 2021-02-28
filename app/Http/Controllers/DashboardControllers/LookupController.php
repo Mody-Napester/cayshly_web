@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Lookup;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class LookupController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
+
         $data['resources'] = Lookup::paginate(config('vars.pagination'));
         return view('@dashboard.lookup.index', $data);
     }
@@ -26,6 +32,11 @@ class LookupController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
+
         $data['parents'] = Lookup::getAllBy('parent_id', 0);
         return view('@dashboard.lookup.create', $data);
     }
@@ -38,6 +49,11 @@ class LookupController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'parent_id' => 'required',
@@ -99,6 +115,11 @@ class LookupController extends Controller
      */
     public function edit(Lookup $lookup)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
+
         $data['resource'] = $lookup;
         $data['parents'] = Lookup::getAllBy('parent_id', 0);
         return view('@dashboard.lookup.edit', $data);
@@ -113,6 +134,11 @@ class LookupController extends Controller
      */
     public function update(Request $request, Lookup $lookup)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
+
         $data['resource'] = $lookup;
 
         // Return
@@ -173,6 +199,11 @@ class LookupController extends Controller
      */
     public function destroy(Lookup $lookup)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.lookup')){
+            return redirect('/');
+        }
+
         $data['resource'] = $lookup;
 
         if($data['resource']){

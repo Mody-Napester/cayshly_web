@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Permission;
 use App\Models\PermissionGroup;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -32,6 +33,11 @@ class RolesController extends Controller
      */
     public function index()
     {
+        // Check Authority
+        if (!User::hasAuthority('index.role')){
+            return redirect('/');
+        }
+
         $data['permissions'] = Permission::all();
         $data['resources'] = Role::all();
         return view('@dashboard.roles.index', $data);
@@ -44,6 +50,11 @@ class RolesController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.role')){
+            return redirect('/');
+        }
+
         $data['permissions'] = Permission::all();
         return view('@dashboard.roles.create', $data);
     }
@@ -56,8 +67,10 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        // Check permissions
+        // Check Authority
+        if (!User::hasAuthority('store.role')){
+            return redirect('/');
+        }
 
         // Check validation
         $validator = Validator::make($request->all(), [
@@ -128,6 +141,11 @@ class RolesController extends Controller
      */
     public function edit($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.role')){
+            return redirect('/');
+        }
+
         $data['permissions'] = Permission::all();
         $data['resource'] = Role::getBy('uuid', $uuid);
         return view('@dashboard.roles.edit', $data);
@@ -142,7 +160,10 @@ class RolesController extends Controller
      */
     public function update(Request $request, $uuid)
     {
-        // Check permissions
+        // Check Authority
+        if (!User::hasAuthority('update.role')){
+            return redirect('/');
+        }
 
         // Get Resource
         $resource = Role::getBy('uuid', $uuid);
@@ -206,6 +227,11 @@ class RolesController extends Controller
      */
     public function destroy($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.role')){
+            return redirect('/');
+        }
+
         $resource = Role::getBy('uuid', $uuid);
         if ($resource){
             $resource->permissions()->detach();

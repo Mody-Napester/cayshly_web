@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DashboardControllers;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Specification;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -17,6 +18,11 @@ class CategoryController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.category')){
+            return redirect('/');
+        }
+
         $data['resources'] = Category::paginate(config('vars.pagination'));
         return view('@dashboard.category.index', $data);
     }
@@ -28,6 +34,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.category')){
+            return redirect('/');
+        }
+
         $data['parents'] = Category::getAllBy('parent_id', 0);
         return view('@dashboard.category.create', $data);
     }
@@ -40,6 +51,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.category')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'parent_id' => 'required',
@@ -135,6 +151,11 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.category')){
+            return redirect('/');
+        }
+
         $data['resource'] = $category;
         $data['parents'] = Category::getAllBy('parent_id', 0);
         return view('@dashboard.category.edit', $data);
@@ -149,6 +170,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.category')){
+            return redirect('/');
+        }
+
         $data['resource'] = $category;
 
         // Return
@@ -242,6 +268,11 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        // Check Authority
+        if(!User::hasAuthority('destroy.category')){
+            return redirect('/');
+        }
+
         $data['resource'] = $category;
 
         if($data['resource']){
@@ -264,6 +295,7 @@ class CategoryController extends Controller
      */
     public function index_specifications(Request $request)
     {
+        // Check Authority
         if(isset($request->product)){
             $data['product_id'] = Product::getOneBy('uuid', $request->product)->id;
         }

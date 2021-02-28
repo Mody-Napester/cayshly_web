@@ -10,13 +10,13 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>Home</a></li>
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
                         <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('product.best_sales_products') }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-diamond"></i> More than {{ $products->count() }} {{ trans('product.best_sales_products') }}</h1>
+                <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-diamond"></i> {{ trans('products.More_than') }} {{ $products->count() }} {{ trans('product.best_sales_products') }}</h1>
             </div>
         </div>
     </div>
@@ -29,23 +29,29 @@
                 <!-- Sidebar-->
                 <div class="cz-sidebar rounded-lg box-shadow-lg" id="shop-sidebar">
                     <div class="cz-sidebar-header box-shadow-sm">
-                        <button class="close ml-auto" type="button" data-dismiss="sidebar" aria-label="Close"><span class="d-inline-block font-size-xs font-weight-normal align-middle">Close sidebar</span><span class="d-inline-block align-middle ml-2" aria-hidden="true">&times;</span></button>
+                        <button class="close ml-auto" type="button" data-dismiss="sidebar" aria-label="Close">
+                            <span class="d-inline-block font-size-xs font-weight-normal align-middle">{{ trans('products.Close_sidebar') }}</span>
+                            <span class="d-inline-block align-middle ml-2" aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="cz-sidebar-body">
                         <!-- Categories-->
                         <div class="widget widget-categories mb-4 pb-4 border-bottom">
-                            <h3 class="widget-title">Categories</h3>
+                            <h3 class="widget-title">{{ trans('products.Categories') }}</h3>
                             <div class="accordion mt-n1" id="shop-categories">
                                 <!-- Shoes-->
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="accordion-heading"><a class="collapsed" href="#shoes" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="shoes">Shoes<span class="accordion-indicator"></span></a></h3>
+                                        <h3 class="accordion-heading">
+                                            <a class="collapsed" href="#shoes" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="shoes">
+                                                {{ trans('products.Shoes') }}<span class="accordion-indicator"></span>
+                                            </a>
+                                        </h3>
                                     </div>
                                     <div class="collapse" id="shoes" data-parent="#shop-categories">
                                         <div class="card-body">
                                             <div class="widget widget-links cz-filter">
                                                 <div class="input-group-overlay input-group-sm mb-2">
-                                                    <input class="cz-filter-search form-control form-control-sm appended-form-control" type="text" placeholder="Search">
+                                                    <input class="cz-filter-search form-control form-control-sm appended-form-control" type="text" placeholder="{{ trans('products.Search') }}">
                                                     <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
                                                 </div>
                                                 <ul class="widget-list cz-filter-list pt-1" style="height: 12rem;" data-simplebar data-simplebar-auto-hide="false">

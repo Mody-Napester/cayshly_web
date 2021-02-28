@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Brand;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class BrandController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('destroy.brand')){
+            return redirect('/');
+        }
+
         $data['resources'] = Brand::paginate(config('vars.pagination'));
         return view('@dashboard.brand.index', $data);
     }
@@ -26,6 +32,7 @@ class BrandController extends Controller
      */
     public function create()
     {
+        // Check Authority
         return view('@dashboard.brand.create');
     }
 
@@ -37,6 +44,10 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.brand')){
+            return redirect('/');
+        }
         // Validation
         $rules = [
             'picture' => 'required',
@@ -116,7 +127,10 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('show.brand')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -127,6 +141,11 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.brand')){
+            return redirect('/');
+        }
+
         $data['resource'] = $brand;
         return view('@dashboard.brand.edit', $data);
     }
@@ -140,6 +159,11 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.brand')){
+            return redirect('/');
+        }
+
         $data['resource'] = $brand;
 
         // Return
@@ -228,6 +252,11 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.brand')){
+            return redirect('/');
+        }
+
         $data['resource'] = $brand;
 
         if($data['resource']){

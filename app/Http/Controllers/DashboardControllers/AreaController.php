@@ -5,6 +5,7 @@ namespace App\Http\Controllers\DashboardControllers;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\City;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -15,6 +16,11 @@ class AreaController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.area')){
+            return redirect('/');
+        }
+
         $data['resources'] = Area::all();
         return view('@dashboard.area.index', $data);
     }
@@ -26,6 +32,11 @@ class AreaController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.area')){
+            return redirect('/');
+        }
+
         $data['cities'] = City::all();
         return view('@dashboard.area.create', $data);
     }
@@ -38,6 +49,11 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.area')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'city' => 'required',
@@ -86,7 +102,10 @@ class AreaController extends Controller
      */
     public function show(Area $area)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('show.area')){
+            return redirect('/');
+        }
     }
 
     /**
@@ -97,6 +116,11 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.area')){
+            return redirect('/');
+        }
+
         $data['resource'] = $area;
         $data['cities'] = City::all();
         return view('@dashboard.area.edit', $data);
@@ -111,6 +135,11 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.area')){
+            return redirect('/');
+        }
+
         $data['resource'] = $area;
 
         // Return
@@ -168,6 +197,11 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.area')){
+            return redirect('/');
+        }
+
         $data['resource'] = $area;
 
         if($data['resource']){

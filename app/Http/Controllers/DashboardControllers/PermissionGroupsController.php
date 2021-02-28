@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\PermissionGroup;
 use Illuminate\Http\Request;
@@ -31,6 +32,11 @@ class PermissionGroupsController extends Controller
      */
     public function index()
     {
+        // Check Authority
+        if (!User::hasAuthority('index.permission_groups')){
+            return redirect('/');
+        }
+
         $data['resources'] = PermissionGroup::all();
         return view('@dashboard.permission_groups.index', $data);
     }
@@ -42,6 +48,11 @@ class PermissionGroupsController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.permission_groups')){
+            return redirect('/');
+        }
+
         return view('@dashboard.permission_groups.create');
     }
 
@@ -53,6 +64,11 @@ class PermissionGroupsController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.permission_groups')){
+            return redirect('/');
+        }
+
         // Check permissions
 
         // Check validation
@@ -104,6 +120,11 @@ class PermissionGroupsController extends Controller
      */
     public function edit($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.permission_groups')){
+            return redirect('/');
+        }
+
         $data['resource'] = PermissionGroup::getBy('uuid', $uuid);
         return view('@dashboard.permission_groups.edit', $data);
     }
@@ -117,6 +138,11 @@ class PermissionGroupsController extends Controller
      */
     public function update(Request $request, $uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.permission_groups')){
+            return redirect('/');
+        }
+
         // Check permissions
 
         // Check validation
@@ -158,6 +184,11 @@ class PermissionGroupsController extends Controller
      */
     public function destroy($uuid)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.permission_groups')){
+            return redirect('/');
+        }
+
         $data['resource'] = PermissionGroup::getBy('uuid', $uuid);
 
         if($data['resource']){

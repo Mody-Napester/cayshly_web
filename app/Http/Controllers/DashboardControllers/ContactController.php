@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Contact;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class ContactController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.contact')){
+            return redirect('/');
+        }
+
         $data['resources'] = Contact::paginate(config('vars.pagination'));
         return view('@dashboard.contact.index', $data);
     }
@@ -26,6 +32,11 @@ class ContactController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.contact')){
+            return redirect('/');
+        }
+
         return view('@dashboard.contact.create');
     }
 
@@ -37,6 +48,11 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.contact')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'picture' => 'required',
@@ -115,6 +131,11 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.city')){
+            return redirect('/');
+        }
+
         $data['resource'] = $contact;
         return view('@dashboard.contact.edit', $data);
     }
@@ -128,6 +149,11 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.contact')){
+            return redirect('/');
+        }
+
         $data['resource'] = $contact;
 
         // Return
@@ -204,6 +230,11 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.contact')){
+            return redirect('/');
+        }
+
         $data['resource'] = $contact;
 
         if($data['resource']){

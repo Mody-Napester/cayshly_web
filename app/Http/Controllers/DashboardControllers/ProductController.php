@@ -9,6 +9,7 @@ use App\Models\Lookup;
 use App\Models\Option;
 use App\Models\Specification;
 use App\Models\Store;
+use App\Models\User;
 use DB;
 use Illuminate\Support\Str;
 use App\Models\Product;
@@ -22,6 +23,11 @@ class ProductController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.product')){
+            return redirect('/');
+        }
+
         $data['resources'] = Product::paginate(config('vars.pagination'));
         return view('@dashboard.product.index', $data);
     }
@@ -33,6 +39,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.product')){
+            return redirect('/');
+        }
+
         $data['brands'] = Brand::all();
         $data['categories'] = Category::where('parent_id', '<>' ,0)->get();
         $data['stores'] = Store::all();
@@ -50,6 +61,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.product')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'brand_id' => 'required',
@@ -176,6 +192,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.product')){
+            return redirect('/');
+        }
+
         $data['resource'] = $product;
         $data['brands'] = Brand::all();
         $data['categories'] = Category::where('parent_id', '<>' ,0)->get();
@@ -201,6 +222,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.product')){
+            return redirect('/');
+        }
+
         $data['resource'] = $product;
 
         // Return
@@ -325,6 +351,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.product')){
+            return redirect('/');
+        }
+
         $data['resource'] = $product;
 
         if($data['resource']){

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CountryController extends Controller
@@ -14,6 +15,11 @@ class CountryController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.country')){
+            return redirect('/');
+        }
+
         $data['resources'] = Country::all();
         return view('@dashboard.country.index', $data);
     }
@@ -25,6 +31,11 @@ class CountryController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.country')){
+            return redirect('/');
+        }
+
         return view('@dashboard.country.create');
     }
 
@@ -36,6 +47,11 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.country')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'nicename' => 'required',
@@ -103,6 +119,11 @@ class CountryController extends Controller
      */
     public function edit(Country $country)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.country')){
+            return redirect('/');
+        }
+
         $data['resource'] = $country;
         return view('@dashboard.country.edit', $data);
     }
@@ -116,6 +137,11 @@ class CountryController extends Controller
      */
     public function update(Request $request, Country $country)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.country')){
+            return redirect('/');
+        }
+
         $data['resource'] = $country;
 
         // Return
@@ -181,6 +207,11 @@ class CountryController extends Controller
      */
     public function destroy(Country $country)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.country')){
+            return redirect('/');
+        }
+
         $data['resource'] = $country;
 
         if($data['resource']){

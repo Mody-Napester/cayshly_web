@@ -19,7 +19,7 @@
                 @endforeach
             </ul>
             @else
-                <p class="text-center">No Data Available</p>
+                <p class="text-center">{{ trans('products.No_Data_Available') }}</p>
             @endif
         </div>
 {{--        offset-lg-1--}}

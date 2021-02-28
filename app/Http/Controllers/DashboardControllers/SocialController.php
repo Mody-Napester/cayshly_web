@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Provider;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Social;
 use Illuminate\Http\Request;
@@ -16,6 +17,11 @@ class SocialController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.social')){
+            return redirect('/');
+        }
+
         $data['resources'] = Social::paginate(config('vars.pagination'));
         return view('@dashboard.social.index', $data);
     }
@@ -27,6 +33,11 @@ class SocialController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.social')){
+            return redirect('/');
+        }
+
         $data['providers'] = Provider::all();
         return view('@dashboard.social.create', $data);
     }
@@ -39,6 +50,11 @@ class SocialController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.social')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'provider_id' => 'required',
@@ -87,6 +103,11 @@ class SocialController extends Controller
      */
     public function edit(Social $social)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.social')){
+            return redirect('/');
+        }
+
         $data['resource'] = $social;
         $data['providers'] = Provider::all();
         return view('@dashboard.social.edit', $data);
@@ -101,6 +122,11 @@ class SocialController extends Controller
      */
     public function update(Request $request, Social $social)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.social')){
+            return redirect('/');
+        }
+
         $data['resource'] = $social;
 
         // Return
@@ -148,6 +174,11 @@ class SocialController extends Controller
      */
     public function destroy(Social $social)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.social')){
+            return redirect('/');
+        }
+
         $data['resource'] = $social;
 
         if($data['resource']){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Page;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class PageController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.page')){
+            return redirect('/');
+        }
+
         $data['resources'] = Page::paginate(config('vars.pagination'));
         return view('@dashboard.page.index', $data);
     }
@@ -26,6 +32,11 @@ class PageController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.page')){
+            return redirect('/');
+        }
+
         return view('@dashboard.page.create');
     }
 
@@ -37,6 +48,11 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.page')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'picture' => 'required',
@@ -127,6 +143,11 @@ class PageController extends Controller
      */
     public function edit(Page $page)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.page')){
+            return redirect('/');
+        }
+
         $data['resource'] = $page;
         return view('@dashboard.page.edit', $data);
     }
@@ -140,6 +161,11 @@ class PageController extends Controller
      */
     public function update(Request $request, Page $page)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.page')){
+            return redirect('/');
+        }
+
         $data['resource'] = $page;
 
         // Return
@@ -228,6 +254,11 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.page')){
+            return redirect('/');
+        }
+
         $data['resource'] = $page;
 
         if($data['resource']){

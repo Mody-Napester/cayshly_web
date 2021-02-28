@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Store;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class StoreController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.store')){
+            return redirect('/');
+        }
+
         $data['resources'] = Store::paginate(config('vars.pagination'));
         return view('@dashboard.store.index', $data);
     }
@@ -26,6 +32,11 @@ class StoreController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.store')){
+            return redirect('/');
+        }
+
         return view('@dashboard.store.create');
     }
 
@@ -37,6 +48,11 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.store')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'picture' => 'required',
@@ -131,6 +147,11 @@ class StoreController extends Controller
      */
     public function edit(Store $store)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.store')){
+            return redirect('/');
+        }
+
         $data['resource'] = $store;
         return view('@dashboard.store.edit', $data);
     }
@@ -144,6 +165,11 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.store')){
+            return redirect('/');
+        }
+
         $data['resource'] = $store;
 
         // Return
@@ -237,6 +263,11 @@ class StoreController extends Controller
      */
     public function destroy(Store $store)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.store')){
+            return redirect('/');
+        }
+
         $data['resource'] = $store;
 
         if($data['resource']){

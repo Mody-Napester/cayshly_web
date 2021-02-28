@@ -1,6 +1,6 @@
 @extends('@public._layouts.master')
 
-@section('page_title') Wishlist @endsection
+@section('page_title') {{ trans('wishlist.My_wishlist') }} @endsection
 
 @section('page_contents')
 
@@ -10,13 +10,13 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>Home</a></li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">My wishlist</li>
+                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('wishlist.My_wishlist') }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                <h1 class="h3 text-light mb-0">My wishlist</h1>
+                <h1 class="h3 text-light mb-0">{{ trans('wishlist.My_wishlist') }}</h1>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
             <section class="col-lg-8">
                 <!-- Toolbar-->
                 <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-                    <h6 class="font-size-base text-light mb-0">List of items you added to wishlist:</h6>
+                    <h6 class="font-size-base text-light mb-0">{{ trans('wishlist.List_of_items_you_added_to_wishlist') }}:</h6>
                     @include('@public._partials.logout_btn')
                 </div>
                 <!-- Wishlist-->
@@ -54,7 +54,7 @@
                                 <form action="{{ route('public.wishlist.destroy', $product->pivot->uuid) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-outline-danger btn-sm" type="submit"><i class="czi-trash mr-2"></i>Remove</button>
+                                    <button class="btn btn-outline-danger btn-sm" type="submit"><i class="czi-trash mr-2"></i>{{ trans('wishlist.Remove') }}</button>
                                 </form>
                             </div>
                         </div>

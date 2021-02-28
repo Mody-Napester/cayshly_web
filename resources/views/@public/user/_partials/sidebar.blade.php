@@ -12,19 +12,19 @@
             </div>
         </div>
         <div class="bg-secondary px-4 py-3">
-            <h3 class="font-size-sm mb-0 text-muted">Dashboard</h3>
+            <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Dashboard') }}</h3>
         </div>
         <ul class="list-unstyled mb-0">
-{{--            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-bag opacity-60 mr-2"></i>Orders<span class="font-size-sm text-muted ml-auto">1</span></a></li>--}}
-            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>Wishlist<span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span></a></li>
-{{--            <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-dollar opacity-60 mr-2"></i>My Points<span class="font-size-sm text-muted ml-auto">1</span></a></li>--}}
+            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-bag opacity-60 mr-2"></i>{{ trans('users.Orders') }}<span class="font-size-sm text-muted ml-auto">1</span></a></li>
+            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>{{ trans('users.Wishlist') }}<span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span></a></li>
+            <li class="mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-dollar opacity-60 mr-2"></i>{{ trans('users.My_Points') }}<span class="font-size-sm text-muted ml-auto">1</span></a></li>
         </ul>
         <div class="bg-secondary px-4 py-3">
-            <h3 class="font-size-sm mb-0 text-muted">Account settings</h3>
+            <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Account_settings') }}</h3>
         </div>
         <ul class="list-unstyled mb-0">
-            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{ route('public.user.show', [auth()->user()->name]) }}"><i class="czi-user opacity-60 mr-2"></i>Profile info</a></li>
-{{--            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-location opacity-60 mr-2"></i>Addresses</a></li>--}}
+            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3 active" href="{{ route('public.user.show', [auth()->user()->name]) }}"><i class="czi-user opacity-60 mr-2"></i>{{ trans('users.Profile_info') }}</a></li>
+            <li class="border-bottom mb-0"><a class="nav-link-style d-flex align-items-center px-4 py-3" href=""><i class="czi-location opacity-60 mr-2"></i>{{ trans('users.Addresses') }}</a></li>
         </ul>
     </div>
 </aside>

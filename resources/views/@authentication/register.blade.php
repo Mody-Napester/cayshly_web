@@ -45,18 +45,27 @@
                             @csrf
                             <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-edit"></i></span></div>
-                                <input class="form-control prepended-form-control" id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Name" required autofocus>
+                                <input class="form-control prepended-form-control" @error('name') is-invalid @enderror id="name" name="name" type="text" value="{{ old('name') }}" placeholder="Name" required autofocus>
+                                @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
-                                <input class="form-control prepended-form-control" id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Email" required>
+                                <input class="form-control prepended-form-control" @error('email') is-invalid @enderror id="email" name="email" type="email" value="{{ old('email') }}" placeholder="Email" required>
+                                @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
                                 <div class="password-toggle">
-                                    <input class="form-control prepended-form-control" id="password" name="password" type="password" placeholder="Password" required autocomplete="new-password">
+                                    <input class="form-control prepended-form-control" @error('password') is-invalid @enderror id="password" name="password" type="password" placeholder="Password" required autocomplete="new-password">
+                                    @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                     <label class="password-toggle-btn">
                                         <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Show password</span>
                                     </label>

@@ -11,13 +11,13 @@
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>Home</a></li>
-                            <li class="breadcrumb-item text-nowrap active" aria-current="page">Categories</li>
+                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                            <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('master.Categories') }}</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                    <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-view-grid"></i> Categories</h1>
+                    <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-view-grid"></i> {{ trans('master.Categories') }}</h1>
                 </div>
             </div>
         </div>

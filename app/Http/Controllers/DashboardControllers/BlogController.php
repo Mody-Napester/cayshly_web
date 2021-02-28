@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Blog;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class BlogController extends Controller
      * @return String
      */
     public function index(){
+        // Check Authority
+        if (!User::hasAuthority('index.blog')){
+            return redirect('/');
+        }
+
         $data['resources'] = Blog::paginate(config('vars.pagination'));
         return view('@dashboard.blog.index', $data);
     }
@@ -26,6 +32,11 @@ class BlogController extends Controller
      */
     public function create()
     {
+        // Check Authority
+        if (!User::hasAuthority('create.blog')){
+            return redirect('/');
+        }
+
         return view('@dashboard.blog.create');
     }
 
@@ -37,6 +48,11 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
+        // Check Authority
+        if (!User::hasAuthority('store.blog')){
+            return redirect('/');
+        }
+
         // Validation
         $rules = [
             'picture' => 'required',
@@ -116,7 +132,11 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-        //
+        // Check Authority
+        if (!User::hasAuthority('show.blog')){
+            return redirect('/');
+        }
+
     }
 
     /**
@@ -127,6 +147,11 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
+        // Check Authority
+        if (!User::hasAuthority('edit.blog')){
+            return redirect('/');
+        }
+
         $data['resource'] = $blog;
         return view('@dashboard.blog.edit', $data);
     }
@@ -140,6 +165,11 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
+        // Check Authority
+        if (!User::hasAuthority('update.blog')){
+            return redirect('/');
+        }
+
         $data['resource'] = $blog;
 
         // Return
@@ -228,6 +258,11 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        // Check Authority
+        if (!User::hasAuthority('destroy.blog')){
+            return redirect('/');
+        }
+
         $data['resource'] = $blog;
 
         if($data['resource']){
