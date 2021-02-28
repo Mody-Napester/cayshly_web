@@ -1,12 +1,1 @@
-ALTER TABLE `products`
-DROP COLUMN `category_id`;
 
-ALTER TABLE `sliders`
-ADD COLUMN `uuid` char(36) BINARY CHARACTER SET utf8 COLLATE utf8_general_ci NULL AFTER `updated_at`,
-ADD COLUMN `is_featured` binary(1) NULL DEFAULT 0 AFTER `uuid`,
-ADD COLUMN `is_active` binary(1) NULL DEFAULT 0 AFTER `is_featured`,
-ADD COLUMN `created_by` int(11) UNSIGNED NOT NULL AFTER `is_active`,
-ADD COLUMN `updated_by` int(11) UNSIGNED NULL AFTER `created_by`;
-
-ALTER TABLE `sliders`
-MODIFY COLUMN `uuid` char(36) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL AFTER `id`;

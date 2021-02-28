@@ -48,7 +48,7 @@
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
-                                <td>{{ getFromJson($resource->category->name , lang()) }}</td>
+                                <td>{{ ($resource->category)? getFromJson($resource->category->name , lang()) : '-' }}</td>
                                 <td>{{ getFromJson($resource->name , lang()) }}</td>
                                 <td>
                                     @if($resource->is_active == 1)

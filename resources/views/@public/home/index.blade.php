@@ -10,8 +10,12 @@
     <!-- Products grid (Trending products)-->
     @include('@public._partials.trending_products')
 
+    <br>
+
     <!-- Offers-->
     @include('@public._partials.offers')
+
+    <br>
 
     <!-- Brands -->
     @include('@public._partials.brands')

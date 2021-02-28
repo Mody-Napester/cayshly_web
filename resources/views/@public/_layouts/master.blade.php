@@ -31,13 +31,7 @@
 </head>
 <!-- Body-->
 <body class="toolbar-enabled bg-gray">
-{{--    <!-- Sign in / sign up modal-->--}}
-{{--    @include('@public._partials.sign.modal')--}}
 
-{{--    <!-- Quick View Modal-->--}}
-{{--    @include('@public._partials.quick_view.modal')--}}
-
-<!-- Navbar Store-->
 @include('@public._layouts.navbar')
 
 @include('@public._partials.alerts')
