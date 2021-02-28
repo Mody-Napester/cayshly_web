@@ -17,7 +17,7 @@ class BrandController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('destroy.brand')){
+        if (!check_authority('index.brand')){
             return redirect('/');
         }
 
@@ -45,7 +45,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
         // Validation
@@ -128,7 +128,7 @@ class BrandController extends Controller
     public function show(Brand $brand)
     {
         // Check Authority
-        if (!User::hasAuthority('show.brand')){
+        if (!check_authority('show.brand')){
             return redirect('/');
         }
     }
@@ -142,7 +142,7 @@ class BrandController extends Controller
     public function edit(Brand $brand)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.brand')){
+        if (!check_authority('edit.brand')){
             return redirect('/');
         }
 
@@ -160,7 +160,7 @@ class BrandController extends Controller
     public function update(Request $request, Brand $brand)
     {
         // Check Authority
-        if (!User::hasAuthority('update.brand')){
+        if (!check_authority('update.brand')){
             return redirect('/');
         }
 
@@ -253,7 +253,7 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.brand')){
+        if (!check_authority('destroy.brand')){
             return redirect('/');
         }
 

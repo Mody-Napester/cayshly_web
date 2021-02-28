@@ -18,7 +18,7 @@ class AddressController extends Controller
     public function index()
     {
         // Check Authority
-        if (!User::hasAuthority('index.address')){
+        if (!check_authority('index.address')){
             return redirect('/');
         }
     }
@@ -31,7 +31,7 @@ class AddressController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.address')){
+        if (!check_authority('create.address')){
             return redirect('/');
         }
     }
@@ -45,7 +45,7 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.address')){
+        if (!check_authority('store.address')){
             return redirect('/');
         }
     }
@@ -59,7 +59,7 @@ class AddressController extends Controller
     public function show(Address $address)
     {
         // Check Authority
-        if (!User::hasAuthority('show.address')){
+        if (!check_authority('show.address')){
             return redirect('/');
         }
     }
@@ -73,7 +73,7 @@ class AddressController extends Controller
     public function edit(Address $address)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.address')){
+        if (!check_authority('edit.address')){
             return redirect('/');
         }
     }
@@ -88,7 +88,7 @@ class AddressController extends Controller
     public function update(Request $request, Address $address)
     {
         // Check Authority
-        if (!User::hasAuthority('update.address')){
+        if (!check_authority('update.address')){
             return redirect('/');
         }
     }
@@ -102,7 +102,7 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.address')){
+        if (!check_authority('destroy.address')){
             return redirect('/');
         }
     }

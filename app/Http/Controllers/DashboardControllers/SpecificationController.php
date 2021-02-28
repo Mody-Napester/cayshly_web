@@ -18,7 +18,7 @@ class SpecificationController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.specification')){
+        if (!check_authority('index.specification')){
             return redirect('/');
         }
 
@@ -34,7 +34,7 @@ class SpecificationController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.specification')){
+        if (!check_authority('create.specification')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class SpecificationController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.specification')){
+        if (!check_authority('store.specification')){
             return redirect('/');
         }
 
@@ -115,7 +115,7 @@ class SpecificationController extends Controller
     public function edit(Specification $specification)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.specification')){
+        if (!check_authority('edit.specification')){
             return redirect('/');
         }
 
@@ -134,7 +134,7 @@ class SpecificationController extends Controller
     public function update(Request $request, Specification $specification)
     {
         // Check Authority
-        if (!User::hasAuthority('update.specification')){
+        if (!check_authority('update.specification')){
             return redirect('/');
         }
 
@@ -196,7 +196,7 @@ class SpecificationController extends Controller
     public function destroy(Specification $specification)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.specification')){
+        if (!check_authority('destroy.specification')){
             return redirect('/');
         }
 

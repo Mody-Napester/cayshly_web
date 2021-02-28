@@ -18,7 +18,7 @@ class ScriptController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.script')){
+        if (!check_authority('index.script')){
             return redirect('/');
         }
 
@@ -34,7 +34,7 @@ class ScriptController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.script')){
+        if (!check_authority('create.script')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class ScriptController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.script')){
+        if (!check_authority('store.script')){
             return redirect('/');
         }
 
@@ -118,7 +118,7 @@ class ScriptController extends Controller
     public function edit(Script $script)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.script')){
+        if (!check_authority('edit.script')){
             return redirect('/');
         }
 
@@ -137,7 +137,7 @@ class ScriptController extends Controller
     public function update(Request $request, Script $script)
     {
         // Check Authority
-        if (!User::hasAuthority('update.script')){
+        if (!check_authority('update.script')){
             return redirect('/');
         }
 
@@ -202,7 +202,7 @@ class ScriptController extends Controller
     public function destroy(Script $script)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.script')){
+        if (!check_authority('destroy.script')){
             return redirect('/');
         }
 

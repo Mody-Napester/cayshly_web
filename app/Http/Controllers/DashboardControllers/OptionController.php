@@ -18,7 +18,7 @@ class OptionController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.option')){
+        if (!check_authority('index.option')){
             return redirect('/');
         }
 
@@ -34,7 +34,7 @@ class OptionController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.option')){
+        if (!check_authority('create.option')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class OptionController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.option')){
+        if (!check_authority('store.option')){
             return redirect('/');
         }
 
@@ -116,7 +116,7 @@ class OptionController extends Controller
     public function edit(Option $option)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.option')){
+        if (!check_authority('edit.option')){
             return redirect('/');
         }
 
@@ -135,7 +135,7 @@ class OptionController extends Controller
     public function update(Request $request, Option $option)
     {
         // Check Authority
-        if (!User::hasAuthority('update.option')){
+        if (!check_authority('update.option')){
             return redirect('/');
         }
 
@@ -198,7 +198,7 @@ class OptionController extends Controller
     public function destroy(Option $option)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.option')){
+        if (!check_authority('destroy.option')){
             return redirect('/');
         }
 

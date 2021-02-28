@@ -16,7 +16,7 @@ class CountryController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.country')){
+        if (!check_authority('index.country')){
             return redirect('/');
         }
 
@@ -32,7 +32,7 @@ class CountryController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.country')){
+        if (!check_authority('create.country')){
             return redirect('/');
         }
 
@@ -48,7 +48,7 @@ class CountryController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.country')){
+        if (!check_authority('store.country')){
             return redirect('/');
         }
 
@@ -120,7 +120,7 @@ class CountryController extends Controller
     public function edit(Country $country)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.country')){
+        if (!check_authority('edit.country')){
             return redirect('/');
         }
 
@@ -138,7 +138,7 @@ class CountryController extends Controller
     public function update(Request $request, Country $country)
     {
         // Check Authority
-        if (!User::hasAuthority('update.country')){
+        if (!check_authority('update.country')){
             return redirect('/');
         }
 
@@ -208,7 +208,7 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.country')){
+        if (!check_authority('destroy.country')){
             return redirect('/');
         }
 

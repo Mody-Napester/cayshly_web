@@ -17,7 +17,7 @@ class PageController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.page')){
+        if (!check_authority('index.page')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class PageController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.page')){
+        if (!check_authority('create.page')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.page')){
+        if (!check_authority('store.page')){
             return redirect('/');
         }
 
@@ -144,7 +144,7 @@ class PageController extends Controller
     public function edit(Page $page)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.page')){
+        if (!check_authority('edit.page')){
             return redirect('/');
         }
 
@@ -162,7 +162,7 @@ class PageController extends Controller
     public function update(Request $request, Page $page)
     {
         // Check Authority
-        if (!User::hasAuthority('update.page')){
+        if (!check_authority('update.page')){
             return redirect('/');
         }
 
@@ -255,7 +255,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.page')){
+        if (!check_authority('destroy.page')){
             return redirect('/');
         }
 

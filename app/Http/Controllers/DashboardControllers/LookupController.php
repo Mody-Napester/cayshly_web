@@ -17,7 +17,7 @@ class LookupController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class LookupController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
 
@@ -50,7 +50,7 @@ class LookupController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
 
@@ -116,7 +116,7 @@ class LookupController extends Controller
     public function edit(Lookup $lookup)
     {
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
 
@@ -135,7 +135,7 @@ class LookupController extends Controller
     public function update(Request $request, Lookup $lookup)
     {
         // Check Authority
-        if (!User::hasAuthority('store.brand')){
+        if (!check_authority('store.brand')){
             return redirect('/');
         }
 
@@ -200,7 +200,7 @@ class LookupController extends Controller
     public function destroy(Lookup $lookup)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.lookup')){
+        if (!check_authority('destroy.lookup')){
             return redirect('/');
         }
 

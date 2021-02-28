@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.blog')){
+        if (!check_authority('index.blog')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class BlogController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.blog')){
+        if (!check_authority('create.blog')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.blog')){
+        if (!check_authority('store.blog')){
             return redirect('/');
         }
 
@@ -133,7 +133,7 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
         // Check Authority
-        if (!User::hasAuthority('show.blog')){
+        if (!check_authority('show.blog')){
             return redirect('/');
         }
 
@@ -148,7 +148,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.blog')){
+        if (!check_authority('edit.blog')){
             return redirect('/');
         }
 
@@ -166,7 +166,7 @@ class BlogController extends Controller
     public function update(Request $request, Blog $blog)
     {
         // Check Authority
-        if (!User::hasAuthority('update.blog')){
+        if (!check_authority('update.blog')){
             return redirect('/');
         }
 
@@ -259,7 +259,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.blog')){
+        if (!check_authority('destroy.blog')){
             return redirect('/');
         }
 

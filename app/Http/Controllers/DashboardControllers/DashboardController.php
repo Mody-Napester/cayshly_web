@@ -12,7 +12,7 @@ class DashboardController extends Controller
     // Home
     public function home(){
         // Check Authority
-        if (!User::hasAuthority('index.dashboard')){
+        if (!check_authority('index.dashboard')){
             return redirect('/');
         }
 

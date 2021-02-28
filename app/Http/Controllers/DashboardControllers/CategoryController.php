@@ -19,7 +19,7 @@ class CategoryController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.category')){
+        if (!check_authority('index.category')){
             return redirect('/');
         }
 
@@ -35,7 +35,7 @@ class CategoryController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.category')){
+        if (!check_authority('create.category')){
             return redirect('/');
         }
 
@@ -52,7 +52,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.category')){
+        if (!check_authority('store.category')){
             return redirect('/');
         }
 
@@ -152,7 +152,7 @@ class CategoryController extends Controller
     public function edit(Category $category)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.category')){
+        if (!check_authority('edit.category')){
             return redirect('/');
         }
 
@@ -171,7 +171,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         // Check Authority
-        if (!User::hasAuthority('update.category')){
+        if (!check_authority('update.category')){
             return redirect('/');
         }
 
@@ -269,7 +269,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         // Check Authority
-        if(!User::hasAuthority('destroy.category')){
+        if(!check_authority('destroy.category')){
             return redirect('/');
         }
 

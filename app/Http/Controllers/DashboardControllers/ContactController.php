@@ -17,7 +17,7 @@ class ContactController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.contact')){
+        if (!check_authority('index.contact')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class ContactController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.contact')){
+        if (!check_authority('create.contact')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.contact')){
+        if (!check_authority('store.contact')){
             return redirect('/');
         }
 
@@ -132,7 +132,7 @@ class ContactController extends Controller
     public function edit(Contact $contact)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.city')){
+        if (!check_authority('edit.city')){
             return redirect('/');
         }
 
@@ -150,7 +150,7 @@ class ContactController extends Controller
     public function update(Request $request, Contact $contact)
     {
         // Check Authority
-        if (!User::hasAuthority('update.contact')){
+        if (!check_authority('update.contact')){
             return redirect('/');
         }
 
@@ -231,7 +231,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.contact')){
+        if (!check_authority('destroy.contact')){
             return redirect('/');
         }
 

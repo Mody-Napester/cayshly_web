@@ -17,7 +17,7 @@ class SubscriberController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.subscriber')){
+        if (!check_authority('index.subscriber')){
             return redirect('/');
         }
 

@@ -1,8 +1,6 @@
 <?php
 
 // Get from json
-use App\Models\User;
-
 function getFromJson($json , $lang){
     $data = json_decode($json, true);
     return $data[$lang];
@@ -15,9 +13,7 @@ function get_path($path){
 
 // Default language
 function check_authority($authority){
-    if (!User::hasAuthority($authority)){
-        redirect('/');
-    }
+    return \App\Models\User::hasAuthority($authority);
 }
 
 // Default language

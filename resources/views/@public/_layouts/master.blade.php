@@ -24,8 +24,18 @@
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/tiny-slider/dist/tiny-slider.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/drift-zoom/dist/drift-basic.min.css') }}"/>
     <link href="{{ url('assets_dashboard/css/alerts.css') }}" rel="stylesheet"/>
-    <link rel="stylesheet" media="screen"
-          href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
+    <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
+
+    @if(lang() == 'ar')
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+        <style>
+            body{
+                font-family: 'Tajawal', sans-serif !important;
+            }
+        </style>
+    @endif
+
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/css/theme.min.css') }}">
 </head>

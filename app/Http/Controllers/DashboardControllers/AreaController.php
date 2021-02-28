@@ -17,7 +17,7 @@ class AreaController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.area')){
+        if (!check_authority('index.area')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class AreaController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.area')){
+        if (!check_authority('create.area')){
             return redirect('/');
         }
 
@@ -50,7 +50,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.area')){
+        if (!check_authority('store.area')){
             return redirect('/');
         }
 
@@ -103,7 +103,7 @@ class AreaController extends Controller
     public function show(Area $area)
     {
         // Check Authority
-        if (!User::hasAuthority('show.area')){
+        if (!check_authority('show.area')){
             return redirect('/');
         }
     }
@@ -117,7 +117,7 @@ class AreaController extends Controller
     public function edit(Area $area)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.area')){
+        if (!check_authority('edit.area')){
             return redirect('/');
         }
 
@@ -136,7 +136,7 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         // Check Authority
-        if (!User::hasAuthority('update.area')){
+        if (!check_authority('update.area')){
             return redirect('/');
         }
 
@@ -198,7 +198,7 @@ class AreaController extends Controller
     public function destroy(Area $area)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.area')){
+        if (!check_authority('destroy.area')){
             return redirect('/');
         }
 

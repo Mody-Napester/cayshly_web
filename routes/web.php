@@ -61,13 +61,18 @@ Route::get('product/{product}', [ProductPublicController::class, 'show'])->name(
 
 Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offer.index');
 
-Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.user.show');
-
-Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
-Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
-Route::delete('wishlist/{wishlist}', [WishlistPublicController::class, 'destroy'])->name('public.wishlist.destroy');
-
 Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.page.show');
+
+Route::group([
+    'middleware' => 'auth',
+], function () {
+    Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.user.show');
+
+    Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
+    Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
+    Route::delete('wishlist/{wishlist}', [WishlistPublicController::class, 'destroy'])->name('public.wishlist.destroy');
+});
+
 
 Route::group([
     'prefix' => 'dashboard',

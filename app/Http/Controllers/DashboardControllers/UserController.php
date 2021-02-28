@@ -33,7 +33,7 @@ class UserController extends Controller
     public function index()
     {
         // Check Permission
-        if (!User::hasAuthority('index.users')){
+        if (!check_authority('index.users')){
             return redirect('/');
         }
 
@@ -47,7 +47,7 @@ class UserController extends Controller
     public function create()
     {
         // Check Permission
-        if (!User::hasAuthority('create.users')){
+        if (!check_authority('create.users')){
             return redirect('/');
         }
 
@@ -62,7 +62,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // Check permissions
-        if (!User::hasAuthority('store.users')){
+        if (!check_authority('store.users')){
             return redirect('/');
         }
 
@@ -121,7 +121,7 @@ class UserController extends Controller
     public function show($id)
     {
         // Check permissions
-        if (!User::hasAuthority('show.users')){
+        if (!check_authority('show.users')){
             return redirect('/');
         }
     }
@@ -141,7 +141,7 @@ class UserController extends Controller
     public function edit($uuid)
     {
         // Check permissions
-        if (!User::hasAuthority('edit.users')){
+        if (!check_authority('edit.users')){
             return redirect('/');
         }
 
@@ -157,7 +157,7 @@ class UserController extends Controller
     public function update(Request $request, $uuid)
     {
         // Check permissions
-        if (!User::hasAuthority('update.users')){
+        if (!check_authority('update.users')){
             return redirect('/');
         }
 
@@ -216,7 +216,7 @@ class UserController extends Controller
     public function destroy($uuid)
     {
         // Check permissions
-        if (!User::hasAuthority('destroy.users')){
+        if (!check_authority('destroy.users')){
             return redirect('/');
         }
 
@@ -252,7 +252,7 @@ class UserController extends Controller
     public function resetPassword($user)
     {
         // Check permissions
-//        if (!User::hasAuthority('index.user')){
+//        if (!check_authority('index.user')){
 //            return redirect('/');
 //        }
 
@@ -286,7 +286,7 @@ class UserController extends Controller
     public function updatePassword(Request $request,$user)
     {
         // Check permissions
-//        if (!User::hasAuthority('index.user')){
+//        if (!check_authority('index.user')){
 //            return redirect('/');
 //        }
 

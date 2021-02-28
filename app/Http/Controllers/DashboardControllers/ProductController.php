@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.product')){
+        if (!check_authority('index.product')){
             return redirect('/');
         }
 
@@ -40,7 +40,7 @@ class ProductController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.product')){
+        if (!check_authority('create.product')){
             return redirect('/');
         }
 
@@ -62,7 +62,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.product')){
+        if (!check_authority('store.product')){
             return redirect('/');
         }
 
@@ -193,7 +193,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.product')){
+        if (!check_authority('edit.product')){
             return redirect('/');
         }
 
@@ -223,7 +223,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         // Check Authority
-        if (!User::hasAuthority('update.product')){
+        if (!check_authority('update.product')){
             return redirect('/');
         }
 
@@ -352,7 +352,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.product')){
+        if (!check_authority('destroy.product')){
             return redirect('/');
         }
 

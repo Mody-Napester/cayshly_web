@@ -33,7 +33,7 @@ class PermissionGroupsController extends Controller
     public function index()
     {
         // Check Authority
-        if (!User::hasAuthority('index.permission_groups')){
+        if (!check_authority('index.permission_groups')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class PermissionGroupsController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.permission_groups')){
+        if (!check_authority('create.permission_groups')){
             return redirect('/');
         }
 
@@ -65,7 +65,7 @@ class PermissionGroupsController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.permission_groups')){
+        if (!check_authority('store.permission_groups')){
             return redirect('/');
         }
 
@@ -121,7 +121,7 @@ class PermissionGroupsController extends Controller
     public function edit($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.permission_groups')){
+        if (!check_authority('edit.permission_groups')){
             return redirect('/');
         }
 
@@ -139,7 +139,7 @@ class PermissionGroupsController extends Controller
     public function update(Request $request, $uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('update.permission_groups')){
+        if (!check_authority('update.permission_groups')){
             return redirect('/');
         }
 
@@ -185,7 +185,7 @@ class PermissionGroupsController extends Controller
     public function destroy($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.permission_groups')){
+        if (!check_authority('destroy.permission_groups')){
             return redirect('/');
         }
 

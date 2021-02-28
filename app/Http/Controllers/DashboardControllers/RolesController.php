@@ -34,7 +34,7 @@ class RolesController extends Controller
     public function index()
     {
         // Check Authority
-        if (!User::hasAuthority('index.role')){
+        if (!check_authority('index.role')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class RolesController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.role')){
+        if (!check_authority('create.role')){
             return redirect('/');
         }
 
@@ -68,7 +68,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.role')){
+        if (!check_authority('store.role')){
             return redirect('/');
         }
 
@@ -142,7 +142,7 @@ class RolesController extends Controller
     public function edit($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.role')){
+        if (!check_authority('edit.role')){
             return redirect('/');
         }
 
@@ -161,7 +161,7 @@ class RolesController extends Controller
     public function update(Request $request, $uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('update.role')){
+        if (!check_authority('update.role')){
             return redirect('/');
         }
 
@@ -228,7 +228,7 @@ class RolesController extends Controller
     public function destroy($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.role')){
+        if (!check_authority('destroy.role')){
             return redirect('/');
         }
 

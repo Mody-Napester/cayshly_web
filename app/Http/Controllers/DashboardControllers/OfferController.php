@@ -17,7 +17,7 @@ class OfferController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.offer')){
+        if (!check_authority('index.offer')){
             return redirect('/');
         }
         $data['resources'] = Offer::paginate(config('vars.pagination'));
@@ -32,7 +32,7 @@ class OfferController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.offer')){
+        if (!check_authority('create.offer')){
             return redirect('/');
         }
 
@@ -48,7 +48,7 @@ class OfferController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.offer')){
+        if (!check_authority('store.offer')){
             return redirect('/');
         }
 
@@ -130,7 +130,7 @@ class OfferController extends Controller
     public function edit(Offer $offer)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.offer')){
+        if (!check_authority('edit.offer')){
             return redirect('/');
         }
 
@@ -148,7 +148,7 @@ class OfferController extends Controller
     public function update(Request $request, Offer $offer)
     {
         // Check Authority
-        if (!User::hasAuthority('update.offer')){
+        if (!check_authority('update.offer')){
             return redirect('/');
         }
 
@@ -228,7 +228,7 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.offer')){
+        if (!check_authority('destroy.offer')){
             return redirect('/');
         }
 

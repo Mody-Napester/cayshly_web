@@ -17,7 +17,7 @@ class SliderController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.slider')){
+        if (!check_authority('index.slider')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class SliderController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.slider')){
+        if (!check_authority('create.slider')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.slider')){
+        if (!check_authority('store.slider')){
             return redirect('/');
         }
 
@@ -145,7 +145,7 @@ class SliderController extends Controller
     public function edit(Slider $slider)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.slider')){
+        if (!check_authority('edit.slider')){
             return redirect('/');
         }
 
@@ -163,7 +163,7 @@ class SliderController extends Controller
     public function update(Request $request, Slider $slider)
     {
         // Check Authority
-        if (!User::hasAuthority('update.slider')){
+        if (!check_authority('update.slider')){
             return redirect('/');
         }
 
@@ -258,7 +258,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.slider')){
+        if (!check_authority('destroy.slider')){
             return redirect('/');
         }
 

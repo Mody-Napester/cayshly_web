@@ -17,7 +17,7 @@ class CityController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.city')){
+        if (!check_authority('index.city')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class CityController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.city')){
+        if (!check_authority('create.city')){
             return redirect('/');
         }
 
@@ -50,7 +50,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.city')){
+        if (!check_authority('store.city')){
             return redirect('/');
         }
 
@@ -114,7 +114,7 @@ class CityController extends Controller
     public function edit(City $city)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.city')){
+        if (!check_authority('edit.city')){
             return redirect('/');
         }
 
@@ -133,7 +133,7 @@ class CityController extends Controller
     public function update(Request $request, City $city)
     {
         // Check Authority
-        if (!User::hasAuthority('update.city')){
+        if (!check_authority('update.city')){
             return redirect('/');
         }
 
@@ -195,7 +195,7 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.city')){
+        if (!check_authority('destroy.city')){
             return redirect('/');
         }
 

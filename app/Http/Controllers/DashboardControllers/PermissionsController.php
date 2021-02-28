@@ -34,7 +34,7 @@ class PermissionsController extends Controller
     public function index()
     {
         // Check Authority
-        if (!User::hasAuthority('index.permissions')){
+        if (!check_authority('index.permissions')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class PermissionsController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.permissions')){
+        if (!check_authority('create.permissions')){
             return redirect('/');
         }
 
@@ -68,7 +68,7 @@ class PermissionsController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.permissions')){
+        if (!check_authority('store.permissions')){
             return redirect('/');
         }
 
@@ -132,7 +132,7 @@ class PermissionsController extends Controller
     public function edit($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.permissions')){
+        if (!check_authority('edit.permissions')){
             return redirect('/');
         }
 
@@ -151,7 +151,7 @@ class PermissionsController extends Controller
     public function update(Request $request, $uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('update.permissions')){
+        if (!check_authority('update.permissions')){
             return redirect('/');
         }
 
@@ -206,7 +206,7 @@ class PermissionsController extends Controller
     public function destroy($uuid)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.permissions')){
+        if (!check_authority('destroy.permissions')){
             return redirect('/');
         }
 

@@ -17,7 +17,7 @@ class OrderController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.order')){
+        if (!check_authority('index.order')){
             return redirect('/');
         }
 

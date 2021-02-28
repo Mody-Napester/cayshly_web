@@ -18,7 +18,7 @@ class SocialController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.social')){
+        if (!check_authority('index.social')){
             return redirect('/');
         }
 
@@ -34,7 +34,7 @@ class SocialController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.social')){
+        if (!check_authority('create.social')){
             return redirect('/');
         }
 
@@ -51,7 +51,7 @@ class SocialController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.social')){
+        if (!check_authority('store.social')){
             return redirect('/');
         }
 
@@ -104,7 +104,7 @@ class SocialController extends Controller
     public function edit(Social $social)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.social')){
+        if (!check_authority('edit.social')){
             return redirect('/');
         }
 
@@ -123,7 +123,7 @@ class SocialController extends Controller
     public function update(Request $request, Social $social)
     {
         // Check Authority
-        if (!User::hasAuthority('update.social')){
+        if (!check_authority('update.social')){
             return redirect('/');
         }
 
@@ -175,7 +175,7 @@ class SocialController extends Controller
     public function destroy(Social $social)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.social')){
+        if (!check_authority('destroy.social')){
             return redirect('/');
         }
 

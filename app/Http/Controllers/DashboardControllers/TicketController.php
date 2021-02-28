@@ -17,7 +17,7 @@ class TicketController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.ticket')){
+        if (!check_authority('index.ticket')){
             return redirect('/');
         }
 

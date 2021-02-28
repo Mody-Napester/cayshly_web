@@ -17,7 +17,7 @@ class StoreController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!User::hasAuthority('index.store')){
+        if (!check_authority('index.store')){
             return redirect('/');
         }
 
@@ -33,7 +33,7 @@ class StoreController extends Controller
     public function create()
     {
         // Check Authority
-        if (!User::hasAuthority('create.store')){
+        if (!check_authority('create.store')){
             return redirect('/');
         }
 
@@ -49,7 +49,7 @@ class StoreController extends Controller
     public function store(Request $request)
     {
         // Check Authority
-        if (!User::hasAuthority('store.store')){
+        if (!check_authority('store.store')){
             return redirect('/');
         }
 
@@ -148,7 +148,7 @@ class StoreController extends Controller
     public function edit(Store $store)
     {
         // Check Authority
-        if (!User::hasAuthority('edit.store')){
+        if (!check_authority('edit.store')){
             return redirect('/');
         }
 
@@ -166,7 +166,7 @@ class StoreController extends Controller
     public function update(Request $request, Store $store)
     {
         // Check Authority
-        if (!User::hasAuthority('update.store')){
+        if (!check_authority('update.store')){
             return redirect('/');
         }
 
@@ -264,7 +264,7 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         // Check Authority
-        if (!User::hasAuthority('destroy.store')){
+        if (!check_authority('destroy.store')){
             return redirect('/');
         }
 
