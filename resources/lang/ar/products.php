@@ -1,0 +1,28 @@
+<?php
+
+return array (
+  'Add_to' => 'اضافه الي',
+  'Add_to_Cart' => 'اضف الي العربه',
+  'Brand' => 'الماركه',
+  'Categories' => 'الاقسام',
+  'Category' => 'القسم',
+  'Store' => 'متجر',
+  'Warranty' => 'الضمان',
+  'Wishlist' => 'قائمه الرغبات',
+  'You_may_also_like' => 'يمكنك انت تعجب ايضا ب',
+  'Shoes' => 'أحذية',
+  'Specifications' => 'مواصفات',
+  'Share_on_twitter' => 'مشاركه علي تويتر',
+  'Share_on_facebook' => 'مشاركه علي فيسبوك',
+  'Search' => 'بحث',
+  'Description' => 'وصف',
+  'General_Info' => 'معلومات عامه',
+  'More_than' => 'اكثر من',
+  'No_Data_Available' => 'لا يوجد بيانات متاحه',
+  'Points' => 'نقاط',
+  'Product_available' => 'المنتجات المتاحه',
+  'Reviews' => 'الاراء',
+  'Sale' => 'خصم',
+  'Condition' => 'الحاله',
+  'Close_sidebar' => 'إغلاق الشريط الجانبي',
+);

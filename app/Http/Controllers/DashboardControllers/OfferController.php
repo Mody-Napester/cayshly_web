@@ -228,7 +228,7 @@ class OfferController extends Controller
     public function destroy(Offer $offer)
     {
         // Check Authority
-        if (!check_authority('destroy.offer')){
+        if (!check_authority('delete.offer')){
             return redirect('/');
         }
 

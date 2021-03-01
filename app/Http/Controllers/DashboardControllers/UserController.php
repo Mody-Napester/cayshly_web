@@ -216,7 +216,7 @@ class UserController extends Controller
     public function destroy($uuid)
     {
         // Check permissions
-        if (!check_authority('destroy.users')){
+        if (!check_authority('delete.users')){
             return redirect('/');
         }
 

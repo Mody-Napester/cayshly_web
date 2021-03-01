@@ -1,0 +1,25 @@
+<?php
+
+return array (
+  'Account_settings' => 'الاعدادت',
+  'Addresses' => 'العناوين',
+  'Change_avatar' => 'تغيير الصورة',
+  'Confirm_Password' => 'تأكيد كلمه المرور',
+  'Dashboard' => 'لوحه التحكم',
+  'Email_Address' => 'البريد الالكتروني',
+  'First_Name' => 'الاسم الاول',
+  'Full_Name' => 'اسم العائله',
+  'Home' => 'الرئيسيه',
+  'Last_Name' => 'اسم العائله',
+  'My_Points' => 'نقاطي',
+  'New_Password' => 'كلمه المرور الجديده',
+  'Orders' => 'طلباتي',
+  'Phone_Number' => 'رقم الهاتف',
+  'Profile_info' => 'معلومات الملف الشخصي',
+  'Show_password' => 'إظهار كلمه المرور',
+  'Subscribe_me_to_Newsletter' => 'اشترك في النشرة الإخبارية',
+  'Update_profile' => 'تحديث الملف الشخصي',
+  'Update_you_profile_details_below' => 'تحديث تفاصيل ملفك الشخصي',
+  'Upload' => 'تحميل',
+  'Wishlist' => 'الرغبات',
+);

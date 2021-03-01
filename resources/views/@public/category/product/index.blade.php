@@ -26,7 +26,7 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="bg-light box-shadow-lg rounded-lg pr-2 pl-2">
+        <div class="">
             <div class="row pt-3 mx-n2">
                 @foreach($products as $product)
                     <div class="col-md-3 col-sm-3 mb-4">

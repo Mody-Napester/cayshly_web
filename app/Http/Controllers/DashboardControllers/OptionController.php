@@ -198,7 +198,7 @@ class OptionController extends Controller
     public function destroy(Option $option)
     {
         // Check Authority
-        if (!check_authority('destroy.option')){
+        if (!check_authority('delete.option')){
             return redirect('/');
         }
 

@@ -102,7 +102,7 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         // Check Authority
-        if (!check_authority('destroy.address')){
+        if (!check_authority('delete.address')){
             return redirect('/');
         }
     }

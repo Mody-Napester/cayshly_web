@@ -1,11 +1,9 @@
 <section class="container pt-5">
     <!-- Heading-->
-    <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-        <h2 class="h3 mb-0 pt-3 mr-2">{{ trans('partials.Trending_products') }}</h2>
-        <div class="pt-3">
-            <a class="btn btn-outline-accent btn-sm" href="">{{ trans('partials.More_products') }}<i class="czi-arrow-right ml-1 mr-n1"></i></a>
-        </div>
+    <div class="pt-1 border-bottom pb-4 mb-4 text-center ">
+        <h2 class="h3 mb-0 pt-3 mr-2 text-center">{{ trans('partials.Trending_products') }}</h2>
     </div>
+
     <!-- Grid-->
     <div class="row pt-2 mx-n2">
         @foreach($trending_products as $product)

@@ -198,7 +198,7 @@ class AreaController extends Controller
     public function destroy(Area $area)
     {
         // Check Authority
-        if (!check_authority('destroy.area')){
+        if (!check_authority('delete.area')){
             return redirect('/');
         }
 

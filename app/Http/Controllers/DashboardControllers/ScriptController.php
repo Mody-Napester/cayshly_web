@@ -202,7 +202,7 @@ class ScriptController extends Controller
     public function destroy(Script $script)
     {
         // Check Authority
-        if (!check_authority('destroy.script')){
+        if (!check_authority('delete.script')){
             return redirect('/');
         }
 

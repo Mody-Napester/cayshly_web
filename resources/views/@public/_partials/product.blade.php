@@ -4,13 +4,15 @@
     <div class="product-card-actions d-flex align-items-center">
 {{--        <a class="btn-action nav-link-style mr-2" href="#"><i class="czi-compare mr-1"></i>Compare</a>--}}
 
-        <form action="{{ route('public.wishlist.store') }}" method="post">
-            @csrf
-            <input type="hidden" name="wishlist_product" value="{{ $product->uuid }}">
-            <button class="btn-wishlist btn-sm" type="submit" data-toggle="tooltip" data-placement="left" title="{{ trans('partials.Add_to_wishlist') }}">
-                <i class="czi-heart"></i>
-            </button>
-        </form>
+        @if(auth()->check())
+            <form action="{{ route('public.wishlist.store') }}" method="post">
+                @csrf
+                <input type="hidden" name="wishlist_product" value="{{ $product->uuid }}">
+                <button class="btn-wishlist btn-sm" type="submit" data-toggle="tooltip" data-placement="left" title="{{ trans('partials.Add_to_wishlist') }}">
+                    <i class="czi-heart"></i>
+                </button>
+            </form>
+        @endif
     </div>
 
     <a class="card-img-top d-block overflow-hidden text-center" href="{{ route('public.product.show', $product->slug) }}" style="height: 180px;width: 100%;">

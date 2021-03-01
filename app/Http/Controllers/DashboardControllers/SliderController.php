@@ -258,7 +258,7 @@ class SliderController extends Controller
     public function destroy(Slider $slider)
     {
         // Check Authority
-        if (!check_authority('destroy.slider')){
+        if (!check_authority('delete.slider')){
             return redirect('/');
         }
 

@@ -231,7 +231,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         // Check Authority
-        if (!check_authority('destroy.contact')){
+        if (!check_authority('delete.contact')){
             return redirect('/');
         }
 

@@ -255,7 +255,7 @@ class PageController extends Controller
     public function destroy(Page $page)
     {
         // Check Authority
-        if (!check_authority('destroy.page')){
+        if (!check_authority('delete.page')){
             return redirect('/');
         }
 

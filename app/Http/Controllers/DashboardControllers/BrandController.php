@@ -253,7 +253,7 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         // Check Authority
-        if (!check_authority('destroy.brand')){
+        if (!check_authority('delete.brand')){
             return redirect('/');
         }
 

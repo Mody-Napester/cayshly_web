@@ -259,7 +259,7 @@ class BlogController extends Controller
     public function destroy(Blog $blog)
     {
         // Check Authority
-        if (!check_authority('destroy.blog')){
+        if (!check_authority('delete.blog')){
             return redirect('/');
         }
 

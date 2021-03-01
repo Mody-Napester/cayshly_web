@@ -228,7 +228,7 @@ class RolesController extends Controller
     public function destroy($uuid)
     {
         // Check Authority
-        if (!check_authority('destroy.role')){
+        if (!check_authority('delete.role')){
             return redirect('/');
         }
 

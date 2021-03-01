@@ -269,7 +269,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         // Check Authority
-        if(!check_authority('destroy.category')){
+        if(!check_authority('delete.category')){
             return redirect('/');
         }
 

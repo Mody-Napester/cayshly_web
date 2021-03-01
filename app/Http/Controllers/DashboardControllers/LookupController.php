@@ -200,7 +200,7 @@ class LookupController extends Controller
     public function destroy(Lookup $lookup)
     {
         // Check Authority
-        if (!check_authority('destroy.lookup')){
+        if (!check_authority('delete.lookup')){
             return redirect('/');
         }
 

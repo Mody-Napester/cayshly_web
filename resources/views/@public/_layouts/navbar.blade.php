@@ -21,10 +21,20 @@
 {{--                    <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>--}}
 {{--                    <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>--}}
                     @if(auth()->check())
-                        <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a></li>
+                        @if(check_authority('index.dashboard'))
+                            <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a></li>
+                        @endif
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="czi-sign-out text-muted mr-2"></i>{{ trans('master.Sign_out') }}
+                            </a>
+                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     @else
-                        <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-location text-muted mr-2"></i>{{ trans('master.Login') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-location text-muted mr-2"></i>{{ trans('master.Register') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-sign-in text-muted mr-2"></i>{{ trans('master.Login') }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-add-user text-muted mr-2"></i>{{ trans('master.Register') }}</a></li>
                     @endif
                 </ul>
             </div>
@@ -32,7 +42,12 @@
 {{--                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>--}}
 {{--                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>--}}
                 @if(auth()->check())
-                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>
+                    @if(check_authority('index.dashboard'))
+                        <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>
+                    @endif
+                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="czi-sign-out mt-n1"></i>{{ trans('master.Sign_out') }}
+                    </a>
                 @else
                     <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>{{ trans('master.Login') }}</a>
                     <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>{{ trans('master.Register') }}</a>

@@ -196,7 +196,7 @@ class SpecificationController extends Controller
     public function destroy(Specification $specification)
     {
         // Check Authority
-        if (!check_authority('destroy.specification')){
+        if (!check_authority('delete.specification')){
             return redirect('/');
         }
 

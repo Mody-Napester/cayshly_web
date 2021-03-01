@@ -195,7 +195,7 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         // Check Authority
-        if (!check_authority('destroy.city')){
+        if (!check_authority('delete.city')){
             return redirect('/');
         }
 

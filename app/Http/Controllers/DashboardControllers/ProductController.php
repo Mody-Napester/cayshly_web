@@ -352,7 +352,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         // Check Authority
-        if (!check_authority('destroy.product')){
+        if (!check_authority('delete.product')){
             return redirect('/');
         }
 

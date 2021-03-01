@@ -185,7 +185,7 @@ class PermissionGroupsController extends Controller
     public function destroy($uuid)
     {
         // Check Authority
-        if (!check_authority('destroy.permission_groups')){
+        if (!check_authority('delete.permission_groups')){
             return redirect('/');
         }
 

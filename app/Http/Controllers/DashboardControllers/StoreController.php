@@ -264,7 +264,7 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         // Check Authority
-        if (!check_authority('destroy.store')){
+        if (!check_authority('delete.store')){
             return redirect('/');
         }
 

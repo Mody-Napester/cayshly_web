@@ -208,7 +208,7 @@ class CountryController extends Controller
     public function destroy(Country $country)
     {
         // Check Authority
-        if (!check_authority('destroy.country')){
+        if (!check_authority('delete.country')){
             return redirect('/');
         }
 

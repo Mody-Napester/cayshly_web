@@ -175,7 +175,7 @@ class SocialController extends Controller
     public function destroy(Social $social)
     {
         // Check Authority
-        if (!check_authority('destroy.social')){
+        if (!check_authority('delete.social')){
             return redirect('/');
         }
 
