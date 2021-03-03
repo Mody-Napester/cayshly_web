@@ -141,6 +141,14 @@ class User extends Authenticatable
     }
 
     /**
+     *  Relationship with orders
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
      *  Relationship with roles
      */
     public function roles()

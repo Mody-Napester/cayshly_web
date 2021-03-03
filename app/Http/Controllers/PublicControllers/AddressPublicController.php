@@ -15,6 +15,10 @@ class AddressPublicController extends Controller
      * Index user address
      */
     public function index(){
+        if(!auth()->check()){
+            return redirect('/');
+        }
+
         $data['user'] = auth()->user();
         return view('@public.address.index', $data);
     }

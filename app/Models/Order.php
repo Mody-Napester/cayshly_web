@@ -71,6 +71,14 @@ class Order extends Model
     }
 
     /**
+     *  Order details Relation
+     */
+    public function details()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
+    /**
      *  Lookup Payment method Relation
      */
     public function payment_method()

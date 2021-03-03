@@ -24,7 +24,7 @@
     <div class="container pb-5 mb-2 mb-md-3">
         <div class="row">
             <!-- Sidebar-->
-            @include('@public.user._partials.sidebar')
+            @include('@public.user._partials.sidebar', ['page' => 'profile'])
 
             <!-- Content  -->
             <section class="col-lg-8">
@@ -35,63 +35,85 @@
                 </div>
                 <!-- Profile form-->
                 <div class="card card-body">
-                    <form>
-                        <div class="bg-secondary rounded-lg p-4 mb-4">
-                            <div class="media align-items-center">
-                                <img src="{{ url('assets_public/img/shop/account/avatar.jpg') }}" width="90" alt="{{ $user->name }}">
-                                <div class="media-body pl-3">
-                                    <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i class="czi-loading mr-2"></i>{{ trans('users.Change_avatar') }}</button>
-                                    <div class="p mb-0 font-size-ms text-muted">{{ trans('users.Upload') }} JPG, GIF or PNG.</div>
-                                </div>
-                            </div>
-                        </div>
+                    <form class="needs-validation" novalidate method="post" action="{{ route('public.user.update') }}">
+                        @csrf
+                        @method('put')
+                        {{--                        <div class="bg-secondary rounded-lg p-4 mb-4">--}}
+                        {{--                            <div class="media align-items-center">--}}
+                        {{--                                <img src="{{ url('assets_public/img/shop/account/avatar.png') }}" width="90" alt="{{ $user->name }}">--}}
+                        {{--                                <div class="media-body pl-3">--}}
+                        {{--                                    <button class="btn btn-light btn-shadow btn-sm mb-2" type="button"><i class="czi-loading mr-2"></i>{{ trans('users.Change_avatar') }}</button>--}}
+                        {{--                                    <div class="p mb-0 font-size-ms text-muted">{{ trans('users.Upload') }} JPG, GIF or PNG.</div>--}}
+                        {{--                                </div>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="account-fn">{{ trans('users.Full_Name') }}</label>
-                                    <input class="form-control" type="text" id="account-fn" value="{{ $user->name }}">
+                                    <label for="name">{{ trans('users.Full_Name') }}</label>
+                                    <input class="form-control" type="text" @error('name') is-invalid @enderror  id="name" name="name" required value="{{ $user->name }}">
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please choose a name.</div>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="account-fn">{{ trans('users.First_Name') }}</label>
-                                    <input class="form-control" type="text" id="account-fn" value="{{ $user->first_name }}">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="account-ln">{{ trans('users.Last_Name') }}</label>
-                                    <input class="form-control" type="text" id="account-ln" value="{{ $user->last_name }}">
-                                </div>
-                            </div>
+                            {{--                            <div class="col-sm-6">--}}
+                            {{--                                <div class="form-group">--}}
+                            {{--                                    <label for="account-fn">{{ trans('users.First_Name') }}</label>--}}
+                            {{--                                    <input class="form-control" type="text" id="account-fn" value="{{ $user->first_name }}">--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
+                            {{--                            <div class="col-sm-6">--}}
+                            {{--                                <div class="form-group">--}}
+                            {{--                                    <label for="account-ln">{{ trans('users.Last_Name') }}</label>--}}
+                            {{--                                    <input class="form-control" type="text" id="account-ln" value="{{ $user->last_name }}">--}}
+                            {{--                                </div>--}}
+                            {{--                            </div>--}}
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="account-email">{{ trans('users.Email_Address') }}</label>
-                                    <input class="form-control" type="email" id="account-email" value="{{ $user->email }}" disabled>
+                                    <input class="form-control" type="email" id="account-email" name="email" required value="{{ $user->email }}" disabled>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please choose an email.</div>
+                                    @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="account-phone">{{ trans('users.Phone_Number') }}</label>
-                                    <input class="form-control" type="text" id="account-phone" value="{{ $user->phone }}" required>
+                                    <label for="phone">{{ trans('users.Phone_Number') }}</label>
+                                    <input class="form-control" type="text" id="phone"  name="phone" value="{{ $user->phone }}" required>
+                                    <div class="valid-feedback">Looks good!</div>
+                                    <div class="invalid-feedback">Please choose phone.</div>
+                                    @error('phone')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="account-pass">{{ trans('users.New_Password') }}</label>
+                                    <label for="password">{{ trans('users.New_Password') }}</label>
                                     <div class="password-toggle">
-                                        <input class="form-control" type="password" id="account-pass">
+                                        <input class="form-control" type="password" id="password" name="password" required>
                                         <label class="password-toggle-btn">
                                             <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('users.Show_password') }}</span>
                                         </label>
+                                        <div class="valid-feedback">Looks good!</div>
+                                        <div class="invalid-feedback">Please choose password.</div>
+                                        @error('password')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="account-confirm-pass">{{ trans('users.Confirm_Password') }}</label>
-                                    <div class="password-toggle">
-                                        <input class="form-control" type="password" id="account-confirm-pass">
+                                    <div class="password_confirmation">
+                                        <input class="form-control" type="password" id="password_confirmation" required>
                                         <label class="password-toggle-btn">
                                             <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('users.Show_password') }}</span>
                                         </label>
@@ -105,11 +127,13 @@
                                         <input class="custom-control-input" type="checkbox" id="subscribe_me" checked>
                                         <label class="custom-control-label" for="subscribe_me">{{ trans('users.Subscribe_me_to_Newsletter') }}</label>
                                     </div>
-                                    <button class="btn btn-primary mt-3 mt-sm-0" type="button">{{ trans('users.Update_profile') }}</button>
+                                    <button class="btn btn-primary mt-3 mt-sm-0" type="submit">{{ trans('users.Update_profile') }}</button>
                                 </div>
                             </div>
                         </div>
+
                     </form>
+
                 </div>
             </section>
         </div>

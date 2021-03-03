@@ -196,18 +196,6 @@ class CartPublicController extends Controller
      */
     public function user_details(){
 
-        if(!session()->has('order')){
-            // Add new order session
-            $order = [
-                ['address' => ''],
-                ['payment' => '']
-            ];
-            session()->push('order', $order);
-        }
-
-        $data['cart_address'] = session('order')[0][0]['address'];
-        $data['cart_payment'] = session('order')[0][1]['payment'];
-
         if(auth()->check()){
             $products = DB::table('carts')
                 ->join('products', 'carts.product_id', '=', 'products.id')
@@ -235,6 +223,22 @@ class CartPublicController extends Controller
             }
         }
 
+        if ($data['cart_product_count'] == 0){
+            return redirect('/');
+        }
+
+        if(!session()->has('order')){
+            // Add new order session
+            $order = [
+                ['address' => ''],
+                ['payment' => '']
+            ];
+            session()->push('order', $order);
+        }
+
+        $data['cart_address'] = session('order')[0][0]['address'];
+        $data['cart_payment'] = session('order')[0][1]['payment'];
+
         return view('@public.cart.user_details', $data);
     }
 
@@ -244,7 +248,7 @@ class CartPublicController extends Controller
     public function payment(Request $request){
 
         if(!session()->has('order')){
-            redirect('/');
+            return redirect('/');
         }else{
             if(!$request->has('cart_request_address')){
                 return back()->with('message', [
@@ -295,7 +299,7 @@ class CartPublicController extends Controller
     public function review(){
 
         if(!session()->has('order')){
-            redirect('/');
+            return redirect('/');
         }else{
             $data['cart_address'] = session('order')[0][0]['address'];
             $data['cart_payment'] = session('order')[0][1]['payment'];
@@ -371,7 +375,7 @@ class CartPublicController extends Controller
                     'product_price' => $product->price,
                     'product_points' => $product->points,
                     'product_quantity' => $cart->quantity,
-//                    'lookup_deliver_status_id' => '',
+                    'lookup_deliver_status_id' => 0,
                     'deliver_date' => '',
                     'quantity_delivered' => 0,
                     'comments' => '',

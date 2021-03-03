@@ -40,6 +40,7 @@ use \App\Http\Controllers\PublicControllers\WishlistPublicController;
 use \App\Http\Controllers\PublicControllers\PagePublicController;
 use \App\Http\Controllers\PublicControllers\CartPublicController;
 use \App\Http\Controllers\PublicControllers\AddressPublicController;
+use \App\Http\Controllers\PublicControllers\OrderPublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -76,14 +77,21 @@ Route::get('cart/user/details', [CartPublicController::class, 'user_details'])->
 Route::group([
     'middleware' => 'auth',
 ], function () {
+    // User
     Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.user.show');
+    Route::put('user/update', [UserPublicController::class, 'update'])->name('public.user.update');
 
+    // Address
     Route::post('address', [AddressPublicController::class, 'store'])->name('public.address.store');
+    Route::get('address', [AddressPublicController::class, 'index'])->name('public.address.index');
 
     // Cart
     Route::get('cart/payment', [CartPublicController::class, 'payment'])->name('public.cart.payment');
     Route::get('cart/review', [CartPublicController::class, 'review'])->name('public.cart.review');
     Route::get('cart/checkout/complete', [CartPublicController::class, 'complete'])->name('public.cart.complete');
+
+    // Orders
+    Route::get('orders', [OrderPublicController::class, 'index'])->name('public.order.index');
 
     // Wishlist
     Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');

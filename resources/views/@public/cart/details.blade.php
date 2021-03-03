@@ -57,11 +57,11 @@
                                 </div>
                                 <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
                                     <div class="form-group mb-0">
-                                        <label class="font-weight-medium" for="quantity{{ $product->uuid }}">Quantity</label>
+                                        <label class="font-weight-medium" for="quantity{{ $product->uuid }}">{{ trans('cart.Quantity') }}</label>
                                         <input class="form-control" type="hidden" value="{{ $product->uuid }}">
                                         <input class="form-control" type="number" value="1" id="quantity{{ $product->uuid }}">
                                     </div>
-                                    <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">Remove</span></button>
+                                    <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">{{ trans('cart.Remove') }}</span></button>
                                 </div>
                             </div>
                         @endforeach
@@ -104,7 +104,10 @@
 {{--                        </div>--}}
 {{--                    </div>--}}
 
-                    <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.user.details') }}"><i class="czi-card font-size-lg mr-2"></i>Proceed to Checkout</a>
+                    @if($cart_product_count > 0)
+                    <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.user.details') }}">
+                        <i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Checkout') }}</a>
+                    @endif
                 </div>
             </aside>
         </div>

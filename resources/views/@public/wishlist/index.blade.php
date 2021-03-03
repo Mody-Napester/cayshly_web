@@ -24,7 +24,7 @@
     <div class="container pb-5 mb-2 mb-md-3">
         <div class="row">
             <!-- Sidebar-->
-            @include('@public.user._partials.sidebar')
+            @include('@public.user._partials.sidebar', ['page' => 'wishlist'])
 
             <!-- Content  -->
             <section class="col-lg-8">
@@ -33,8 +33,8 @@
                     <h6 class="font-size-base text-light mb-0">{{ trans('wishlist.List_of_items_you_added_to_wishlist') }}:</h6>
                     @include('@public._partials.logout_btn')
                 </div>
-                <!-- Wishlist-->
 
+                <!-- Wishlist-->
                 <div class="card card-body">
                     @foreach($user->wishlists as $product)
                         <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
