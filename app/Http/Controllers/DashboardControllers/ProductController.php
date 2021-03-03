@@ -331,7 +331,7 @@ class ProductController extends Controller
 
         // Return
         if($resource){
-            return redirect(route('product.index'))->with('message', [
+            return back()->with('message', [
                 'type' => 'success',
                 'text' => 'Updated successfully'
             ]);

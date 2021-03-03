@@ -5,11 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class Cart extends Model
 {
     use HasFactory;
-
-    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -17,16 +15,7 @@ class OrderDetail extends Model
      * @var array
      */
     protected $fillable = [
-        'order_id',
-        'product_id',
-        'product_name',
-        'product_price',
-        'product_points',
-        'product_quantity',
-        'lookup_deliver_status_id',
-        'deliver_date',
-        'quantity_delivered',
-        'comments',
+        'user_id','product_id','quantity',
     ];
 
     /**
@@ -74,10 +63,10 @@ class OrderDetail extends Model
     }
 
     /**
-     *  Order Relation
+     *  Products Relation
      */
-    public function order()
+    public function products()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Product::class);
     }
 }

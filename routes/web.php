@@ -38,6 +38,8 @@ use \App\Http\Controllers\PublicControllers\OfferPublicController;
 use \App\Http\Controllers\PublicControllers\UserPublicController;
 use \App\Http\Controllers\PublicControllers\WishlistPublicController;
 use \App\Http\Controllers\PublicControllers\PagePublicController;
+use \App\Http\Controllers\PublicControllers\CartPublicController;
+use \App\Http\Controllers\PublicControllers\AddressPublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -63,11 +65,27 @@ Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offe
 
 Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.page.show');
 
+// Cart
+Route::post('cart', [CartPublicController::class, 'store'])->name('public.cart.store');
+Route::get('cart/empty_cart', [CartPublicController::class, 'empty_cart'])->name('public.cart.empty_cart');
+Route::get('cart/details', [CartPublicController::class, 'details'])->name('public.cart.details');
+Route::get('cart/user/details', [CartPublicController::class, 'user_details'])->name('public.cart.user.details');
+
+// Order Preprocess
+
 Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('user/{user}', [UserPublicController::class, 'show'])->name('public.user.show');
 
+    Route::post('address', [AddressPublicController::class, 'store'])->name('public.address.store');
+
+    // Cart
+    Route::get('cart/payment', [CartPublicController::class, 'payment'])->name('public.cart.payment');
+    Route::get('cart/review', [CartPublicController::class, 'review'])->name('public.cart.review');
+    Route::get('cart/checkout/complete', [CartPublicController::class, 'complete'])->name('public.cart.complete');
+
+    // Wishlist
     Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
     Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
     Route::delete('wishlist/{wishlist}', [WishlistPublicController::class, 'destroy'])->name('public.wishlist.destroy');
@@ -100,6 +118,7 @@ Route::group([
     Route::resource('slider', SliderController::class);
     Route::resource('social', SocialController::class);
     Route::get('orders', [OrderController::class, 'index'])->name('dashboard.order.index');
+    Route::get('orders/{order}/details', [OrderController::class, 'details'])->name('dashboard.order.details');
     Route::get('subscriber', [SubscriberController::class, 'index'])->name('dashboard.subscriber.index');
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');
     Route::resource('user', UserController::class);

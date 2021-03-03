@@ -10,6 +10,7 @@
     <meta name="author" content="">
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- Favicon and Touch Icons-->
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets_public/img/platform/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url('assets_public/img/platform/favicon-32x32.png') }}">
@@ -25,6 +26,15 @@
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/drift-zoom/dist/drift-basic.min.css') }}"/>
     <link href="{{ url('assets_dashboard/css/alerts.css') }}" rel="stylesheet"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
+
+    <style>
+        .my-addresses{
+            display: none;
+        }
+        .cart-addresses{
+
+        }
+    </style>
 
     @if(lang() == 'ar')
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -47,19 +57,6 @@
 @include('@public._partials.alerts')
 
 @yield('page_contents')
-
-<!-- Toast: Added to Cart-->
-<div class="toast-container toast-bottom-center">
-    <div class="toast mb-3" id="cart-toast" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header bg-success text-white"><i class="czi-check-circle mr-2"></i>
-            <h6 class="font-size-sm text-white mb-0 mr-auto">{{ trans('master.Added_to_cart') }}!</h6>
-            <button class="close text-white ml-2 mb-1" type="button" data-dismiss="toast" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="toast-body">{{ trans('master.This_item_has_been_added_to_your_cart') }}.</div>
-    </div>
-</div>
 
 <!-- Footer-->
 <footer class="bg-dark pt-5">
@@ -224,6 +221,8 @@
 {{--    </div>--}}
 {{--</div>--}}
 
+@include('@public._popups.add_to_cart')
+
 <!-- Back To Top Button-->
 <a class="btn-scroll-top" href="#top" data-scroll>
     <span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">{{ trans('master.Top') }}</span>
@@ -231,7 +230,9 @@
 </a>
 
 <!-- Vendor scrits: js libraries and plugins-->
-<script src="{{ url('assets_public/vendor/jquery/dist/jquery.slim.min.js') }}"></script>
+{{--<script src="{{ url('assets_public/vendor/jquery/dist/jquery.slim.min.js') }}"></script>--}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+
 <script src="{{ url('assets_public/vendor/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ url('assets_public/vendor/bs-custom-file-input/dist/bs-custom-file-input.min.js') }}"></script>
 <script src="{{ url('assets_public/vendor/simplebar/dist/simplebar.min.js') }}"></script>
@@ -243,6 +244,11 @@
 <script src="{{ url('assets_public/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
 <!-- Main theme script-->
 <script src="{{ url('assets_public/js/theme.min.js') }}"></script>
+
+@include('@public._scripts.add_to_cart')
+
+@yield('page_scripts')
+
 </body>
 
 </html>

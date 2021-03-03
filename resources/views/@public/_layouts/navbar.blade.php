@@ -104,12 +104,13 @@
                     @endif
 
                     <div class="navbar-tool dropdown ml-3">
-                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="">
-                            <span class="navbar-tool-label">4</span>
+                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{{ route('public.cart.details') }}">
+                            <span class="navbar-tool-label cart-count">{{ $header_cart_product_count }}</span>
                             <i class="navbar-tool-icon czi-cart"></i>
                         </a>
 
-                        <a class="navbar-tool-text" href=""><small>{{ trans('master.My_Cart') }}</small>$1,247.00</a>
+                        <a class="navbar-tool-text" href="{{ route('public.cart.details') }}">
+                            <small>{{ trans('master.My_Cart') }}</small><span class="cart-price">{{ $header_cart_price_sum }}</span> EGP</a>
 
                         <!-- Cart dropdown-->
 {{--                        <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">--}}

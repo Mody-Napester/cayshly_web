@@ -133,6 +133,14 @@ class User extends Authenticatable
     }
 
     /**
+     *  Relationship with addresses
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    /**
      *  Relationship with roles
      */
     public function roles()
@@ -145,17 +153,22 @@ class User extends Authenticatable
      */
     public static function authorities($user)
     {
-        $roles = $user->roles;
-        $permissions = [];
-        foreach ($roles as $role){
-            foreach ($role->permissions as $permission){
-                $element = PermissionGroup::getBy('id', $permission->pivot->permission_group_id)->name . '.' . $permission->name;
-                if (!in_array($element, $permissions)){
-                    $permissions[] = $element;
+        if(session()->has('permissions')){
+            return session('permissions');
+        }else{
+            $roles = $user->roles;
+            $permissions = [];
+            foreach ($roles as $role){
+                foreach ($role->permissions as $permission){
+                    $element = PermissionGroup::getBy('id', $permission->pivot->permission_group_id)->name . '.' . $permission->name;
+                    if (!in_array($element, $permissions)){
+                        $permissions[] = $element;
+                    }
                 }
             }
+            session()->push('permissions', $permissions);
+            return $permissions;
         }
-        return $permissions;
     }
 
     /**

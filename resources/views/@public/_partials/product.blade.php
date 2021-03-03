@@ -21,7 +21,7 @@
     <div class="card-body py-2">
         <a class="product-meta d-block font-size-xs pb-1" href="">{{ getFromJson( $product->store->name , lang()) }}</a>
         <h3 class="product-title font-size-sm" style="height: 40px;">
-            <a href="">{{ getFromJson($product->name , lang()) }}</a>
+            <a href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
         </h3>
         <div class="d-flex justify-content-between">
             <div class="product-price">
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="card-body card-body-hidden">
-        <button class="btn btn-primary btn-sm btn-block mb-2" type="button" data-toggle="toast" data-target="#cart-toast">
+        <button class="btn btn-primary btn-sm btn-block mb-2 add_to_cart" type="button" data-item="{{ $product->uuid }}">
             <i class="czi-cart font-size-sm mr-1"></i>{{ trans('partials.Add_to_Cart') }}
         </button>
 

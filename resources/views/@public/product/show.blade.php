@@ -154,7 +154,7 @@
                                                 <button class="btn btn-secondary btn-block" type="submit"><i class="czi-heart font-size-lg mr-2"></i><span class='d-none d-sm-inline'>{{ trans('products.Add_to') }} </span>{{ trans('products.Wishlist') }}</button>
                                             </form>
                                         </div>
-                                        <button class="btn btn-primary btn-shadow btn-block" type="button"><i class="czi-cart font-size-lg mr-2"></i>{{ trans('products.Add_to_Cart') }}</button>
+                                        <button class="btn btn-primary btn-shadow btn-block add_to_cart" type="button" data-item="{{ $product->uuid }}"><i class="czi-cart font-size-lg mr-2"></i>{{ trans('products.Add_to_Cart') }}</button>
                                     </div>
 
                                     <!-- Product panels-->

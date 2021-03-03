@@ -79,6 +79,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{ $resources->links() }}
             </div>
         </div>
     </div>

@@ -37,6 +37,7 @@
                             <th>Address</th>
                             <th>Comments</th>
                             <th>Payment Method</th>
+                            <th>Since</th>
                             <th>Created at</th>
                             <th>Updated at</th>
                             <th>Actions</th>
@@ -50,12 +51,12 @@
                                 <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
                                 <td>{{ $resource->address_name }}</td>
                                 <td>{{ $resource->comments }}</td>
-                                <td>{{ getFromJson($resource->payment_method->name , lang()) }}</td>
+                                <td> COD {{-- {{ getFromJson($resource->payment_method->name , lang()) }} --}} </td>
+                                <td>{{ human_date($resource->created_at) }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
                                 <td>
-                                    <a href="{{ route('brand.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
-                                    <a href="{{ route('brand.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
+                                    <a href="{{ route('dashboard.order.details', $resource->uuid) }}" class="badge badge-warning">Details</a>
                                 </td>
                             </tr>
                         @endforeach
