@@ -69,6 +69,9 @@
 {{--                                </div>--}}
 {{--                                <a class="nav-link-inline font-size-sm" href="account-password-recovery.html">Forgot password?</a>--}}
 {{--                            </div>--}}
+                            <div class="text-center">
+                                <p>{{ trans('login.dont_have_account') }} .. <a class="nav-link-inline font-size-sm" href="{{ route('register') }}">{{ trans('login.create') }}</a></p>
+                            </div>
                             <hr class="mt-4">
                             <div class="text-right pt-4">
                                 <button class="btn btn-primary" type="submit"><i class="czi-sign-in mr-2 ml-n21"></i>{{ trans('login.Sign_in') }}</button>

@@ -7,7 +7,7 @@
                     <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('navbar.language') }}</a>
                     <ul class="dropdown-menu">
                         @foreach(langs() as $lang)
-                        <li><a class="dropdown-item pb-1" href="{{ route('language', $lang['short_name']) }}">{{ $lang['name'] }}</a></li>
+                        <li><a class="dropdown-item pb-1 fire-loader-anchor" href="{{ route('language', $lang['short_name']) }}">{{ $lang['name'] }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -16,41 +16,56 @@
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
-                <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('master.Useful_pages') }}</a>
-                <ul class="dropdown-menu dropdown-menu-right">
+                @if(auth()->check())
+                    @if(check_authority('index.dashboard'))
+                        <a class="topbar-link ml-3 d-md-inline-block fire-loader-anchor" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a>
+                    @endif
+
+                    <a class="topbar-link ml-3 d-md-inline-block fire-loader-anchor" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="czi-sign-out text-muted mr-2"></i>{{ trans('master.Sign_out') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                @else
+                    <a class="topbar-link ml-3 d-inline-block fire-loader-anchor" href="{{ route('login') }}"><i class="czi-sign-in text-muted mr-2"></i>{{ trans('master.Login') }}</a>
+                    <a class="topbar-link ml-3 d-inline-block fire-loader-anchor" href="{{ route('register') }}"><i class="czi-add-user text-muted mr-2"></i>{{ trans('master.Register') }}</a>
+                @endif
+{{--                <a class="topbar-link dropdown-toggle" href="#" data-toggle="dropdown">{{ trans('master.Useful_pages') }}</a>--}}
+{{--                <ul class="dropdown-menu dropdown-menu-right">--}}
 {{--                    <li><a class="dropdown-item" href=""><i class="czi-idea text-muted mr-2"></i>About us</a></li>--}}
 {{--                    <li><a class="dropdown-item" href=""><i class="czi-location text-muted mr-2"></i>Contact us</a></li>--}}
-                    @if(auth()->check())
-                        @if(check_authority('index.dashboard'))
-                            <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a></li>
-                        @endif
-                        <li>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <i class="czi-sign-out text-muted mr-2"></i>{{ trans('master.Sign_out') }}
-                            </a>
-                        </li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    @else
-                        <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-sign-in text-muted mr-2"></i>{{ trans('master.Login') }}</a></li>
-                        <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-add-user text-muted mr-2"></i>{{ trans('master.Register') }}</a></li>
-                    @endif
-                </ul>
+{{--                    @if(auth()->check())--}}
+{{--                        @if(check_authority('index.dashboard'))--}}
+{{--                            <li><a class="dropdown-item" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a></li>--}}
+{{--                        @endif--}}
+{{--                        <li>--}}
+{{--                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">--}}
+{{--                                <i class="czi-sign-out text-muted mr-2"></i>{{ trans('master.Sign_out') }}--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+{{--                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+{{--                            @csrf--}}
+{{--                        </form>--}}
+{{--                    @else--}}
+{{--                        <li><a class="dropdown-item" href="{{ route('login') }}"><i class="czi-sign-in text-muted mr-2"></i>{{ trans('master.Login') }}</a></li>--}}
+{{--                        <li><a class="dropdown-item" href="{{ route('register') }}"><i class="czi-add-user text-muted mr-2"></i>{{ trans('master.Register') }}</a></li>--}}
+{{--                    @endif--}}
+{{--                </ul>--}}
             </div>
             <div class="d-none d-md-block ml-3 text-nowrap">
 {{--                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>--}}
 {{--                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>--}}
                 @if(auth()->check())
                     @if(check_authority('index.dashboard'))
-                        <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>
+                        <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block fire-loader-anchor" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>
                     @endif
-                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block fire-loader-anchor" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="czi-sign-out mt-n1"></i>{{ trans('master.Sign_out') }}
                     </a>
                 @else
-                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>{{ trans('master.Login') }}</a>
-                    <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>{{ trans('master.Register') }}</a>
+                    <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block fire-loader-anchor" href="{{ route('login') }}"><i class="czi-sign-in mt-n1"></i>{{ trans('master.Login') }}</a>
+                    <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block fire-loader-anchor" href="{{ route('register') }}"><i class="czi-add-user mt-n1"></i>{{ trans('master.Register') }}</a>
                 @endif
             </div>
         </div>
@@ -59,10 +74,10 @@
     <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="{{ route('public.home') }}" style="min-width: 7rem;">
+                <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 7rem;">
                     <img style="width: 130px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
                 </a>
-                <a class="navbar-brand d-sm-none mr-2" href="{{ route('public.home') }}" style="min-width: 4.625rem;">
+                <a class="navbar-brand d-sm-none mr-2 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 4.625rem;">
                     <img width="74" src="{{ url('assets_public/img/logo-icon.png') }}" alt="{{ trans('master.Cayshly') }}"/>
                 </a>
                 <!-- Search-->
@@ -92,24 +107,24 @@
                     </a>
 
                     @if(auth()->check())
-                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('public.user.show', [auth()->user()->name]) }}">
+                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 fire-loader-anchor" href="{{ route('public.user.show', [auth()->user()->name]) }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
                             <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ auth()->user()->name }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @else
-                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="{{ route('login') }}">
+                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 fire-loader-anchor" href="{{ route('login') }}">
                             <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
                             <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ trans('master.Sign_in') }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @endif
 
                     <div class="navbar-tool dropdown ml-3">
-                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle" href="{{ route('public.cart.details') }}">
+                        <a class="navbar-tool-icon-box bg-secondary dropdown-toggle fire-loader-anchor" href="{{ route('public.cart.details') }}">
                             <span class="navbar-tool-label cart-count">{{ $header_cart_product_count }}</span>
                             <i class="navbar-tool-icon czi-cart"></i>
                         </a>
 
-                        <a class="navbar-tool-text" href="{{ route('public.cart.details') }}">
+                        <a class="navbar-tool-text fire-loader-anchor" href="{{ route('public.cart.details') }}">
                             <small>{{ trans('master.My_Cart') }}</small><span class="cart-price">{{ $header_cart_price_sum }}</span> EGP</a>
 
                         <!-- Cart dropdown-->
@@ -188,7 +203,7 @@
                                                     <ul class="widget-list">
                                                         @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
                                                         <li class="widget-list-item pb-1">
-                                                            <a class="widget-list-link" href="{{ route('public.category.product.index', $child->slug) }}"><i class="{{ $child->icon }} opacity-60 font-size-lg mt-n1 mr-2"></i> {{ getFromJson($child->name , lang()) }}</a>
+                                                            <a class="widget-list-link fire-loader-anchor" href="{{ route('public.category.product.index', $child->slug) }}"><i class="{{ $child->icon }} opacity-60 font-size-lg mt-n1 mr-2"></i> {{ getFromJson($child->name , lang()) }}</a>
                                                         </li>
                                                         @endforeach
                                                     </ul>
@@ -197,7 +212,7 @@
                                             <div class="mega-dropdown-column d-none d-lg-block py-4 text-center">
                                                 <img src="{{ url('assets_public/images/category/picture/'. $category->picture) }}" alt="{{ getFromJson($category->name , lang()) }}"/>
 {{--                                                <div class="font-size-sm mb-3">Starting from <span class='font-weight-medium'>$149.<small>80</small></span></div>--}}
-                                                <a class="btn btn-primary btn-shadow btn-sm" href="{{ route('public.category.show', $category->slug) }}">{{ trans('navbar.see_all') }}<i class="czi-arrow-right font-size-xs ml-1"></i></a>
+                                                <a class="btn btn-primary btn-shadow btn-sm fire-loader-anchor" href="{{ route('public.category.show', $category->slug) }}">{{ trans('navbar.see_all') }}<i class="czi-arrow-right font-size-xs ml-1"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -209,31 +224,31 @@
                     <!-- Primary menu-->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> {{ trans('master.Home') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> {{ trans('master.Home') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> {{ trans('master.Stores') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.store.index') }}"><i style="margin-right: 5px;" class="czi-bag"></i> {{ trans('master.Stores') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.category.index') }}"><i style="margin-right: 5px;" class="czi-view-grid"></i> {{ trans('master.Categories') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.category.index') }}"><i style="margin-right: 5px;" class="czi-view-grid"></i> {{ trans('master.Categories') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.brand.index') }}"><i style="margin-right: 5px;" class="czi-bookmark"></i> {{ trans('master.Brands') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.brand.index') }}"><i style="margin-right: 5px;" class="czi-bookmark"></i> {{ trans('master.Brands') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.product.best.index') }}"><i style="margin-right: 5px;" class="czi-diamond"></i> {{ trans('master.Best_Sales') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.product.best.index') }}"><i style="margin-right: 5px;" class="czi-diamond"></i> {{ trans('master.Best_Sales') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> {{ trans('master.By_Free') }}</a>
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> {{ trans('master.By_Free') }}</a>
                         </li>
                     </ul>
                 </div>

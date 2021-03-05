@@ -120,6 +120,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'code' => ($request->has('code'))? $request->code : '',
             'points' => $points,
+            'discount_type' => ($request->has('discount_type') && in_array($request->discount_type, [1,2,3]))? $request->discount_type : 1,
+            'discount_unit' => ($request->has('discount_type') && in_array($request->discount_type, [2,3]))? $request->discount_unit : null,
             'lookup_condition_id' => $lookup_condition_id,
             'warranty' => ($request->has('warranty'))? $request->warranty : '',
             'video' => ($request->has('video'))? $request->video : '',
@@ -222,6 +224,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+//        dd($request->all());
+//        $d = ($request->has('discount_type') && in_array($request->discount_type, [2,3]))? $request->discount_unit : '';
+//        dd($d);
         // Check Authority
         if (!check_authority('update.product')){
             return redirect('/');
@@ -290,6 +295,8 @@ class ProductController extends Controller
             'price' => $request->price,
             'code' => ($request->has('code'))? $request->code : $data['resource']->code,
             'points' => $points,
+            'discount_type' => ($request->has('discount_type') && in_array($request->discount_type, [1,2,3]))? $request->discount_type : 1,
+            'discount_unit' => ($request->has('discount_type') && in_array($request->discount_type, [2,3]))? $request->discount_unit : null,
             'lookup_condition_id' => $lookup_condition_id,
             'warranty' => ($request->has('warranty'))? $request->warranty : '-',
             'video' => ($request->has('video'))? $request->video : '-',

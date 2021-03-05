@@ -18,7 +18,7 @@ class CreateScriptsTable extends Migration
             $table->uuid('uuid');
             $table->integer('lookup_provider_id');
             $table->string('name');
-            $table->string('code');
+            $table->text('code');
             $table->boolean('is_active')->default(0);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();

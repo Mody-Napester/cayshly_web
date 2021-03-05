@@ -60,7 +60,7 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->slug }}</td>
-                                <td>{{ getFromJson($resource->name , lang()) }}</td>
+                                <td>{{ $resource->name }}</td>
                                 <td>{{ $resource->phone }}</td>
                                 <td>{{ $resource->email }}</td>
                                 <td>{{ $resource->website }}</td>

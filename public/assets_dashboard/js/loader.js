@@ -9,6 +9,6 @@ function addLoader(selector = 'body') {
 
     $(selector).append(loader);
 }
-function removeLoarder() {
+function removeLoader() {
     $('.loading').hide(200).remove();
 }

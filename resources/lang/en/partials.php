@@ -11,4 +11,6 @@ return array (
   'All_new' => 'new',
   'at_discounted_price_Hurry_up' => 'ِAt discounted price Hurryup',
   'View_offers' => 'View offers',
+  'Best_Offers' => 'Best Offers',
+  'Top_Brands' => 'Top Brands',
 );

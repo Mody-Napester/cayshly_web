@@ -162,7 +162,7 @@ class User extends Authenticatable
     public static function authorities($user)
     {
         if(session()->has('permissions')){
-            return session('permissions');
+            $return = session('permissions')[0];
         }else{
             $roles = $user->roles;
             $permissions = [];
@@ -175,8 +175,10 @@ class User extends Authenticatable
                 }
             }
             session()->push('permissions', $permissions);
-            return $permissions;
+            $return = $permissions;
         }
+
+        return $return;
     }
 
     /**

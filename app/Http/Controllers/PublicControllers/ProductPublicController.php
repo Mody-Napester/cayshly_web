@@ -64,7 +64,7 @@ class ProductPublicController extends Controller
      */
     public function index_best_sales_products()
     {
-        $data['products'] = Product::where('is_active', 1)->paginate(30);
+        $data['products'] = Product::inRandomOrder()->where('is_active', 1)->paginate(30);
         return view('@public.product.best.index', $data);
     }
 
@@ -73,7 +73,7 @@ class ProductPublicController extends Controller
      */
     public function index_by_free_products()
     {
-        $data['products'] = Product::where('is_active', 1)->paginate(30);
+        $data['products'] = Product::inRandomOrder()->where('is_active', 1)->paginate(30);
         return view('@public.product.free.index', $data);
     }
 

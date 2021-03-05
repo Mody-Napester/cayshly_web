@@ -192,6 +192,53 @@ class CartPublicController extends Controller
     }
 
     /**
+     * remove product from cart.
+     */
+    public function remove($product_uuid){
+
+        if(auth()->check()){
+            $product = Product::getOneBy('uuid', $product_uuid);
+            if($product){
+                $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
+                if($cart){
+                    $cart->delete();
+
+                    $data['message'] = [
+                        'type'=>'success',
+                        'text'=> trans('messages.Product_deleted')
+                    ];
+                }else{
+                    $data['message'] = [
+                        'type'=>'danger',
+                        'text'=> trans('messages.Sorry_item_cant_be_deleted')
+                    ];
+                }
+            }else{
+                $data['message'] = [
+                    'type'=>'danger',
+                    'text'=> trans('messages.Sorry_item_not_fount')
+                ];
+            }
+        }else{
+            if(session()->has('carts')){
+                session()->pull('carts.' . $product_uuid);
+
+                $data['message'] = [
+                    'type'=>'success',
+                    'text'=> trans('messages.Product_deleted')
+                ];
+            }else{
+                $data['message'] = [
+                    'type'=>'danger',
+                    'text'=> trans('messages.Sorry_item_cant_be_deleted')
+                ];
+            }
+        }
+
+        return back()->with('message', $data['message']);
+    }
+
+    /**
      * cart user details.
      */
     public function user_details(){

@@ -58,7 +58,7 @@
                                         <label class="form-col-form-label" for="store_id">Store</label>
                                         <select class="select2 form-control @error('store_id') is-invalid @enderror" id="store_id" name="store_id">
                                             @foreach($stores as $store)
-                                                <option @if($resource->store_id == $store->id) selected @endif value="{{ $store->uuid }}">{{ getFromJson($store->name , lang()) }}</option>
+                                                <option @if($resource->store_id == $store->id) selected @endif value="{{ $store->uuid }}">{{ $store->name }}</option>
                                             @endforeach
                                         </select>
 
@@ -120,6 +120,35 @@
                                                placeholder="Enter code .." value="{{ $resource->code }}">
 
                                         @error('code')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="discount_type">Discount Type</label>
+                                        <select class="select2 form-control @error('discount_type') is-invalid @enderror" id="discount_type" name="discount_type">
+                                            <option @if($resource->discount_type == 1) selected @endif value="1">No Discount</option>
+                                            <option @if($resource->discount_type == 2) selected @endif value="2">Percentage (%)</option>
+                                            <option @if($resource->discount_type == 3) selected @endif value="3">Amount (EGP)</option>
+                                        </select>
+
+                                        @error('discount_type')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="discount_unit">Discount Units</label>
+                                        <input class="form-control @error('discount_unit') is-invalid @enderror "
+                                               id="discount_unit"
+                                               type="text" name="discount_unit"
+                                               placeholder="Enter discount units .." value="{{ $resource->discount_unit }}">
+
+                                        @error('discount_unit')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -318,6 +347,17 @@
             });
 
             $('#option').trigger('change');
+        });
+
+        $(document).on('change', '#discount_type', function(){
+            var discount_type = $(this).val();
+
+            if(discount_type == 2 || discount_type == 3){
+                $('#discount_unit').attr('disabled', false);
+            }else{
+                $('#discount_unit').attr('disabled', true);
+            }
+
         });
     </script>
 @endsection

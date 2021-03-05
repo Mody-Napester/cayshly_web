@@ -51,7 +51,7 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ getFromJson($resource->lookup->name , lang()) }}</td>
-                                <td>{!! $resource->code !!}</td>
+                                <td><code>{{ $resource->code }}</code></td>
                                 <td>{{ getFromJson($resource->name , lang()) }}</td>
                                 <td>
                                     @if($resource->is_active == 1)

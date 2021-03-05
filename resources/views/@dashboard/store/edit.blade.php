@@ -19,7 +19,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Edit Store "{{ getFromJson($resource->name , lang()) }}"
+                            Edit Store "{{ $resource->name }}"
                         </h1>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                                             <input class="form-control @error('name_'.$lang) is-invalid @enderror "
                                                    id="name_{{ $lang }}"
                                                    type="text" name="name_{{ $lang }}"
-                                                   placeholder="Enter name_{{ $lang }} .." value="{{ getFromJson($resource->name , $lang) }}">
+                                                   placeholder="Enter name_{{ $lang }} .." value="{{ getFromJson($resource->getRawOriginal('name') , $lang) }}">
 
                                             @error('name_'.$lang)
                                             <div class="invalid-feedback">{{ $message }}</div>

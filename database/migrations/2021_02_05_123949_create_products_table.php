@@ -25,6 +25,8 @@ class CreateProductsTable extends Migration
             $table->float('price');
             $table->float('points');
             $table->integer('lookup_condition_id');
+            $table->smallInteger('discount_type')->default(1);
+            $table->float('discount_unit')->nullable();
             $table->string('warranty')->nullable();
             $table->string('video')->nullable();
             $table->integer('views')->default(0);

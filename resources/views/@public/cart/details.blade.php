@@ -10,13 +10,13 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('cart.cart') }}</li>
+                        <li class="breadcrumb-item"><a class="text-nowrap fire-loader-anchor" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page"><i style="margin-right: 5px;" class="czi-cart"></i> {{ trans('cart.cart') }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                <h1 class="h3 text-light mb-0">{{ trans('cart.Your_cart') }}</h1>
+                <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-cart"></i> {{ trans('cart.Your_cart') }}</h1>
             </div>
         </div>
     </div>
@@ -29,9 +29,9 @@
 
                 <div class="card card-body">
                     <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
-                        <h2 class="h6 text-danger mb-0">{{ trans('cart.Products') }} ({{ $cart_product_count }}) {{ trans('cart.in_the_art') }}</h2>
+                        <h2 class="h6 text-danger mb-0">({{ $cart_product_count }}) {{ trans('cart.in_the_art') }}</h2>
                         @if(count($cart_products) > 0)
-                            <a class="btn btn-outline-primary btn-sm pl-2" href="{{ route('public.cart.empty_cart') }}"><i class="czi-trash mr-2"></i>{{ trans('cart.Empty_cart') }}</a>
+                            <a class="btn btn-outline-primary btn-sm pl-2 fire-loader-anchor" href="{{ route('public.cart.empty_cart') }}"><i class="czi-trash mr-2"></i>{{ trans('cart.Empty_cart') }}</a>
                         @endif
                     </div>
 
@@ -42,14 +42,14 @@
                             <!-- Item-->
                             <div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
                                 <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left">
-                                    <a class="d-inline-block mx-auto mr-sm-4" href="{{ route('public.product.show', $product->slug) }}" style="width: 10rem;height: 100px;text-align: center;">
+                                    <a class="d-inline-block mx-auto mr-sm-4 fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}" style="width: 10rem;height: 100px;text-align: center;">
                                         <img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="Product">
                                     </a>
                                     <div class="media-body pt-2">
                                         <h3 class="product-title font-size-base mb-2">
-                                            <a href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
+                                            <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
                                         </h3>
-                                        <div class="font-size-sm"><span class="text-muted mr-2">Store:</span>{{ ($store = \App\Models\Store::getOneBy('id', $product->store_id))? getFromJson( $store->name , lang()) : '-' }}</div>
+                                        <div class="font-size-sm"><span class="text-muted mr-2">Store:</span>{{ ($store = \App\Models\Store::getOneBy('id', $product->store_id))? $store->name : '-' }}</div>
                                         {{--                                    <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>8.5</div>--}}
                                         {{--                                    <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>White &amp; Blue</div>--}}
                                         <div class="font-size-lg text-accent pt-2">{{ $product->price }} EGP</div>
@@ -61,7 +61,9 @@
                                         <input class="form-control" type="hidden" value="{{ $product->uuid }}">
                                         <input class="form-control" type="number" value="1" id="quantity{{ $product->uuid }}">
                                     </div>
-                                    <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">{{ trans('cart.Remove') }}</span></button>
+                                    <a href="{{ route('public.cart.remove', $product->uuid) }}" class="btn btn-link px-0 text-danger fire-loader-anchor" type="button">
+                                        <i class="czi-close-circle mr-2"></i><span class="font-size-sm">{{ trans('cart.Remove') }}</span>
+                                    </a>
                                 </div>
                             </div>
                         @endforeach
@@ -105,7 +107,7 @@
 {{--                    </div>--}}
 
                     @if($cart_product_count > 0)
-                    <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.user.details') }}">
+                    <a class="btn btn-primary btn-shadow btn-block mt-4 fire-loader-anchor" href="{{ route('public.cart.user.details') }}">
                         <i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Checkout') }}</a>
                     @endif
                 </div>

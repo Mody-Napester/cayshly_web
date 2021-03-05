@@ -34,6 +34,7 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>Actions</th>
                             <th>Brand</th>
                             <th>Category</th>
                             <th>Store</th>
@@ -42,6 +43,8 @@
                             <th>Code</th>
                             <th>Price</th>
                             <th>Points</th>
+                            <th>Discount</th>
+                            <th>Dis. Price</th>
                             <th>Condition</th>
                             <th>Warranty</th>
                             <th>Video</th>
@@ -52,13 +55,17 @@
                             <th>Updated by</th>
                             <th>Created at</th>
                             <th>Updated at</th>
-                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
+                                <td>
+                                    <a href="{{ route('public.product.show' , [$resource->slug]) }}" target="_blank" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="eye"></i></a>
+                                    <a href="{{ route('product.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+                                    <a href="{{ route('product.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
+                                </td>
                                 <td>{{ (isset($resource->brand))? getFromJson( $resource->brand->name , lang()) : '-' }}</td>
                                 <td>
                                     @if($resource->categories)
@@ -69,12 +76,18 @@
                                         -
                                     @endif
                                 </td>
-                                <td>{{ (isset($resource->store))? getFromJson( $resource->store->name , lang()) : '-' }}</td>
+                                <td>{{ (isset($resource->store))? $resource->store->name : '-' }}</td>
                                 <td>{{ $resource->slug }}</td>
                                 <td>{{ getFromJson($resource->name , lang()) }}</td>
                                 <td>{{ $resource->code }}</td>
                                 <td>{{ $resource->price }}</td>
                                 <td>{{ $resource->points }}</td>
+                                <td>
+                                    <span class="text-danger font-weight-bold">{{ getProductAfterDiscount($resource)['discount'] }}</span>
+                                </td>
+                                <td>
+                                    <span class="text-danger font-weight-bold">{{ getProductAfterDiscount($resource)['price'] }}</span>
+                                </td>
                                 <td>{{ getFromJson( $resource->condition->name , lang()) }}</td>
                                 <td>{{ $resource->warranty }}</td>
                                 <td>{{ $resource->video }}</td>
@@ -95,10 +108,6 @@
                                 <td>{{ ($ub = $resource->updated_by_user)? $ub->name : '-' }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
-                                <td>
-                                    <a href="{{ route('product.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
-                                    <a href="{{ route('product.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>

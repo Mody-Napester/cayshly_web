@@ -11,7 +11,7 @@
                 <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                            <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                            <li class="breadcrumb-item"><a class="text-nowrap fire-loader-anchor" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
                             <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('master.Offers') }}</li>
                         </ol>
                     </nav>
@@ -33,7 +33,7 @@
                         <div class="py-4 my-2 my-md-0 py-md-5 px-4 ml-md-3 text-center text-sm-left">
                             <h4 class="font-size-lg font-weight-light mb-2">{{ trans('offer.Hot_Offer') }}</h4>
                             <h3 class="mb-4">{{ getFromJson($offer->name , lang()) }}</h3>
-                            <a class="btn btn-primary btn-shadow btn-sm" href="{{ $offer->link }}">{{ trans('offer.Shop_Now') }}</a>
+                            <a class="btn btn-primary btn-shadow btn-sm fire-loader-anchor" href="{{ $offer->link }}">{{ trans('offer.Shop_Now') }}</a>
                         </div>
                         <img class="d-block ml-auto" style="width: 75%;height: 100%;" src="{{ url('assets_public/images/offer/picture/'. $offer->picture) }}" alt="{{ getFromJson($offer->name , lang()) }}">
                     </div>

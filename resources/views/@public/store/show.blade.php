@@ -1,6 +1,6 @@
 @extends('@public._layouts.master')
 
-@section('page_title') {{ getFromJson($store->name , lang()) }} @endsection
+@section('page_title') {{ $store->name }} @endsection
 
 @section('page_contents')
 
@@ -8,10 +8,10 @@
         <div class="container d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between align-items-center pt-2">
             <div class="media media-ie-fix align-items-center pb-3">
                 <div class="img-thumbnail rounded-circle position-relative" style="width: 80px;height: 80px;overflow: hidden;padding: 0;">
-                    <img class="" src="{{ url('assets_public/images/store/picture/'. $store->picture) }}" alt="{{ getFromJson($store->name , lang()) }}">
+                    <img class="" src="{{ url('assets_public/images/store/picture/'. $store->picture) }}" alt="{{ $store->name }}">
                 </div>
                 <div class="media-body pl-3">
-                    <h3 class="text-light font-size-lg mb-0">{{ getFromJson($store->name , lang()) }}</h3>
+                    <h3 class="text-light font-size-lg mb-0">{{ $store->name }}</h3>
                     <span class="d-block text-light font-size-ms opacity-60 py-1">{{ trans('stores.Member_since') }} {{ date('d F Y', $store->created_at->timestamp) }}</span>
                     @if($store->is_authorized == 1)
                         <span class="badge badge-success"><i class="czi-check mr-1"></i>{{ trans('stores.Authorized_Store') }}</span>

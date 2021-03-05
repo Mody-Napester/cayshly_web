@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>@yield('page_title')</title>
     <!-- SEO Meta Tags-->
-    <meta name="description" content="Cayshly - Bootstrap E-commerce Template">
+    <meta name="description" content="Cayshly">
     <meta name="keywords" content="">
     <meta name="author" content="">
     <!-- Viewport-->
@@ -24,7 +24,8 @@
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/simplebar/dist/simplebar.min.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/tiny-slider/dist/tiny-slider.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/drift-zoom/dist/drift-basic.min.css') }}"/>
-    <link href="{{ url('assets_dashboard/css/alerts.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" media="all" href="{{ url('assets_public/css/alerts.css') }}"/>
+    <link rel="stylesheet" media="all" href="{{ url('assets_public/css/loader.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
 
     <style>
@@ -39,15 +40,15 @@
     @if(lang() == 'ar')
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-        <style>
-            body{
-                font-family: 'Tajawal', sans-serif !important;
-            }
-        </style>
+        <link rel="stylesheet" media="all" href="{{ url('assets_public/css/rtl.css') }}"/>
     @endif
 
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/css/theme.min.css') }}">
+
+    @foreach(\App\Models\Script::where('is_active', 1)->get() as $script)
+        {!! $script->code !!}
+    @endforeach
 </head>
 <!-- Body-->
 <body class="toolbar-enabled bg-gray">
@@ -67,7 +68,7 @@
                     <h3 class="widget-title text-light">{{ trans('master.Shop_departments') }}</h3>
                     <ul class="widget-list">
                         @foreach($categories as $category)
-                        <li class="widget-list-item"><a class="widget-list-link" href="{{ route('public.category.show', $category->slug) }}">{{ getFromJson($category->name , lang()) }}</a></li>
+                        <li class="widget-list-item"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.category.show', $category->slug) }}">{{ getFromJson($category->name , lang()) }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -77,7 +78,7 @@
                     <h3 class="widget-title text-light">{{ trans('master.Useful_pages') }}</h3>
                     <ul class="widget-list">
                         @foreach($pages as $page)
-                            <li class="widget-list-item"><a class="widget-list-link" href="{{ route('public.page.show', $page->slug) }}">{{ getFromJson($page->name , lang()) }}</a></li>
+                            <li class="widget-list-item"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.page.show', $page->slug) }}">{{ getFromJson($page->name , lang()) }}</a></li>
                         @endforeach
                     </ul>
                 </div>
@@ -174,22 +175,22 @@
 
                     <div class="widget widget-links widget-light">
                         <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.home') }}">{{ trans('master.Home') }}</a></li>
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.store.index') }}">{{ trans('master.Stores') }}</a></li>
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.category.index') }}">{{ trans('master.Categories') }}</a></li>
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.brand.index') }}">{{ trans('master.Brands') }}</a></li>
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.product.best.index') }}">{{ trans('master.Best_Sales') }}</a></li>
-                            <li class="widget-list-item mr-4"><a class="widget-list-link" href="{{ route('public.offer.index') }}">{{ trans('master.Offers') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.home') }}">{{ trans('master.Home') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.store.index') }}">{{ trans('master.Stores') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.category.index') }}">{{ trans('master.Categories') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.brand.index') }}">{{ trans('master.Brands') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.product.best.index') }}">{{ trans('master.Best_Sales') }}</a></li>
+                            <li class="widget-list-item mr-4"><a class="widget-list-link fire-loader-anchor" href="{{ route('public.offer.index') }}">{{ trans('master.Offers') }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md-6 text-center text-md-right mb-4">
                     <div class="mb-3">
                         @foreach($socials as $social)
-                        <a class="social-btn sb-light sb-{{ strtolower($social->provider->name) }} ml-2 mb-2" title="{{ $social->name }}" href="{{ $social->link }}"><i class="czi-{{ strtolower($social->provider->name) }}"></i></a>
+                        <a class="social-btn sb-light sb-{{ strtolower($social->provider->name) }} ml-2 mb-2 fire-loader-anchor" title="{{ $social->name }}" href="{{ $social->link }}"><i class="czi-{{ strtolower($social->provider->name) }}"></i></a>
                         @endforeach
                     </div>
-                    <img class="d-inline-block" width="187" src="{{ url('assets_public/img/cards-alt.png') }}" alt="{{ trans('master.Payment_methods') }}"/>
+                    <img class="d-inline-block" width="80" src="{{ url('assets_public/img/ssl.png') }}" alt="{{ trans('master.Payment_methods') }}"/>
                 </div>
             </div>
 
@@ -240,7 +241,8 @@
 <script src="{{ url('assets_public/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js') }}"></script>
 <script src="{{ url('assets_public/vendor/drift-zoom/dist/Drift.min.js') }}"></script>
 <script src="{{ url('assets_public/vendor/lightgallery.js/dist/js/lightgallery.min.js') }}"></script>
-<script src="{{ url('assets_dashboard/js/alerts.js') }}"></script>
+<script src="{{ url('assets_public/js/alerts.js') }}"></script>
+<script src="{{ url('assets_public/js/loader.js') }}"></script>
 <script src="{{ url('assets_public/vendor/lg-video.js/dist/lg-video.min.js') }}"></script>
 <!-- Main theme script-->
 <script src="{{ url('assets_public/js/theme.min.js') }}"></script>

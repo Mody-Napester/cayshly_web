@@ -6,6 +6,26 @@ function getFromJson($json , $lang){
     return $data[$lang];
 }
 
+function getProductAfterDiscount($product){
+    $data['price'] = 0;
+    $data['discount'] = 0;
+
+    if($product->discount_type == 1){
+        $data['price'] = $product->price;
+        $data['discount'] = 0;
+    }
+    elseif($product->discount_type == 2){
+        $data['price'] = $product->price - (($product->price * $product->discount_unit)/100);
+        $data['discount'] = '-' . $product->discount_unit . '%';
+    }
+    elseif($product->discount_type == 3){
+        $data['price'] = $product->price - $product->discount_unit;
+        $data['discount'] = '-' . $product->discount_unit . 'EGP';
+    }
+
+    return $data;
+}
+
 // Get path
 function get_path($path){
     return base_path() . '/' . config('vars.public') . '/' . $path;

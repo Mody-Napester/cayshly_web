@@ -1,0 +1,11 @@
+body{
+    font-family: 'Tajawal', sans-serif !important;
+}
+.product-card-alt .card-body, .product-card .card-body, .cz-sidebar-static, footer{
+    direction: rtl;
+    text-align: right;
+}
+
+.cz-sidebar-static .list-unstyled{
+    padding-right: 0;
+}

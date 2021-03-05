@@ -19,10 +19,10 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                        <li class="breadcrumb-item"><a class="text-nowrap fire-loader-anchor" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
                         @if(isset($product->store))
                         <li class="breadcrumb-item text-nowrap">
-                            <a href="{{ route('public.store.show', $product->store->slug) }}">{{ getFromJson( $product->store->name , lang()) }}</a>
+                            <a href="{{ route('public.store.show', $product->store->slug) }}">{{ $product->store->name }}</a>
                         </li>
                         @endif
                         <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ getFromJson($product->name , lang()) }}</li>
@@ -89,9 +89,12 @@
                             <div class="col-lg-5 pt-4 pt-lg-0">
                                 <div class="product-details ml-auto pb-3">
                                     <div class="mb-3">
-                                        <span class="h3 font-weight-normal text-accent mr-1">{{ $product->price }} <small>EGP</small></span>
-                                        <del class="text-muted font-size-lg mr-3">$25.<small>00</small></del>
-                                        <span class="badge badge-danger align-middle mt-n2">{{ trans('products.Sale') }}</span>
+                                        <span class="h3 font-weight-normal text-accent mr-1">{{ getProductAfterDiscount($product)['price'] }} <small>EGP</small></span>
+
+                                        @if($product->discount_type != 1)
+                                            <del class="text-muted font-size-lg mr-3">{{ $product->price }} <small>EGP</small></del>
+                                            <span class="badge badge-danger align-middle mt-n2">{{ getProductAfterDiscount($product)['discount'] }}</span>
+                                        @endif
                                     </div>
 
                                     <div class="position-relative mr-n4 mb-3">
@@ -113,7 +116,7 @@
                                         </div>
                                         <div class="font-size-sm">
                                             <span class="text-heading font-weight-medium mr-1">{{ trans('products.Store') }} :</span>
-                                            <span class="text-muted">{{ (isset($product->store))? getFromJson( $product->store->name , lang()) : '-' }}</span>
+                                            <span class="text-muted">{{ (isset($product->store))? $product->store->name : '-' }}</span>
                                         </div>
                                         <div class="font-size-sm">
                                             <span class="text-heading font-weight-medium mr-1">{{ trans('products.Points') }} :</span>

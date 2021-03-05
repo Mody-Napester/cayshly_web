@@ -13,7 +13,7 @@ class BrandPublicController extends Controller
      * Index all brands.
      */
     public function index(){
-        $data['brands'] = Brand::getAllBy('is_active', 1);
+        $data['brands'] = Brand::with('products')->active()->get();
         return view('@public.brand.index', $data);
     }
 
@@ -22,7 +22,7 @@ class BrandPublicController extends Controller
      */
     public function products($brand)
     {
-        $data['brand'] = Brand::getOneBy('slug', $brand);
+        $data['brand'] = Brand::getOneActiveBy('slug', $brand);
         $data['products'] = $data['brand']->products()->active()->paginate(30);
         return view('@public.brand.product.index', $data);
     }

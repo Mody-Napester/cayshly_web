@@ -10,13 +10,13 @@
             <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
-                        <li class="breadcrumb-item"><a class="text-nowrap" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
-                        <li class="breadcrumb-item text-nowrap active" aria-current="page">{{ trans('wishlist.My_wishlist') }}</li>
+                        <li class="breadcrumb-item"><a class="text-nowrap fire-loader-anchor" href="{{ route('public.home') }}"><i class="czi-home"></i>{{ trans('master.Home') }}</a></li>
+                        <li class="breadcrumb-item text-nowrap active" aria-current="page"><i style="margin-right: 5px;" class="czi-heart"></i> {{ trans('wishlist.My_wishlist') }}</li>
                     </ol>
                 </nav>
             </div>
             <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-                <h1 class="h3 text-light mb-0">{{ trans('wishlist.My_wishlist') }}</h1>
+                <h1 class="h3 text-light mb-0"><i style="margin-right: 5px;" class="czi-heart"></i> {{ trans('wishlist.My_wishlist') }}</h1>
             </div>
         </div>
     </div>
@@ -39,14 +39,16 @@
                     @foreach($user->wishlists as $product)
                         <div class="d-sm-flex justify-content-between mt-lg-4 mb-4 pb-3 pb-sm-2 border-bottom">
                             <div class="media media-ie-fix d-block d-sm-flex text-center text-sm-left">
-                                <a class="d-inline-block mx-auto mr-sm-4" href="{{ route('public.product.show', $product->slug) }}" style="width: 10rem;height: 100px;text-align: center;">
+                                <a class="d-inline-block mx-auto mr-sm-4 fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}" style="width: 10rem;height: 100px;text-align: center;">
                                     <img src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" style="height: 100%;" alt="{{ getFromJson($product->name , lang()) }}">
                                 </a>
                                 <div class="media-body pt-2">
                                     <h3 class="product-title font-size-base mb-2">
-                                        <a href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
+                                        <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
                                     </h3>
-                                    <div class="font-size-sm"><span class="text-muted mr-2">Store:</span>{{ getFromJson( $product->store->name , lang()) }}</div>
+                                    <div class="font-size-sm">
+                                        <span class="text-muted mr-2">Store:</span> <a href="{{ route('public.store.show', $product->store->slug) }}">{{ $product->store->name }}</a>
+                                    </div>
                                     <div class="font-size-lg text-accent pt-2">{{ $product->price }}<small>50</small></div>
                                 </div>
                             </div>
@@ -54,7 +56,7 @@
                                 <form action="{{ route('public.wishlist.destroy', $product->pivot->uuid) }}" method="post">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-outline-danger btn-sm" type="submit"><i class="czi-trash mr-2"></i>{{ trans('wishlist.Remove') }}</button>
+                                    <button class="btn btn-outline-danger btn-sm fire-loader-button" type="submit"><i class="czi-trash mr-2"></i>{{ trans('wishlist.Remove') }}</button>
                                 </form>
                             </div>
                         </div>

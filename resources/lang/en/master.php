@@ -9,6 +9,7 @@ return array (
   'Sign_out' => 'Sign out',
   'Added_to_cart' => 'Added to cart',
   'This_item_has_been_added_to_your_cart' => 'This item has been added to your cart',
+  'Shop_departments' => 'Shop departments',
   'Useful_pages' => 'Useful pages',
   'Stay_informed' => 'Stay informed',
   'Your_email' => 'Your email',

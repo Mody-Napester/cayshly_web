@@ -9,7 +9,7 @@ return array (
   'Store' => 'متجر',
   'Warranty' => 'الضمان',
   'Wishlist' => 'قائمه الرغبات',
-  'You_may_also_like' => 'يمكنك انت تعجب ايضا ب',
+  'You_may_also_like' => 'منتجات مختارة لك',
   'Shoes' => 'أحذية',
   'Specifications' => 'مواصفات',
   'Share_on_twitter' => 'مشاركه علي تويتر',

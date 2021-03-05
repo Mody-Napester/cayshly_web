@@ -13,7 +13,7 @@ class StorePublicController extends Controller
      * Index all stores.
      */
     public function index(){
-        $data['stores'] = Store::getAllBy('is_active', 1);
+        $data['stores'] = Store::getAllActiveBy('is_active', 1);
         return view('@public.store.index', $data);
     }
 
@@ -21,7 +21,7 @@ class StorePublicController extends Controller
      * Show store.
      */
     public function show($store){
-        $data['store'] = Store::getOneBy('slug', $store);
+        $data['store'] = Store::getOneActiveBy('slug', $store);
         return view('@public.store.show', $data);
     }
 

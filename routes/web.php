@@ -68,6 +68,7 @@ Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.p
 
 // Cart
 Route::post('cart', [CartPublicController::class, 'store'])->name('public.cart.store');
+Route::get('cart/{product_uuid}/remove', [CartPublicController::class, 'remove'])->name('public.cart.remove');
 Route::get('cart/empty_cart', [CartPublicController::class, 'empty_cart'])->name('public.cart.empty_cart');
 Route::get('cart/details', [CartPublicController::class, 'details'])->name('public.cart.details');
 Route::get('cart/user/details', [CartPublicController::class, 'user_details'])->name('public.cart.user.details');

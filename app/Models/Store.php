@@ -36,6 +36,22 @@ class Store extends Model
     }
 
     /**
+     * Get the translated name.
+     */
+    public function getNameAttribute($value)
+    {
+        return getFromJson($value , lang());
+    }
+
+    /*
+     * Scope Active
+     * */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
+
+    /**
      *  Setup model event hooks
      */
     public static function boot()
@@ -55,11 +71,27 @@ class Store extends Model
     }
 
     /**
+     *  Get One Active Resource By
+     */
+    public static function getOneActiveBy($field, $value)
+    {
+        return self::where($field, $value)->active()->first();
+    }
+
+    /**
      *  Get All Resource By
      */
     public static function getAllBy($field, $value)
     {
         return self::where($field, $value)->get();
+    }
+
+    /**
+     *  Get All Active Resource By
+     */
+    public static function getAllActiveBy($field, $value)
+    {
+        return self::where($field, $value)->active()->get();
     }
 
     /**

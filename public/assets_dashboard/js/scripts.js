@@ -37,7 +37,7 @@
     function addLoader() {
         $('body').append(loader);
     }
-    function removeLoarder() {
+    function removeLoader() {
         $('.loading').hide(200).remove();
     }
 

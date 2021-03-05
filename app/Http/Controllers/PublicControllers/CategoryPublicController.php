@@ -17,7 +17,7 @@ class CategoryPublicController extends Controller
      * @return String
      */
     public function index(){
-        $data['categories'] = Category::getAllBy('parent_id', 0);
+        $data['categories'] = Category::getAllActiveBy('parent_id', 0);
         return view('@public.category.index', $data);
     }
 
@@ -26,8 +26,8 @@ class CategoryPublicController extends Controller
      */
     public function show($category)
     {
-        $data['category'] = Category::getOneBy('slug', $category);
-        $data['categories'] = Category::getAllBy('parent_id', $data['category']->id);
+        $data['category'] = Category::getOneActiveBy('slug', $category);
+        $data['categories'] = Category::getAllActiveBy('parent_id', $data['category']->id);
         return view('@public.category.show', $data);
     }
 
@@ -36,7 +36,7 @@ class CategoryPublicController extends Controller
      */
     public function products($category)
     {
-        $data['category'] = Category::getOneBy('slug', $category);
+        $data['category'] = Category::getOneActiveBy('slug', $category);
         $data['products'] = $data['category']->products()->active()->paginate(30);
         return view('@public.category.product.index', $data);
     }

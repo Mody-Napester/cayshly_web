@@ -13,7 +13,7 @@
                     item : item
                 },
                 beforeSend : function(){
-
+                    addLoader();
                 },
                 success: function(data){
                     console.log(data);
@@ -26,9 +26,11 @@
                     $('.cart-price').text(data.cart_price_sum);
 
                     $('#cart-toast').toast('show');
+                    removeLoader();
                 },
                 error: function(data){
-                    alert({{ trans('messages.sorry_error_exists') }})
+                    alert('{{ trans('messages.sorry_error_exists') }}')
+                    removeLoader();
                 }
             });
 

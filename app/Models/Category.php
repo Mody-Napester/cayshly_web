@@ -63,11 +63,27 @@ class Category extends Model
     }
 
     /**
+     *  Get One Active Resource By
+     */
+    public static function getOneActiveBy($field, $value)
+    {
+        return self::where($field, $value)->active()->first();
+    }
+
+    /**
      *  Get All Resource By
      */
     public static function getAllBy($field, $value)
     {
         return self::where($field, $value)->get();
+    }
+
+    /**
+     *  Get All Active Resource By
+     */
+    public static function getAllActiveBy($field, $value)
+    {
+        return self::where($field, $value)->active()->get();
     }
 
     /**

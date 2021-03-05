@@ -11,4 +11,6 @@ return array (
   'Trending_products' => 'المنتجات الرائجة',
   'View_offers' => 'مشاهدة العروض',
   'at_discounted_price_Hurry_up' => 'اسرع ...تخفيضات',
+  'Top_Brands' => 'احدث البراندات',
+  'Best_Offers' => 'افضل العروض',
 );
