@@ -1,6 +1,8 @@
 <?php
 
 // Get from json
+use App\Models\Cart;
+
 function getFromJson($json , $lang){
     $data = json_decode($json, true);
     return $data[$lang];
@@ -79,6 +81,25 @@ function str_well($value){
 function human_date($date){
 //    $editDate = str_replace('-0001-11-30', '2016-11-30', $date);
     return Carbon\Carbon::createFromTimeStamp(strtotime($date))->diffForHumans();
+}
+
+// Check product in the cart
+function check_product_in_the_cart($product){
+    if (auth()->check()){
+        $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
+    }else{
+        if(session()->has('carts')){
+            $cart = key_exists($product->uuid, session('carts'));
+        }else{
+            $cart = false;
+        }
+    }
+
+    if ($cart){
+        return true;
+    }else{
+        return false;
+    }
 }
 
 // Products points schema

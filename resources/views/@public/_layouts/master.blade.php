@@ -15,7 +15,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ url('assets_public/img/platform/apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url('assets_public/img/platform/favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ url('assets_public/img/platform/favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url('assets_public/img/platform/site.webmanifest') }}">
+{{--    <link rel="manifest" href="{{ url('assets_public/img/platform/site.webmanifest') }}">--}}
     <link rel="mask-icon" color="#fe6a6a" href="{{ url('assets_public/img/platform/safari-pinned-tab.svg') }}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
@@ -201,26 +201,38 @@
 </footer>
 
 <!-- Toolbar for handheld devices-->
-{{--<div class="cz-handheld-toolbar">--}}
-{{--    <div class="d-table table-fixed w-100">--}}
-{{--        <a class="d-table-cell cz-handheld-toolbar-item" href="account-wishlist.html">--}}
-{{--            <span class="cz-handheld-toolbar-icon"><i class="czi-heart"></i></span>--}}
-{{--            <span class="cz-handheld-toolbar-label">Wishlist</span>--}}
-{{--        </a>--}}
+<div class="cz-handheld-toolbar">
+    <div class="d-table table-fixed w-100">
+        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.category.index') }}">
+            <span class="cz-handheld-toolbar-icon"><i class="czi-view-grid"></i></span>
+            <span class="cz-handheld-toolbar-label">{{ trans('master.Categories') }}</span>
+        </a>
+        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.store.index') }}">
+            <span class="cz-handheld-toolbar-icon"><i class="czi-bag"></i></span>
+            <span class="cz-handheld-toolbar-label">{{ trans('master.Stores') }}</span>
+        </a>
+        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.offer.index') }}">
+            <span class="cz-handheld-toolbar-icon"><i class="czi-loudspeaker"></i></span>
+            <span class="cz-handheld-toolbar-label">{{ trans('master.Offers') }}</span>
+        </a>
+        <a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html">
+              <span class="cz-handheld-toolbar-icon">
+                  <i class="czi-cart"></i>
+                  <span class="badge badge-primary badge-pill ml-1">4</span>
+              </span>
+            <span class="cz-handheld-toolbar-label">$265.00</span>
+        </a>
+        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.home') }}">
+            <span class="cz-handheld-toolbar-icon"><i class="czi-home"></i></span>
+            <span class="cz-handheld-toolbar-label">{{ trans('master.Home') }}</span>
+        </a>
 {{--        <a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse"--}}
 {{--           onclick="window.scrollTo(0, 0)">--}}
 {{--            <span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span>--}}
 {{--            <span class="cz-handheld-toolbar-label">Menu</span>--}}
 {{--        </a>--}}
-{{--        <a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html">--}}
-{{--              <span class="cz-handheld-toolbar-icon">--}}
-{{--                  <i class="czi-cart"></i>--}}
-{{--                  <span class="badge badge-primary badge-pill ml-1">4</span>--}}
-{{--              </span>--}}
-{{--            <span class="cz-handheld-toolbar-label">$265.00</span>--}}
-{{--        </a>--}}
-{{--    </div>--}}
-{{--</div>--}}
+    </div>
+</div>
 
 @include('@public._popups.add_to_cart')
 
@@ -248,6 +260,7 @@
 <script src="{{ url('assets_public/js/theme.min.js') }}"></script>
 
 @include('@public._scripts.add_to_cart')
+@include('@public._scripts.remove_from_cart')
 
 @yield('page_scripts')
 

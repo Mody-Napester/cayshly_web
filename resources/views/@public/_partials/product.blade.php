@@ -45,9 +45,13 @@
     </div>
 {{--    <div class="card-body card-body-hidden">--}}
     <div class="card-body pt-2 pb-4">
-        <button class="btn btn-primary btn-sm btn-block mb-2 add_to_cart" type="button" data-item="{{ $product->uuid }}">
-            <i class="czi-cart font-size-sm mr-1"></i>{{ trans('partials.Add_to_Cart') }}
-        </button>
+        <div class="btn-cart-status">
+            @if(check_product_in_the_cart($product))
+                @include('@public._partials.remove_from_cart_btn')
+            @else
+                @include('@public._partials.add_to_cart_btn')
+            @endif
+        </div>
 
 {{--        <div class="text-center">--}}
 {{--            <a class="nav-link-style font-size-ms" href="#quick-view-electro" data-toggle="modal"><i class="czi-eye align-middle mr-1"></i>Quick view</a>--}}

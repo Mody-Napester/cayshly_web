@@ -18,34 +18,7 @@ class CartPublicController extends Controller
      * Index cart.
      */
     public function details(){
-
-        if(auth()->check()){
-            $products = DB::table('carts')
-                ->join('products', 'carts.product_id', '=', 'products.id')
-                ->where('carts.user_id', auth()->user()->id);
-
-            $data['cart_products'] = $products->select('products.*')->get();
-            $data['cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
-            $data['cart_price_sum'] = $products->sum('products.price');
-        }else{
-            if(session()->has('carts')){
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                foreach (session('carts') as $product_uuid => $product_quantity){
-                    $product = Product::getOneBy('uuid', $product_uuid);
-                    $data['cart_products'][] = $product;
-                    $single_price = intval($product->price) * intval($product_quantity);
-                    $data['cart_price_sum'] += $single_price;
-                }
-                $data['cart_product_count'] = count(session('carts'));
-
-            }else{
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                $data['cart_product_count'] = 0;
-            }
-        }
-
+        $data = Cart::details();
         return view('@public.cart.details', $data);
     }
 
@@ -74,6 +47,8 @@ class CartPublicController extends Controller
                             'title'=> trans('messages.Added_to_cart'),
                             'text'=> trans('messages.This_item_has_been_added_to_your_cart')
                         ];
+
+                        $data['btn_view'] = view('@public._partials.remove_from_cart_btn', ['product' => $product])->render();
                     }else{
                         $data['message'] = [
                             'type'=>'danger',
@@ -101,6 +76,8 @@ class CartPublicController extends Controller
                                 'title'=> trans('messages.Added_to_cart'),
                                 'text'=> trans('messages.This_item_has_been_added_to_your_cart')
                             ];
+
+                            $data['btn_view'] = view('@public._partials.remove_from_cart_btn', ['product' => $product])->render();
                         }else{
                             $data['message'] = [
                                 'type'=>'danger',
@@ -194,45 +171,129 @@ class CartPublicController extends Controller
     /**
      * remove product from cart.
      */
-    public function remove($product_uuid){
+    public function remove(Request $request){
+        $item = ($request->has('item'))? $request->item : null;
 
-        if(auth()->check()){
-            $product = Product::getOneBy('uuid', $product_uuid);
-            if($product){
-                $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
-                if($cart){
-                    $cart->delete();
+        if(!is_null($item)){
+            if(auth()->check()){
+                $product = Product::getOneBy('uuid', $item);
 
-                    $data['message'] = [
-                        'type'=>'success',
-                        'text'=> trans('messages.Product_deleted')
-                    ];
+                if($product){
+                    $cart = Cart::where('user_id', auth()->user()->id)->where('product_id', $product->id)->first();
+                    if($cart){
+                        $cart->delete();
+
+                        $data['message'] = [
+                            'type'=>'success',
+                            'title'=> trans('messages.Removed_from_cart'),
+                            'text'=> trans('messages.Product_deleted')
+                        ];
+
+                        $data['btn_view'] = view('@public._partials.add_to_cart_btn', ['product' => $product])->render();
+                    }else{
+                        $data['message'] = [
+                            'type'=>'danger',
+                            'title'=> trans('messages.Not_Removed_from_cart'),
+                            'text'=> trans('messages.Sorry_item_cant_be_deleted')
+                        ];
+                    }
                 }else{
                     $data['message'] = [
                         'type'=>'danger',
+                        'title'=> trans('messages.Not_Removed_from_cart'),
+                        'text'=> trans('messages.Sorry_item_not_fount')
+                    ];
+                }
+
+                $data['cart_price_sum'] = DB::table('carts')
+                    ->join('products', 'carts.product_id', '=', 'products.id')
+                    ->where('carts.user_id', auth()->user()->id)->sum('products.price');
+
+                $data['carts'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
+            }else{
+                if(session()->has('carts')){
+                    session()->pull('carts.' . $item);
+
+                    $data['message'] = [
+                        'type'=>'success',
+                        'title'=> trans('messages.Removed_from_cart'),
+                        'text'=> trans('messages.Product_deleted')
+                    ];
+
+                    $product = collect(new Product());
+                    $product->uuid = $item;
+
+                    $data['btn_view'] = view('@public._partials.add_to_cart_btn', ['product' => $product])->render();
+                }else{
+                    $data['message'] = [
+                        'type'=>'danger',
+                        'title'=> trans('messages.Not_Removed_from_cart'),
                         'text'=> trans('messages.Sorry_item_cant_be_deleted')
                     ];
                 }
-            }else{
-                $data['message'] = [
-                    'type'=>'danger',
-                    'text'=> trans('messages.Sorry_item_not_fount')
-                ];
+
+                $data['cart_price_sum'] = 0;
+                foreach (session('carts') as $product_uuid => $product_quantity){
+                    $product = Product::getOneBy('uuid', $product_uuid);
+                    $single_price = intval($product->price) * intval($product_quantity);
+                    $data['cart_price_sum'] += $single_price;
+                }
+
+                $data['carts'] = count(session('carts'));
+                $data['cart'] = session('carts');
             }
         }else{
-            if(session()->has('carts')){
-                session()->pull('carts.' . $product_uuid);
+            $data['message'] = [
+                'type'=>'danger',
+                'title'=> trans('messages.Not_Added_to_cart'),
+                'text'=> trans('messages.Please_choose_item')
+            ];
+        }
+
+        return response($data);
+    }
+
+    /**
+     * update products in cart.
+     */
+    public function update(Request $request){
+        if (count($request->quantity) > 0){
+            if(auth()->check()){
+                $carts = Cart::where('user_id', auth()->user()->id)->pluck('id')->toArray();
+                Cart::destroy($carts);
+
+                foreach ($request->quantity as $product_uuid => $quantity){
+                    $product = Product::getOneBy('uuid', $product_uuid);
+                    if($product){
+                        $new_cart = Cart::create([
+                            'user_id' => auth()->user()->id,
+                            'product_id' => $product->id,
+                            'quantity' => $quantity,
+                        ]);
+                    }
+                }
 
                 $data['message'] = [
                     'type'=>'success',
-                    'text'=> trans('messages.Product_deleted')
+                    'text'=> trans('messages.Cart_updated_successfully')
                 ];
             }else{
+                session()->forget('carts');
+
+                foreach ($request->quantity as $product_uuid => $quantity){
+                    session()->push('carts.'.$product_uuid, $quantity);
+                }
+
                 $data['message'] = [
-                    'type'=>'danger',
-                    'text'=> trans('messages.Sorry_item_cant_be_deleted')
+                    'type'=>'success',
+                    'text'=> trans('messages.Cart_updated_successfully')
                 ];
             }
+        }else{
+            $data['message'] = [
+                'type'=>'danger',
+                'text'=> trans('messages.Sorry_no_item_in_the_cart')
+            ];
         }
 
         return back()->with('message', $data['message']);
@@ -242,33 +303,7 @@ class CartPublicController extends Controller
      * cart user details.
      */
     public function user_details(){
-
-        if(auth()->check()){
-            $products = DB::table('carts')
-                ->join('products', 'carts.product_id', '=', 'products.id')
-                ->where('carts.user_id', auth()->user()->id);
-
-            $data['cart_products'] = $products->select('products.*', 'quantity')->get();
-            $data['cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
-            $data['cart_price_sum'] = $products->sum('products.price');
-        }else{
-            if(session()->has('carts')){
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                foreach (session('carts') as $product_uuid => $product_quantity){
-                    $product = Product::getOneBy('uuid', $product_uuid);
-                    $product->quantity = $product_quantity[0];
-                    $data['cart_products'][] = $product;
-                    $single_price = intval($product->price) * intval($product_quantity);
-                    $data['cart_price_sum'] += $single_price;
-                }
-                $data['cart_product_count'] = count(session('carts'));
-            }else{
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                $data['cart_product_count'] = 0;
-            }
-        }
+        $data = Cart::details();
 
         if ($data['cart_product_count'] == 0){
             return redirect('/');
@@ -294,6 +329,8 @@ class CartPublicController extends Controller
      */
     public function payment(Request $request){
 
+        $data = Cart::details();
+
         if(!session()->has('order')){
             return redirect('/');
         }else{
@@ -310,33 +347,6 @@ class CartPublicController extends Controller
             $data['cart_payment'] = session('order')[0][1]['payment'];
         }
 
-        if(auth()->check()){
-            $products = DB::table('carts')
-                ->join('products', 'carts.product_id', '=', 'products.id')
-                ->where('carts.user_id', auth()->user()->id);
-
-            $data['cart_products'] = $products->select('products.*', 'quantity')->get();
-            $data['cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
-            $data['cart_price_sum'] = $products->sum('products.price');
-        }else{
-            if(session()->has('carts')){
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                foreach (session('carts') as $product_uuid => $product_quantity){
-                    $product = Product::getOneBy('uuid', $product_uuid);
-                    $product->quantity = $product_quantity[0];
-                    $data['cart_products'][] = $product;
-                    $single_price = intval($product->price) * intval($product_quantity);
-                    $data['cart_price_sum'] += $single_price;
-                }
-                $data['cart_product_count'] = count(session('carts'));
-            }else{
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                $data['cart_product_count'] = 0;
-            }
-        }
-
         return view('@public.cart.payment', $data);
     }
 
@@ -345,38 +355,13 @@ class CartPublicController extends Controller
      */
     public function review(){
 
+        $data = Cart::details();
+
         if(!session()->has('order')){
             return redirect('/');
         }else{
             $data['cart_address'] = session('order')[0][0]['address'];
             $data['cart_payment'] = session('order')[0][1]['payment'];
-        }
-
-        if(auth()->check()){
-            $products = DB::table('carts')
-                ->join('products', 'carts.product_id', '=', 'products.id')
-                ->where('carts.user_id', auth()->user()->id);
-
-            $data['cart_products'] = $products->select('products.*', 'quantity')->get();
-            $data['cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
-            $data['cart_price_sum'] = $products->sum('products.price');
-        }else{
-            if(session()->has('carts')){
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                foreach (session('carts') as $product_uuid => $product_quantity){
-                    $product = Product::getOneBy('uuid', $product_uuid);
-                    $product->quantity = $product_quantity[0];
-                    $data['cart_products'][] = $product;
-                    $single_price = intval($product->price) * intval($product_quantity);
-                    $data['cart_price_sum'] += $single_price;
-                }
-                $data['cart_product_count'] = count(session('carts'));
-            }else{
-                $data['cart_products'] = [];
-                $data['cart_price_sum'] = 0;
-                $data['cart_product_count'] = 0;
-            }
         }
 
         // Cart Full Details

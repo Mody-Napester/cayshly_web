@@ -21,8 +21,14 @@
     width: 70px;
     height: 70px;
     animation: spin 1s linear infinite;
-    margin: 18% auto auto auto;
-    /*transform: translateY(-50%);*/
+    margin: 20% auto auto auto;
+}
+
+@media all and (max-width: 700px) and (min-width: 200px){
+    .loader {
+        margin: 50% auto auto auto;
+        transform: translateY(-50%);
+    }
 }
 
 @keyframes spin {

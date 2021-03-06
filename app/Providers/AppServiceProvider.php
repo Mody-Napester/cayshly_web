@@ -39,30 +39,11 @@ class AppServiceProvider extends ServiceProvider
             $data['socials'] = Social::all();
             $data['pages'] = Page::all();
 
-            if(auth()->check()){
-                $products = DB::table('carts')
-                    ->join('products', 'carts.product_id', '=', 'products.id')
-                    ->where('carts.user_id', auth()->user()->id);
-
-                $data['header_cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
-                $data['header_cart_price_sum'] = $products->sum('products.price');
-            }else{
-                if(session()->has('carts')){
-                    $data['header_cart_price_sum'] = 0;
-                    foreach (session('carts') as $product_uuid => $product_quantity){
-                        $product = Product::getOneBy('uuid', $product_uuid);
-                        $single_price = intval($product->price) * intval($product_quantity);
-                        $data['header_cart_price_sum'] += $single_price;
-                    }
-                    $data['header_cart_product_count'] = count(session('carts'));
-                }else{
-                    $data['header_cart_price_sum'] = 0;
-                    $data['header_cart_product_count'] = 0;
-                }
-            }
-
-//            session()->flush();
-
+            $cart_details = Cart::details();
+            $data['header_cart_products'] = $cart_details['cart_products'];
+            $data['header_cart_product_count'] = $cart_details['cart_product_count'];
+            $data['header_cart_price_sum'] = $cart_details['cart_price_sum'];
+            
             $view->with($data);
         });
     }
