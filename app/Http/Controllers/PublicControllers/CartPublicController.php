@@ -76,8 +76,6 @@ class CartPublicController extends Controller
                                 'title'=> trans('messages.Added_to_cart'),
                                 'text'=> trans('messages.This_item_has_been_added_to_your_cart')
                             ];
-
-                            $data['btn_view'] = view('@public._partials.remove_from_cart_btn', ['product' => $product])->render();
                         }else{
                             $data['message'] = [
                                 'type'=>'danger',
@@ -94,6 +92,8 @@ class CartPublicController extends Controller
                             'text'=> trans('messages.This_item_has_been_added_to_your_cart')
                         ];
                     }
+
+                    $data['btn_view'] = view('@public._partials.remove_from_cart_btn', ['product' => $product])->render();
 
                     $data['cart_price_sum'] = 0;
                     foreach (session('carts') as $product_uuid => $product_quantity){

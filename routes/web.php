@@ -41,6 +41,7 @@ use \App\Http\Controllers\PublicControllers\PagePublicController;
 use \App\Http\Controllers\PublicControllers\CartPublicController;
 use \App\Http\Controllers\PublicControllers\AddressPublicController;
 use \App\Http\Controllers\PublicControllers\OrderPublicController;
+use \App\Http\Controllers\PublicControllers\SearchPublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -75,7 +76,8 @@ Route::get('cart/empty_cart', [CartPublicController::class, 'empty_cart'])->name
 Route::get('cart/details', [CartPublicController::class, 'details'])->name('public.cart.details');
 Route::get('cart/user/details', [CartPublicController::class, 'user_details'])->name('public.cart.user.details');
 
-// Order Preprocess
+// Search
+Route::get('search/{product}', [SearchPublicController::class, 'index'])->name('public.search.index');
 
 Route::group([
     'middleware' => 'auth',

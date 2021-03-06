@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
             $data['header_cart_products'] = $cart_details['cart_products'];
             $data['header_cart_product_count'] = $cart_details['cart_product_count'];
             $data['header_cart_price_sum'] = $cart_details['cart_price_sum'];
-            
+
             $view->with($data);
         });
     }

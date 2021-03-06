@@ -77,35 +77,29 @@
     <div class="navbar-sticky bg-light">
         <div class="navbar navbar-expand-lg navbar-light">
             <div class="container">
-                <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 7rem;">
-                    <img style="width: 130px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
-                </a>
-                <a class="navbar-brand d-sm-none mr-2 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 4.625rem;">
-                    <img style="width: 110px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
-                </a>
+                    <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 7rem;">
+                        <img style="width: 130px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
+                    </a>
+                    <a class="navbar-brand d-sm-none mr-2 fire-loader-anchor" href="{{ route('public.home') }}" style="min-width: 4.625rem;">
+                        <img style="width: 110px;" src="{{ url('assets_public/img/logo-dark.png') }}" alt="{{ trans('master.Cayshly') }}"/>
+                    </a>
 
-                <!-- Search Desktop -->
-                <div class="input-group-overlay d-none d-lg-inline-flex mx-4">
-                    <div class="input-group-prepend-overlay">
-                        <span class="input-group-text"><i class="czi-search"></i></span>
+                    <!-- Search Desktop -->
+                    <div class="input-group-overlay d-none d-lg-inline-flex mx-4">
+                        <div class="input-group-prepend-overlay">
+                            <span class="input-group-text"><i class="czi-search"></i></span>
+                        </div>
+                        <input class="form-control prepended-form-control appended-form-control search-products-d-input" type="text"placeholder="{{ trans('master.Search_for_products') }}">
+                        <button class="input-group-append-overlay btn btn-primary search-products-d-btn" style="border-radius: 0 5px 5px 0;padding-top: 17px;"><i class="czi-play"></i></button>
                     </div>
-                    <input class="form-control prepended-form-control appended-form-control" type="text" placeholder="{{ trans('master.Search_for_products') }}">
-                    <div class="input-group-append-overlay">
-                        <select class="custom-select">
-                            <option value="all">{{ trans('master.All_categories') }}</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <!-- Toolbar-->
-                <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
+                    <!-- Toolbar-->
+                    <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
 
                     <!-- Search Mobile -->
                     <div class="input-group-overlay d-lg-none my-3">
                         <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
-                        <input class="form-control prepended-form-control" type="text" placeholder="{{ trans('master.Search_for_products') }}">
+                        <input class="form-control prepended-form-control search-products-m-input" type="text" placeholder="{{ trans('master.Search') }}">
+                        <button class="input-group-append-overlay btn btn-primary search-products-m-btn" style="border-radius: 0 5px 5px 0;padding-top: 17px;"><i class="czi-search"></i></button>
                     </div>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -186,6 +180,8 @@
 {{--                        </div>--}}
                     </div>
                 </div>
+
+
             </div>
         </div>
         <div class="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">

@@ -259,6 +259,7 @@
 <!-- Main theme script-->
 <script src="{{ url('assets_public/js/theme.min.js') }}"></script>
 
+@include('@public._scripts.search')
 @include('@public._scripts.add_to_cart')
 @include('@public._scripts.remove_from_cart')
 
