@@ -5,7 +5,7 @@
 
 @foreach($offers as $offer)
     <section class="container mt-4 mb-grid-gutter">
-        <div class="row">
+        <div class="row rtl-ar">
             @include('@public._partials.offer')
         </div>
     </section>

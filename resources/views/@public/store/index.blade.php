@@ -25,10 +25,10 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="bg-light box-shadow-lg rounded-lg pr-2 pl-2">
-            <div class="row pt-3 mx-n2">
-            @foreach($stores as $store)
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
+        <div class="row pt-3 mx-n2 rtl-ar">
+        @foreach($stores as $store)
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
+                <div class="card card-body">
                     <div class="card product-card-alt">
                         <div class="product-thumb" style="height: 180px;overflow: hidden;">
                             <div class="product-card-actions">
@@ -52,7 +52,7 @@
                             </div>
                             <h3 class="product-title font-size-sm mb-2">
                                 <a class=" fire-loader-anchor" href="{{ route('public.store.show', $store->slug) }}">{{ $store->name }}</a>
-{{--                                <a href="{{ route('public.store.show', $store->slug) }}">{{ $store->name }}</a>--}}
+    {{--                                <a href="{{ route('public.store.show', $store->slug) }}">{{ $store->name }}</a>--}}
                             </h3>
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="font-size-sm mr-2">
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
             </div>
+        @endforeach
         </div>
     </div>
 

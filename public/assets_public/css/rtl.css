@@ -9,3 +9,16 @@ body{
 .cz-sidebar-static .list-unstyled{
     padding-right: 0;
 }
+
+.rtl-mrl-3{
+    margin-left: 3px;
+}
+
+.rtl-ar{
+    direction: rtl;
+    text-align: right;
+}
+.navbar-tool-text{
+    padding-right: .875rem;
+    padding-left: 0 !important;
+}

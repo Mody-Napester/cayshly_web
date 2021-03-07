@@ -288,7 +288,7 @@
     </div>
     <!-- Product description-->
     <div class="container pt-lg-3 pb-4 pb-sm-5">
-        <div class="row justify-content-center">
+        <div class="row rtl-ar justify-content-center">
             <div class="col-lg-8">
                 <h2 class="h3 pb-2">{{ trans('products.Description') }}</h2>
                 <p>{!! getFromJson($product->details , lang()) !!}</p>

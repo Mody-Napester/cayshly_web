@@ -26,7 +26,7 @@
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
         <div class="">
-            <div class="row pt-3 mx-n2">
+            <div class="row pt-3 mx-n2 rtl-ar">
                 @foreach($categories as $category)
                 <div class="col-md-4 col-sm-6 mb-3">
                     <div class="card border-0">
@@ -35,10 +35,10 @@
                         </a>
                         <div class="card-body">
                             <h2 class="h5">{{ getFromJson($category->name , lang()) }}</h2>
-                            <ul class="list-unstyled font-size-sm mb-0">
+                            <ul class="list-unstyled font-size-sm m-0 p-0">
                                 @foreach(\App\Models\Category::getAllBy('parent_id', $category->id) as $child)
                                 <li class="d-flex align-items-center justify-content-between">
-                                    <a class="nav-link-style fire-loader-anchor" href="{{ route('public.category.product.index', $child->slug) }}"><i class="czi-arrow-right-circle mr-2"></i>{{ getFromJson($child->name , lang()) }}</a>
+                                    <a class="nav-link-style fire-loader-anchor" href="{{ route('public.category.product.index', $child->slug) }}"><i class="czi-arrow-right-circle rtl-mrl-3"></i>{{ getFromJson($child->name , lang()) }}</a>
                                     <span class="font-size-ms text-muted">
                                         {{ $child->products()->count() }} {{ trans('category.Products') }}
                                     </span>

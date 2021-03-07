@@ -68,6 +68,25 @@
                             </div>
 
                             <div class="input-group-overlay form-group">
+                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-time"></i></span></div>
+                                <input class="form-control prepended-form-control" @error('dob') is-invalid @enderror id="dob" name="dob" type="date" value="{{ old('dob') }}" placeholder="{{ trans('register.dob') }}" required>
+                                @error('dob')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="input-group-overlay form-group">
+                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-user-circle"></i></span></div>
+                                <select class="form-control prepended-form-control" @error('gender') is-invalid @enderror id="gender" name="gender">
+                                    <option value="1">{{ trans('register.male') }}</option>
+                                    <option value="2">{{ trans('register.female') }}</option>
+                                </select>
+                                @error('gender')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="input-group-overlay form-group">
                                 <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
                                 <div class="password-toggle">
                                     <input class="form-control prepended-form-control" @error('password') is-invalid @enderror id="password" name="password" type="password" placeholder="{{ trans('register.Password') }}" required autocomplete="new-password">

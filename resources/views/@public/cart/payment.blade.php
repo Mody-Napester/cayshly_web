@@ -22,7 +22,7 @@
     </div>
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="row">
+        <div class="row rtl-ar">
             <section class="col-lg-8">
                 <!-- Steps-->
                 <div class="steps steps-light pt-2 pb-3 mb-5">

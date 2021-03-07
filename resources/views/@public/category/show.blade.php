@@ -26,10 +26,10 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="bg-light box-shadow-lg rounded-lg pr-2 pl-2">
-            <div class="row pt-3 mx-n2">
-                @foreach($categories as $category)
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
+        <div class="row rtl-ar">
+            @foreach($categories as $category)
+                <div class="col-lg-3 col-md-4 col-sm-6 mb-grid-gutter">
+                    <div class="card card-body">
                         <div class="card product-card-alt">
                             <div class="product-thumb" style="height: 180px;overflow: hidden;">
                                 <div class="product-card-actions">
@@ -45,8 +45,8 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 

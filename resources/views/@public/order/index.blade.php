@@ -23,7 +23,7 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-3">
-        <div class="row">
+        <div class="row rtl-ar">
             <!-- Sidebar-->
             @include('@public.user._partials.sidebar', ['page' => 'order'])
 

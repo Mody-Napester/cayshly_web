@@ -5,7 +5,7 @@
     </div>
 
     <!-- Grid-->
-    <div class="row pt-2 mx-n2">
+    <div class="row rtl-ar pt-2 mx-n2">
         @foreach($trending_products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 mb-3 px-2">
                 @include('@public._partials.product')

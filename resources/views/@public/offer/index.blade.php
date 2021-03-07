@@ -25,7 +25,7 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="row">
+        <div class="row rtl-ar">
             @foreach($offers as $offer)
                 @include('@public._partials.offer')
             @endforeach

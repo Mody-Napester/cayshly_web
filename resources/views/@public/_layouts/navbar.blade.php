@@ -112,18 +112,19 @@
                     </a>
 
                     @if(auth()->check())
-                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('public.user.show', [auth()->user()->name]) }}">
-                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
+                        <a class="rtl-ar navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('public.user.show', [auth()->user()->name]) }}">
+                            <div class="navbar-tool-icon-box bg-secondary "><i class="navbar-tool-icon czi-user"></i></div>
                             <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ auth()->user()->name }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @else
-                        <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('login') }}">
-                            <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
+                        <a class="rtl-ar navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('login') }}">
+                            <div class="navbar-tool-icon-box bg-secondary "><i class="navbar-tool-icon czi-user"></i></div>
                             <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ trans('master.Sign_in') }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @endif
 
-                    <div class="navbar-tool dropdown ml-3 d-md-inline-flex d-none">
+{{--                    <div class="rtl-ar navbar-tool dropdown rtl-mrl-3 d-md-inline-flex d-none">--}}
+                    <div class="rtl-ar navbar-tool rtl-mrl-3 d-md-inline-flex d-none">
                         <a class="navbar-tool-icon-box bg-secondary dropdown-toggle fire-loader-anchor" href="{{ route('public.cart.details') }}">
                             <span class="navbar-tool-label cart-count">{{ $header_cart_product_count }}</span>
                             <i class="navbar-tool-icon czi-cart"></i>
@@ -224,7 +225,7 @@
                         </li>
                     </ul>
                     <!-- Primary menu-->
-                    <ul class="navbar-nav">
+                    <ul class="rtl-ar navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link fire-loader-anchor" href="{{ route('public.home') }}"><i style="margin-right: 5px;" class="czi-home"></i> {{ trans('master.Home') }}</a>
                         </li>
@@ -249,9 +250,9 @@
                             <a class="nav-link fire-loader-anchor" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link fire-loader-anchor" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> {{ trans('master.By_Free') }}</a>
-                        </li>
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link fire-loader-anchor" href="{{ route('public.product.free.index') }}"><i style="margin-right: 5px;" class="czi-gift"></i> {{ trans('master.By_Free') }}</a>--}}
+{{--                        </li>--}}
                     </ul>
                 </div>
             </div>

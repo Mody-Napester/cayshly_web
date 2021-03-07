@@ -27,6 +27,7 @@
     <link rel="stylesheet" media="all" href="{{ url('assets_public/css/alerts.css') }}"/>
     <link rel="stylesheet" media="all" href="{{ url('assets_public/css/loader.css') }}"/>
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
+    <link rel="stylesheet" media="all" href="{{ url('assets_public/css/ltr.css') }}"/>
 
     <style>
         .my-addresses{
@@ -167,8 +168,8 @@
 
             <div class="row pb-2">
                 <div class="col-md-6 text-center text-md-left mb-4">
-                    <div class="text-nowrap mb-4">
-                        <a class="d-inline-block align-middle mt-n1 mr-3" href="#">
+                    <div class="text-nowrap mb-4 rtl-ar">
+                        <a class="d-inline-block align-middle mt-n1 rtl-mrl-3" href="#">
                             <img class="d-block" width="117" src="{{ url('assets_public/img/footer-logo-light.png') }}" alt="{{ config('app.name') }}"/>
                         </a>
                     </div>
@@ -215,12 +216,12 @@
             <span class="cz-handheld-toolbar-icon"><i class="czi-loudspeaker"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Offers') }}</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html">
+        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.cart.details') }}">
               <span class="cz-handheld-toolbar-icon">
                   <i class="czi-cart"></i>
-                  <span class="badge badge-primary badge-pill ml-1">4</span>
+                  <span class="badge badge-primary badge-pill ml-1 cart-count">{{ $header_cart_product_count }}</span>
               </span>
-            <span class="cz-handheld-toolbar-label">$265.00</span>
+            <span class="cz-handheld-toolbar-label"><span class="cart-price">{{ $header_cart_price_sum }}</span> EGP</span>
         </a>
         <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.home') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-home"></i></span>

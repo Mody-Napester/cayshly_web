@@ -24,7 +24,7 @@
     </div>
 
     <section class="container pb-5 mb-2 mb-md-4">
-        <div class="row pt-sm-0">
+        <div class="row rtl-ar">
             @foreach($brands as $brand)
                 <div class="col-md-3 col-sm-6 mb-grid-gutter">
                     <a class="card product-card h-100 border-0 box-shadow pb-2 fire-loader-anchor" href="{{ route('public.brand.product.index', $brand->slug) }}">

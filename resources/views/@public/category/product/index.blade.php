@@ -27,7 +27,7 @@
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
         <div class="">
-            <div class="row pt-3 mx-n2">
+            <div class="row pt-3 mx-n2 rtl-ar">
                 @foreach($products as $product)
                     <div class="col-md-3 col-sm-3 mb-4">
                         @include('@public._partials.product')
