@@ -26,6 +26,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string('deliver_date')->nullable();
             $table->integer('quantity_delivered')->default(0);
             $table->text('comments')->nullable();
+            $table->integer('updated_by')->nullable()->unsigned();
             $table->timestamps();
         });
     }

@@ -41,9 +41,10 @@ class RegisteredUserController extends Controller
             'password' => 'required|string|confirmed|min:8',
         ]);
 
+        $parent_id = rand(1, User::count());
         Auth::login($user = User::create([
             'uuid' => Uuid::generate()->string,
-            'parent_id' => 1,
+            'parent_id' => $parent_id,
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,

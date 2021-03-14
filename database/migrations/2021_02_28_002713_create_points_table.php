@@ -18,7 +18,7 @@ class CreatePointsTable extends Migration
             $table->uuid('uuid');
             $table->integer('user_id');
             $table->float('amount');
-            $table->integer('reason_lookup_id')->nullable();
+            $table->integer('lookup_point_reason_id')->nullable();
             $table->integer('product_id')->nullable();
             $table->timestamps();
         });

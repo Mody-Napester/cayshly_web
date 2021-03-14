@@ -21,7 +21,7 @@ class LookupController extends Controller
             return redirect('/');
         }
 
-        $data['resources'] = Lookup::paginate(config('vars.pagination'));
+        $data['resources'] = Lookup::with('child')->where('parent_id', 0)->get();
         return view('@dashboard.lookup.index', $data);
     }
 

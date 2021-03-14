@@ -77,4 +77,12 @@ class Lookup extends Model
     {
         return $this->belongsTo(User::class, 'updated_by', 'id');
     }
+
+    /**
+     *  Child Relation
+     */
+    public function child()
+    {
+        return $this->hasMany(Lookup::class, 'parent_id', 'id');
+    }
 }

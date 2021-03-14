@@ -140,6 +140,7 @@
 </div>
 
 @include('@dashboard._modals.confirm_delete')
+@yield('modals')
 
 <script src="{{ url('assets_dashboard/vendor/jquery/jquery-3.5.1.min.js') }}" crossorigin="anonymous"></script>
 <script src="{{ url('assets_dashboard/vendor/bootstrap_4.5.3/dist/js/bootstrap.bundle.min.js') }}" crossorigin="anonymous"></script>

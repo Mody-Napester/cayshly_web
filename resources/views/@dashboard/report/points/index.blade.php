@@ -1,6 +1,6 @@
 @extends('@dashboard._layouts.master')
 
-@section('page_title') Orders @endsection
+@section('page_title') Points @endsection
 
 @section('page_contents')
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -10,9 +10,9 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Orders ({{ $resources->count() }})
+                            Points ({{ $resources->sum() }})
                         </h1>
-                        <div class="page-header-subtitle">All Application Required Data</div>
+                        <div class="page-header-subtitle">All Points Data</div>
                     </div>
                     <div class="col-12 col-xl-auto mt-4">
 
@@ -32,30 +32,24 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Number</th>
-                            <th>Created by</th>
-                            <th>Address</th>
-                            <th>Comments</th>
-                            <th>Payment Method</th>
-                            <th>Since</th>
+                            <th>User</th>
+                            <th>Amount</th>
+                            <th>Reason</th>
+                            <th>Product</th>
                             <th>Created at</th>
-                            <th>View</th>
+                            <th>Created at</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
-                                <td>{{ $resource->order_number }}</td>
-                                <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
-                                <td>{{ $resource->address_name }}</td>
-                                <td>{{ $resource->comments }}</td>
-                                <td> COD {{-- {{ getFromJson($resource->payment_method->name , lang()) }} --}} </td>
+                                <td>{{ $resource->user_id }}</td>
+                                <td>{{ $resource->amount }}</td>
+                                <td>{{ $resource->reason_lookup_id }}</td>
+                                <td>{{ $resource->product_id }}</td>
                                 <td>{{ human_date($resource->created_at) }}</td>
-                                <td>{{ custom_date($resource->created_at) }}</td>
-                                <td>
-                                    <a href="{{ route('dashboard.order.details', $resource->uuid) }}" class="badge badge-warning">Details</a>
-                                </td>
+                                <td>{{ $resource->created_at }}</td>
                             </tr>
                         @endforeach
                         </tbody>

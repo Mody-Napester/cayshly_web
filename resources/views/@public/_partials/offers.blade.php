@@ -3,10 +3,10 @@
     <h2 class="h3 mb-0 pt-3 mr-2 text-center">{{ trans('partials.Best_Offers') }}</h2>
 </div>
 
-@foreach($offers as $offer)
-    <section class="container mt-4 mb-grid-gutter">
-        <div class="row rtl-ar">
+<section class="container mt-4 mb-grid-gutter">
+    <div class="row rtl-ar">
+        @foreach($offers as $offer)
             @include('@public._partials.offer')
-        </div>
-    </section>
-@endforeach
+        @endforeach
+    </div>
+</section>

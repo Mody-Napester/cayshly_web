@@ -27,6 +27,7 @@ use \App\Http\Controllers\DashboardControllers\RolesController;
 use \App\Http\Controllers\DashboardControllers\UserController;
 use \App\Http\Controllers\DashboardControllers\SliderController;
 use \App\Http\Controllers\DashboardControllers\SocialController;
+use \App\Http\Controllers\DashboardControllers\ReportController;
 
 use \App\Http\Controllers\LanguagesController;
 
@@ -110,6 +111,9 @@ Route::group([
     'middleware' => 'auth',
 ], function () {
     Route::get('/', [DashboardController::class, 'home'])->name('dashboard.home');
+    Route::get('reports/points', [ReportController::class, 'points'])->name('dashboard.point.index');
+    Route::get('product/export', [ProductController::class, 'export'])->name('product.export');
+    Route::post('product/import', [ProductController::class, 'import'])->name('product.import');
     Route::resource('lookup', LookupController::class);
     Route::resource('script', ScriptController::class);
     Route::resource('script', ScriptController::class);
@@ -132,6 +136,7 @@ Route::group([
     Route::resource('social', SocialController::class);
     Route::get('orders', [OrderController::class, 'index'])->name('dashboard.order.index');
     Route::get('orders/{order}/details', [OrderController::class, 'details'])->name('dashboard.order.details');
+    Route::post('update-order-details', [OrderController::class, 'update_details'])->name('dashboard.order.details.update');
     Route::get('subscriber', [SubscriberController::class, 'index'])->name('dashboard.subscriber.index');
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');
     Route::resource('user', UserController::class);

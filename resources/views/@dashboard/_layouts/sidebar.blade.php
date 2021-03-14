@@ -138,8 +138,8 @@
                 </a>
                 <div class="collapse" id="collapseReports" data-parent="#accordionSidenav">
                 <nav class="sidenav-menu-nested nav accordion" id="accordionSidenavPages">
+                    <a class="nav-link" href="{{ route('dashboard.point.index') }}">Points</a>
 {{--                    @if(check_authority('index.points'))--}}
-{{--                        <a class="nav-link" href="{{ route('dashboard.points.index') }}">Points</a>--}}
 {{--                    @endif--}}
                 </nav>
             </div>

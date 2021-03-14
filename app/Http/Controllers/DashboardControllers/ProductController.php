@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\DashboardControllers;
 
+use App\Events\ImportProductEvent;
+use App\Exports\ProductExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ProductImport;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Lookup;
@@ -14,9 +17,90 @@ use DB;
 use Illuminate\Support\Str;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
+    /**
+     * Import Excel Sheet For Products.
+     */
+    public function import(Request $request){
+        // Check Authority
+        if (!check_authority('index.product')){
+            return redirect('/');
+        }
+
+        if ($request->hasFile('file')) {
+
+            // validate incoming request
+            $request->validate([
+                'file' => 'required|file|mimes:xls,xlsx,csv|max:10240', //max 10Mb
+            ]);
+
+            if ($request->file('file')->isValid()) {
+                // Upload files
+                $extention = strtolower($request->file('file')->getClientOriginalExtension());
+                $validExtentions = ['xls','xlsx','csv'];
+
+                if (in_array($extention, $validExtentions)) {
+
+                    $filename = 'products-' . time() . '.' .$extention;
+                    $destinationPath = get_path('assets_dashboard/files/products');
+                    $upload = $request->file('file')->move($destinationPath, $filename);
+
+                    $brand_id = ($brand = Brand::getOneBy('uuid', $request->brand_id))? $brand->id : 0;
+                    $store_id = ($store = Store::getOneBy('uuid', $request->store_id))? $store->id : 0;
+                    $lookup_condition_id = ($condition = Lookup::getOneBy('uuid', $request->lookup_condition_id))? $condition->id : 0;
+
+                    $data['filepath'] = $destinationPath . '/' . $filename;
+                    $data['brand_id'] = $brand_id;
+                    $data['store_id'] = $store_id;
+                    $data['lookup_condition_id'] = $lookup_condition_id;
+                    $data['category'] = ($request->has('category'))? $request->input('category') : [] ;
+
+                    if ($upload) {
+                        // File Uploaded
+                        $message = 'Imported Successfully With No Duplication';
+
+                        event(new ImportProductEvent($data));
+
+                        return redirect(route('product.index'))->with('message', [
+                            'type' => 'success',
+                            'text' => $message
+                        ]);
+                    }else{
+                        // Error Uploading
+                        $message = 'Error Uploading';
+                    }
+
+                }else{
+                    // File not valid
+                    $message = 'File not valid';
+                }
+            }
+        }else{
+            $message = 'Please select an excel file';
+        }
+
+        return back()->with('message', [
+            'type' => 'error',
+            'text' => $message
+        ]);
+    }
+
+    /**
+     * Export Excel Sheet For Products.
+     */
+    public function export(){
+        // Check Authority
+        if (!check_authority('index.product')){
+            return redirect('/');
+        }
+
+        $filename = 'products-' . date('d-m-Y') . '-' . time() . '.xlsx';
+        return Excel::download(new ProductExport(), $filename);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,6 +113,11 @@ class ProductController extends Controller
         }
 
         $data['resources'] = Product::paginate(config('vars.pagination'));
+        $data['brands'] = Brand::all();
+        $data['categories'] = Category::where('parent_id', '<>' ,0)->get();
+        $data['stores'] = Store::all();
+        $data['conditions'] = lookups('condition');
+
         return view('@dashboard.product.index', $data);
     }
 

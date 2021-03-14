@@ -27,6 +27,7 @@ class OrderDetail extends Model
         'deliver_date',
         'quantity_delivered',
         'comments',
+        'updated_by',
     ];
 
     /**
@@ -71,6 +72,14 @@ class OrderDetail extends Model
     public static function getAllBy($field, $value)
     {
         return self::where($field, $value)->get();
+    }
+
+    /**
+     *  Updated By Relation
+     */
+    public function updated_by_user()
+    {
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
     /**

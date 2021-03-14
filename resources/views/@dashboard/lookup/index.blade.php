@@ -32,7 +32,7 @@
             <div class="card-header">All Lookups</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-sm table-bordered table-hover" id="dataTable-lookup" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -50,7 +50,7 @@
                         </thead>
                         <tbody>
                         @foreach($resources as $resource)
-                            <tr>
+                            <tr style="@if($resource->parent_id == 0) background-color:#eeeeee; @endif">
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->parent_id }}</td>
                                 <td>{{ $resource->key }}</td>
@@ -78,12 +78,55 @@
                                     <a href="{{ route('lookup.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
                                 </td>
                             </tr>
+                            @foreach($resource->child as $child)
+                                <tr>
+                                    <td>{{ $child->id }}</td>
+                                    <td>{{ $child->parent_id }}</td>
+                                    <td>{{ $child->key }}</td>
+                                    <td>
+                                        @if($child->parent_id != 0)
+                                            {{ getFromJson(\App\Models\Lookup::getOneBy('id', $child->parent_id)->name , lang()) }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td>{{ getFromJson($child->name , lang()) }}</td>
+                                    <td>
+                                        @if($child->is_active == 1)
+                                            <span class="badge badge-success badge-pill">Yes</span>
+                                        @else
+                                            <span class="badge badge-danger badge-pill">No</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ ($cb = $child->created_by_user)? $cb->name : '-' }}</td>
+                                    <td>{{ ($ub = $child->updated_by_user)? $ub->name : '-' }}</td>
+                                    <td>{{ $child->created_at }}</td>
+                                    <td>{{ $child->updated_at }}</td>
+                                    <td>
+                                        <a href="{{ route('lookup.edit' , [$child->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
+                                        <a href="{{ route('lookup.destroy' , [$child->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         @endforeach
                         </tbody>
                     </table>
                 </div>
+
+{{--                <div class="mt-3">{{ $resources->links() }}</div>--}}
             </div>
         </div>
     </div>
 
+@endsection
+
+@section('footer_scripts')
+    <script>
+        $('#dataTable-lookup').dataTable({
+            // "paging": false,
+            // "info": false,
+            "ordering": false,
+            "pageLength": 50,
+        });
+    </script>
 @endsection

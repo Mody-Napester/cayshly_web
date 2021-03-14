@@ -43,20 +43,60 @@
                             <tr>
                                 <th>{{ trans('order.Order') }} #</th>
                                 <th>{{ trans('order.Date_Purchased') }}</th>
-                                <th>{{ trans('order.Status') }}</th>
+                                <th>{{ trans('order.Deliver_to') }}</th>
                                 <th>{{ trans('order.Total') }}</th>
+                                <th>{{ trans('order.Details') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($user->orders as $order)
-                            <tr>
-                                <td class="py-3">
-                                    <a class="nav-link-style font-weight-medium font-size-sm">{{ $order->order_number }}</a>
-                                </td>
-                                <td class="py-3">{{ date('d \of M Y', $order->created_at->timestamp) }}</td>
-                                <td class="py-3"><span class="badge badge-info m-0">In Progress</span></td>
-                                <td class="py-3">{{ $order->details()->sum('product_price') }} EGP</td>
-                            </tr>
+                                <tr>
+                                    <td class="py-3">
+                                        <a class="nav-link-style font-weight-medium font-size-sm">{{ $order->order_number }}</a>
+                                    </td>
+                                    <td class="py-3">{{ date('d \of M Y', $order->created_at->timestamp) }}</td>
+                                    <td class="py-3">{{ $order->address_name }}</td>
+                                    <td class="py-3">{{ $order->details()->sum('product_price') }} EGP</td>
+                                    <td class="py-3"><span style="cursor: pointer;" class="badge badge-primary open-details"><i class="czi-arrow-down"></i></span></td>
+                                </tr>
+                                <tr style="display: none;background-color: #eeeeee" class="order-opened-details">
+                                    <td colspan="5">
+                                        <table class="table table-sm">
+                                            <tr>
+                                                <td>Product</td>
+                                                <td>Price</td>
+                                                <td>Points</td>
+                                                <td>Qnt.</td>
+                                                <td>Status</td>
+                                            </tr>
+                                            @foreach($order->details as $detail)
+                                                <tr>
+                                                    <td>
+                                                        <?php $product = \App\Models\Product::getOneBy('id', $detail->product_id); ?>
+                                                        @if($product)
+                                                            <a target="_blank" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
+                                                        @else
+                                                            <span class="badge badge-secondary">{{ getFromJson($detail->product_name , lang()) }}</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $detail->product_price }}</td>
+                                                    <td>{{ $detail->product_points }}</td>
+                                                    <td>{{ $detail->product_quantity }}</td>
+                                                    <td>
+                                                        <?php
+                                                        $status = lookup('id', $detail->lookup_deliver_status_id);
+                                                        if(isset($status)){
+                                                            $status = getFromJson($status->name, lang());
+                                                        }else{
+                                                            $status = trans('order.processing');
+                                                        }
+                                                        ?>
+                                                        <span class="badge badge-success">{{ $status }}</span></td>
+                                                </tr>
+                                            @endforeach
+                                        </table>
+                                    </td>
+                                </tr>
                             @endforeach
                             </tbody>
                         </table>
@@ -67,4 +107,12 @@
         </div>
     </div>
 
+@endsection
+
+@section('page_scripts')
+    <script>
+        $('.open-details').on('click', function () {
+            $(this).parents('tr').next('tr').slideToggle();
+        });
+    </script>
 @endsection

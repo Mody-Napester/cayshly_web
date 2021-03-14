@@ -18,6 +18,12 @@
                         <a href="{{ route('product.create') }}" class="btn btn-sm btn-white">
                             <i class="mr-2 text-primary" data-feather="plus"></i> Add New
                         </a>
+                        <span class="btn btn-sm btn-success" data-toggle="modal" data-target="#import-file">
+                            <i class="mr-2 text-white" data-feather="upload"></i> Import Excel
+                        </span>
+                        <a href="{{ route('product.export') }}" class="btn btn-sm btn-warning">
+                            <i class="mr-2 text-white" data-feather="download"></i> Export Excel
+                        </a>
                     </div>
                 </div>
             </div>
@@ -119,4 +125,109 @@
         </div>
     </div>
 
+@endsection
+
+@section('modals')
+    <div class="modal fade" id="import-file" tabindex="-1" role="dialog" aria-labelledby="import-file" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Import File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a href="{{ url('assets_dashboard/files/templates/products-template.xlsx') }}" download type="button" class="btn btn-sm btn-success"><i class="mr-2" data-feather="download"></i> Download template</a>
+                    <hr>
+                    <form action="{{ route('product.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-col-form-label" for="brand_id">Brand</label>
+                                    <select style="width: 100%;" class="select2 form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id">
+                                        @foreach($brands as $brand)
+                                            <option value="{{ $brand->uuid }}">{{ getFromJson($brand->name , lang()) }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('brand_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-col-form-label" for="store_id">Store</label>
+                                    <select style="width: 100%;" class="select2 form-control @error('store_id') is-invalid @enderror" id="store_id" name="store_id">
+                                        @foreach($stores as $store)
+                                            <option value="{{ $store->uuid }}">{{ $store->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('store_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-col-form-label" for="lookup_condition_id">Condition</label>
+                                    <select style="width: 100%;" class="select2 form-control @error('lookup_condition_id') is-invalid @enderror" id="lookup_condition_id" name="lookup_condition_id">
+                                        @foreach($conditions as $condition)
+                                            <option value="{{ $condition->uuid }}">{{ getFromJson($condition->name , lang()) }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('lookup_condition_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-col-form-label" for="category">Category</label>
+                                    <select style="width: 100%;" class="select2 form-control @error('category') is-invalid @enderror" multiple id="category" name="category[]">
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->uuid }}">{{ getFromJson($category->name , lang()) }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('category')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Please choose excel file:</label>
+                                    <input type="file" name="file" required accept=".xls,.xlsx" class="form-control @error('file') is-invalid @enderror">
+
+                                    @error('file')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="text-right">
+                            <button type="button" class="btn btn-sm btn-warning" data-dismiss="modal">Close</button>
+
+                            <button type="submit" class="btn btn-sm btn-primary">Import</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

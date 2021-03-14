@@ -31,6 +31,9 @@ class ProductPublicController extends Controller
     public function show($product)
     {
         $data['product'] = Product::where('slug', $product)->first();
+        if($data['product']->picture == ''){
+            $data['product']->picture = 'placeholder.jpg';
+        }
         $data['option_parent'] = DB::table('options')->join('product_option', 'options.id', '=','product_option.option_id')
             ->where('product_id', $data['product']->id)
             ->groupBy('options.parent_id')

@@ -19,7 +19,7 @@
     </div>
 
     <a class="card-img-top d-block overflow-hidden text-center fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}" style="height: 180px;width: 100%;">
-        <img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="{{ getFromJson($product->name , lang()) }}">
+        <img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. ( ($product->picture == '')? 'placeholder.jpg' : $product->picture)) }}" alt="{{ getFromJson($product->name , lang()) }}">
     </a>
     <div class="card-body py-2">
         <a class="product-meta d-block font-size-xs pb-1 fire-loader-anchor" href="{{ route('public.store.show', $product->store->slug) }}">{{ $product->store->name }}</a>

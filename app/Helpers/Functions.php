@@ -77,6 +77,11 @@ function str_well($value){
     return ucfirst(str_replace('_', ' ', $value));
 }
 
+// Custom Date
+function custom_date($date){
+    return date('d-m-Y, g:i:s a', strtotime($date));
+}
+
 // Human Date
 function human_date($date){
 //    $editDate = str_replace('-0001-11-30', '2016-11-30', $date);

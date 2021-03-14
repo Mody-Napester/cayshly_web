@@ -204,26 +204,26 @@
 <!-- Toolbar for handheld devices-->
 <div class="cz-handheld-toolbar">
     <div class="d-table table-fixed w-100">
-        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.category.index') }}">
+        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.category.index') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-view-grid"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Categories') }}</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.store.index') }}">
+        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.store.index') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-bag"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Stores') }}</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.offer.index') }}">
+        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.offer.index') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-loudspeaker"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Offers') }}</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.cart.details') }}">
+        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.cart.details') }}">
               <span class="cz-handheld-toolbar-icon">
                   <i class="czi-cart"></i>
                   <span class="badge badge-primary badge-pill ml-1 cart-count">{{ $header_cart_product_count }}</span>
               </span>
             <span class="cz-handheld-toolbar-label"><span class="cart-price">{{ $header_cart_price_sum }}</span> EGP</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item" href="{{ route('public.home') }}">
+        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.home') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-home"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Home') }}</span>
         </a>
