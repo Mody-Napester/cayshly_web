@@ -74,12 +74,18 @@
 {{--                            <span class="badge badge-secondary font-size-sm text-body align-middle ml-2">6</span>--}}
                         </h2>
                         <div class="row pt-2">
-                            @foreach($store->products as $product)
+                            @foreach($products as $product)
                                 <div class="col-md-4 col-sm-6 col-xs-1 mb-4">
                                     @include('@public._partials.product')
                                 </div>
                             @endforeach
                         </div>
+
+                        @if($products->hasPages())
+                            <div style="padding: 20px;background-color: #ffffff">
+                                {{ $products->links() }}
+                            </div>
+                        @endif
                     </div>
                 </section>
             </div>

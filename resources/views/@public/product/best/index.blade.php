@@ -32,6 +32,12 @@
                 </div>
             @endforeach
         </div>
+
+        @if($products->hasPages())
+            <div style="padding: 20px;background-color: #ffffff">
+                {{ $products->links() }}
+            </div>
+        @endif
     </div>
 
 @endsection

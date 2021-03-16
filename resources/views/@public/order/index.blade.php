@@ -56,18 +56,28 @@
                                     </td>
                                     <td class="py-3">{{ date('d \of M Y', $order->created_at->timestamp) }}</td>
                                     <td class="py-3">{{ $order->address_name }}</td>
-                                    <td class="py-3">{{ $order->details()->sum('product_price') }} EGP</td>
+                                    <?php
+
+                                    $data['total_pre_deliver_price'] = 0;
+                                    $data['total_deliver_price'] = 0;
+                                    foreach ($order->details as $detail){
+                                        $data['total_pre_deliver_price'] += ($detail->product_quantity * $detail->product_price);
+                                        $data['total_deliver_price'] += ($detail->quantity_delivered * $detail->product_price);
+                                    }
+
+                                    ?>
+                                    <td class="py-3">{{ $data['total_pre_deliver_price'] }} EGP</td>
                                     <td class="py-3"><span style="cursor: pointer;" class="badge badge-primary open-details"><i class="czi-arrow-down"></i></span></td>
                                 </tr>
                                 <tr style="display: none;background-color: #eeeeee" class="order-opened-details">
                                     <td colspan="5">
                                         <table class="table table-sm">
                                             <tr>
-                                                <td>Product</td>
-                                                <td>Price</td>
-                                                <td>Points</td>
-                                                <td>Qnt.</td>
-                                                <td>Status</td>
+                                                <td>{{ trans('order.Product') }}</td>
+                                                <td>{{ trans('order.Price') }}</td>
+                                                <td>{{ trans('order.Points') }}</td>
+                                                <td>{{ trans('order.Qnt') }}</td>
+                                                <td>{{ trans('order.Status') }}</td>
                                             </tr>
                                             @foreach($order->details as $detail)
                                                 <tr>

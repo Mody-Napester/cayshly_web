@@ -8,9 +8,10 @@ return array (
   'Add_to_wishlist' => 'Add to wishlist',
   'Add_to_Cart' => 'Add to Cart',
   'Limited_Offer' => 'Limited Offer',
-  'All_new' => 'new',
+  'All_new' => 'All new',
   'at_discounted_price_Hurry_up' => 'ِAt discounted price Hurryup',
   'View_offers' => 'View offers',
   'Best_Offers' => 'Best Offers',
   'Top_Brands' => 'Top Brands',
+  'Remove_From_Cart' => 'Remove From Cart',
 );

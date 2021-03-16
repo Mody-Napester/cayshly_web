@@ -26,15 +26,19 @@
 
     <!-- Page Content-->
     <div class="container pb-5 mb-2 mb-md-4">
-        <div class="">
-            <div class="row pt-3 mx-n2 rtl-ar">
-                @foreach($products as $product)
-                    <div class="col-md-3 col-sm-3 mb-4">
-                        @include('@public._partials.product')
-                    </div>
-                @endforeach
-            </div>
+        <div class="row pt-3 mx-n2 rtl-ar">
+            @foreach($products as $product)
+                <div class="col-md-3 col-sm-3 mb-4">
+                    @include('@public._partials.product')
+                </div>
+            @endforeach
         </div>
+
+        @if($products->hasPages())
+            <div style="padding: 20px;background-color: #ffffff">
+                {{ $products->links() }}
+            </div>
+        @endif
     </div>
 
 @endsection

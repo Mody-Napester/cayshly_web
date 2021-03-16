@@ -22,6 +22,7 @@ class StorePublicController extends Controller
      */
     public function show($store){
         $data['store'] = Store::getOneActiveBy('slug', $store);
+        $data['products'] = $data['store']->products()->inRandomOrder()->paginate(36);
         return view('@public.store.show', $data);
     }
 

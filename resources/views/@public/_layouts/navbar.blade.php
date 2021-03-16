@@ -114,7 +114,7 @@
                     @if(auth()->check())
                         <a class="rtl-ar navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('public.user.show', [auth()->user()->name]) }}">
                             <div class="navbar-tool-icon-box bg-secondary "><i class="navbar-tool-icon czi-user"></i></div>
-                            <div class="navbar-tool-text ml-n3"><small>{{ trans('master.Hello') }}, {{ auth()->user()->name }}</small>{{ trans('master.My_Account') }}</div>
+                            <div class="navbar-tool-text ml-n3"><small>{{ auth()->user()->name }}</small>{{ trans('master.My_Account') }}</div>
                         </a>
                     @else
                         <a class="rtl-ar navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2 d-md-inline-flex d-none fire-loader-anchor" href="{{ route('login') }}">

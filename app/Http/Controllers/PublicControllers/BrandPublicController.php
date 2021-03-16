@@ -23,7 +23,7 @@ class BrandPublicController extends Controller
     public function products($brand)
     {
         $data['brand'] = Brand::getOneActiveBy('slug', $brand);
-        $data['products'] = $data['brand']->products()->active()->paginate(30);
+        $data['products'] = $data['brand']->products()->active()->paginate(29);
         return view('@public.brand.product.index', $data);
     }
 

@@ -61,6 +61,7 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="mt-3">{{ $resources->links() }}</div>
             </div>
         </div>
     </div>

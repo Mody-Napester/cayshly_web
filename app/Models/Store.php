@@ -89,9 +89,16 @@ class Store extends Model
     /**
      *  Get All Active Resource By
      */
-    public static function getAllActiveBy($field, $value)
+    public static function getAllActiveBy($field, $value, $paginate = null)
     {
-        return self::where($field, $value)->active()->get();
+        $data = self::where($field, $value)->active();
+
+        if(is_null($paginate)){
+            $data = $data->get();
+        }else{
+            $data = $data->paginate($paginate);
+        }
+        return $data;
     }
 
     /**

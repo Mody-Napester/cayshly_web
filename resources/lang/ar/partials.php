@@ -13,4 +13,5 @@ return array (
   'at_discounted_price_Hurry_up' => 'اسرع ...تخفيضات',
   'Top_Brands' => 'احدث البراندات',
   'Best_Offers' => 'افضل العروض',
+  'Remove_From_Cart' => 'ازالة من العربة',
 );

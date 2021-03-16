@@ -69,7 +69,11 @@ function lookup($by, $value){
 // Get lookups
 function lookups($key){
     $lookup = \App\Models\Lookup::getOneBy('key', $key);
-    return \App\Models\Lookup::getAllBy('parent_id', $lookup->id);
+    if($lookup){
+        return \App\Models\Lookup::getAllBy('parent_id', $lookup->id);
+    }else{
+        return null;
+    }
 }
 
 // Get lookups
