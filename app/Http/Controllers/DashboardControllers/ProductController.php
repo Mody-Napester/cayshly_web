@@ -197,12 +197,17 @@ class ProductController extends Controller
         $store_id = ($store = Store::getOneBy('uuid', $request->store_id))? $store->id : 0;
         $lookup_condition_id = ($condition = Lookup::getOneBy('uuid', $request->lookup_condition_id))? $condition->id : 0;
 
+        $slug = Str::slug($name['en'], '_');
+        if(Product::getOneBy('slug', $slug)){
+            $slug = $slug.time();
+        }
+
         $points = pointify($request->price);
 
         $resource = Product::create([
             'brand_id' => $brand_id,
             'store_id' => $store_id,
-            'slug' => Str::slug($name['en'], '_'),
+            'slug' => $slug,
             'name' => json_encode($name),
             'details' => json_encode($details),
             'picture' => (isset($picture))? $picture : '',
@@ -372,12 +377,20 @@ class ProductController extends Controller
         $store_id = ($store = Store::getOneBy('uuid', $request->store_id))? $store->id : 0;
         $lookup_condition_id = ($condition = Lookup::getOneBy('uuid', $request->lookup_condition_id))? $condition->id : 0;
 
+        $slug = Str::slug($name['en'], '_');
+//        if($slug == $data['resource']->slug){
+//
+//        }
+        if(Product::where('slug', $slug)->where('id', '<>', $data['resource']->id)->first()){
+            $slug = $slug.time();
+        }
+
         $points = pointify($request->price);
 
         $resource = $data['resource']->update([
             'brand_id' => $brand_id,
             'store_id' => $store_id,
-            'slug' => Str::slug($name['en'], '_'),
+            'slug' => $slug,
             'name' => json_encode($name),
             'details' => json_encode($details),
             'picture' => (isset($picture))? $picture : $data['resource']->picture,
