@@ -18,7 +18,7 @@ class OrderController extends Controller
      */
     public function index(){
         // Check Authority
-        if (!check_authority('index.order')){
+        if (!check_authority('index.orders')){
             return redirect('/');
         }
 
@@ -31,7 +31,7 @@ class OrderController extends Controller
      */
     public function details($order){
         // Check Authority
-        if (!check_authority('index.order')){
+        if (!check_authority('index.orders')){
             return redirect('/');
         }
 
@@ -54,7 +54,7 @@ class OrderController extends Controller
      */
     public function update_details(Request $request){
         // Check Authority
-        if (!check_authority('index.order')){
+        if (!check_authority('index.orders')){
             return redirect('/');
         }
 

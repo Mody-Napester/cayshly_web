@@ -87,7 +87,7 @@
             <div class="col-md-4">
                 <div class="widget pb-2 mb-4">
                     <h3 class="widget-title text-light pb-1">{{ trans('master.Stay_informed') }}</h3>
-                    <form class="cz-subscribe-form validate" action="" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+                    <form style="direction: ltr;" class="cz-subscribe-form validate" action="" method="post" name="mc-embedded-subscribe-form" target="_blank" novalidate>
                         <div class="input-group input-group-overlay flex-nowrap">
                             <div class="input-group-prepend-overlay">
                                 <span class="input-group-text text-muted font-size-base"><i class="czi-mail"></i></span>
@@ -195,7 +195,7 @@
                 </div>
             </div>
 
-            <div class="pb-4 font-size-xs text-light opacity-50 text-center text-md-left">© {{ trans('master.All_rights_reserved') }}.</div>
+            <div class="pb-4 font-size-xs text-light opacity-50 text-center">© {{ trans('master.All_rights_reserved') }}.</div>
 
         </div>
     </div>
