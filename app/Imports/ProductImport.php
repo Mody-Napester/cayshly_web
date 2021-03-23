@@ -39,6 +39,7 @@ class ProductImport implements ToModel, WithStartRow
 //        $row[4] = price
 //        $row[5] = code
 //        $row[6] = warranty
+//        $row[7] = picture
 
         $nameArray = [
             'en' => $row[0],
@@ -64,7 +65,7 @@ class ProductImport implements ToModel, WithStartRow
                 'slug' => Str::slug($row[0], '_'),
                 'name' => $name,
                 'details' => $details,
-                'picture' => '',
+                'picture' => $row[7],
                 'price' => $row[4],
                 'code' => $row[5],
                 'points' => pointify($row[4]),
@@ -76,8 +77,6 @@ class ProductImport implements ToModel, WithStartRow
                 'is_active' => 1,
                 'created_by' => auth()->user()->id,
             ]);
-
-//            dd($product);
 
             foreach ($this->data['category'] as $category){
                 $product->categories()->attach(Category::getOneBy('uuid', $category)->id);
