@@ -43,69 +43,87 @@
 {{--                        <h3 class="font-size-base pt-4 pb-2">Or using form below</h3>--}}
                         <form method="POST" action="{{ route('register') }}" class="needs-validation" novalidate>
                             @csrf
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-edit"></i></span></div>
-                                <input class="form-control prepended-form-control" @error('name') is-invalid @enderror id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ trans('register.Name') }}" required autofocus>
-                                @error('name')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
 
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
-                                <input class="form-control prepended-form-control" @error('email') is-invalid @enderror id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ trans('register.Email') }}" required>
-                                @error('email')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-phone"></i></span></div>
-                                <input class="form-control prepended-form-control" @error('phone') is-invalid @enderror id="phone" name="phone" type="text" value="{{ old('phone') }}" placeholder="{{ trans('register.Phone') }}" required>
-                                @error('phone')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-time"></i></span></div>
-                                <input class="form-control prepended-form-control" @error('dob') is-invalid @enderror id="dob" name="dob" type="date" value="{{ old('dob') }}" placeholder="{{ trans('register.dob') }}" required>
-                                @error('dob')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-user-circle"></i></span></div>
-                                <select class="form-control prepended-form-control" @error('gender') is-invalid @enderror id="gender" name="gender">
-                                    <option value="1">{{ trans('register.male') }}</option>
-                                    <option value="2">{{ trans('register.female') }}</option>
-                                </select>
-                                @error('gender')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
-                                <div class="password-toggle">
-                                    <input class="form-control prepended-form-control" @error('password') is-invalid @enderror id="password" name="password" type="password" placeholder="{{ trans('register.Password') }}" required autocomplete="new-password">
-                                    @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                    <label class="password-toggle-btn">
-                                        <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('register.Show_password') }}</span>
-                                    </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="name">{{ trans('register.Name') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-edit"></i></span></div>
+                                        <input class="form-control prepended-form-control" @error('name') is-invalid @enderror id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ trans('register.Name') }}" required autofocus>
+                                        @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="input-group-overlay form-group">
-                                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
-                                <div class="password-toggle">
-                                    <input class="form-control prepended-form-control" id="password_confirmation" name="password_confirmation" type="password" placeholder="{{ trans('register.Confirm_Password') }}" required>
-                                    <label class="password-toggle-btn">
-                                        <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('register.Show_password') }}</span>
-                                    </label>
+                                <div class="col-md-6">
+                                    <label for="email">{{ trans('register.Email') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
+                                        <input class="form-control prepended-form-control" @error('email') is-invalid @enderror id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ trans('register.Email') }}" required>
+                                        @error('email')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone">{{ trans('register.Phone') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-phone"></i></span></div>
+                                        <input class="form-control prepended-form-control" @error('phone') is-invalid @enderror id="phone" name="phone" type="text" value="{{ old('phone') }}" placeholder="{{ trans('register.Phone') }}" required>
+                                        @error('phone')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="name">{{ trans('register.dob') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-time"></i></span></div>
+                                        <input class="form-control prepended-form-control" @error('dob') is-invalid @enderror id="dob" name="dob" type="date" value="{{ old('dob') }}" placeholder="{{ trans('register.dob') }}" required>
+                                        @error('dob')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gender">{{ trans('register.gender') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-user-circle"></i></span></div>
+                                        <select class="form-control prepended-form-control" @error('gender') is-invalid @enderror id="gender" name="gender">
+                                            <option value="1">{{ trans('register.male') }}</option>
+                                            <option value="2">{{ trans('register.female') }}</option>
+                                        </select>
+                                        @error('gender')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password">{{ trans('register.Password') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
+                                        <div class="password-toggle">
+                                            <input class="form-control prepended-form-control" @error('password') is-invalid @enderror id="password" name="password" type="password" placeholder="{{ trans('register.Password') }}" required autocomplete="new-password">
+                                            @error('password')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                            <label class="password-toggle-btn">
+                                                <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('register.Show_password') }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password_confirmation">{{ trans('register.Confirm_Password') }}</label>
+                                    <div class="input-group-overlay form-group">
+                                        <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
+                                        <div class="password-toggle">
+                                            <input class="form-control prepended-form-control" id="password_confirmation" name="password_confirmation" type="password" placeholder="{{ trans('register.Confirm_Password') }}" required>
+                                            <label class="password-toggle-btn">
+                                                <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">{{ trans('register.Show_password') }}</span>
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 

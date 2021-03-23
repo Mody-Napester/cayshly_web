@@ -6,8 +6,7 @@
             addLoader();
             window.location.href = "{{ url('search') }}/" + item;
         });
-    });
-    $(document).ready(function () {
+
         $(document).on('click', '.search-products-m-btn', function () {
             var that = $(this);
             var item = $('.search-products-m-input').val();

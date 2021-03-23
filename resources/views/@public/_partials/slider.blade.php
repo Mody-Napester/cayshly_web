@@ -1,6 +1,6 @@
 <!-- Slider-->
 <section class="cz-carousel mb-4 mb-sm-5 rtl-ar">
-    <div class="cz-carousel-inner" data-carousel-options="{&quot;items&quot;: 1, &quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;: {&quot;nav&quot;: true, &quot;controls&quot;: false}, &quot;576&quot;: {&quot;nav&quot;: false, &quot;controls&quot;: true}}}">
+    <div class="cz-carousel-inner" data-carousel-options="{&quot;autoplay&quot;: true,&quot;autoplayTimeout&quot;: 5000,&quot;speed&quot;: 1000,&quot;items&quot;: 1, &quot;mode&quot;: &quot;gallery&quot;, &quot;nav&quot;: false, &quot;responsive&quot;: {&quot;0&quot;: {&quot;nav&quot;: true, &quot;controls&quot;: false}, &quot;576&quot;: {&quot;nav&quot;: false, &quot;controls&quot;: true}}}">
         @foreach($sliders as $slider)
         <div>
             <div class="px-md-5 text-center text-xl-left pt-3 pb-3 bg-secondary">

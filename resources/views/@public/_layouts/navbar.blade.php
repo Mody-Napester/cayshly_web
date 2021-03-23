@@ -89,7 +89,7 @@
                         <div class="input-group-prepend-overlay">
                             <span class="input-group-text"><i class="czi-search"></i></span>
                         </div>
-                        <input class="form-control prepended-form-control appended-form-control search-products-d-input" type="text"placeholder="{{ trans('master.Search_for_products') }}">
+                        <input class="form-control prepended-form-control appended-form-control search-products-d-input" @if(lang() == 'ar') style="text-align: right;padding-right: 70px;" @endif type="text"placeholder="{{ trans('master.Search_for_products') }}">
                         <button class="input-group-append-overlay btn btn-primary search-products-d-btn" style="border-radius: 0 5px 5px 0;padding-top: 17px;"><i class="czi-play"></i></button>
                     </div>
                     <!-- Toolbar-->
@@ -98,7 +98,7 @@
                     <!-- Search Mobile -->
                     <div class="input-group-overlay d-lg-none my-3">
                         <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span></div>
-                        <input class="form-control prepended-form-control search-products-m-input" type="text" placeholder="{{ trans('master.Search') }}">
+                        <input class="form-control prepended-form-control search-products-m-input" @if(lang() == 'ar') style="text-align: right;padding-right: 70px;" @endif type="text" placeholder="{{ trans('master.Search') }}">
                         <button class="input-group-append-overlay btn btn-primary search-products-m-btn" style="border-radius: 0 5px 5px 0;padding-top: 17px;"><i class="czi-search"></i></button>
                     </div>
 

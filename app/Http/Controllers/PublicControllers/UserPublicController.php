@@ -29,10 +29,10 @@ class UserPublicController extends Controller
 
 //        dd($request->all());
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|min:5|max:255',
 //            'email' => 'required|string|email|max:255|unique:users,email,'.auth()->user()->id,
             'phone' => 'required|string|max:20|min:4',
-//            'password' => 'string|confirmed|min:8',
+            'password' => 'string|confirmed|min:8',
         ]);
 
         auth()->user()->update([

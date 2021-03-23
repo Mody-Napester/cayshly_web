@@ -28,7 +28,7 @@
 
             <!-- Content  -->
             <section class="col-lg-8">
-                <!-- Toolbar-->
+            <!-- Toolbar-->
                 <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
                     <h6 class="font-size-base text-light mb-0">{{ trans('users.Update_you_profile_details_below') }}:</h6>
                     @include('@public._partials.logout_btn')
@@ -55,7 +55,7 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please choose a name.</div>
                                     @error('name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -78,7 +78,7 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please choose an email.</div>
                                     @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">Please choose phone.</div>
                                     @error('phone')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                         <div class="valid-feedback">Looks good!</div>
                                         <div class="invalid-feedback">Please choose password.</div>
                                         @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 </div>
