@@ -149,6 +149,14 @@ class User extends Authenticatable
     }
 
     /**
+     *  Relationship with points
+     */
+    public function points()
+    {
+        return $this->hasMany(Point::class, 'user_id');
+    }
+
+    /**
      *  Relationship with roles
      */
     public function roles()

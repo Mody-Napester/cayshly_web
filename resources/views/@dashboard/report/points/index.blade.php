@@ -10,7 +10,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Points ({{ $resources->sum() }})
+                            Points ({{ $resources->sum('amount') }})
                         </h1>
                         <div class="page-header-subtitle">All Points Data</div>
                     </div>
@@ -44,12 +44,18 @@
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
-                                <td>{{ $resource->user_id }}</td>
+                                <td>{{ $resource->user->name }}</td>
                                 <td>{{ $resource->amount }}</td>
-                                <td>{{ $resource->reason_lookup_id }}</td>
-                                <td>{{ $resource->product_id }}</td>
+                                <td>{{ getFromJson(lookup('id', $resource->lookup_point_reason_id)->name, lang()) }}</td>
+                                <td>
+                                    @if(isset($resource->product))
+                                        <a target="_blank" href="{{ route('public.product.show', $resource->product->slug) }}">
+                                            {{ getFromJson($resource->product->name, lang()) }}
+                                        </a>
+                                    @endif
+                                </td>
                                 <td>{{ human_date($resource->created_at) }}</td>
-                                <td>{{ $resource->created_at }}</td>
+                                <td>{{ custom_date($resource->created_at) }}</td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -53,9 +53,9 @@
                             @if(count(auth()->user()->addresses) > 0)
                                 @foreach(auth()->user()->addresses as $key => $address)
                                     <p>{{ ++$key }} : {{ $address->address }}</p>
-                            @endforeach
+                                @endforeach
+                            @endif
                         @endif
-                    @endif
 
                     <!-- Shipping address-->
                         <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">{{ trans('cart.New_address') }}</h2>
@@ -71,38 +71,99 @@
 
                     </div>
 
-                    <form action="{{ route('public.cart.payment') }}" method="get">
-                        @csrf
+
                         <div class="card card-body cart-addresses">
                             <!-- Shipping address-->
                             <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">{{ trans('cart.Shipping_address') }}</h2>
 
                             @if(auth()->check())
-                                <div class="mb-3 text-right">
-                                    <a class="btn btn-success add-address-view"><i class="czi-map"></i> {{ trans('cart.Add_Address') }}</a>
-                                </div>
-
-                                @if(count(auth()->user()->addresses) > 0)
-                                    @foreach(auth()->user()->addresses as $key => $address)
-                                        <div class="form-group" style="background-color: #eeeeee;padding: 10px;">
-                                            <label for="address{{ $key }}">
-                                                <input type="radio" @if($cart_address == $address->uuid) checked @endif class="form-control" style="width: auto;display: inline-block;height: auto;margin-right: 10px;" name="cart_request_address" value="{{ $address->uuid }}" id="address{{ $key }}">
-                                                <span>{{ $address->address }}</span>
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="p-4 text-center">
-                                        {{ trans('cart.You_have_no_address') }}
+                                <form action="{{ route('public.cart.payment') }}" method="get">
+                                    @csrf
+                                    <div class="mb-3 text-right">
+                                        <a class="btn btn-success add-address-view"><i class="czi-map"></i> {{ trans('cart.Add_Address') }}</a>
                                     </div>
-                                @endif
+
+                                    @if(count(auth()->user()->addresses) > 0)
+                                        @foreach(auth()->user()->addresses as $key => $address)
+                                            <div class="form-group" style="background-color: #eeeeee;padding: 10px;">
+                                                <label for="address{{ $key }}">
+                                                    <input type="radio"
+                                                           @if($cart_address == $address->uuid) checked @endif
+                                                           @if($cart_address != $address->uuid && $key == 0) checked @endif
+                                                           class="form-control" style="width: auto;display: inline-block;height: auto;margin-right: 10px;" name="cart_request_address" value="{{ $address->uuid }}" id="address{{ $key }}">
+                                                    <span>{{ $address->address }}</span>
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="p-4 text-center">
+                                            {{ trans('cart.You_have_no_address') }}
+                                        </div>
+                                    @endif
+                                </form>
                             @else
-                                <div class="p-5 text-center">
+                                <div class="text-center">
                                     <p>{{ trans('cart.You_are_not_login_please_login_first') }}</p>
                                     <a href="{{ route('login') }}" class="btn btn-primary mb-3 fire-loader-anchor">{{ trans('cart.Login_now') }}</a>
-                                    <a href="{{ route('register') }}" class="btn btn-secondary mb-3 fire-loader-anchor">{{ trans('cart.Or_Register') }}</a>
+{{--                                    <a href="{{ route('register') }}" class="btn btn-secondary mb-3 fire-loader-anchor">{{ trans('cart.Or_Register') }}</a>--}}
+
+                                    <hr class="mb-3">
+
+                                    <p>{{ trans('cart.or_continue_form_here') }}</p>
+
+                                    <form method="POST" action="{{ route('order_store') }}" class="needs-validation" novalidate>
+                                        @csrf
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label for="name">{{ trans('register.Name') }}</label>
+                                                <div class="input-group-overlay form-group">
+                                                    <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-edit"></i></span></div>
+                                                    <input class="form-control prepended-form-control" @error('name') is-invalid @enderror id="name" name="name" type="text" value="{{ old('name') }}" placeholder="{{ trans('register.Name') }}" required autofocus>
+                                                    @error('name')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="email">{{ trans('register.Email') }}</label>
+                                                <div class="input-group-overlay form-group">
+                                                    <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
+                                                    <input class="form-control prepended-form-control" @error('email') is-invalid @enderror id="email" name="email" type="email" value="{{ old('email') }}" placeholder="{{ trans('register.Email') }}" required>
+                                                    @error('email')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="phone">{{ trans('register.Phone') }}</label>
+                                                <div class="input-group-overlay form-group">
+                                                    <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-phone"></i></span></div>
+                                                    <input class="form-control prepended-form-control" @error('phone') is-invalid @enderror id="phone" name="phone" type="text" value="{{ old('phone') }}" placeholder="{{ trans('register.Phone') }}" required>
+                                                    @error('phone')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label for="phone">{{ trans('register.address') }}</label>
+                                                <div class="input-group-overlay form-group">
+                                                    <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-add-location"></i></span></div>
+                                                    <input class="form-control prepended-form-control" @error('address') is-invalid @enderror id="address" name="address" type="text" value="{{ old('address') }}" placeholder="{{ trans('register.address') }}" required>
+                                                    @error('address')
+                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="mt-4">
+                                        <div class="text-right pt-4">
+                                            <button class="btn btn-primary" type="submit"><i class="czi-add-user mr-2 ml-n21"></i>{{ trans('register.Create') }}</button>
+                                        </div>
+                                    </form>
                                 </div>
-                        @endif
+                            @endif
 
                         <!-- Navigation (desktop)-->
                             <div class="row mt-3">
@@ -130,7 +191,7 @@
                                 @endif
                             </div>
                         </div>
-                    </form>
+
                 </section>
 
                 <!-- Sidebar-->

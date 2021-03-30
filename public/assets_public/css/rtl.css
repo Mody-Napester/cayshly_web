@@ -22,3 +22,10 @@ body{
     padding-right: .875rem;
     padding-left: 0 !important;
 }
+.input-group-overlay .prepended-form-control:not(.rounded-left-0){
+    padding-right: 40px;
+}
+.step-label>i {
+    margin-right: 0;
+    margin-left: .425rem;
+}

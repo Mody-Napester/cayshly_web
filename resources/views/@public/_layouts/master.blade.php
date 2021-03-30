@@ -36,6 +36,9 @@
         .cart-addresses{
 
         }
+        .input-group-overlay .prepended-form-control:not(.rounded-left-0){
+            padding-right: 40px;
+        }
     </style>
 
     @if(lang() == 'ar')

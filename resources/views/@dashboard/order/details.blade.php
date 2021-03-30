@@ -102,24 +102,40 @@
                                     <td>{{ $detail->product_points }}</td>
                                     <td>{{ $detail->product_quantity }}</td>
                                     <td>
-                                        <select name="deliver_status[{{$detail->uuid}}]" style="width: 120px;padding: 4px;">
-                                            @foreach($deliver_status as $status)
-                                                <option @if($detail->lookup_deliver_status_id == $status->id) selected @endif value="{{ $status->uuid }}">{{ getFromJson($status->name, lang()) }}</option>
-                                            @endforeach
-                                        </select>
+                                        @if($detail->lookup_deliver_status_id == 23)
+                                            {{ getFromJson(lookup('id', $detail->lookup_deliver_status_id)->name, lang()) }}
+                                        @else
+                                            <select name="deliver_status[{{$detail->uuid}}]" style="width: 120px;padding: 4px;">
+                                                @foreach($deliver_status as $status)
+                                                    <option @if($detail->lookup_deliver_status_id == $status->id) selected @endif value="{{ $status->uuid }}">{{ getFromJson($status->name, lang()) }}</option>
+                                                @endforeach
+                                            </select>
+                                        @endif
                                     </td>
                                     <td>
-                                        <input type="date" name="deliver_date[{{$detail->uuid}}]" value="{{ $detail->deliver_date }}">
+                                        @if($detail->lookup_deliver_status_id == 23)
+                                            {{ $detail->deliver_date }}
+                                        @else
+                                            <input type="date" name="deliver_date[{{$detail->uuid}}]" value="{{ $detail->deliver_date }}">
+                                        @endif
                                     </td>
                                     <td>
-                                        <select name="quantity_delivered[{{$detail->uuid}}]" style="width: 100%;padding: 4px;">
-                                            @for($i = 0; $i <= $detail->product_quantity ;$i++)
-                                                <option @if($i == $detail->quantity_delivered) selected @endif value="{{ $i }}">{{ $i }}</option>
-                                            @endfor
-                                        </select>
+                                        @if($detail->lookup_deliver_status_id == 23)
+                                            {{ $detail->quantity_delivered }}
+                                        @else
+                                            <select name="quantity_delivered[{{$detail->uuid}}]" style="width: 100%;padding: 4px;">
+                                                @for($i = 0; $i <= $detail->product_quantity ;$i++)
+                                                    <option @if($i == $detail->quantity_delivered) selected @endif value="{{ $i }}">{{ $i }}</option>
+                                                @endfor
+                                            </select>
+                                        @endif
                                     </td>
                                     <td>
-                                        <input type="text" name="comments[{{$detail->uuid}}]" value="{{ $detail->comments }}">
+                                        @if($detail->lookup_deliver_status_id == 23)
+                                            {{ $detail->comments }}
+                                        @else
+                                            <input type="text" name="comments[{{$detail->uuid}}]" value="{{ $detail->comments }}">
+                                        @endif
                                     </td>
                                     <td>{{ (isset($detail->updated_by_user))? $detail->updated_by_user->name : '-' }}</td>
                                     <td>{{ $detail->updated_at }}</td>

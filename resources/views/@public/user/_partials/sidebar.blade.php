@@ -21,7 +21,9 @@
             <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'wishlist') active @endif" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>{{ trans('users.Wishlist') }}
 {{--                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span>--}}
                 </a></li>
-{{--            <li class="mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3" href=""><i class="czi-dollar opacity-60 mr-2"></i>{{ trans('users.My_Points') }}<span class="font-size-sm text-muted ml-auto">1</span></a></li>--}}
+            <li class="mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'point') active @endif" href="{{ route('public.point.index') }}"><i class="czi-dollar opacity-60 mr-2"></i>{{ trans('users.my_Points') }}
+{{--                    <span class="font-size-sm text-muted ml-auto">1</span>--}}
+                </a></li>
         </ul>
         <div class="bg-secondary px-4 py-3">
             <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Account_settings') }}</h3>

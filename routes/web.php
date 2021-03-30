@@ -38,6 +38,7 @@ use \App\Http\Controllers\PublicControllers\ProductPublicController;
 use \App\Http\Controllers\PublicControllers\OfferPublicController;
 use \App\Http\Controllers\PublicControllers\UserPublicController;
 use \App\Http\Controllers\PublicControllers\WishlistPublicController;
+use \App\Http\Controllers\PublicControllers\PointPublicController;
 use \App\Http\Controllers\PublicControllers\PagePublicController;
 use \App\Http\Controllers\PublicControllers\CartPublicController;
 use \App\Http\Controllers\PublicControllers\AddressPublicController;
@@ -103,6 +104,9 @@ Route::group([
     Route::get('wishlist', [WishlistPublicController::class, 'index'])->name('public.wishlist.index');
     Route::post('wishlist', [WishlistPublicController::class, 'store'])->name('public.wishlist.store');
     Route::delete('wishlist/{wishlist}', [WishlistPublicController::class, 'destroy'])->name('public.wishlist.destroy');
+
+    // Point
+    Route::get('point', [PointPublicController::class, 'index'])->name('public.point.index');
 });
 
 

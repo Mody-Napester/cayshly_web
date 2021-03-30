@@ -31,7 +31,7 @@
             <div class="card-header">Personnel Management</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-responsive table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>#</th>

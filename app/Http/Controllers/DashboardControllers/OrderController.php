@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderDetail;
+use App\Models\Point;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Models\Order;
@@ -57,6 +58,7 @@ class OrderController extends Controller
         if (!check_authority('index.orders')){
             return redirect('/');
         }
+//        dd($request->all());
 
         if ($request->has('order')){
             $order = $request->order;
@@ -64,14 +66,30 @@ class OrderController extends Controller
             $data['details'] = OrderDetail::getAllBy('order_id', $data['order']->id);
 
             foreach ($data['details'] as $detail) {
-                $deliver_status_id = lookup('uuid', $request->deliver_status[$detail->uuid])->id;
-                $detail->update([
-                    'lookup_deliver_status_id' => $deliver_status_id,
-                    'deliver_date' => $request->deliver_date[$detail->uuid],
-                    'quantity_delivered' => $request->quantity_delivered[$detail->uuid],
-                    'comments' => $request->comments[$detail->uuid],
-                    'updated_by' => auth()->user()->id,
-                ]);
+
+                if(key_exists($detail->uuid, $request->deliver_status)){
+                    // Update detail
+                    $deliver_status_id = lookup('uuid', $request->deliver_status[$detail->uuid])->id;
+                    $detail->update([
+                        'lookup_deliver_status_id' => $deliver_status_id,
+                        'deliver_date' => $request->deliver_date[$detail->uuid],
+                        'quantity_delivered' => $request->quantity_delivered[$detail->uuid],
+                        'comments' => $request->comments[$detail->uuid],
+                        'updated_by' => auth()->user()->id,
+                    ]);
+
+                    // Add points if delivered ( Lookup ID  = 23)
+                    if ($deliver_status_id == 23){
+                        if($detail->quantity_delivered > 0){
+                            $point = new Point();
+                            $point->user_id = $data['order']->user_id;
+                            $point->amount = ($detail->product_points * $detail->quantity_delivered);
+                            $point->lookup_point_reason_id = 27; // a_successful_purchase
+                            $point->product_id = $detail->product_id;
+                            $point->save();
+                        }
+                    }
+                }
             }
 
             // Return

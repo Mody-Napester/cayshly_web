@@ -15,7 +15,7 @@ class Point extends Model
      * @var array
      */
     protected $fillable = [
-        'uuid','user_id','amount','reason_lookup_id','product_id'
+        'uuid','user_id','amount','lookup_point_reason_id','product_id'
     ];
 
     /**
@@ -60,5 +60,21 @@ class Point extends Model
     public static function getAllBy($field, $value)
     {
         return self::where($field, $value)->get();
+    }
+
+    /**
+     *  Relation to user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     *  Relation to product
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }
