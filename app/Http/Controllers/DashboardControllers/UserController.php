@@ -37,7 +37,7 @@ class UserController extends Controller
             return redirect('/');
         }
 
-        $data['resources'] = User::all();
+        $data['resources'] = User::paginate(50);
         return view('@dashboard.users.index', $data);
     }
 

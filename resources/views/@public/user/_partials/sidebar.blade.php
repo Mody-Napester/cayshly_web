@@ -15,13 +15,13 @@
             <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Dashboard') }}</h3>
         </div>
         <ul class="list-unstyled mb-0">
-            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'order') active @endif" href="{{ route('public.order.index') }}"><i class="czi-bag opacity-60 mr-2"></i>{{ trans('users.Orders') }}
+            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'order') active @endif" href="{{ route('public.order.index') }}"><i class="czi-bag opacity-60"></i>{{ trans('users.Orders') }}
 {{--                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->orders()->count() }}</span>--}}
                 </a></li>
-            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'wishlist') active @endif" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60 mr-2"></i>{{ trans('users.Wishlist') }}
+            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'wishlist') active @endif" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60"></i>{{ trans('users.Wishlist') }}
 {{--                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span>--}}
                 </a></li>
-            <li class="mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'point') active @endif" href="{{ route('public.point.index') }}"><i class="czi-dollar opacity-60 mr-2"></i>{{ trans('users.my_Points') }}
+            <li class="mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'point') active @endif" href="{{ route('public.point.index') }}"><i class="czi-dollar opacity-60"></i>{{ trans('users.my_Points') }}
 {{--                    <span class="font-size-sm text-muted ml-auto">1</span>--}}
                 </a></li>
         </ul>
@@ -29,8 +29,8 @@
             <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Account_settings') }}</h3>
         </div>
         <ul class="list-unstyled mb-0">
-            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'profile') active @endif" href="{{ route('public.user.show', [auth()->user()->name]) }}"><i class="czi-user opacity-60 mr-2"></i>{{ trans('users.Profile_info') }}</a></li>
-            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'address') active @endif" href="{{ route('public.address.index') }}"><i class="czi-location opacity-60 mr-2"></i>{{ trans('users.Addresses') }}</a></li>
+            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'profile') active @endif" href="{{ route('public.user.show', [auth()->user()->name]) }}"><i class="czi-user opacity-60"></i>{{ trans('users.Profile_info') }}</a></li>
+            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'address') active @endif" href="{{ route('public.address.index') }}"><i class="czi-location opacity-60"></i>{{ trans('users.Addresses') }}</a></li>
         </ul>
     </div>
 </aside>

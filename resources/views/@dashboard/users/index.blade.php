@@ -11,7 +11,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="key"></i></div>
-                            Users ({{ $resources->count() }})
+                            Users ({{ \App\Models\User::count() }})
                         </h1>
                         <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
@@ -83,6 +83,8 @@
                         </tbody>
                     </table>
                 </div>
+
+                {{ $resources->links() }}
             </div>
         </div>
     </div>

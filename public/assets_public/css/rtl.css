@@ -29,3 +29,5 @@ body{
     margin-right: 0;
     margin-left: .425rem;
 }
+
+.list-unstyled i{margin-right: 5px;}
