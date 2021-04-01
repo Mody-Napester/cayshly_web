@@ -62,13 +62,14 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
-{{--                            <div class="d-flex flex-wrap justify-content-between">--}}
+                            <div class="text-center">
 {{--                                <div class="custom-control custom-checkbox">--}}
 {{--                                    <input class="custom-control-input" type="checkbox" checked id="remember_me">--}}
 {{--                                    <label class="custom-control-label" for="remember_me">Remember me</label>--}}
 {{--                                </div>--}}
-{{--                                <a class="nav-link-inline font-size-sm" href="account-password-recovery.html">Forgot password?</a>--}}
-{{--                            </div>--}}
+                                <a class="nav-link-inline font-size-sm" href="{{ route('password.request') }}">{{ trans('login.Forgot_password') }}</a>
+                            </div>
+                            <hr class="mt-4 mb-4">
                             <div class="text-center">
                                 <p>{{ trans('login.dont_have_account') }} .. <a class="nav-link-inline font-size-sm" href="{{ route('register') }}">{{ trans('login.create') }}</a></p>
                             </div>
