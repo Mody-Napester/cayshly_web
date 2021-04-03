@@ -27,7 +27,52 @@
 
     <!-- Main page content-->
     <div class="container mt-n10">
-        <!-- Example DataTable for Dashboard Demo-->
+        <div class="card mb-4">
+            <form action="#" method="get" enctype="multipart/form-data">
+                @csrf
+
+                <div class="card-header">Search and filter</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" placeholder="Name"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control" placeholder="Email"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Phone</label>
+                                <input type="text" name="phone" class="form-control" placeholder="Phone"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-col-form-label" for="is_active">Is Active</label>
+                                <select style="width: 100%;" class="select2" id="is_active" name="is_active">
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-search"></i> Search</button>
+                </div>
+            </form>
+        </div>
+
         <div class="card mb-4">
             <div class="card-header">All Users</div>
             <div class="card-body">
@@ -36,8 +81,10 @@
                         <thead>
                         <tr>
                             <th>Id</th>
+                            <th>Control</th>
                             <th>Name</th>
                             <th>Parent</th>
+                            <th>Points</th>
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Roles</th>
@@ -46,7 +93,6 @@
                             <th>Updated by</th>
                             <th>Created at</th>
                             <th>Updated at</th>
-                            <th>Control</th>
                         </tr>
                         </thead>
 
@@ -54,8 +100,16 @@
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
+                                <td>
+                                    <a href="{{ route('user.login_as' , [$resource->uuid]) }}" class="badge badge-warning badge-sm"><i data-feather="eye"></i></a>
+
+                                    <a href="{{ route('user.edit' , [$resource->uuid]) }}" class="badge badge-primary badge-sm"><i data-feather="edit"></i></a>
+
+                                    <a href="{{ route('user.destroy' , [$resource->uuid]) }}" class="badge badge-danger badge-sm confirm-delete"><i data-feather="trash-2"></i></a>
+                                </td>
                                 <td>{{ $resource->name }}</td>
                                 <td>{{ ($resource->parent)? $resource->parent->name : '-' }}</td>
+                                <td>{{ $resource->points()->sum('amount') }}</td>
                                 <td>{{ $resource->email }}</td>
                                 <td>{{ $resource->phone }}</td>
                                 <td>
@@ -74,17 +128,13 @@
                                 <td>{{ ($resource->updatedBy)? $resource->updatedBy->name : '-' }}</td>
                                 <td>{{ $resource->created_at }}</td>
                                 <td>{{ $resource->updated_at }}</td>
-                                <td>
-                                    <a href="{{ route('user.edit' , [$resource->uuid]) }}" class="btn btn-datatable text-warning btn-icon btn-transparent-dark mr-2"><i data-feather="edit"></i></a>
-                                    <a href="{{ route('user.destroy' , [$resource->uuid]) }}" class="btn btn-datatable text-danger btn-icon btn-transparent-dark confirm-delete"><i data-feather="trash-2"></i></a>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
 
-                {{ $resources->links() }}
+                {{ $resources->appends(request()->input())->links() }}
             </div>
         </div>
     </div>

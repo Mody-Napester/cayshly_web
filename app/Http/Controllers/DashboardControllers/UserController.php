@@ -30,14 +30,38 @@ class UserController extends Controller
      * Display a listing of the resource.
 
      */
-    public function index()
+    public function index(Request $request)
     {
         // Check Permission
         if (!check_authority('index.users')){
             return redirect('/');
         }
 
-        $data['resources'] = User::paginate(50);
+        if($request->has('name')){
+            $data['resources'] = new User;
+
+            if($request->has('name')){
+                $data['resources'] = $data['resources']->where('name', 'like', "%".$request->name."%");
+            }
+
+            if($request->has('email')){
+                $data['resources'] = $data['resources']->where('email', 'like', "%".$request->email."%");
+            }
+
+            if($request->has('phone')){
+                $data['resources'] = $data['resources']->where('phone', 'like', "%".$request->phone."%");
+            }
+
+            if($request->has('is_active')){
+                $data['resources'] = $data['resources']->where('is_active', $request->is_active);
+            }
+
+            $data['resources'] = $data['resources']->paginate(50);
+
+        }else{
+            $data['resources'] = User::paginate(50);
+        }
+
         return view('@dashboard.users.index', $data);
     }
 
@@ -305,6 +329,33 @@ class UserController extends Controller
         }else{
             $data['message'] = [
                 'msg_status' => 0,
+                'type' => 'danger',
+                'text' => 'Sorry! User not exists.',
+            ];
+        }
+
+        return back()->with('message', $data['message']);
+
+    }
+
+    /**
+     * Update Password
+     */
+    public function login_as($user)
+    {
+        // Get Resource
+        $resource = User::getBy('uuid', $user);
+
+        if($resource){
+
+            auth()->login($resource);
+
+            $data['message'] = [
+                'type' => 'success',
+                'text' => 'You are login as : ' . $resource->name,
+            ];
+        }else{
+            $data['message'] = [
                 'type' => 'danger',
                 'text' => 'Sorry! User not exists.',
             ];

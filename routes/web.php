@@ -144,6 +144,7 @@ Route::group([
     Route::get('subscriber', [SubscriberController::class, 'index'])->name('dashboard.subscriber.index');
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');
     Route::resource('user', UserController::class);
+    Route::get('user/login_as/{user}', [UserController::class, 'login_as'])->name('user.login_as');
 //        ->names([
 //        'index' => 'dashboard.user.index',
 //        'create' => 'dashboard.user.create',
