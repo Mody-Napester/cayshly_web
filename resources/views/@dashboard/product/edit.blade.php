@@ -182,7 +182,21 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="picture_name">Picture Name</label>
+                                        <input class="form-control @error('picture_name') is-invalid @enderror "
+                                               id="picture_name"
+                                               type="text" name="picture_name"
+                                               placeholder="Enter picture name .." value="{{ $resource->picture }}">
+
+                                        @error('picture_name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="picture">Picture</label>
                                         <input class="form-control @error('picture') is-invalid @enderror" id="picture" type="file" name="picture">

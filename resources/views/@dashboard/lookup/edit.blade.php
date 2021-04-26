@@ -35,7 +35,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="parent_id">Parent</label>
-                                        <select class="form-control @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id">
+                                        <select class="select2 form-control @error('parent_id') is-invalid @enderror" id="parent_id" name="parent_id">
                                             <option @if($resource->parent_id == 0) selected @endif value="0">No Parent</option>
                                             @foreach($parents as $parent)
                                                 <option @if($resource->parent_id == $parent->id) selected @endif value="{{ $parent->uuid }}">{{ getFromJson($parent->name , lang()) }}</option>
@@ -50,8 +50,24 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="form-col-form-label" for="constraint_id">Constraint</label>
+                                        <select class="select2 form-control @error('constraint_id') is-invalid @enderror" id="constraint_id" name="constraint_id">
+                                            <option value="0">No Constraint</option>
+                                            @foreach(\App\Enums\LookupConstraints::$constraints as $id => $constraints)
+                                                <option @if($resource->constraint_id == $id) selected @endif value="{{ $id }}">{{ $constraints[lang()] }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        @error('constraint_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="form-col-form-label" for="is_active">Is Active</label>
-                                        <select class="form-control @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
+                                        <select class="select2 form-control @error('is_active') is-invalid @enderror" id="is_active" name="is_active">
                                             <option @if($resource->is_active == 1) selected @endif value="1">Yes</option>
                                             <option @if($resource->is_active == 0) selected @endif value="0">No</option>
                                         </select>

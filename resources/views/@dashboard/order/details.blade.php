@@ -36,6 +36,13 @@
                             <td>{{ ($cb = $order->created_by_user)? $cb->name : '-' }}</td>
                         </tr>
                         <tr>
+                            <td><b>User Phone</b></td>
+                            <td>{{ ($cb = $order->created_by_user)? $cb->phone : '-' }}</td>
+
+                            <td><b>User Email</b></td>
+                            <td>{{ ($cb = $order->created_by_user)? $cb->email : '-' }}</td>
+                        </tr>
+                        <tr>
                             <td><b>Pre Deliver Total Price</b></td>
                             <td>{{ $total_pre_deliver_price }} EGP</td>
 
@@ -63,7 +70,15 @@
                         </tr>
                         <tr>
                             <td><b>Payment Method</b></td>
-                            <td colspan="3">COD</td>
+                            <td>
+                                @if($order->lookup_payment_method_id == 1)
+                                    <span>Cash on delivery</span>
+                                @else
+                                    <span>Redeem points</span>
+                                @endif
+                            </td>
+                            <td><b>Total Points</b></td>
+                            <td>{{ $details->sum('product_points') }} Points</td>
                         </tr>
                     </table>
 

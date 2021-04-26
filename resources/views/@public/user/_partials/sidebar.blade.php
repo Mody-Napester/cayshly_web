@@ -15,15 +15,19 @@
             <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Dashboard') }}</h3>
         </div>
         <ul class="list-unstyled mb-0">
-            <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'order') active @endif" href="{{ route('public.order.index') }}"><i class="czi-bag opacity-60"></i>{{ trans('users.Orders') }}
-{{--                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->orders()->count() }}</span>--}}
-                </a></li>
+            <li class="border-bottom mb-0">
+                <a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'order') active @endif" href="{{ route('public.order.index') }}"><i class="czi-bag opacity-60"></i>{{ trans('users.Orders') }}
+                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->orders()->count() }}</span>
+                </a>
+            </li>
             <li class="border-bottom mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'wishlist') active @endif" href="{{ route('public.wishlist.index') }}"><i class="czi-heart opacity-60"></i>{{ trans('users.Wishlist') }}
 {{--                    <span class="font-size-sm text-muted ml-auto">{{ auth()->user()->wishlists()->count() }}</span>--}}
                 </a></li>
-            <li class="mb-0"><a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'point') active @endif" href="{{ route('public.point.index') }}"><i class="czi-dollar opacity-60"></i>{{ trans('users.my_Points') }}
-{{--                    <span class="font-size-sm text-muted ml-auto">1</span>--}}
-                </a></li>
+            <li class="mb-0">
+                <a class="nav-link-style fire-loader-anchor d-flex align-items-center px-4 py-3 @if(isset($page) && $page == 'point') active @endif" href="{{ route('public.point.index') }}"><i class="czi-dollar opacity-60"></i>{{ trans('users.my_Points') }}
+                    <span class="font-size-sm text-muted @if(lang() == 'ar') mr-auto @else ml-auto @endif">{{ user_points(auth()->user()->id)['points'] }}</span>
+                </a>
+            </li>
         </ul>
         <div class="bg-secondary px-4 py-3">
             <h3 class="font-size-sm mb-0 text-muted">{{ trans('users.Account_settings') }}</h3>

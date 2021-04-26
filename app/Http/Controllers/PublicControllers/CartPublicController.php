@@ -353,13 +353,15 @@ class CartPublicController extends Controller
     /**
      * cart review.
      */
-    public function review(){
+    public function review(Request $request){
 
         $data = Cart::details();
 
         if(!session()->has('order')){
             return redirect('/');
         }else{
+            session()->put('order.0.1.payment', $request->payment_method);
+
             $data['cart_address'] = session('order')[0][0]['address'];
             $data['cart_payment'] = session('order')[0][1]['payment'];
         }
@@ -368,7 +370,7 @@ class CartPublicController extends Controller
         $data['client_name'] = auth()->user()->name;
         $data['client_address'] = Address::getOneBy('uuid', $data['cart_address'])->address;
         $data['client_phone'] = auth()->user()->phone;
-        $data['client_payment'] = 'Cash on delivery';
+        $data['client_payment'] = ucfirst($request->payment_method);
 
         return view('@public.cart.review', $data);
     }
@@ -392,7 +394,7 @@ class CartPublicController extends Controller
             'address_name' => Address::getOneBy('uuid', $data['cart_address'])->address,
             'order_number' => $data['order_number'],
             'comments' => '',
-            'lookup_payment_method_id' => 1,
+            'lookup_payment_method_id' => ($data['cart_payment'] == 'cod')? 1 : 2, // 1 -> Cash, 2 -> Redeem
         ]);
 
         // Order Details

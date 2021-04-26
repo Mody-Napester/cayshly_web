@@ -53,9 +53,27 @@
     @foreach(\App\Models\Script::where('is_active', 1)->get() as $script)
         {!! $script->code !!}
     @endforeach
+
+    <style>
+        .my-points-flow{
+            background-color: #eeeeee;
+            padding: 5px;
+            position: fixed;
+            right: 0;
+            top: 35%;
+            z-index: 10000;
+        }
+    </style>
 </head>
 <!-- Body-->
 <body class="toolbar-enabled bg-gray">
+
+    @if(auth()->check())
+        <div class="my-points-flow">
+            {{ trans('master.my-points') }}
+            <b>{{ user_points(auth()->user()->id)['points'] }}</b>
+        </div>
+    @endif
 
 @include('@public._layouts.navbar')
 
@@ -211,10 +229,10 @@
             <span class="cz-handheld-toolbar-icon"><i class="czi-view-grid"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Categories') }}</span>
         </a>
-        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.store.index') }}">
-            <span class="cz-handheld-toolbar-icon"><i class="czi-bag"></i></span>
-            <span class="cz-handheld-toolbar-label">{{ trans('master.Stores') }}</span>
-        </a>
+{{--        <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.store.index') }}">--}}
+{{--            <span class="cz-handheld-toolbar-icon"><i class="czi-bag"></i></span>--}}
+{{--            <span class="cz-handheld-toolbar-label">{{ trans('master.Stores') }}</span>--}}
+{{--        </a>--}}
         <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.offer.index') }}">
             <span class="cz-handheld-toolbar-icon"><i class="czi-loudspeaker"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Offers') }}</span>
@@ -230,6 +248,19 @@
             <span class="cz-handheld-toolbar-icon"><i class="czi-home"></i></span>
             <span class="cz-handheld-toolbar-label">{{ trans('master.Home') }}</span>
         </a>
+
+        @if(auth()->check())
+            <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('public.user.show', [auth()->user()->name]) }}">
+                <span class="cz-handheld-toolbar-icon"><i class="czi-user"></i></span>
+                <span class="cz-handheld-toolbar-label">{{ trans('master.My_Account') }}</span>
+            </a>
+        @else
+            <a class="d-table-cell cz-handheld-toolbar-item fire-loader-anchor" href="{{ route('login') }}">
+                <span class="cz-handheld-toolbar-icon"><i class="czi-user"></i></span>
+                <span class="cz-handheld-toolbar-label">{{ trans('master.My_Account') }}</span>
+            </a>
+        @endif
+
 {{--        <a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse"--}}
 {{--           onclick="window.scrollTo(0, 0)">--}}
 {{--            <span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span>--}}

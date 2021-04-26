@@ -12,4 +12,10 @@ return array (
   'Sorry_item_cant_be_deleted' => 'Sorry item cant be deleted',
   'please_select_address' => 'please select Address',
   'sorry_error_exists' => 'sorry Error Exists',
+  'Removed_from_cart' => 'Removed from cart',
+  'Product_deleted' => 'Product deleted',
+  'Not_Removed_from_cart' => 'Not Removed from cart',
+  'Sorry_item_not_fount' => 'Sorry item not fount',
+  'Cart_updated_successfully' => 'Cart updated successfully',
+  'Sorry_no_item_in_the_cart' => 'Sorry no item in the cart',
 );

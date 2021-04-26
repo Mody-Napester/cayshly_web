@@ -53,4 +53,6 @@ return array (
   'Thank_you_for_your_order' => 'Thank you for your order From Cayshly',
   'Your_order_has_been_placed_and_will_be_processed_as_soon_as_possible' => 'Your order has been placed and will be processed As soon ِAs Possible',
   'Order_number' => 'Order number',
+  'Store' => 'Store',
+  'or_continue_form_here' => 'or continue form here',
 );

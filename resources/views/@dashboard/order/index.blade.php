@@ -25,10 +25,58 @@
     <!-- Main page content-->
     <div class="container mt-n10">
         <div class="card mb-4">
+            <form action="#" method="get" enctype="multipart/form-data">
+
+                <div class="card-header">Search and filter</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Order Number</label>
+                                <input type="number" name="number" class="form-control" value="{{ (isset($_GET['number']))? $_GET['number'] : '' }}" placeholder="Number"/>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Order Date</label>
+                                <input type="date" name="date" class="form-control" value="{{ (isset($_GET['date']))? $_GET['date'] : '' }}" placeholder="Date"/>
+                            </div>
+                        </div>
+
+{{--                        <div class="col-md-3">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Ordered By</label>--}}
+{{--                                <input type="text" name="by" class="form-control" value="{{ (isset($_GET['by']))? $_GET['by'] : '' }}" placeholder="Ordered By"/>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="form-col-form-label" for="status">Status</label>
+                                <select style="width: 100%;" class="select2" id="status" name="status">
+                                    <option value="Choose">Choose</option>
+                                    <option {{ (isset($_GET['status']) && $_GET['status'] == 1)? 'selected' : '' }} value="1">Fully Delivered</option>
+                                    <option {{ (isset($_GET['status']) && $_GET['status'] == 2)? 'selected' : '' }} value="2">Partially Delivered</option>
+                                    <option {{ (isset($_GET['status']) && $_GET['status'] == 3)? 'selected' : '' }} value="3">Not Delivered</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-search"></i> Search</button>
+                    <a href="{{ route('dashboard.order.index') }}" class="btn btn-warning">Reset</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card mb-4">
             <div class="card-header">All</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -50,7 +98,13 @@
                                 <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
                                 <td>{{ $resource->address_name }}</td>
                                 <td>{{ $resource->comments }}</td>
-                                <td> COD {{-- {{ getFromJson($resource->payment_method->name , lang()) }} --}} </td>
+                                <td>
+                                    @if($resource->lookup_payment_method_id == 1)
+                                        <span>Cash on delivery</span>
+                                    @else
+                                        <span>Redeem points</span>
+                                    @endif
+                                </td>
                                 <td>{{ human_date($resource->created_at) }}</td>
                                 <td>{{ custom_date($resource->created_at) }}</td>
                                 <td>
@@ -66,4 +120,41 @@
         </div>
     </div>
 
+@endsection
+
+@section('footer_scripts')
+    <script>
+        var tableDTUsers = $('#datatable-custom').DataTable({
+            lengthChange: false,
+            ordering: false,
+            buttons: [
+                {
+                    extend: 'copyHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    }
+                },
+                {
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    }
+                }
+            ],
+        });
+        tableDTUsers.buttons().container().appendTo('#datatable-users-buttons_wrapper .col-md-6:eq(0)');
+
+    </script>
 @endsection

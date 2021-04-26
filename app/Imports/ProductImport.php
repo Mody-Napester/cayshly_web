@@ -56,9 +56,9 @@ class ProductImport implements ToModel, WithStartRow
         // Check if duplicated
         $duplicated = Product::where(function($query) use ($row, $name){
             $query->where('slug', Str::slug($row[0], '_'));
-        })->first();
+        })->count();
 
-        if (is_null($duplicated)) {
+        if ($duplicated == 0 && $row[0] != null) {
             $product = Product::create([
                 'brand_id' => $this->data['brand_id'],
                 'store_id' => $this->data['store_id'],
@@ -83,6 +83,8 @@ class ProductImport implements ToModel, WithStartRow
             }
 
             return $product;
+        }else{
+            return null;
         }
     }
 }

@@ -101,11 +101,17 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>
-                                    <a href="{{ route('user.login_as' , [$resource->uuid]) }}" class="badge badge-warning badge-sm"><i data-feather="eye"></i></a>
-
-                                    <a href="{{ route('user.edit' , [$resource->uuid]) }}" class="badge badge-primary badge-sm"><i data-feather="edit"></i></a>
-
-                                    <a href="{{ route('user.destroy' , [$resource->uuid]) }}" class="badge badge-danger badge-sm confirm-delete"><i data-feather="trash-2"></i></a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-xs btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a href="{{ route('user.points.show' , [$resource->uuid]) }}" class="dropdown-item"><i data-feather="play"></i> Points</a>
+                                            <a href="{{ route('user.login_as' , [$resource->uuid]) }}" class="dropdown-item"><i data-feather="eye"></i> Login as</a>
+                                            <a href="{{ route('user.edit' , [$resource->uuid]) }}" class="dropdown-item"><i data-feather="edit"></i> Edit</a>
+                                            <a href="{{ route('user.destroy' , [$resource->uuid]) }}" class="dropdown-item"><i data-feather="trash-2"></i> Delete</a>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>{{ $resource->name }}</td>
                                 <td>{{ ($resource->parent)? $resource->parent->name : '-' }}</td>
@@ -138,5 +144,10 @@
             </div>
         </div>
     </div>
+@endsection
 
+@section('page_scripts')
+    <script !src="">
+
+    </script>
 @endsection

@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'language' => 'language',
+  'language' => 'اللغه',
   'available' => 'available',
   'at' => 'at',
   'see_all' => 'see all',

@@ -22,4 +22,5 @@ return array (
   'Update_you_profile_details_below' => 'تحديث تفاصيل ملفك الشخصي',
   'Upload' => 'تحميل',
   'Wishlist' => 'الرغبات',
+  'my_Points' => 'نقاطى',
 );

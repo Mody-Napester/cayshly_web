@@ -4,6 +4,7 @@ namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Lookup;
+use App\Models\Point;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -339,7 +340,7 @@ class UserController extends Controller
     }
 
     /**
-     * Update Password
+     * Login as another user
      */
     public function login_as($user)
     {
@@ -363,5 +364,66 @@ class UserController extends Controller
 
         return back()->with('message', $data['message']);
 
+    }
+
+    /**
+     * Show user points
+     */
+    public function show_user_points($user)
+    {
+        // Get Resource
+        $resource = User::getBy('uuid', $user);
+
+        if($resource){
+
+            $data['user'] = $resource;
+            $data['resources'] = $resource->points;
+            return view('@dashboard.users.points.index', $data);
+        }else{
+            $data['message'] = [
+                'type' => 'danger',
+                'text' => 'Sorry! User not exists.',
+            ];
+
+            return back()->with('message', $data['message']);
+        }
+    }
+
+    /**
+     * Get Control user points
+     */
+    public function get_control_user_points(Request $request)
+    {
+        // Get Resource
+        $data['user_id'] = $request->user;
+
+        $data['users'] = User::where('id', $data['user_id'])->get();
+        $data['point_reasons'] = lookups('point_reason');
+
+        return view('@dashboard.users.points.control', $data);
+    }
+
+    /**
+     * Post Control user points
+     */
+    public function post_control_user_points(Request $request)
+    {
+        foreach ($request->users as $user_id){
+            $lookup = \lookup('id', $request->point_reason);
+
+            $point = new Point();
+            $point->user_id = $user_id;
+            $point->amount = $request->amount;
+            $point->lookup_point_reason_id = $request->point_reason;
+            $point->product_id = null;
+            $point->action = ($lookup->constraint_id == 1)? 1: 0;
+            $point->save();
+        }
+
+        $data['message'] = [
+            'type' => 'success',
+            'text' => 'Points Updated',
+        ];
+        return back()->with('message', $data['message']);
     }
 }

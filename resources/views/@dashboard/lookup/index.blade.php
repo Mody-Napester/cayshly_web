@@ -37,6 +37,7 @@
                         <tr>
                             <th>#</th>
                             <th>Parent id</th>
+                            <th>Constraint</th>
                             <th>Key</th>
                             <th>Parent</th>
                             <th>Name</th>
@@ -53,6 +54,13 @@
                             <tr style="@if($resource->parent_id == 0) background-color:#eeeeee; @endif">
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->parent_id }}</td>
+                                <td>
+                                    @if($resource->constraint_id != 0)
+                                        {{ \App\Enums\LookupConstraints::$constraints[$resource->constraint_id][lang()] }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
                                 <td>{{ $resource->key }}</td>
                                 <td>
                                     @if($resource->parent_id != 0)
@@ -82,6 +90,13 @@
                                 <tr>
                                     <td>{{ $child->id }}</td>
                                     <td>{{ $child->parent_id }}</td>
+                                    <td>
+                                        @if($child->constraint_id != 0)
+                                            {{ \App\Enums\LookupConstraints::$constraints[$child->constraint_id][lang()] }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                     <td>{{ $child->key }}</td>
                                     <td>
                                         @if($child->parent_id != 0)

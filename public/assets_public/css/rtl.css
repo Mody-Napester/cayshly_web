@@ -31,3 +31,6 @@ body{
 }
 
 .list-unstyled i{margin-right: 5px;}
+.card-body{
+    text-align: right;
+}

@@ -4,8 +4,12 @@
 use App\Models\Cart;
 
 function getFromJson($json , $lang){
-    $data = json_decode($json, true);
-    return $data[$lang];
+    if(!empty($json)){
+        $data = json_decode($json, true);
+        return $data[$lang];
+    }else{
+        return '-';
+    }
 }
 
 function getProductAfterDiscount($product){
@@ -90,6 +94,17 @@ function custom_date($date){
 function human_date($date){
 //    $editDate = str_replace('-0001-11-30', '2016-11-30', $date);
     return Carbon\Carbon::createFromTimeStamp(strtotime($date))->diffForHumans();
+}
+
+// User points
+function user_points($user_id){
+    $user = \App\Models\User::where('id', $user_id)->first();
+
+    $data['up_points'] = $user->points()->where('action', 1)->sum('amount');
+    $data['down_points'] = $user->points()->where('action', 0)->sum('amount');
+    $data['points'] = $data['up_points'] - $data['down_points'];
+
+    return $data;
 }
 
 // Check product in the cart

@@ -106,17 +106,50 @@ class ProductController extends Controller
      *
      * @return String
      */
-    public function index(){
+    public function index(Request $request){
         // Check Authority
         if (!check_authority('index.product')){
             return redirect('/');
         }
 
-        $data['resources'] = Product::paginate(config('vars.pagination'));
         $data['brands'] = Brand::all();
         $data['categories'] = Category::where('parent_id', '<>' ,0)->get();
         $data['stores'] = Store::all();
         $data['conditions'] = lookups('condition');
+
+        if($request->has('brand') || $request->has('date') || $request->has('by') || $request->has('status')){
+            $data['resources'] = new Product;
+
+            if($request->has('brand') && !is_null($request->brand) && $request->brand != 'Choose'){
+                $data['resources'] = $data['resources']->where('brand_id', $request->brand);
+            }
+            if($request->has('store') && !is_null($request->store) && $request->store != 'Choose'){
+                $data['resources'] = $data['resources']->where('store_id', $request->store);
+            }
+//            if($request->has('category') && !is_null($request->category) && $request->category != 'Choose'){
+//                $data['resources'] = $data['resources']->where('category_id', $request->category);
+//            }
+            if($request->has('condition') && !is_null($request->condition) && $request->condition != 'Choose'){
+                $data['resources'] = $data['resources']->where('lookup_condition_id', $request->condition);
+            }
+            if($request->has('name') && !is_null($request->name)){
+                $data['resources'] = $data['resources']->where('name', 'like', "%".$request->name."%");
+            }
+            if($request->has('code') && !is_null($request->code)){
+                $data['resources'] = $data['resources']->where('code', $request->code);
+            }
+            if($request->has('price') && !is_null($request->price)){
+                $data['resources'] = $data['resources']->where('price', $request->price);
+            }
+            if($request->has('is_active') && !is_null($request->is_active) && $request->is_active != 'Choose'){
+                $data['resources'] = $data['resources']->where('is_active', $request->is_active);
+            }
+
+            $data['resources'] = $data['resources']->paginate(50);
+
+        }else{
+            $data['resources'] = Product::paginate(config('vars.pagination'));
+        }
 
         return view('@dashboard.product.index', $data);
     }
@@ -371,6 +404,8 @@ class ProductController extends Controller
                     'text'=> 'Image ' . $upload['message']
                 ]);
             }
+        }else{
+            $picture = $request->picture_name;
         }
 
         $brand_id = ($brand = Brand::getOneBy('uuid', $request->brand_id))? $brand->id : 0;

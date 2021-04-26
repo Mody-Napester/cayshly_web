@@ -8,4 +8,5 @@ return array (
   'Sign_in' => 'تسجيل الدخول',
   'create' => 'انشاء',
   'dont_have_account' => 'لا تمتلك حساب',
+  'Forgot_password' => 'هل نسيت كلمة المرور؟',
 );

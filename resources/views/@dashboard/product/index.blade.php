@@ -33,6 +33,96 @@
     <!-- Main page content-->
     <div class="container mt-n10">
         <div class="card mb-4">
+            <form action="" method="get" enctype="multipart/form-data">
+                @csrf
+
+                <div class="card-header">Search and filter</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Brand</label>
+                                <select class="select2 form-control" name="brand" id="brand">
+                                    <option value="Choose">Choose</option>
+                                    @foreach($brands as $brand)
+                                    <option @if(isset($_GET['brand']) && $_GET['brand'] == $brand->id) selected @endif value="{{ $brand->id }}">{{ getFromJson($brand->name, lang()) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Store</label>
+                                <select class="select2 form-control" name="store" id="store">
+                                    <option value="Choose">Choose</option>
+                                    @foreach($stores as $store)
+                                    <option @if(isset($_GET['store']) && $_GET['store'] == $store->id) selected @endif value="{{ $store->id }}">{{ $store->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+{{--                        <div class="col-md-3">--}}
+{{--                            <div class="form-group">--}}
+{{--                                <label>Category</label>--}}
+{{--                                <select class="select2 form-control" name="category" id="">--}}
+{{--                                    <option value="Choose">Choose</option>--}}
+{{--                                    @foreach($categories as $category)--}}
+{{--                                        <option @if(isset($_GET['category']) && $_GET['category'] == $category->id) selected @endif value="{{ $category->id }}">{{ getFromJson($category->name, lang()) }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Condition</label>
+                                <select class="select2 form-control" name="condition" id="condition">
+                                    <option value="Choose">Choose</option>
+                                    @foreach($conditions as $condition)
+                                    <option @if(isset($_GET['condition']) && $_GET['condition'] == $condition->id) selected @endif value="{{ $condition->id }}">{{ getFromJson($condition->name, lang()) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="form-col-form-label" for="is_active">Is Active</label>
+                                <select class="select2 form-control @if(isset($_GET['is_active'])) is-invalid @enderror" id="is_active" name="is_active">
+                                    <option value="Choose">Choose</option>
+                                    <option value="1">Yes</option>
+                                    <option value="0">No</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" name="name" class="form-control" value="{{ (isset($_GET['name']))? $_GET['name'] : '' }}" placeholder="Name"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Code</label>
+                                <input type="text" name="code" class="form-control" value="{{ (isset($_GET['code']))? $_GET['code'] : '' }}" placeholder="Code"/>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Price</label>
+                                <input type="text" name="price" class="form-control" value="{{ (isset($_GET['price']))? $_GET['price'] : '' }}" placeholder="Price"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-search"></i> Search</button>
+                    <a href="{{ route('product.index') }}" class="btn btn-warning">Reset</a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card mb-4">
             <div class="card-header">All</div>
             <div class="card-body">
                 <div class="datatable">

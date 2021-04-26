@@ -62,6 +62,10 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="text-right">
+                                <button class="btn btn-primary" type="submit"><i class="czi-sign-in mr-2 ml-n21"></i>{{ trans('login.Sign_in') }}</button>
+                            </div>
+                            <hr class="my-3">
                             <div class="text-center">
 {{--                                <div class="custom-control custom-checkbox">--}}
 {{--                                    <input class="custom-control-input" type="checkbox" checked id="remember_me">--}}
@@ -69,13 +73,9 @@
 {{--                                </div>--}}
                                 <a class="nav-link-inline font-size-sm" href="{{ route('password.request') }}">{{ trans('login.Forgot_password') }}</a>
                             </div>
-                            <hr class="mt-4 mb-4">
+                            <hr class="my-3">
                             <div class="text-center">
                                 <p>{{ trans('login.dont_have_account') }} .. <a class="nav-link-inline font-size-sm" href="{{ route('register') }}">{{ trans('login.create') }}</a></p>
-                            </div>
-                            <hr class="mt-4">
-                            <div class="text-right pt-4">
-                                <button class="btn btn-primary" type="submit"><i class="czi-sign-in mr-2 ml-n21"></i>{{ trans('login.Sign_in') }}</button>
                             </div>
                         </form>
                     </div>

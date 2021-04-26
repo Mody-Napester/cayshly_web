@@ -30,7 +30,7 @@
             <section class="col-lg-8">
                 <!-- Toolbar-->
                 <div class="d-none d-lg-flex justify-content-between align-items-center pt-lg-3 pb-4 pb-lg-5 mb-lg-3">
-                    <h6 class="font-size-base text-light mb-0">{{ trans('point.List_of_your_points') }}: <b>( {{ $user->points()->sum('amount') }} ) {{ trans('point.point') }}</b></h6>
+                    <h6 class="font-size-base text-light mb-0">{{ trans('point.List_of_your_points') }}: <b>( {{ user_points($user->id)['points'] }} ) {{ trans('point.point') }}</b></h6>
                     @include('@public._partials.logout_btn')
                 </div>
 
@@ -50,7 +50,7 @@
                                 @foreach($user->points as $point)
                                     <tr>
                                         <td>{{ custom_date($point->created_at) }}</td>
-                                        <td>{{ $point->amount }}</td>
+                                        <td>{{ $point->amount }} {{ ($point->action == 1)? '+' : '-'}}</td>
                                         <td>{{ getFromJson(lookup('id', $point->lookup_point_reason_id)->name, lang()) }}</td>
                                         <td>
                                             @if(isset($point->product))

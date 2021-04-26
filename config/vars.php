@@ -6,6 +6,8 @@ return [
   'use_https' => false,
   'authorized_users' => [1],
   'pagination' => 10,
+  'registration_points' => 5000,
+  'points_reason_new_registration' => 31,
   'langs' => [
       [
           'name' => 'English',

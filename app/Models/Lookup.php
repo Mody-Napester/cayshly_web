@@ -15,7 +15,7 @@ class Lookup extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id','key','name','is_active','created_by','updated_by',
+        'parent_id','constraint_id','key','name','is_active','created_by','updated_by',
     ];
 
     /**

@@ -10,4 +10,8 @@ return array (
   'Show_password' => 'Show password',
   'Confirm_Password' => 'Confirm Password',
   'Create' => 'Create',
+  'dob' => 'Date of birth',
+  'female' => 'Female',
+  'male' => 'Male',
+  'gender' => 'Gender',
 );

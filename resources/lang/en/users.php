@@ -22,4 +22,5 @@ return array (
   'Confirm_Password' => 'Confirm Password',
   'Subscribe_me_to_Newsletter' => 'Subscribe me to Newsletter',
   'Update_profile' => 'Update profile',
+  'my_Points' => 'My Points',
 );

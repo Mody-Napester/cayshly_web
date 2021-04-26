@@ -20,8 +20,9 @@
             </div>
         </div>
     </div>
-    <!-- Page Content-->
-    <div class="container pb-5 mb-2 mb-md-4">
+
+        <!-- Page Content-->
+        <div class="container pb-5 mb-2 mb-md-4">
         <div class="row rtl-ar">
             <section class="col-lg-8">
                 <!-- Steps-->
@@ -44,50 +45,63 @@
                     </a>
                 </div>
 
-                <div class="card card-body">
-                    <!-- Payment methods accordion-->
-                    <h2 class="h6 pb-3 mb-2">{{ trans('cart.Choose_payment_method') }}</h2>
-                    <div class="accordion mb-2" id="payment-method" role="tablist">
-                        <div class="card">
-                            <div class="card-header" role="tab">
-                                <h3 class="accordion-heading">
-                                    <a class="collapsed" href="#cod" data-toggle="collapse">
-                                        <i class="czi-money-bag mr-2"></i>{{ trans('cart.Cash_on_delivery') }}<span class="accordion-indicator"></span>
-                                    </a>
-                                </h3>
-                            </div>
-                            <div class="collapse show" id="cod" data-parent="#payment-method" role="tabpanel">
-                                <div class="card-body">
-                                    <p>{{ trans('cart.You_will_pay_on_your_stop') }}.</p>
-                                    <div class="custom-control custom-checkbox d-block">
-                                        <input class="custom-control-input" type="radio" checked name="payment_method" id="use_cod">
-                                        <label class="custom-control-label" for="use_cod">{{ trans('cart.Use_cash_on_delivery_to_pay_for_this_order') }}.</label>
+                <form method="get" action="{{ route('public.cart.review') }}">
+                    @csrf
+                    <div class="card card-body">
+                        <!-- Payment methods accordion-->
+                        <h2 class="h6 pb-3 mb-2">{{ trans('cart.Choose_payment_method') }}</h2>
+                        <div class="accordion mb-2" id="payment-method" role="tablist">
+
+                            <div class="card">
+                                    <div class="card-header" role="tab">
+                                        <h3 class="accordion-heading">
+                                            <a class="collapsed" href="#cod" data-toggle="collapse">
+                                                <i class="czi-money-bag mr-2"></i>{{ trans('cart.Cash_on_delivery') }}<span class="accordion-indicator"></span>
+                                            </a>
+                                        </h3>
+                                    </div>
+                                    <div class="collapse show" id="cod" data-parent="#payment-method" role="tabpanel">
+                                        <div class="card-body">
+                                            <p>{{ trans('cart.You_will_pay_on_your_stop') }}.</p>
+                                            <div class="custom-control custom-checkbox d-block">
+                                                <input class="custom-control-input" type="radio" checked name="payment_method" value="cod" id="use_cod">
+                                                <label class="custom-control-label" for="use_cod">{{ trans('cart.Use_cash_on_delivery_to_pay_for_this_order') }}.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="card">
+                                <div class="card-header" role="tab">
+                                    <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>Redeem Reward Points<span class="accordion-indicator"></span></a></h3>
+                                </div>
+                                <div class="collapse show" id="points" data-parent="#payment-method" role="tabpanel">
+                                    <div class="card-body">
+                                        <p>{{ trans('cart.You_currently_have') }} <span class="font-weight-medium">{{ user_points(auth()->user()->id)['points'] }}</span> {{ trans('cart.Reward_Points_to_spend') }}</p>
+                                        <div class="custom-control custom-checkbox d-block">
+                                            <input class="custom-control-input" type="radio" name="payment_method" value="redeem" id="use_points">
+                                            <label class="custom-control-label" for="use_points">
+                                                Redeem with
+                                                @if( user_points(auth()->user()->id)['points'] >= $cart_products->sum('points'))
+                                                    {{ $cart_products->sum('points') }}
+                                                @else
+                                                    {{user_points(auth()->user()->id)['points'] }}
+                                                @endif
+                                                from my total points
+                                                {{ user_points(auth()->user()->id)['points'] }}
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-{{--                        <div class="card">--}}
-{{--                            <div class="card-header" role="tab">--}}
-{{--                                <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>Redeem Reward Points<span class="accordion-indicator"></span></a></h3>--}}
-{{--                            </div>--}}
-{{--                            <div class="collapse show" id="points" data-parent="#payment-method" role="tabpanel">--}}
-{{--                                <div class="card-body">--}}
-{{--                                    <p>You currently have<span class="font-weight-medium">&nbsp;384</span>&nbsp;Reward Points to spend.</p>--}}
-{{--                                    <div class="custom-control custom-checkbox d-block">--}}
-{{--                                        <input class="custom-control-input" type="radio" name="payment_method" id="use_points">--}}
-{{--                                        <label class="custom-control-label" for="use_points">Use my Reward Points to pay for this order.</label>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-                    </div>
 
-                    <!-- Navigation (desktop)-->
-                    <div class="d-none d-lg-flex pt-4">
-                        <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                        <div class="w-50 pl-2"><a class="btn btn-primary btn-block fire-loader-anchor" href="{{ route('public.cart.review') }}"><span class="d-none d-sm-inline">{{ trans('cart.Review_your_order') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Review_order') }}</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></a></div>
+                        <!-- Navigation (desktop)-->
+                        <div class="d-none d-lg-flex pt-4">
+                            <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
+                            <div class="w-50 pl-2"><button class="btn btn-primary btn-block fire-loader-button"><span class="d-none d-sm-inline">{{ trans('cart.Review_your_order') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Review_order') }}</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </section>
 
 
@@ -108,7 +122,7 @@
                                         </h6>
                                         <div class="widget-product-meta">
                                             <span class="text-accent mr-2">{{ $product->price }} EGP</span>
-                                            <span class="text-muted">x {{ $product->quantity }}</span>
+                                            <span class="text-muted">x {{ $product->quantity }} </span>
                                         </div>
                                     </div>
                                 </div>
@@ -121,10 +135,11 @@
                         {{--                        <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Taxes:</span><span class="text-right">$9.<small>50</small></span></li>--}}
                         {{--                        <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Discount:</span><span class="text-right">—</span></li>--}}
                     </ul>
-                    <h3 class="font-weight-normal text-center my-4">{{ $cart_price_sum }} EGP</h3>
-                    @if(auth()->check())
-                        <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.review') }}"><i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Review') }}</a>
-                    @endif
+                    <h3 class="font-weight-normal text-center">{{ $cart_price_sum }} EGP</h3>
+                    <h3 class="font-weight-normal text-center">{{ $cart_products->sum('points') }} {{ trans('cart.points') }}</h3>
+{{--                    @if(auth()->check())--}}
+{{--                        <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.review') }}"><i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Review') }}</a>--}}
+{{--                    @endif--}}
 
                     {{--                    <form class="needs-validation" method="post" novalidate>--}}
                     {{--                        <div class="form-group">--}}
@@ -136,19 +151,19 @@
                 </div>
             </aside>
         </div>
-        <!-- Navigation (mobile)-->
-        <div class="row d-lg-none">
-            <div class="col-lg-8">
-                <div class="d-flex pt-4 mt-3">
-                    @if(auth()->check())
-                        <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                        <div class="w-50 pl-2"><a class="btn btn-primary btn-block fire-loader-anchor" href="{{ route('public.cart.review') }}"><span class="d-none d-sm-inline">{{ trans('cart.Proceed_to_Review') }}</span><span class="d-inline d-sm-none">Next</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></a></div>
-                    @else
-                        <div class="w-100 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                    @endif
-                </div>
-            </div>
-        </div>
+{{--        <!-- Navigation (mobile)-->--}}
+{{--        <div class="row d-lg-none">--}}
+{{--            <div class="col-lg-8">--}}
+{{--                <div class="d-flex pt-4 mt-3">--}}
+{{--                    @if(auth()->check())--}}
+{{--                        <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>--}}
+{{--                        <div class="w-50 pl-2"><a class="btn btn-primary btn-block fire-loader-anchor" href="{{ route('public.cart.review') }}"><span class="d-none d-sm-inline">{{ trans('cart.Proceed_to_Review') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Next') }}</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></a></div>--}}
+{{--                    @else--}}
+{{--                        <div class="w-100 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 
 @endsection

@@ -109,7 +109,6 @@ Route::group([
     Route::get('point', [PointPublicController::class, 'index'])->name('public.point.index');
 });
 
-
 Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth',
@@ -145,6 +144,11 @@ Route::group([
     Route::get('ticket', [TicketController::class, 'index'])->name('dashboard.ticket.index');
     Route::resource('user', UserController::class);
     Route::get('user/login_as/{user}', [UserController::class, 'login_as'])->name('user.login_as');
+    Route::get('user/points/{user}/show', [UserController::class, 'show_user_points'])->name('user.points.show');
+
+    Route::get('user/control/points', [UserController::class, 'get_control_user_points'])->name('user.points.control.get');
+    Route::post('user/control/points', [UserController::class, 'post_control_user_points'])->name('user.points.control.post');
+
 //        ->names([
 //        'index' => 'dashboard.user.index',
 //        'create' => 'dashboard.user.create',

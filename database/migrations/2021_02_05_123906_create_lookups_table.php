@@ -17,6 +17,7 @@ class CreateLookupsTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->integer('parent_id')->unsigned();
+            $table->integer('constraint_id')->nullable()->unsigned();
             $table->string('key')->unique();
             $table->text('name');
             $table->boolean('is_active')->default(1);

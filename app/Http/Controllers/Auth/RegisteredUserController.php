@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Cart;
+use App\Models\Point;
 use App\Models\Product;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
@@ -56,6 +57,14 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
 
+        // Add Points For Registration
+        $point = new Point();
+        $point->user_id = auth()->user()->id;
+        $point->amount = config('vars.registration_points');
+        $point->lookup_point_reason_id = config('vars.points_reason_new_registration'); // new_registration
+        $point->product_id = null;
+        $point->save();
+
         event(new Registered($user));
 
         return redirect(RouteServiceProvider::HOME);
@@ -67,8 +76,6 @@ class RegisteredUserController extends Controller
      */
     public function order_store(Request $request)
     {
-//        dd(url()->previous());
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -113,6 +120,14 @@ class RegisteredUserController extends Controller
                 }
             }
         }
+
+        // Add Points For Registration
+        $point = new Point();
+        $point->user_id = auth()->user()->id;
+        $point->amount = config('vars.registration_points');
+        $point->lookup_point_reason_id = config('vars.points_reason_new_registration'); // new_registration
+        $point->product_id = null;
+        $point->save();
 
         $data['message'] = [
             'type'=>'success',

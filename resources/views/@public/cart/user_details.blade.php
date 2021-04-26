@@ -75,9 +75,12 @@
                         <div class="card card-body cart-addresses">
                             <!-- Shipping address-->
                             <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">{{ trans('cart.Shipping_address') }}</h2>
+                            @if(auth()->check())
+                            <form action="{{ route('public.cart.payment') }}" method="get">
+                            @endif
 
                             @if(auth()->check())
-                                <form action="{{ route('public.cart.payment') }}" method="get">
+
                                     @csrf
                                     <div class="mb-3 text-right">
                                         <a class="btn btn-success add-address-view"><i class="czi-map"></i> {{ trans('cart.Add_Address') }}</a>
@@ -100,7 +103,7 @@
                                             {{ trans('cart.You_have_no_address') }}
                                         </div>
                                     @endif
-                                </form>
+
                             @else
                                 <div class="text-center">
                                     <p>{{ trans('cart.You_are_not_login_please_login_first') }}</p>
@@ -190,6 +193,10 @@
                                     </div>
                                 @endif
                             </div>
+
+                            @if(auth()->check())
+                                </form>
+                            @endif
                         </div>
 
                 </section>

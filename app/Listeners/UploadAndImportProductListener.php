@@ -27,6 +27,7 @@ class UploadAndImportProductListener
      */
     public function handle($event)
     {
+
         $data['filepath'] = $event->filepath;
         $data['brand_id'] = $event->brand_id;
         $data['store_id'] = $event->store_id;

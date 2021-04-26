@@ -32,4 +32,6 @@ return array (
   'My_Cart' => 'My Cart',
   'Departments' => 'Departments',
   'By_Free' => 'By Free',
+  'Search' => 'Search',
+  'my-points' => 'My points',
 );

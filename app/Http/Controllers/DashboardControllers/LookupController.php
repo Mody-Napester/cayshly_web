@@ -78,6 +78,7 @@ class LookupController extends Controller
             'parent_id' => $parent,
             'key' => Str::slug($name['en'], '_'),
             'name' => json_encode($name),
+            'constraint_id' => (isset($request->constraint_id) && $request->constraint_id != 0)? $request->constraint_id : 0,
             'is_active' => ($request->is_active == 1)? 1 : 0,
             'created_by' => auth()->user()->id,
         ]);
@@ -173,6 +174,7 @@ class LookupController extends Controller
             'parent_id' => $parent,
             'key' => Str::slug($name['en'], '_'),
             'name' => json_encode($name),
+            'constraint_id' => (isset($request->constraint_id) && $request->constraint_id != 0)? $request->constraint_id : 0,
             'is_active' => ($request->is_active == 1)? 1 : 0,
             'updated_by' => auth()->user()->id,
         ]);

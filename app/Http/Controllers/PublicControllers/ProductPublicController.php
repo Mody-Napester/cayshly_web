@@ -30,7 +30,14 @@ class ProductPublicController extends Controller
      */
     public function show($product)
     {
-        $data['product'] = Product::where('slug', $product)->first();
+        $data['product'] = Product::where('uuid', $product)->orWhere('slug', $product)->first();
+
+        if($data['product']->count() > 0){
+            $data['product']->update(['views' => DB::raw('views + 1')]);
+        }else{
+            return back();
+        }
+
         if($data['product']->picture == ''){
             $data['product']->picture = 'placeholder.jpg';
         }

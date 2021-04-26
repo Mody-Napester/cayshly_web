@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\DashboardControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -16,6 +17,8 @@ class DashboardController extends Controller
             return redirect('/');
         }
 
-        return view('@dashboard/home/index');
+        $data['resources'] = Order::orderBy('id', 'desc')->where('created_at', 'like', "%" . date('Y-m-d') . "%")->get();
+
+        return view('@dashboard/home/index', $data);
     }
 }

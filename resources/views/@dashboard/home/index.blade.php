@@ -105,222 +105,257 @@
 {{--        </div>--}}
 
         <div class="row">
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-dark text-white mb-4">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">Resent Today Orders ({{ $resources->count() }})</div>
                     <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Users</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\User::count() }}</div>
-                            </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                        <div class="datatable">
+                            <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Created by</th>
+                                    <th>Created at</th>
+                                    <th>View</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($resources as $resource)
+                                    <tr>
+                                        <td>{{ $resource->order_number }}</td>
+                                        <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
+                                        <td>{{ custom_date($resource->created_at) }}</td>
+                                        <td>
+                                            <a href="{{ route('dashboard.order.details', $resource->uuid) }}" class="badge badge-warning">Details</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
             </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-warning text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Categories</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Category::count() }}</div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-dark text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Users</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\User::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('user.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-success text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Brands</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Brand::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Categories</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Category::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('category.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Stores</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Store::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Brands</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Brand::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('brand.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View Requests</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-accent text-black mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-black-75 small">Products</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Product::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Stores</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Store::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-black-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('store.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-black stretched-link" href="#">View</a>
-                        <div class="small text-black"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-purple text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Orders</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Order::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-accent text-black mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-black-75 small">Products</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Product::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-black-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-black stretched-link" href="{{ route('product.index') }}">View</a>
+                                <div class="small text-black"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-primary text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Blogs</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Blog::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-purple text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Orders</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Order::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('dashboard.order.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-pink text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Subscribers</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Subscriber::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Blogs</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Blog::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('blog.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-cyan text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Scripts</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Script::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-pink text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Subscribers</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Subscriber::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('dashboard.subscriber.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-orange text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Offers</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Offer::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-cyan text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Scripts</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Script::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('script.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-danger text-white mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-white-75 small">Slider</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Slider::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-orange text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Offers</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Offer::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('offer.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="#">View</a>
-                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xxl-3 col-lg-3">
-                <div class="card bg-accent text-black mb-4">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="mr-3">
-                                <div class="text-black-75 small">Social Accounts</div>
-                                <div class="text-lg font-weight-bold">{{ \App\Models\Social::count() }}</div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-white-75 small">Slider</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Slider::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-white-50" data-feather="check-square"></i>
+                                </div>
                             </div>
-                            <i class="feather-xl text-black-50" data-feather="check-square"></i>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="{{ route('slider.index') }}">View</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-black stretched-link" href="#">View</a>
-                        <div class="small text-black"><i class="fas fa-angle-right"></i></div>
+                    <div class="col-xxl-4 col-lg-4">
+                        <div class="card bg-accent text-black mb-4">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-3">
+                                        <div class="text-black-75 small">Social Accounts</div>
+                                        <div class="text-lg font-weight-bold">{{ \App\Models\Social::count() }}</div>
+                                    </div>
+                                    <i class="feather-xl text-black-50" data-feather="check-square"></i>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-black stretched-link" href="{{ route('social.index') }}">View</a>
+                                <div class="small text-black"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
                     </div>
+                    {{--            <div class="col-xxl-4 col-lg-4">--}}
+                    {{--                <div class="card bg-primary border-0">--}}
+                    {{--                    <div class="card-body">--}}
+                    {{--                        <h5 class="text-white-50">Budget Overview</h5>--}}
+                    {{--                        <div class="mb-4">--}}
+                    {{--                            <span class="display-4 text-white">$48k</span>--}}
+                    {{--                            <span class="text-white-50">per year</span>--}}
+                    {{--                        </div>--}}
+                    {{--                        <div class="progress bg-white-25 rounded-pill" style="height: 0.5rem"><div class="progress-bar bg-white w-75 rounded-pill" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>--}}
+                    {{--                    </div>--}}
+                    {{--                </div>--}}
+                    {{--            </div>--}}
                 </div>
             </div>
-{{--            <div class="col-xxl-3 col-lg-3">--}}
-{{--                <div class="card bg-primary border-0">--}}
-{{--                    <div class="card-body">--}}
-{{--                        <h5 class="text-white-50">Budget Overview</h5>--}}
-{{--                        <div class="mb-4">--}}
-{{--                            <span class="display-4 text-white">$48k</span>--}}
-{{--                            <span class="text-white-50">per year</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="progress bg-white-25 rounded-pill" style="height: 0.5rem"><div class="progress-bar bg-white w-75 rounded-pill" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div></div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         </div>
     </div>
 

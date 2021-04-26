@@ -12,4 +12,10 @@ return array (
   'Updated_successfully' => 'تم التحديث بنجاح',
   'please_select_address' => 'اختر عنوان',
   'sorry_error_exists' => 'خطأ',
+  'Removed_from_cart' => 'تمت الازالة من العربة',
+  'Product_deleted' => 'تم حذف المنتج',
+  'Not_Removed_from_cart' => 'لم يتم حذف العنصر',
+  'Sorry_item_not_fount' => 'نأسف .. العنصر غير موجود',
+  'Cart_updated_successfully' => 'تم تحديث عربة التسوق بنجاح',
+  'Sorry_no_item_in_the_cart' => 'ناسف .. لا توجد عناصر فى عربة التسوق',
 );

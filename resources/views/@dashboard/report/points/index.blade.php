@@ -10,7 +10,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Points ({{ $resources->sum('amount') }})
+                            Points ({{ $resources->where('action', 1)->sum('amount') }})
                         </h1>
                         <div class="page-header-subtitle">All Points Data</div>
                     </div>
@@ -45,7 +45,7 @@
                             <tr>
                                 <td>{{ $resource->id }}</td>
                                 <td>{{ $resource->user->name }}</td>
-                                <td>{{ $resource->amount }}</td>
+                                <td>{{ $resource->amount }} {{ ($resource->action == 1)? '+' : '-'}}</td>
                                 <td>{{ getFromJson(lookup('id', $resource->lookup_point_reason_id)->name, lang()) }}</td>
                                 <td>
                                     @if(isset($resource->product))

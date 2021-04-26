@@ -32,4 +32,6 @@ return array (
   'offers' => 'العروض',
   'Stay_informed' => 'للاطلاع على احدث العروض',
   'Shop_departments' => 'تسوق فى الاقسام',
+  'Search' => 'بحث',
+  'my-points' => 'نقاطى',
 );
