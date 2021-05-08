@@ -10,7 +10,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Orders ({{ $resources->count() }})
+                            Orders ({{ \App\Models\Order::count() }})
                         </h1>
                         <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
@@ -115,7 +115,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="mt-3">{{ $resources->links() }}</div>
+                <div class="mt-3">{{ $resources->appends($_GET)->links() }}</div>
             </div>
         </div>
     </div>

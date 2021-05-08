@@ -10,7 +10,7 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Products ({{ $resources->count() }})
+                            Products ({{ \App\Models\Product::count() }})
                         </h1>
                         <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
@@ -135,7 +135,8 @@
                             <th>Category</th>
                             <th>Store</th>
                             <th>Slug</th>
-                            <th>Name</th>
+                            <th>Name EN</th>
+                            <th>Name AR</th>
                             <th>Code</th>
                             <th>Price</th>
                             <th>Points</th>
@@ -174,7 +175,8 @@
                                 </td>
                                 <td>{{ (isset($resource->store))? $resource->store->name : '-' }}</td>
                                 <td>{{ $resource->slug }}</td>
-                                <td>{{ getFromJson($resource->name , lang()) }}</td>
+                                <td>{{ getFromJson($resource->name , 'en') }}</td>
+                                <td>{{ getFromJson($resource->name , 'ar') }}</td>
                                 <td>{{ $resource->code }}</td>
                                 <td>{{ $resource->price }}</td>
                                 <td>{{ $resource->points }}</td>
@@ -210,7 +212,7 @@
                     </table>
                 </div>
 
-                {{ $resources->links() }}
+                {{ $resources->appends($_GET)->links() }}
             </div>
         </div>
     </div>

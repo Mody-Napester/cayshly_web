@@ -112,6 +112,12 @@ class ProductController extends Controller
             return redirect('/');
         }
 
+//        $rrr = json_encode($request->name);
+//        dd(explode('"', $rrr));
+
+        // $r = utf8_encode($request->name);
+        // dd(utf8_decode($r));
+
         $data['brands'] = Brand::all();
         $data['categories'] = Category::where('parent_id', '<>' ,0)->get();
         $data['stores'] = Store::all();
@@ -133,6 +139,13 @@ class ProductController extends Controller
                 $data['resources'] = $data['resources']->where('lookup_condition_id', $request->condition);
             }
             if($request->has('name') && !is_null($request->name)){
+
+//                $data['resources'] = $data['resources']->where(function ($r) use ($request){
+//                    $encoded_name = utf8_encode($request->name);
+//                    $r->where('name', 'like', "%".$request->name."%");
+//                    $r->orWhere('name', 'like', "%".$encoded_name."%");
+//                });
+
                 $data['resources'] = $data['resources']->where('name', 'like', "%".$request->name."%");
             }
             if($request->has('code') && !is_null($request->code)){
