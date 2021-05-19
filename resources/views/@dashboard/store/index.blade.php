@@ -47,6 +47,7 @@
                             <th>Picture</th>
                             <th>Cover</th>
                             <th>Authorized</th>
+                            <th>Views</th>
                             <th>Active</th>
                             <th>Created by</th>
                             <th>Updated by</th>
@@ -81,6 +82,7 @@
                                         <span class="badge badge-danger badge-pill">No</span>
                                     @endif
                                 </td>
+                                <td>{{ $resource->views }}</td>
                                 <td>
                                     @if($resource->is_active == 1)
                                         <span class="badge badge-success badge-pill">Yes</span>

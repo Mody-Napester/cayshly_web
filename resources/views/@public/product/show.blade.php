@@ -64,24 +64,23 @@
                                         <div class="cz-preview-item active" id="first"><img class="cz-image-zoom" src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" data-zoom="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="Product image">
                                             <div class="cz-image-zoom-pane"></div>
                                         </div>
-                                        <div class="cz-preview-item" id="second"><img class="cz-image-zoom" src="img/shop/single/gallery/06.jpg" data-zoom="img/shop/single/gallery/06.jpg" alt="Product image">
-                                            <div class="cz-image-zoom-pane"></div>
-                                        </div>
-                                        <div class="cz-preview-item" id="third"><img class="cz-image-zoom" src="img/shop/single/gallery/07.jpg" data-zoom="img/shop/single/gallery/07.jpg" alt="Product image">
-                                            <div class="cz-image-zoom-pane"></div>
-                                        </div>
-                                        <div class="cz-preview-item" id="fourth"><img class="cz-image-zoom" src="img/shop/single/gallery/08.jpg" data-zoom="img/shop/single/gallery/08.jpg" alt="Product image">
-                                            <div class="cz-image-zoom-pane"></div>
-                                        </div>
+
+                                        @if($product->images()->count() > 0)
+                                            @foreach($product->images as $image)
+                                                <div class="cz-preview-item" id="{{ $image->uuid }}"><img class="cz-image-zoom" src="{{ url('assets_public/images/product/picture/'. $image->image) }}" data-zoom="{{ url('assets_public/images/product/picture/'. $image->image) }}" alt="Product image">
+                                                    <div class="cz-image-zoom-pane"></div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                     <div class="cz-thumblist order-sm-1">
-                                        <a class="cz-thumblist-item active" href="#first"><img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="Product thumb"></a>
-{{--                                        <a class="cz-thumblist-item" href="#second"><img src="img/shop/single/gallery/th06.jpg" alt="Product thumb"></a>--}}
-{{--                                        <a class="cz-thumblist-item" href="#third"><img src="img/shop/single/gallery/th07.jpg" alt="Product thumb"></a>--}}
-{{--                                        <a class="cz-thumblist-item" href="#fourth"><img src="img/shop/single/gallery/th08.jpg" alt="Product thumb"></a>--}}
-{{--                                        <a class="cz-thumblist-item video-item" href="https://www.youtube.com/watch?v=nrQevwouWn0">--}}
-{{--                                            <div class="cz-thumblist-item-text"><i class="czi-video"></i>Video</div>--}}
-{{--                                        </a>--}}
+                                        <a class="cz-thumblist-item active" href="#first"><img src="{{ url('assets_public/images/product/picture/'. $product->picture) }}" alt="Product thumb"></a>
+
+                                        @if($product->images()->count() > 0)
+                                            @foreach($product->images as $image)
+                                                <a class="cz-thumblist-item" href="#{{ $image->uuid }}"><img src="{{ url('assets_public/images/product/picture/'. $image->image) }}" alt="Product thumb"></a>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -135,10 +134,10 @@
                                         <div class="mt-2 mb-2">
                                             <div class="font-size-sm"><span class="text-heading font-weight-medium mr-1">{{ getFromJson( $option['parent']->name , lang()) }}</span></div>
                                             <div class="d-flex mb-1">
-                                                @foreach($option['child'] as $child)
+                                                @foreach($option['child'] as $key => $child)
                                                     <div class="custom-control custom-option custom-control-inline mb-2">
-                                                        <input class="custom-control-input" type="radio" name="" id="" value="" checked="">
-                                                        <label class="custom-option-label" for="">
+                                                        <input class="product_option" type="radio" name="option" id="options_{{ $child[0]->uuid }}" @if($key == 0) checked @endif value="{{ $child[0]->uuid }}">
+                                                        <label class="custom-option-label" for="options_{{ $child[0]->uuid }}">
                                                             {{ getFromJson( $child[0]->name , lang()) }}
                                                         </label>
                                                     </div>
@@ -312,3 +311,9 @@
     </div>
 
 @endsection
+
+{{--@section('')--}}
+{{--    <script>--}}
+{{--        cz-thumblist-item=--}}
+{{--    </script>--}}
+{{--@endsection--}}

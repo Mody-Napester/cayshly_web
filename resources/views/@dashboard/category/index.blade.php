@@ -46,6 +46,7 @@
                             <th>Icon</th>
                             <th>Picture</th>
                             <th>Cover</th>
+                            <th>Views</th>
                             <th>Active</th>
                             <th>Created by</th>
                             <th>Updated by</th>
@@ -79,6 +80,7 @@
                                         <img style="width:100%;" src="{{ url('assets_public/images/category/cover/'. $resource->cover) }}" alt="">
                                     </div>
                                 </td>
+                                <td>{{ $resource->views }}</td>
                                 <td>
                                     @if($resource->is_active == 1)
                                         <span class="badge badge-success badge-pill">Yes</span>

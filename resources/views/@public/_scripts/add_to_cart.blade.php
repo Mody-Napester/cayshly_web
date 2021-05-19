@@ -3,7 +3,10 @@
         $(document).on('click', '.add_to_cart', function () {
             var that = $(this);
             var item = $(this).attr('data-item');
+            var option = $('.product_option:checked').val();
             var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
+            console.log(option);
 
             $.ajax({
                 url: "{{ route('public.cart.store') }}",
@@ -11,7 +14,8 @@
                 dataType: 'json',
                 data: {
                     _token: CSRF_TOKEN,
-                    item : item
+                    item : item,
+                    option : option
                 },
                 beforeSend : function(){
                     addLoader();

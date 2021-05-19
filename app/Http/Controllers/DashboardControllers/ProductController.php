@@ -10,6 +10,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Lookup;
 use App\Models\Option;
+use App\Models\ProductImage;
 use App\Models\Specification;
 use App\Models\Store;
 use App\Models\User;
@@ -161,7 +162,7 @@ class ProductController extends Controller
             $data['resources'] = $data['resources']->paginate(50);
 
         }else{
-            $data['resources'] = Product::paginate(config('vars.pagination'));
+            $data['resources'] = Product::paginate(50);
         }
 
         return view('@dashboard.product.index', $data);
@@ -301,6 +302,28 @@ class ProductController extends Controller
             }
         }
 
+        if ($request->hasFile('pictures')){
+            foreach ($request->file('pictures') as $key => $picture){
+                $upload = upload_file('image', $picture , 'assets_public/images/product/picture');
+
+                if ($upload['status'] == true){
+                    $picture_name = $upload['filename'];
+
+                    if($picture != ''){
+                        $picture_data = new ProductImage();
+                        $picture_data->product_id = $resource->id;
+                        $picture_data->image = $picture_name;
+                        $picture_data->save();
+                    }
+                }else{
+                    return back()->with('message',[
+                        'type'=> 'danger',
+                        'text'=> 'Image ' . $upload['message']
+                    ]);
+                }
+            }
+        }
+
         // Return
         if($resource){
             return redirect(route('product.index'))->with('message', [
@@ -365,6 +388,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
 //        dd($request->all());
+
 //        $d = ($request->has('discount_type') && in_array($request->discount_type, [2,3]))? $request->discount_unit : '';
 //        dd($d);
         // Check Authority
@@ -453,6 +477,36 @@ class ProductController extends Controller
             'is_active' => ($request->is_active == 1)? 1 : 0,
             'updated_by' => auth()->user()->id,
         ]);
+
+        if ($request->has('prepictures')) {
+            foreach($data['resource']->images as $image){
+                if(!in_array($image->uuid, $request->prepictures)){
+                    $image->delete();
+                }
+            }
+        }
+
+        if ($request->hasFile('pictures')){
+            foreach ($request->file('pictures') as $key => $picture){
+                $upload = upload_file('image', $picture , 'assets_public/images/product/picture');
+
+                if ($upload['status'] == true){
+                    $picture_name = $upload['filename'];
+
+                    if($picture != ''){
+                        $picture_data = new ProductImage();
+                        $picture_data->product_id = $data['resource']->id;
+                        $picture_data->image = $picture_name;
+                        $picture_data->save();
+                    }
+                }else{
+                    return back()->with('message',[
+                        'type'=> 'danger',
+                        'text'=> 'Image ' . $upload['message']
+                    ]);
+                }
+            }
+        }
 
         // Relations
         if ($request->has('category')){

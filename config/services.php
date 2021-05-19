@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'client_id' => '1602455719867792',
+        'client_secret' => '8ae420cc7f3071dc96dee42684a5e083',
+        'redirect' => 'http://localhost/apps/cayshly/public/auth/facebook/callback',
+    ],
+
 ];

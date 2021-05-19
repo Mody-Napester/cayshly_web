@@ -136,4 +136,12 @@ class Product extends Model
     {
         return $this->belongsTo(Lookup::class, 'lookup_condition_id', 'id');
     }
+
+    /**
+     *  ProductImages Condition Relation
+     */
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }

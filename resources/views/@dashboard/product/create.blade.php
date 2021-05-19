@@ -2,6 +2,11 @@
 
 @section('page_title') Product @endsection
 
+@section('head_styles')
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="{{ url('assets_dashboard/vendor/image_uploader/image-uploader.min.css') }}" rel="stylesheet" />
+@endsection
+
 @section('head_scripts')
     <script src="{{ url('assets_dashboard/vendor/ckeditor/ckeditor.js') }}"></script>
     <!-- provide the csrf token -->
@@ -183,10 +188,21 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label class="form-col-form-label" for="picture">Picture</label>
+                                        <label class="form-col-form-label" for="picture">Default Picture</label>
                                         <input class="form-control @error('picture') is-invalid @enderror" id="picture" type="file" name="picture">
 
                                         @error('picture')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="form-col-form-label" for="">Other Pictures</label>
+                                        <div class="input-images"></div>
+
+                                        @error('pictures')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -288,8 +304,20 @@
 @endsection
 
 @section('footer_scripts')
+    <script src="{{ url('assets_dashboard/vendor/image_uploader/image-uploader.min.js') }}"></script>
+
     <script !src="">
         $(document).ready(function () {
+            $('.input-images').imageUploader({
+                label: 'Drag & Drop files here or click to browse',
+                // preloaded: [
+                //     {id: 1, src: 'https://picsum.photos/500/500?random=1'},
+                //     {id: 2, src: 'https://picsum.photos/500/500?random=2'},
+                // ],
+                imagesInputName: 'pictures',
+                // preloadedInputName: 'Custom Name',
+            });
+
             $(document).on('change', '#category', function(){
                 var categories = $(this).val();
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');

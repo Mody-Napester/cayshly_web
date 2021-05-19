@@ -48,4 +48,50 @@ class AddressPublicController extends Controller
         }
     }
 
+    /**
+     * Update user address
+     */
+    public function update(Request $request, $address){
+        $data['user'] = auth()->user();
+        $data['address'] = Address::where('uuid', $address)->first();
+
+        $resource = $data['address']->update([
+            'address' => $request->address,
+        ]);
+
+        if($resource){
+            return back()->with('message', [
+                'type' => 'success',
+                'text' => 'Updated successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'danger',
+                'text' => 'Some thing wrong, try again later.'
+            ]);
+        }
+    }
+
+    /**
+     * Delete user address
+     */
+    public function delete($address){
+        $data['user'] = auth()->user();
+        $data['address'] = Address::where('uuid', $address)->first();
+
+        if($data['address'] and $data['address']->user_id == $data['user']->id){
+            $data['address']->delete();
+
+            return back()->with('message', [
+                'type' => 'success',
+                'text' => 'Deleted successfully'
+            ]);
+        }else{
+            return back()->with('message', [
+                'type' => 'danger',
+                'text' => 'Some thing wrong, try again later.'
+            ]);
+        }
+    }
+
 }

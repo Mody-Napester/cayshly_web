@@ -24,7 +24,7 @@ class StorePublicController extends Controller
     public function show($store){
         $data['store'] = Store::getOneActiveBy('slug', $store);
 
-        if($data['store']->count() > 0){
+        if($data['store']){
             $data['store']->update(['views' => DB::raw('views + 1')]);
         }else{
             return back();

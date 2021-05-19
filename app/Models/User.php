@@ -35,6 +35,7 @@ class User extends Authenticatable
         'created_by',
         'updated_by',
         'password',
+        'facebook_id',
     ];
 
     /**

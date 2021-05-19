@@ -44,6 +44,7 @@ use \App\Http\Controllers\PublicControllers\CartPublicController;
 use \App\Http\Controllers\PublicControllers\AddressPublicController;
 use \App\Http\Controllers\PublicControllers\OrderPublicController;
 use \App\Http\Controllers\PublicControllers\SearchPublicController;
+use \App\Http\Controllers\PublicControllers\SocialAuthPublicController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -81,6 +82,10 @@ Route::get('cart/user/details', [CartPublicController::class, 'user_details'])->
 // Search
 Route::get('search/{product}', [SearchPublicController::class, 'index'])->name('public.search.index');
 
+// Social Auth
+Route::get('auth/facebook', [SocialAuthPublicController::class, 'redirectToFacebook']);
+Route::get('auth/facebook/callback', [SocialAuthPublicController::class, 'facebookSignin']);
+
 Route::group([
     'middleware' => 'auth',
 ], function () {
@@ -91,6 +96,8 @@ Route::group([
     // Address
     Route::post('address', [AddressPublicController::class, 'store'])->name('public.address.store');
     Route::get('address', [AddressPublicController::class, 'index'])->name('public.address.index');
+    Route::post('address/update/{address}', [AddressPublicController::class, 'update'])->name('public.address.update');
+    Route::get('address/delete/{address}', [AddressPublicController::class, 'delete'])->name('public.address.delete');
 
     // Cart
     Route::get('cart/payment', [CartPublicController::class, 'payment'])->name('public.cart.payment');

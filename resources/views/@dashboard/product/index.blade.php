@@ -126,7 +126,7 @@
             <div class="card-header">All</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-responsive table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-sm table-responsive table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -322,4 +322,16 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer_scripts')
+    <script !src="">
+        $(document).ready(function() {
+            $('#datatable-custom').DataTable( {
+                "paging":   false,
+                "ordering": false,
+                "info":     false
+            } );
+        } );
+    </script>
 @endsection

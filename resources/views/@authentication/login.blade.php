@@ -31,14 +31,14 @@
                 <div class="card border-0 box-shadow">
                     <div class="card-body">
                         <h2 class="h4 mb-1">{{ trans('login.Sign_in') }}</h2>
-{{--                        <div class="py-3">--}}
-{{--                            <h3 class="d-inline-block align-middle font-size-base font-weight-semibold mb-2 mr-2">With social account:</h3>--}}
-{{--                            <div class="d-inline-block align-middle">--}}
+                        <div class="py-3" style="text-align: center">
+                            <h3 class="d-inline-block align-middle font-size-base font-weight-semibold mb-2 mr-2">{{ trans('login.With_social_account') }}:</h3>
+                            <div class="d-inline-block align-middle">
+                                <a class="social-btn sb-facebook mr-2 mb-2" href="{{ url('auth/facebook') }}" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a>
 {{--                                <a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a>--}}
-{{--                                <a class="social-btn sb-facebook mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a>--}}
 {{--                                <a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                            </div>
+                        </div>
                         <hr class="mt-3 mb-3">
 {{--                        <h3 class="font-size-base pt-4 pb-2">Or using form below</h3>--}}
                         <form method="POST" action="{{ route('login') }}" class="needs-validation" novalidate>

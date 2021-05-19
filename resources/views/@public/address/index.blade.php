@@ -47,14 +47,23 @@
                             </thead>
                             <tbody>
                             @foreach($user->addresses as $address)
-                                <tr>
-                                    <td class="py-3 align-middle">{{ $address->address }} <span class="align-middle badge badge-info ml-2">Primary</span></td>
-{{--                                    <td style="width: 20%;" class="py-3 align-middle">--}}
-{{--                                        <a class="nav-link-style mr-2" href="#" data-toggle="tooltip" title="Edit"><i class="czi-edit"></i></a><a class="nav-link-style text-danger" href="#" data-toggle="tooltip" title="Remove">--}}
-{{--                                            <div class="czi-trash"></div>--}}
-{{--                                        </a>--}}
-{{--                                    </td>--}}
-                                </tr>
+                                <form action="{{ route('public.address.update', $address->uuid) }}" method="post">
+                                    @csrf
+                                    <tr>
+                                        <td class="py-3 align-middle">
+                                            <input class="form-control" type="text" name="address" id="address{{ $address->uuid }}" value="{{ $address->address }}">
+
+{{--                                        <span class="align-middle badge badge-info ml-2">Primary</span>--}}
+                                        </td>
+                                        <td style="width: 20%;" class="py-3 align-middle">
+                                            <button class="btn nav-link-style mr-2" type="submit" data-toggle="tooltip" title="Edit"><i class="czi-reload"></i></button>
+
+                                            <a class="nav-link-style text-danger" onclick="return confirm('Are you sure you want to delete this item?');" href="{{ route('public.address.delete', $address->uuid) }}" data-toggle="tooltip" title="Remove">
+                                                <div class="czi-trash"></div>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </form>
                             @endforeach
                             </tbody>
                         </table>
