@@ -119,7 +119,8 @@ class OrderController extends Controller
                     if ($deliver_status_id == 23){
                         if($detail->quantity_delivered > 0){
                             // Remove Points
-                            $totalPointsToRemove = $detail->product_points * $detail->quantity_delivered;
+//                            $totalPointsToRemove = $detail->product_points * $detail->quantity_delivered;
+                            $totalPointsToRemove = $detail->product_price * 100;
                             if($userTotalPoints >= $totalPointsToRemove){
                                 $pointsToRemove = $userTotalPoints - $totalPointsToRemove;
                                 $userTotalPoints = $userTotalPoints - $pointsToRemove;
@@ -128,13 +129,16 @@ class OrderController extends Controller
                                 $userTotalPoints = $userTotalPoints - $pointsToRemove;
                             }
 
-                            $point_up = new Point();
-                            $point_up->user_id = $data['order']->user_id;
-                            $point_up->amount = $pointsToRemove;
-                            $point_up->lookup_point_reason_id = 34; // buy_products_by_redeem_points
-                            $point_up->product_id = $detail->product_id;
-                            $point_up->action = 0;
-                            $point_up->save();
+                            if($data['order']->lookup_payment_method_id == 2) // Redeem
+                            {
+                                $point_up = new Point();
+                                $point_up->user_id = $data['order']->user_id;
+                                $point_up->amount = $pointsToRemove;
+                                $point_up->lookup_point_reason_id = 34; // buy_products_by_redeem_points
+                                $point_up->product_id = $detail->product_id;
+                                $point_up->action = 0;
+                                $point_up->save();
+                            }
 
                             $point = new Point();
                             $point->user_id = $data['order']->user_id;

@@ -1,7 +1,8 @@
 <div class="card product-card">
-    <span class="badge badge-success badge-shadow">{{ trans('partials.New') }}</span>
     @if($product->discount_type != 1)
         <span class="badge badge-danger badge-shadow">{{ getProductAfterDiscount($product)['discount'] }}</span>
+    @else
+        <span class="badge badge-success badge-shadow">{{ trans('partials.New') }}</span>
     @endif
 
     <div class="product-card-actions d-flex align-items-center">
@@ -22,7 +23,9 @@
         <img style="height: 100%;" src="{{ url('assets_public/images/product/picture/'. ( ($product->picture == '')? 'placeholder.jpg' : $product->picture)) }}" alt="{{ getFromJson($product->name , lang()) }}">
     </a>
     <div class="card-body py-2">
+        @if($product->store)
         <a class="product-meta d-block font-size-xs pb-1 fire-loader-anchor" href="{{ route('public.store.show', $product->store->slug) }}">{{ $product->store->name }}</a>
+        @endif
         <h3 class="product-title font-size-sm" style="height: 40px;">
             <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->uuid) }}">{{ getFromJson($product->name , lang()) }}</a>
         </h3>

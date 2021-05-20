@@ -35,8 +35,8 @@
                             <h3 class="d-inline-block align-middle font-size-base font-weight-semibold mb-2 mr-2">{{ trans('login.With_social_account') }}:</h3>
                             <div class="d-inline-block align-middle">
                                 <a class="social-btn sb-facebook mr-2 mb-2" href="{{ url('auth/facebook') }}" data-toggle="tooltip" title="Sign in with Facebook"><i class="czi-facebook"></i></a>
-{{--                                <a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a>--}}
-{{--                                <a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a>--}}
+                                <a class="social-btn sb-twitter mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Twitter"><i class="czi-twitter"></i></a>
+                                {{--                                <a class="social-btn sb-google mr-2 mb-2" href="#" data-toggle="tooltip" title="Sign in with Google"><i class="czi-google"></i></a>--}}
                             </div>
                         </div>
                         <hr class="mt-3 mb-3">

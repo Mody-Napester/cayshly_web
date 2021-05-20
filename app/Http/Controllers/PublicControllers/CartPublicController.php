@@ -28,7 +28,7 @@ class CartPublicController extends Controller
     public function store(Request $request){
         $item = ($request->has('item'))? $request->item : null;
         $option = ($request->has('option'))? $request->option : null;
-        
+
         if(!is_null($item)){
             $product = Product::getOneBy('uuid', $item);
             if($product){
@@ -42,6 +42,7 @@ class CartPublicController extends Controller
                             'user_id' => auth()->user()->id,
                             'product_id' => $product->id,
                             'quantity' => 1,
+                            'options' => $options,
                         ]);
 
                         $data['message'] = [

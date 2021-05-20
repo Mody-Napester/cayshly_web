@@ -9,4 +9,5 @@ return array (
   'dont_have_account' => 'dont have account',
   'create' => 'Create new account',
   'Forgot_password' => 'Forgot password?',
+  'With_social_account' => 'With social account',
 );

@@ -72,21 +72,26 @@
                                 </div>
                             <div class="card">
                                 <div class="card-header" role="tab">
-                                    <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>Redeem Reward Points<span class="accordion-indicator"></span></a></h3>
+                                    <h3 class="accordion-heading"><a class="collapsed" href="#points" data-toggle="collapse"><i class="czi-gift mr-2"></i>{{ trans('cart.Redeem_Reward_Points') }}<span class="accordion-indicator"></span></a></h3>
                                 </div>
                                 <div class="collapse show" id="points" data-parent="#payment-method" role="tabpanel">
                                     <div class="card-body">
-                                        <p>{{ trans('cart.You_currently_have') }} <span class="font-weight-medium">{{ user_points(auth()->user()->id)['points'] }}</span> {{ trans('cart.Reward_Points_to_spend') }}</p>
+                                        <p>{{ trans('cart.You_currently_have') }} <span class="font-weight-medium">{{ user_points(auth()->user()->id)['points'] }}</span> {{ trans('cart.Point') }}</p>
                                         <div class="custom-control custom-checkbox d-block">
                                             <input class="custom-control-input" type="radio" name="payment_method" value="redeem" id="use_points">
                                             <label class="custom-control-label" for="use_points">
-                                                Redeem with
-                                                @if( user_points(auth()->user()->id)['points'] >= $cart_products->sum('points'))
-                                                    {{ $cart_products->sum('points') }}
+                                                {{ trans('cart.Redeem_with') }}
+                                                @if( user_points(auth()->user()->id)['points'] >= ($cart_price_sum * 100))
+                                                    {{ ($cart_price_sum * 100) }}
                                                 @else
                                                     {{user_points(auth()->user()->id)['points'] }}
                                                 @endif
-                                                from my total points
+{{--                                                @if( user_points(auth()->user()->id)['points'] >= $cart_products->sum('points'))--}}
+{{--                                                    {{ $cart_products->sum('points') }}--}}
+{{--                                                @else--}}
+{{--                                                    {{user_points(auth()->user()->id)['points'] }}--}}
+{{--                                                @endif--}}
+                                                {{ trans('cart.from_my_total_points') }}
                                                 {{ user_points(auth()->user()->id)['points'] }}
                                             </label>
                                         </div>
@@ -136,7 +141,8 @@
                         {{--                        <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Discount:</span><span class="text-right">—</span></li>--}}
                     </ul>
                     <h3 class="font-weight-normal text-center">{{ $cart_price_sum }} EGP</h3>
-                    <h3 class="font-weight-normal text-center">{{ $cart_products->sum('points') }} {{ trans('cart.points') }}</h3>
+                    <h3 class="font-weight-normal text-center">{{ trans('cart.Redeem_with') }} {{ ($cart_price_sum * 100) }} {{ trans('cart.points') }}</h3>
+                    <h3 class="font-weight-normal text-center">{{ trans('cart.Earn') }} {{ $cart_products->sum('points') }} {{ trans('cart.points') }}</h3>
 {{--                    @if(auth()->check())--}}
 {{--                        <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.review') }}"><i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Review') }}</a>--}}
 {{--                    @endif--}}

@@ -9,4 +9,5 @@ return array (
   'create' => 'انشاء',
   'dont_have_account' => 'لا تمتلك حساب',
   'Forgot_password' => 'هل نسيت كلمة المرور؟',
+  'With_social_account' => 'باستخدام الحسابات الاجتماعية',
 );

@@ -201,7 +201,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-col-form-label" for="picture">Picture</label>
                                         <input class="form-control @error('picture') is-invalid @enderror" id="picture" type="file" name="picture">

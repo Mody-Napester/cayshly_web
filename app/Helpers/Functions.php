@@ -22,11 +22,11 @@ function getProductAfterDiscount($product){
     }
     elseif($product->discount_type == 2){
         $data['price'] = $product->price - (($product->price * $product->discount_unit)/100);
-        $data['discount'] = '-' . $product->discount_unit . '%';
+        $data['discount'] = '- ' . round($product->discount_unit, 2) . ' %';
     }
     elseif($product->discount_type == 3){
         $data['price'] = $product->price - $product->discount_unit;
-        $data['discount'] = '-' . $product->discount_unit . 'EGP';
+        $data['discount'] = '- ' . round($product->discount_unit, 2) . ' EGP';
     }
 
     return $data;

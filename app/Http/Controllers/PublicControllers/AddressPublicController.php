@@ -28,6 +28,14 @@ class AddressPublicController extends Controller
      */
     public function store(Request $request){
         $data['user'] = auth()->user();
+
+        if($request->user_address == ''){
+            return back()->with('message', [
+                'type' => 'danger',
+                'text' => 'Please fill out the address.'
+            ]);
+        }
+
         $resource = Address::create([
             'user_id' => $data['user']->id,
             'country_id' => null,
@@ -35,6 +43,7 @@ class AddressPublicController extends Controller
             'area_id' => null,
             'address' => $request->user_address,
         ]);
+
         if($resource){
             return back()->with('message', [
                 'type' => 'success',
@@ -54,6 +63,13 @@ class AddressPublicController extends Controller
     public function update(Request $request, $address){
         $data['user'] = auth()->user();
         $data['address'] = Address::where('uuid', $address)->first();
+
+        if($request->address == ''){
+            return back()->with('message', [
+                'type' => 'danger',
+                'text' => 'Please fill out the address.'
+            ]);
+        }
 
         $resource = $data['address']->update([
             'address' => $request->address,

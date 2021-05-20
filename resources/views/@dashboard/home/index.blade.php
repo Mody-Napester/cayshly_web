@@ -135,7 +135,80 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">Top viewed Products</div>
+                    <div class="card-body">
+                        <div class="datatable">
+                            <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Number</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach(\App\Models\Product::orderBy('views', 'DESC')->limit(10)->get() as $product)
+                                    <tr>
+                                        <td>{{ getFromJson($product->name, lang()) }}</td>
+                                        <td>{{ $product->views }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">Top viewed Stores</div>
+                    <div class="card-body">
+                        <div class="datatable">
+                            <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Store</th>
+                                    <th>Number</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach(\App\Models\Store::orderBy('views', 'DESC')->limit(10)->get() as $store)
+                                    <tr>
+                                        <td>{{ $store->name }}</td>
+                                        <td>{{ $store->views }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-4">
+                    <div class="card-header">Top viewed Categories</div>
+                    <div class="card-body">
+                        <div class="datatable">
+                            <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Number</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach(\App\Models\Category::orderBy('views', 'DESC')->limit(10)->get() as $category)
+                                    <tr>
+                                        <td>{{ getFromJson($category->name, lang()) }}</td>
+                                        <td>{{ $category->views }}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
+
             <div class="col-md-6">
                 <div class="row">
                     <div class="col-xxl-4 col-lg-4">

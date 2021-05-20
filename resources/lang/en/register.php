@@ -14,4 +14,6 @@ return array (
   'female' => 'Female',
   'male' => 'Male',
   'gender' => 'Gender',
+  'With_social_account' => 'With social account',
+  'address' => 'address',
 );

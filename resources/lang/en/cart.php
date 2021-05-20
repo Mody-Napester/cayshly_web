@@ -55,4 +55,8 @@ return array (
   'Order_number' => 'Order number',
   'Store' => 'Store',
   'or_continue_form_here' => 'or continue form here',
+  'Next' => 'Next',
+  'Reward_Points_to_spend' => 'Reward Points to spend',
+  'You_currently_have' => 'You currently have',
+  'points' => 'points',
 );

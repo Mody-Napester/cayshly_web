@@ -14,4 +14,6 @@ return array (
   'male' => 'ذكر',
   'female' => 'انثى',
   'gender' => 'النوع',
+  'address' => 'العنوان',
+  'With_social_account' => 'باستخدام الحسابات الاجتماعية',
 );
