@@ -86,7 +86,7 @@ class Cart extends Model
             $data['cart_product_count'] = Cart::getAllBy('user_id', auth()->user()->id)->count();
             $data['cart_price_sum'] = 0;
             foreach ($data['cart_products'] as $product){
-                $data['cart_price_sum'] += ($product->quantity * $product->price);
+                $data['cart_price_sum'] += ($product->quantity * getProductAfterDiscount($product)['price']);
             }
         }else{
             if(session()->has('carts')){
@@ -96,7 +96,7 @@ class Cart extends Model
                     $product = Product::getOneBy('uuid', $product_uuid);
                     $product->quantity = $product_quantity[0];
                     $data['cart_products'][] = $product;
-                    $single_price = intval($product->price) * intval($product_quantity[0]);
+                    $single_price = intval(getProductAfterDiscount($product)['price']) * intval($product_quantity[0]);
                     $data['cart_price_sum'] += $single_price;
                 }
                 $data['cart_product_count'] = count(session('carts'));

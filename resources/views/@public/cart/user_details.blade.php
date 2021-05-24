@@ -217,7 +217,7 @@
                                                 <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
                                             </h6>
                                             <div class="widget-product-meta">
-                                                <span class="text-accent mr-2">{{ $product->price }} EGP</span>
+                                                <span class="text-accent mr-2">{{ getProductAfterDiscount($product)['price'] }} EGP</span>
                                                 <span class="text-muted">x {{ $product->quantity }}</span>
                                             </div>
                                         </div>

@@ -162,6 +162,7 @@
             @if(check_authority('use.support'))
             <!-- Sidenav Heading (Support)-->
             <div class="sidenav-menu-heading">Support</div>
+                <a class="nav-link" href="{{ route('dashboard.ask.index') }}"><div class="nav-link-icon"><i data-feather="message-square"></i></div> Messages</a>
                 @if(check_authority('index.orders'))
                     <a class="nav-link" href="{{ route('dashboard.order.index') }}"><div class="nav-link-icon"><i data-feather="shopping-bag"></i></div> Orders</a>
                 @endif

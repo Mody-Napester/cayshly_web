@@ -101,9 +101,9 @@
                         </div>
 
                         <!-- Navigation (desktop)-->
-                        <div class="d-none d-lg-flex pt-4">
-                            <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                            <div class="w-50 pl-2"><button class="btn btn-primary btn-block fire-loader-button"><span class="d-none d-sm-inline">{{ trans('cart.Review_your_order') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Review_order') }}</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
+                        <div class="row pt-4">
+                            <div class="col-md-6 mb-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
+                            <div class="col-md-6 mb-3"><button class="btn btn-primary btn-block fire-loader-button"><span class="d-none d-sm-inline">{{ trans('cart.Review_your_order') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Review_order') }}</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></button></div>
                         </div>
                     </div>
                 </form>
@@ -126,7 +126,7 @@
                                             <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
                                         </h6>
                                         <div class="widget-product-meta">
-                                            <span class="text-accent mr-2">{{ $product->price }} EGP</span>
+                                            <span class="text-accent mr-2">{{ getProductAfterDiscount($product)['price'] }} EGP</span>
                                             <span class="text-muted">x {{ $product->quantity }} </span>
                                         </div>
                                     </div>
@@ -141,7 +141,7 @@
                         {{--                        <li class="d-flex justify-content-between align-items-center"><span class="mr-2">Discount:</span><span class="text-right">—</span></li>--}}
                     </ul>
                     <h3 class="font-weight-normal text-center">{{ $cart_price_sum }} EGP</h3>
-                    <h3 class="font-weight-normal text-center">{{ trans('cart.Redeem_with') }} {{ ($cart_price_sum * 100) }} {{ trans('cart.points') }}</h3>
+{{--                    <h3 class="font-weight-normal text-center">{{ trans('cart.Redeem_with') }} {{ ($cart_price_sum * 100) }} {{ trans('cart.points') }}</h3>--}}
                     <h3 class="font-weight-normal text-center">{{ trans('cart.Earn') }} {{ $cart_products->sum('points') }} {{ trans('cart.points') }}</h3>
 {{--                    @if(auth()->check())--}}
 {{--                        <a class="btn btn-primary btn-shadow btn-block mt-4" href="{{ route('public.cart.review') }}"><i class="czi-card font-size-lg mr-2"></i>{{ trans('cart.Proceed_to_Review') }}</a>--}}

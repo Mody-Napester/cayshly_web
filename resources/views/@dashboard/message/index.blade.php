@@ -1,6 +1,6 @@
 @extends('@dashboard._layouts.master')
 
-@section('page_title') Points @endsection
+@section('page_title') Message @endsection
 
 @section('page_contents')
     <header class="page-header page-header-dark bg-gradient-primary-to-secondary pb-10">
@@ -10,12 +10,11 @@
                     <div class="col-auto mt-4">
                         <h1 class="page-header-title">
                             <div class="page-header-icon"><i data-feather="book"></i></div>
-                            Points ({{ $resources->where('action', 1)->sum('amount') }})
+                            Messages ({{ $resources->count() }})
                         </h1>
-                        <div class="page-header-subtitle">All Points Data</div>
+                        <div class="page-header-subtitle">All Application Required Data</div>
                     </div>
                     <div class="col-12 col-xl-auto mt-4">
-
                     </div>
                 </div>
             </div>
@@ -32,30 +31,22 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>User</th>
-                            <th>Amount</th>
-                            <th>Reason</th>
-                            <th>Product</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Email</th>
                             <th>Created at</th>
-                            <th>Created at</th>
+                            <th>Updated at</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($resources as $resource)
                             <tr>
                                 <td>{{ $resource->id }}</td>
-                                <td>{{ ($resource->user)? $resource->user->name : '-' }}</td>
-                                <td>{{ $resource->amount }} {{ ($resource->action == 1)? '+' : '-'}}</td>
-                                <td>{{ getFromJson(lookup('id', $resource->lookup_point_reason_id)->name, lang()) }}</td>
-                                <td>
-                                    @if(isset($resource->product))
-                                        <a target="_blank" href="{{ route('public.product.show', $resource->product->slug) }}">
-                                            {{ getFromJson($resource->product->name, lang()) }}
-                                        </a>
-                                    @endif
-                                </td>
-                                <td>{{ human_date($resource->created_at) }}</td>
-                                <td>{{ custom_date($resource->created_at) }}</td>
+                                <td>{{ $resource->email }}</td>
+                                <td>{{ $resource->phone }}</td>
+                                <td>{{ $resource->message }}</td>
+                                <td>{{ $resource->created_at }}</td>
+                                <td>{{ $resource->updated_at }}</td>
                             </tr>
                         @endforeach
                         </tbody>

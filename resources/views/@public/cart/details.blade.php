@@ -55,7 +55,7 @@
                                             <div class="font-size-sm rtl-ar"><span class="text-muted mr-2">{{ trans('cart.Store') }}:</span>{{ ($store = \App\Models\Store::getOneBy('id', $product->store_id))? $store->name : '-' }}</div>
     {{--                                    <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>8.5</div>--}}
     {{--                                    <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>White &amp; Blue</div>--}}
-                                            <div class="font-size-lg text-accent pt-2 rtl-ar">{{ $product->price }} EGP</div>
+                                            <div class="font-size-lg text-accent pt-2 rtl-ar">{{ getProductAfterDiscount($product)['price'] }} EGP</div>
                                         </div>
                                     </div>
                                     <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">

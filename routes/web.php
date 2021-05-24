@@ -70,6 +70,8 @@ Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offe
 
 Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.page.show');
 
+Route::post('ask_us/store', [\App\Http\Controllers\AskUsMessageController::class, 'store'])->name('public.store');
+
 // Cart
 Route::post('cart', [CartPublicController::class, 'store'])->name('public.cart.store');
 Route::post('cart/remove', [CartPublicController::class, 'remove'])->name('public.cart.remove');
@@ -120,6 +122,8 @@ Route::group([
     'prefix' => 'dashboard',
     'middleware' => 'auth',
 ], function () {
+    Route::get('ask_us/index', [\App\Http\Controllers\AskUsMessageController::class, 'index'])->name('dashboard.ask.index');
+
     Route::get('/', [DashboardController::class, 'home'])->name('dashboard.home');
     Route::get('reports/points', [ReportController::class, 'points'])->name('dashboard.point.index');
     Route::get('product/export', [ProductController::class, 'export'])->name('product.export');

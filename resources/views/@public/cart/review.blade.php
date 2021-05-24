@@ -81,7 +81,7 @@
                                             <a class=" fire-loader-anchor" href="{{ route('public.product.show', $product->slug) }}">{{ getFromJson($product->name , lang()) }}</a>
                                         </h6>
                                         <div class="widget-product-meta">
-                                            <span class="text-accent mr-2">{{ $product->price }} EGP</span>
+                                            <span class="text-accent mr-2">{{ getProductAfterDiscount($product)['price'] }} EGP</span>
                                             <span class="text-muted">x {{ $product->quantity }}</span>
                                         </div>
                                     </div>
@@ -111,18 +111,18 @@
             </aside>
         </div>
         <!-- Navigation (mobile)-->
-        <div class="row d-lg-none">
-            <div class="col-lg-8">
-                <div class="d-flex pt-4 mt-3">
-                    @if(auth()->check())
-                        <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                        <div class="w-50 pl-2"><a class="btn btn-primary btn-block fire-loader-anchor" href="{{ route('public.cart.review') }}"><span class="d-none d-sm-inline">{{ trans('cart.Proceed_to_Review') }}</span><span class="d-inline d-sm-none">Next</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></a></div>
-                    @else
-                        <div class="w-100 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>
-                    @endif
-                </div>
-            </div>
-        </div>
+{{--        <div class="row d-lg-none">--}}
+{{--            <div class="col-lg-8">--}}
+{{--                <div class="d-flex pt-4 mt-3">--}}
+{{--                    @if(auth()->check())--}}
+{{--                        <div class="w-50 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>--}}
+{{--                        <div class="w-50 pl-2"><a class="btn btn-primary btn-block fire-loader-anchor" href="{{ route('public.cart.review') }}"><span class="d-none d-sm-inline">{{ trans('cart.Proceed_to_Review') }}</span><span class="d-inline d-sm-none">Next</span><i class="czi-arrow-right mt-sm-0 ml-1"></i></a></div>--}}
+{{--                    @else--}}
+{{--                        <div class="w-100 pr-3"><a class="btn btn-secondary btn-block fire-loader-anchor" href="{{ route('public.cart.user.details') }}"><i class="czi-arrow-left mt-sm-0 mr-1"></i><span class="d-none d-sm-inline">{{ trans('cart.Back_to_User_Details') }}</span><span class="d-inline d-sm-none">{{ trans('cart.Back') }}</span></a></div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 
 @endsection

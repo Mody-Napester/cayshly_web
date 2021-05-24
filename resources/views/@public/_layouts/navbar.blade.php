@@ -16,6 +16,7 @@
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
+
                 @if(auth()->check())
                     @if(check_authority('index.dashboard'))
                         <a class="topbar-link ml-3 d-md-inline-block fire-loader-anchor" href="{{ route('dashboard.home') }}"><i class="czi-settings text-muted mr-2"></i>{{ trans('master.Dashboard') }}</a>
@@ -52,7 +53,10 @@
             </div>
             <div class="d-none d-md-block ml-3 text-nowrap">
 {{--                <a class="topbar-link ml-3 pl-3 border-light d-none d-md-inline-block" href=""><i class="czi-idea mt-n1"></i>About us</a>--}}
-{{--                <a class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block" href=""><i class="czi-location mt-n1"></i>Contact us</a>--}}
+
+                <span style="cursor: pointer" class="topbar-link ml-3 border-left border-light pl-3 d-none d-md-inline-block"
+                   data-toggle="modal" data-target="#ask_us"><i class="czi-location mt-n1"></i>{{ trans('navbar.ask_us') }}</span>
+
                 @if(auth()->check())
                     @if(check_authority('index.dashboard'))
                         <a class="topbar-link ml-3 pl-3 d-none d-md-inline-block fire-loader-anchor" href="{{ route('dashboard.home') }}"><i class="czi-settings mt-n1"></i>{{ trans('master.Dashboard') }}</a>

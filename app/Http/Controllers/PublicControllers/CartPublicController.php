@@ -42,7 +42,7 @@ class CartPublicController extends Controller
                             'user_id' => auth()->user()->id,
                             'product_id' => $product->id,
                             'quantity' => 1,
-                            'options' => $options,
+//                            'options' => $option,
                         ]);
 
                         $data['message'] = [
