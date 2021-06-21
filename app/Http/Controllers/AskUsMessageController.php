@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AskUsMail;
 use App\Models\AskUsMessage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AskUsMessageController extends Controller
 {
@@ -29,6 +31,9 @@ class AskUsMessageController extends Controller
         $ask_message->phone = $request->phone;
         $ask_message->message = $request->message;
         $ask_message->save();
+
+        // Send mail
+        Mail::to('ttaheraly@gmail.com')->send(new AskUsMail($ask_message));
 
         if($ask_message){
             $data['message'] = [

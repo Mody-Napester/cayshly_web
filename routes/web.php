@@ -64,6 +64,7 @@ Route::get('brand/products/{brand}', [BrandPublicController::class, 'products'])
 
 Route::get('products/best-sales', [ProductPublicController::class, 'index_best_sales_products'])->name('public.product.best.index');
 Route::get('products/by-free', [ProductPublicController::class, 'index_by_free_products'])->name('public.product.free.index');
+Route::get('products/by-free', [ProductPublicController::class, 'index_by_free_products'])->name('public.product.discount.index');
 Route::get('product/{product}', [ProductPublicController::class, 'show'])->name('public.product.show');
 
 Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offer.index');

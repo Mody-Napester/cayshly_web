@@ -30,28 +30,35 @@
                 <div class="card-header">Search and filter</div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Order Number</label>
                                 <input type="number" name="number" class="form-control" value="{{ (isset($_GET['number']))? $_GET['number'] : '' }}" placeholder="Number"/>
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label>Order Date</label>
-                                <input type="date" name="date" class="form-control" value="{{ (isset($_GET['date']))? $_GET['date'] : '' }}" placeholder="Date"/>
+                                <label>Order Date From</label>
+                                <input type="date" name="date_from" class="form-control" value="{{ (isset($_GET['date_from']))? $_GET['date_from'] : '' }}" placeholder="Date from"/>
                             </div>
                         </div>
 
-{{--                        <div class="col-md-3">--}}
-{{--                            <div class="form-group">--}}
-{{--                                <label>Ordered By</label>--}}
-{{--                                <input type="text" name="by" class="form-control" value="{{ (isset($_GET['by']))? $_GET['by'] : '' }}" placeholder="Ordered By"/>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Order Date To</label>
+                                <input type="date" name="date_to" class="form-control" value="{{ (isset($_GET['date_to']))? $_GET['date_to'] : '' }}" placeholder="Date to"/>
+                            </div>
+                        </div>
 
-                        <div class="col-md-4">
+                        {{--                        <div class="col-md-3">--}}
+                        {{--                            <div class="form-group">--}}
+                        {{--                                <label>Ordered By</label>--}}
+                        {{--                                <input type="text" name="by" class="form-control" value="{{ (isset($_GET['by']))? $_GET['by'] : '' }}" placeholder="Ordered By"/>--}}
+                        {{--                            </div>--}}
+                        {{--                        </div>--}}
+
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label class="form-col-form-label" for="status">Status</label>
                                 <select style="width: 100%;" class="select2" id="status" name="status">
@@ -76,7 +83,7 @@
             <div class="card-header">All</div>
             <div class="card-body">
                 <div class="datatable">
-                    <table class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
+                    <table data-page-length='50' class="table table-sm table-bordered table-hover" id="datatable-custom" width="100%" cellspacing="0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -91,9 +98,9 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($resources as $resource)
+                        @foreach($resources as $key => $resource)
                             <tr>
-                                <td>{{ $resource->id }}</td>
+                                <td>{{ $key + 1 }}</td>
                                 <td>{{ $resource->order_number }}</td>
                                 <td>{{ ($cb = $resource->created_by_user)? $cb->name : '-' }}</td>
                                 <td>{{ $resource->address_name }}</td>

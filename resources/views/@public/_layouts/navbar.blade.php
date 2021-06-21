@@ -16,6 +16,8 @@
                 </div>
             </div>
             <div class="topbar-text dropdown d-md-none ml-auto">
+                <span style="cursor: pointer" class="topbar-link ml-3 d-md-inline-block"
+                      data-toggle="modal" data-target="#ask_us"><i class="czi-location mt-n1"></i>{{ trans('navbar.ask_us') }}</span>
 
                 @if(auth()->check())
                     @if(check_authority('index.dashboard'))
@@ -252,6 +254,10 @@
 
                         <li class="nav-item">
                             <a class="nav-link fire-loader-anchor" href="{{ route('public.offer.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link fire-loader-anchor" href="{{ route('public.product.discount.index') }}"><i style="margin-right: 5px;" class="czi-loudspeaker"></i> {{ trans('master.Offers') }}</a>
                         </li>
 
 {{--                        <li class="nav-item">--}}

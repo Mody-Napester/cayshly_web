@@ -32,8 +32,9 @@ class OrderController extends Controller
                 $data['resources'] = $data['resources']->where('orders.order_number', 'like', "%".$request->number."%");
             }
 
-            if($request->has('date') && !is_null($request->date)){
-                $data['resources'] = $data['resources']->where('orders.created_at', 'like', "%".$request->date."%");
+            if($request->has('date_from') && $request->has('date_to') && !is_null($request->date_from) && !is_null($request->date_to)){
+//                $data['resources'] = $data['resources']->where('orders.created_at', 'like', "%".$request->date."%");
+                $data['resources'] = $data['resources']->whereBetween('orders.created_at', [$request->date_from, $request->date_to]);
             }
 
 //            if($request->has('by') && !is_null($request->by)){
