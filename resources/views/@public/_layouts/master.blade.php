@@ -29,6 +29,8 @@
     <link rel="stylesheet" media="screen" href="{{ url('assets_public/vendor/lightgallery.js/dist/css/lightgallery.min.css') }}"/>
     <link rel="stylesheet" media="all" href="{{ url('assets_public/css/ltr.css') }}"/>
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
         .my-addresses{
             display: none;
@@ -63,6 +65,13 @@
             top: 35%;
             z-index: 10000;
         }
+
+        .ask-flow{
+            position: fixed;
+            right: 0;
+            top: 42%;
+            z-index: 10000;
+        }
     </style>
 </head>
 <!-- Body-->
@@ -74,6 +83,11 @@
             <b>{{ user_points(auth()->user()->id)['points'] }}</b>
         </div>
     @endif
+
+    <div class="ask-flow">
+            <span style="border-radius: 0" class="btn btn-warning"
+                  data-toggle="modal" data-target="#ask_us"><i class="czi-location mt-n1"></i>{{ trans('navbar.ask_us') }}</span>
+    </div>
 
 @include('@public._layouts.navbar')
 
@@ -269,36 +283,8 @@
     </div>
 </div>
 
-    <!-- Modal -->
-    <div style="direction: rtl;text-align: right" class="modal fade" id="ask_us" tabindex="-1" role="dialog" aria-labelledby="askUSModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('public.store') }}" class="ask_us_form" method="post">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="askUSModalLabel">{{ trans('master.Contact_us') }}</h5>
-{{--                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                            <span aria-hidden="true">&times;</span>--}}
-{{--                        </button>--}}
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="{{ trans('master.email') }}">
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" name="phone" id="phone" placeholder="{{ trans('master.phone') }}">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" name="message" id="message" placeholder="{{ trans('master.message') }}"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">{{ trans('master.Save') }}</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+<!-- Modal -->
+@include('@public._popups.ask_us')
 
 @include('@public._popups.add_to_cart')
 

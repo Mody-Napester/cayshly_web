@@ -1,4 +1,5 @@
 <script>
+
     $(document).ready(function () {
         $('.ask_us_form').on('submit', function (e) {
             e.preventDefault();
