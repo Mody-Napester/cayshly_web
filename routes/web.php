@@ -71,7 +71,7 @@ Route::get('offers', [OfferPublicController::class, 'index'])->name('public.offe
 
 Route::get('page/{page}', [PagePublicController::class, 'show'])->name('public.page.show');
 
-Route::post('ask_us/store', [\App\Http\Controllers\AskUsMessageController::class, 'store'])->name('public.store');
+//Route::post('ask_us/store', [\App\Http\Controllers\AskUsMessageController::class, 'store'])->name('public.store');
 
 // Cart
 Route::post('cart', [CartPublicController::class, 'store'])->name('public.cart.store');

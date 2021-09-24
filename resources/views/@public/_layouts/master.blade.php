@@ -84,10 +84,10 @@
         </div>
     @endif
 
-    <div class="ask-flow">
-            <span style="border-radius: 0" class="btn btn-warning"
-                  data-toggle="modal" data-target="#ask_us"><i class="czi-location mt-n1"></i>{{ trans('navbar.ask_us') }}</span>
-    </div>
+{{--    <div class="ask-flow">--}}
+{{--            <span style="border-radius: 0" class="btn btn-warning"--}}
+{{--                  data-toggle="modal" data-target="#ask_us"><i class="czi-location mt-n1"></i>{{ trans('navbar.ask_us') }}</span>--}}
+{{--    </div>--}}
 
 @include('@public._layouts.navbar')
 
@@ -284,7 +284,7 @@
 </div>
 
 <!-- Modal -->
-@include('@public._popups.ask_us')
+{{--@include('@public._popups.ask_us')--}}
 
 @include('@public._popups.add_to_cart')
 
@@ -314,7 +314,7 @@
 @include('@public._scripts.search')
 @include('@public._scripts.add_to_cart')
 @include('@public._scripts.remove_from_cart')
-@include('@public._scripts.ask_us')
+{{--@include('@public._scripts.ask_us')--}}
 
 @yield('page_scripts')
 
